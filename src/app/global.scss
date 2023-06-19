@@ -1,0 +1,10 @@
+// dark mode and light mode
+:root {
+    --primary-theme: red;
+}
+
+body {
+    :root {
+        --primary-theme: green;
+    }
+}
