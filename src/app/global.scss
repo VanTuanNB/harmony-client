@@ -8,7 +8,8 @@
 }
 
 :root {
-    --primary-background: #000;
+    --theme-mode-background: #18191a;
+    --theme-mode-color: #fff;
 }
 
 html {
@@ -18,12 +19,21 @@ html {
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 1.6rem;
-    line-height: 1.5;
+    line-height: 1.6;
     text-rendering: optimizeSpeed;
-    color: var(--white-color);
-    background-color: var(--dark-color);
     overflow-y: overlay;
+    background-color: var(--theme-mode-background);
+    color: var(--theme-mode-color);
+    transition: background-color linear 0.2s;
 }
+
+[data-theme='light'] {
+    --theme-mode-background: #fff;
+    --theme-mode-color: #18191a;
+    background-color: var(--theme-mode-background);
+    color: var(--theme-mode-color);
+}
+
 button,
 input,
 [tabindex] {

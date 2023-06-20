@@ -3,11 +3,11 @@
     display: flex;
     align-items: flex-start;
     position: relative;
+    color: var(--theme-mode-color);
 
     & .contents {
         flex: 1;
         height: 100vh;
-        background-color: rgba($color: #000000, $alpha: 0.4);
     }
 
     & .component-outside {
@@ -17,5 +17,7 @@
         right: 0;
         bottom: 0;
         width: 100%;
+        background-color: var(--theme-mode-background);
+        color: var(--theme-mode-color);
     }
 }
