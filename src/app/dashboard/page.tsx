@@ -1,7 +1,6 @@
-'use-client';
-import styles from './dashboard.module.scss';
-function DashboardPage() {
-    return <h1 className={styles.title}>Dashboard Page</h1>;
+import DashboardPage from '@/core/layouts/pages/Dashboard/Dashboard.component';
+function DashboardRouting() {
+    return <DashboardPage></DashboardPage>;
 }
 
-export default DashboardPage;
+export default DashboardRouting;

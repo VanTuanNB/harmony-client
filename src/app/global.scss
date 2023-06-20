@@ -9,24 +9,6 @@
 
 :root {
     --primary-background: #000;
-    // --dark-color: #0f0f0f;
-    // --white-color: #fff;
-    // --hashTagColor: #3ea6ff;
-    // --sub-color: #aaa;
-    // --black-color: #000;
-    // --layer-color: rgba(255, 255, 255, 0.1);
-    // --hover-color: rgba(255, 255, 255, 0.2);
-
-    // // layout
-    // --height-header: 56px;
-    // --width-header-search-input: 464px;
-    // --border-color-search-input: hsl(0, 0%, 18.82%);
-    // --back-ground-search-input: hsl(0, 0%, 8%);
-    // --box-shadow-search-input: hsla(0, 0%, 0%, 0);
-    // --search-box-legacy-button: hsl(0, 0%, 18.82%);
-    // --search-box-legacy-button-color: hsla(0, 0%, 100%, 0.08);
-    // --overlay-watch-layout-color: rgba(0, 0, 0, 0.5);
-    // --badge-chip-background-color: #f1f1f1;
 }
 
 html {
@@ -34,6 +16,7 @@ html {
 }
 
 body {
+    font-family: 'Roboto', sans-serif;
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;
