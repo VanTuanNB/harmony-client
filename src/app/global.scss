@@ -1,10 +1,76 @@
-// dark mode and light mode
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 :root {
-    --primary-theme: red;
+    --primary-background: #000;
+    // --dark-color: #0f0f0f;
+    // --white-color: #fff;
+    // --hashTagColor: #3ea6ff;
+    // --sub-color: #aaa;
+    // --black-color: #000;
+    // --layer-color: rgba(255, 255, 255, 0.1);
+    // --hover-color: rgba(255, 255, 255, 0.2);
+
+    // // layout
+    // --height-header: 56px;
+    // --width-header-search-input: 464px;
+    // --border-color-search-input: hsl(0, 0%, 18.82%);
+    // --back-ground-search-input: hsl(0, 0%, 8%);
+    // --box-shadow-search-input: hsla(0, 0%, 0%, 0);
+    // --search-box-legacy-button: hsl(0, 0%, 18.82%);
+    // --search-box-legacy-button-color: hsla(0, 0%, 100%, 0.08);
+    // --overlay-watch-layout-color: rgba(0, 0, 0, 0.5);
+    // --badge-chip-background-color: #f1f1f1;
+}
+
+html {
+    font-size: 62.5%;
 }
 
 body {
-    :root {
-        --primary-theme: green;
-    }
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+    color: var(--white-color);
+    background-color: var(--dark-color);
+    overflow-y: overlay;
+}
+button,
+input,
+[tabindex] {
+    border: none;
+    outline: none;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+// custom Scrollbar css
+html *::-webkit-scrollbar {
+    border-radius: 0;
+    width: 8px;
+}
+
+html *::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+html *::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0);
 }
