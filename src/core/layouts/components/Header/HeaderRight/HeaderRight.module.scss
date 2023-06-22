@@ -1,11 +1,34 @@
 .header-right-options {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     list-style-type: none;
     padding-left: 0;
     margin: 0;
 
     & .item {
         padding: 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        &:last-child() {
+            padding-right: 0;
+        }
+
+        & .btn-settings {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
+            color: var(--theme-mode-color);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        & .avatar {
+            border-radius: 50%;
+            cursor: pointer;
+        }
     }
 }
