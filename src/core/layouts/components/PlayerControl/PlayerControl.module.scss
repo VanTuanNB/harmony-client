@@ -1,5 +1,114 @@
 .player-control {
+    background-color: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    height: 7rem;
+    padding: 1em;
+    color: #ddd;
+}
+.icons {
+    color: #999;
+    display: flex;
+    gap: 1em;
+}
+.controlButtons {
+    color: #999;
+}
+.otherFeatures {
+    color: #999;
+    position: absolute;
+    right: 1em;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+.songBar {
+    position: absolute;
+    left: 1em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    width: 25%;
+}
+
+.songInfos {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+.imageContainer {
+    // --size: 4.5em;
+    flex-shrink: 0;
+    width: 3.8em;
+    height: 3.8em;
+    margin-top: 50px;
+}
+.imageContainer .image1 {
     width: 100%;
-    height: 10vh;
-    background-color: darkmagenta;
+    height: 100%;
+    object-fit: cover;
+}
+.songDescription {
+    margin-bottom: 100px;
+    margin-left: 100px;
+}
+.artist {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+.progressController {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5em;
+    color: #999;
+}
+.controlButtons {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+}
+.play-pause {
+    display: inline-block;
+    padding: 1em;
+    background-color: #ddd;
+    color: #111;
+    border-radius: 50%;
+}
+.progressContainer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+.progressBar {
+    height: 4px;
+    border-radius: 10px;
+    width: 30%;
+    background-color: #ccc4;
+}
+.progress {
+    position: relative;
+    height: 100%;
+    width: 30%;
+    border-radius: 10px;
+    background-color: #999;
+}
+.volumeBar {
+    display: flex;
+    align-items: center;
+    gap: 0.7em;
+}
+.volumeBar .progressBar {
+    width: 6em;
 }
