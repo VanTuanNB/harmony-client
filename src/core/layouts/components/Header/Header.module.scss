@@ -1,0 +1,18 @@
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: var(--header-height);
+
+    & .header-left {
+        display: flex;
+        align-items: center;
+
+        & .header-roadMap {
+            color: var(--theme-mode-color);
+            font-size: 2rem;
+        }
+    }
+}

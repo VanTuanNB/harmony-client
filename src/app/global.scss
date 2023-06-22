@@ -10,6 +10,8 @@
 :root {
     --theme-mode-background: #18191a;
     --theme-mode-color: #fff;
+
+    --header-height: 56px;
 }
 
 html {
@@ -24,14 +26,16 @@ body {
     overflow-y: overlay;
     background-color: var(--theme-mode-background);
     color: var(--theme-mode-color);
+}
+[data-theme='dark'] {
     transition: background-color linear 0.2s;
 }
-
 [data-theme='light'] {
     --theme-mode-background: #fff;
     --theme-mode-color: #18191a;
     background-color: var(--theme-mode-background);
     color: var(--theme-mode-color);
+    transition: background-color linear 0.2s;
 }
 
 button,
