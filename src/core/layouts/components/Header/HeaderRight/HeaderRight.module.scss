@@ -1,0 +1,11 @@
+.header-right-options {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+
+    & .item {
+        padding: 0 10px;
+    }
+}
