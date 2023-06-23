@@ -15,7 +15,8 @@ const cookieStoreInstance = new CookieStorageSide();
 
 const initialState: IClientStore = {
     [EScopeClientStore.LOCAL_STORAGE]: {
-        [ELocalStorageKey.DATA_THEME]: localStoreInstance.getStore(ELocalStorageKey.DATA_THEME) as EDataTheme.LIGHT &
+        [ELocalStorageKey.DATA_THEME]:
+            (localStoreInstance.getStore(ELocalStorageKey.DATA_THEME) as EDataTheme.LIGHT & EDataTheme.DARK) ??
             EDataTheme.DARK,
     },
     [EScopeClientStore.SESSION_STORAGE]: {},
