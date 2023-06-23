@@ -1,0 +1,213 @@
+.header-search {
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+    flex: 1;
+    flex-basis: 1e-9px;
+    margin-left: 10px;
+
+    & .header-search-wrap-box {
+        position: relative;
+        height: 40px;
+        flex: 1;
+        flex-basis: 1e-9px;
+        display: flexbox;
+        display: flex;
+        flex-direction: row;
+
+        & .container-header {
+            position: relative;
+            border-radius: 40px;
+            border: 1px solid rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
+            background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.1);
+            box-shadow: inset 0 1px 2px var(--box-shadow-search-input);
+            margin-left: 32px;
+            top: 50%;
+            left: 0;
+            padding: 0px 4px 0px 16px;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            flex: 1;
+            flex-basis: 1e-9px;
+            border-right: unset;
+
+            &:has(.search-input-tag:not(:placeholder-shown)) .search-clear {
+                display: flex;
+            }
+
+            &:has(.search-input-tag:focus-within) {
+                margin-left: 0px;
+                padding: 0px 4px 0px 48px;
+            }
+
+            &:has(.search-input-tag:focus-within) .search-icon-wrapper {
+                display: flex;
+                visibility: unset;
+            }
+
+            &:has(.search-input-tag:focus-within) .popper-search {
+                display: block;
+            }
+
+            & .search-icon-wrapper {
+                position: absolute;
+                top: 50%;
+                left: 0px;
+                width: 48px;
+                height: 20px;
+                transform: translateY(-50%);
+                padding: 0 12px 0 16px;
+                display: none;
+                visibility: hidden;
+            }
+
+            & .search-input-wrapper {
+                background: transparent;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                float: right;
+
+                &:has(.search-input-tag:not(:placeholder-shown)) .search-keyboard {
+                    right: 36px;
+                }
+
+                & .search-input {
+                    width: var(--width-header-search-input);
+                    box-sizing: border-box;
+                    -webkit-box-sizing: border-box;
+                    height: 100%;
+                    overflow: hidden;
+                    flex: 1;
+
+                    & .search-input-tag {
+                        border: none;
+                        padding: 0px;
+                        margin: 0px;
+                        height: auto;
+                        width: 100%;
+                        outline: none;
+                        background-color: transparent;
+                        color: var(--theme-mode-color);
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 24px;
+                        text-align: inherit;
+                        max-width: 100%;
+                    }
+                }
+
+                & .search-keyboard {
+                    position: absolute;
+                    top: 50%;
+                    right: 8px;
+                    transform: translateY(-50%);
+                    padding: 0 4px;
+                    cursor: pointer;
+                }
+            }
+
+            & .search-clear {
+                position: absolute;
+                top: 50%;
+                right: 0px;
+                transform: translateY(-50%);
+                padding: 10px;
+                display: none;
+                align-items: center;
+                cursor: pointer;
+
+                & .search-clear-icon {
+                    padding: 6px 10px;
+                    font-size: 1.8rem;
+                    display: inline-flex;
+                }
+            }
+        }
+        & .popper-search {
+            display: block;
+            position: absolute;
+            top: 42px;
+            left: 10px;
+            right: 0;
+            width: 100%;
+            max-width: 572px;
+            background-color: var(--theme-mode-color);
+            color: var(--theme-mode-background);
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            padding: 16px 0 8px;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
+            width: 100%;
+            & .popper-search-list {
+                margin: 0;
+                padding: 0;
+                list-style-type: none;
+
+                & .popper-search-item {
+                    text-align: left;
+                    padding: 0 24px 0 16px;
+                    font-size: 1.6rem;
+                    color: #222;
+                    z-index: 1000000;
+                    cursor: default;
+
+                    &:hover {
+                        background-color: #eee;
+                    }
+
+                    & .popper-search-content {
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        & .popper-search-info {
+                            display: flex;
+                            align-items: center;
+                            color: #030303;
+                            padding-right: 8px;
+                            width: 80%;
+
+                            & .search-clock-icon {
+                                width: 20px;
+                                height: 20px;
+                                margin-right: 14px;
+                                pointer-events: none;
+                            }
+
+                            & .search-info-text {
+                                font-size: 1.6rem;
+                                font-weight: 500;
+                                line-height: 3.2rem;
+                                display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                -webkit-line-clamp: 1;
+                                max-width: 90%;
+                                overflow: hidden;
+                                max-height: 3.2rem;
+                            }
+                        }
+
+                        & .popper-search-clear {
+                            padding: 0 3px 0 0;
+                            cursor: pointer;
+
+                            &:hover .popper-search-clear-action {
+                                text-decoration: underline;
+                            }
+
+                            & .popper-search-clear-action {
+                                font-size: 1.3rem;
+
+                                line-height: 32px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

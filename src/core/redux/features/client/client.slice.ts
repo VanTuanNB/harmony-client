@@ -6,27 +6,28 @@ import { ESelectReducer } from '@/core/common/constants/index.constant';
 import { IClientStore } from '@/core/common/interfaces/index.interface';
 import { EDataTheme } from '@/core/common/constants/reduxSlice.constant';
 import { CookieStorageSide, LocalStorageSide, sessionStorageSide } from '@/utils/clientStore.util';
-import { EScopeClientStore } from '@/core/common/constants/common.constant';
+import { ELocalStorageKey, EScopeClientStore } from '@/core/common/constants/common.constant';
 
-const initialState: IClientStore = {
-    [EScopeClientStore.LOCAL_STORAGE]: {
-        'data-theme': EDataTheme.DARK,
-    },
-    [EScopeClientStore.SESSION_STORAGE]: {},
-    [EScopeClientStore.COOKIE]: {},
-};
 // init instance
 const localStoreInstance = new LocalStorageSide();
 const sessionStoreInstance = new sessionStorageSide();
 const cookieStoreInstance = new CookieStorageSide();
 
+const initialState: IClientStore = {
+    [EScopeClientStore.LOCAL_STORAGE]: {
+        [ELocalStorageKey.DATA_THEME]: localStoreInstance.getStore(ELocalStorageKey.DATA_THEME) as EDataTheme.LIGHT &
+            EDataTheme.DARK,
+    },
+    [EScopeClientStore.SESSION_STORAGE]: {},
+    [EScopeClientStore.COOKIE]: {},
+};
 export const clientStoreSlice = createSlice({
     name: ESelectReducer.CLIENT_STORE,
     initialState,
     reducers: {
         changeGlobalThemes(state, actions: PayloadAction<{ theme: EDataTheme }>) {
             state.localStorage['data-theme'] = actions.payload.theme;
-            localStoreInstance.setStore<EDataTheme>(state.localStorage['data-theme'], actions.payload.theme);
+            localStoreInstance.setStore<EDataTheme>(ELocalStorageKey.DATA_THEME, actions.payload.theme);
         },
     },
 });

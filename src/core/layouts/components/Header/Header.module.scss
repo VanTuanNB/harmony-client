@@ -1,0 +1,32 @@
+.header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: var(--header-height);
+
+    & .header-left {
+        display: flex;
+        align-items: center;
+
+        & .header-roadMap {
+            color: var(--theme-mode-color);
+            font-size: 1.6rem;
+
+            & .button-roadMap {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
+
+                &:nth-child(2) {
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+}

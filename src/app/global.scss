@@ -9,7 +9,15 @@
 
 :root {
     --theme-mode-background: #18191a;
+    --theme-mode-background-rgb: 24, 25, 26;
     --theme-mode-color: #fff;
+    --theme-mode-color-rgb: 255, 255, 255;
+    --box-shadow-search-input: hsla(0, 0%, 0%, 0);
+    --search-box-legacy-button: hsl(0, 0%, 18.82%);
+    --search-box-legacy-button-color: hsla(0, 0%, 100%, 0.08);
+
+    --header-height: 56px;
+    --width-header-search-input: 300px;
 }
 
 html {
@@ -24,14 +32,24 @@ body {
     overflow-y: overlay;
     background-color: var(--theme-mode-background);
     color: var(--theme-mode-color);
-    transition: background-color linear 0.2s;
 }
-
-[data-theme='light'] {
-    --theme-mode-background: #fff;
-    --theme-mode-color: #18191a;
+[data-theme='dark'] {
+    transition: background-color linear 0.2s;
+    --theme-mode-background: #18191a;
+    --theme-mode-background-rgb: 24, 25, 26;
+    --theme-mode-color: #fff;
+    --theme-mode-color-rgb: 255, 255, 255;
     background-color: var(--theme-mode-background);
     color: var(--theme-mode-color);
+}
+[data-theme='light'] {
+    --theme-mode-background: #fff;
+    --theme-mode-background-rgb: 255, 255, 255;
+    --theme-mode-color: #18191a;
+    --theme-mode-color-rgb: 24, 25, 26;
+    background-color: var(--theme-mode-background);
+    color: var(--theme-mode-color);
+    transition: background-color linear 0.2s;
 }
 
 button,
@@ -42,7 +60,6 @@ input,
 }
 
 a {
-    color: var(--text-color);
     text-decoration: none;
 }
 
@@ -66,4 +83,39 @@ html *::-webkit-scrollbar-thumb {
 html *::-webkit-scrollbar-track {
     border-radius: 0;
     background-color: rgba(0, 0, 0, 0);
+}
+
+body {
+    .tippy-box {
+        font-size: 1.6rem;
+        border-radius: 8px;
+        font-weight: 600;
+        padding: 8px;
+        line-height: 22px;
+        text-align: center;
+    }
+
+    .tippy-arrow {
+        color: rgba(84, 84, 84, 0.92);
+    }
+    .tippy-box[data-placement^='bottom'] > .tippy-arrow:before {
+        top: -8px;
+    }
+    .tippy-content {
+        background-color: hsl(0, 0%, 45%);
+        text-transform: none;
+        word-break: normal;
+        font-family: 'Roboto', 'Arial', sans-serif;
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+        font-weight: 500;
+        border-radius: 4px;
+        max-width: 350px;
+        padding: 8px;
+    }
+
+    div[data-tippy-root] {
+        transform: unset !important;
+        width: 100%;
+    }
 }
