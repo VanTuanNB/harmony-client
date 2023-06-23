@@ -1,7 +1,13 @@
-import { faBan } from '@fortawesome/free-solid-svg-icons';
+import { faBan, faHome } from '@fortawesome/free-solid-svg-icons';
 import { IPopperListOptions } from '../interfaces/IPopperListOptions.interface';
 
-const MENU_SETTINGS: IPopperListOptions[] = [];
+const MENU_SETTINGS: IPopperListOptions[] = [
+    {
+        icon: faHome,
+        title: 'Home settings',
+        href: '/dashboard',
+    },
+];
 
 const USER_SETTINGS: IPopperListOptions[] = [
     {

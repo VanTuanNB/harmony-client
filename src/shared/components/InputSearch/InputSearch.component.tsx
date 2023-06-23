@@ -76,7 +76,7 @@ function InputSearchComponent(): ReactNode {
                                         onChange={(e) => setKeyword(e.target.value)}
                                         onFocus={() => setShowHeadless(true)}
                                         onKeyDown={(e) => {
-                                            console.log(e);
+                                            // console.log(e);
                                         }}
                                     />
                                 </div>

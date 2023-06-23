@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import styles from './PopperMenu.module.scss';
 import { IPopperListOptions } from '@/shared/interfaces/IPopperListOptions.interface';
 import Button from '@/shared/components/Button/Button.component';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -16,7 +17,14 @@ function MenuItem({ dataOption, onClick }: IMenuItem) {
         separate: dataOption.separate,
     });
     return (
-        <Button className={classes} leftIcon={dataOption.icon} href={dataOption.href} onClick={onClick}>
+        <Button
+            className={classes}
+            leftIcon={dataOption.icon}
+            rightIcon={dataOption.children ? faAngleRight : undefined}
+            href={dataOption.href}
+            hrefLang={dataOption.hrefLang}
+            onClick={onClick}
+        >
             {dataOption.title}
         </Button>
     );

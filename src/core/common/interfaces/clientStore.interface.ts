@@ -1,10 +1,10 @@
-import { EScopeClientStore } from '../constants/common.constant';
+import { ELocalStorageKey, EScopeClientStore } from '../constants/common.constant';
 import { EDataTheme } from '../constants/reduxSlice.constant';
 
 export interface IClientStore {
     [EScopeClientStore.LOCAL_STORAGE]: {
+        [ELocalStorageKey.DATA_THEME]: EDataTheme.DARK | EDataTheme.LIGHT;
         [key: string]: string;
-        ['data-theme']: EDataTheme;
     };
     [EScopeClientStore.SESSION_STORAGE]: {
         [key: string]: string;

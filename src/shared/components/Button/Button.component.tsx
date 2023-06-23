@@ -60,12 +60,13 @@ function Button({
     if (href) {
         props.href = href;
         Comp = Link;
-    } else if (href) {
-        props.href = href;
-        Comp = 'a';
+    } else if (hrefLang) {
+        props.hrefLang = hrefLang;
+        Comp = Link;
     }
 
     const classes = cx('wrapper', {
+        [className ?? '']: className ?? '',
         primary,
         outline,
         text,
@@ -74,13 +75,6 @@ function Button({
         small,
         large,
     });
-
-    if (className) {
-        Object.assign(classes, {
-            [className]: className,
-        });
-    }
-
     return (
         <Comp className={classes} {...props}>
             {leftIcon && <span className={cx('icon')}>{<FontAwesomeIcon icon={leftIcon} />}</span>}

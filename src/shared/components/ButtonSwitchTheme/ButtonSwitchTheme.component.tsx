@@ -7,11 +7,16 @@ import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 import { EDataTheme } from '@/core/common/constants/reduxSlice.constant';
 import { useAppDispatch } from '@/core/redux/hook.redux';
 import { changeGlobalThemes } from '@/core/redux/features/client/client.slice';
+import { LocalStorageSide } from '@/utils/clientStore.util';
+import { ELocalStorageKey } from '@/core/common/constants/common.constant';
 
 const cx = classNames.bind(styles);
 
 function ButtonSwitchTheme(): ReactNode {
-    const [theme, setTheme] = useState<EDataTheme>(EDataTheme.DARK);
+    const localStoreInstance = new LocalStorageSide();
+    const [theme, setTheme] = useState<EDataTheme>(
+        localStoreInstance.getStore(ELocalStorageKey.DATA_THEME) as EDataTheme.LIGHT & EDataTheme.DARK,
+    );
     const dispatch = useAppDispatch();
     function handleSwitchTheme() {
         setTheme((prevState: EDataTheme) => (prevState === EDataTheme.DARK ? EDataTheme.LIGHT : EDataTheme.DARK));

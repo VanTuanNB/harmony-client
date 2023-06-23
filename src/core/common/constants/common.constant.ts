@@ -3,3 +3,7 @@ export enum EScopeClientStore {
     SESSION_STORAGE = 'sessionStorage',
     COOKIE = 'cookie',
 }
+
+export enum ELocalStorageKey {
+    DATA_THEME = 'data-theme',
+}

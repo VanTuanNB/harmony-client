@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import HeadlessTippy from '@tippyjs/react/headless';
 
 import classNames from 'classnames/bind';
@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
 import PopperMenuComponent from '@/shared/components/PopperMenu/PopperMenu.component';
-import { USER_SETTINGS } from '@/shared/constants/common.constant';
+import { USER_SETTINGS, MENU_SETTINGS } from '@/shared/constants/index.constant';
 
 const cx = classNames.bind(styles);
 
@@ -19,19 +19,14 @@ function HeaderRight(): ReactNode {
                 <ButtonSwitchTheme />
             </li>
             <li className={cx('item')}>
-                <HeadlessTippy
-                    visible={true}
-                    interactive
-                    placement="bottom"
-                    render={(attrs) => <div className={cx('popper-search')} tabIndex={-1} {...attrs}></div>}
-                >
+                <PopperMenuComponent listOptions={MENU_SETTINGS} position={{ top: 46, right: 0 }}>
                     <button className={cx('btn-settings')}>
                         <FontAwesomeIcon icon={faGear} />
                     </button>
-                </HeadlessTippy>
+                </PopperMenuComponent>
             </li>
             <li className={cx('item')}>
-                <PopperMenuComponent listOptions={USER_SETTINGS}>
+                <PopperMenuComponent listOptions={USER_SETTINGS} position={{ top: 46, right: 0 }}>
                     <Image
                         width={40}
                         height={40}
