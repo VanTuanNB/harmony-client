@@ -1,7 +1,7 @@
 export enum EScopeClientStore {
-    LOCAL_STORAGE = 'localStorage',
-    SESSION_STORAGE = 'sessionStorage',
-    COOKIE = 'cookie',
+    LOCAL_STORAGE = 'localStoreSide',
+    SESSION_STORAGE = 'sessionStoreSide',
+    COOKIE = 'cookieSide',
 }
 
 export enum ELocalStorageKey {

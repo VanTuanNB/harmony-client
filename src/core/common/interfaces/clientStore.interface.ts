@@ -15,6 +15,6 @@ export interface IClientStore {
 }
 
 export interface IClientStoreSide {
-    getStore(key: string): { [key: string]: any };
+    getStore(key: string): any;
     setStore<T>(key: string, value: T, options?: { expires: number }): void;
 }

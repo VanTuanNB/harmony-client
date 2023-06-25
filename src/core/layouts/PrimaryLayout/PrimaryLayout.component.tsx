@@ -15,7 +15,7 @@ const cx = classNames.bind(styles);
 function PrimaryLayout({ children }: { children: ReactNode }) {
     const store = useAppSelector(selectClientStoreReducer);
     return (
-        <div id="root" data-theme={store.localStorage['data-theme']} className={cx('primary-layout')}>
+        <div id="root" data-theme={store.localStoreSide['data-theme']} className={cx('primary-layout')}>
             <SideBarNavigation />
             <main className={cx('contents')}>
                 <HeaderComponent />

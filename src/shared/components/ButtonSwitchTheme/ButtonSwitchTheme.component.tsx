@@ -15,7 +15,8 @@ const cx = classNames.bind(styles);
 function ButtonSwitchTheme(): ReactNode {
     const localStoreInstance = new LocalStorageSide();
     const [theme, setTheme] = useState<EDataTheme>(
-        localStoreInstance.getStore(ELocalStorageKey.DATA_THEME) as EDataTheme.LIGHT & EDataTheme.DARK,
+        (localStoreInstance.getStore(ELocalStorageKey.DATA_THEME) as EDataTheme.LIGHT & EDataTheme.DARK) ??
+            EDataTheme.DARK,
     );
     const dispatch = useAppDispatch();
     function handleSwitchTheme() {
