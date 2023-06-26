@@ -2,10 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 import type { RootState } from '@/core/redux/store.redux';
-import { IUser } from '@/core/common/interfaces/index.interface';
+import { IUserStore } from '@/core/common/interfaces/index.interface';
 import { ESelectReducer } from '@/core/common/constants/index.constant';
 
-const initialState: IUser = {
+const initialState: IUserStore = {
     _id: '',
     email: '',
     name: '',
@@ -26,7 +26,7 @@ export const userSlice = createSlice({
     name: ESelectReducer.USER,
     initialState,
     reducers: {
-        changeNameAction: (state, action: PayloadAction<Pick<IUser, 'name'>>) => {
+        changeNameAction: (state, action: PayloadAction<Pick<IUserStore, 'name'>>) => {
             state.name = action.payload.name;
         },
     },
