@@ -1,0 +1,92 @@
+.media {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &:hover .box-right {
+        display: flex;
+    }
+
+    & .box-left {
+        display: flex;
+        align-items: center;
+
+        & .thumbnail {
+            width: 40px;
+            height: 40px;
+
+            & .img {
+                border-radius: 6px;
+                object-fit: cover;
+            }
+        }
+
+        & .info {
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            margin-left: 10px;
+
+            & .title {
+                font-size: 1.4rem;
+                color: var(--theme-mode-color);
+                margin: 0;
+                line-height: 1.6rem;
+                display: -webkit-box;
+                max-height: 1.6rem;
+                overflow: hidden;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+            }
+
+            & .performers {
+                display: flex;
+                align-items: center;
+                font-size: 1.2rem;
+                margin-top: 4px;
+                line-height: 1.4rem;
+                display: -webkit-box;
+                max-height: 1.6rem;
+                overflow: hidden;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+
+                & .link-channel {
+                    color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.6);
+                    margin-left: 4px;
+
+                    &:first-child {
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    & .box-right {
+        display: none;
+        align-items: center;
+
+        & .btn {
+            font-size: 1.6rem;
+            background-color: transparent;
+            color: var(--theme-mode-color);
+            cursor: pointer;
+            padding: 4px;
+            width: 26px;
+            height: 26px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+
+            &:hover {
+                background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.3);
+            }
+
+            &:last-child {
+                margin-left: 6px;
+            }
+        }
+    }
+}
