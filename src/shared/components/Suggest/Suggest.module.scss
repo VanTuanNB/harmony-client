@@ -1,0 +1,23 @@
+.wrapper {
+    & .title {
+        font-size: 1.6rem;
+        margin: 0;
+        color: var(--theme-mode-color);
+        margin-left: 8px;
+    }
+    & .contents {
+        margin-top: 10px;
+
+        & .list-listening {
+            & .item {
+                padding: 8px;
+                border-radius: 6px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
+                }
+            }
+        }
+    }
+}

@@ -3,7 +3,7 @@ export interface IUser {}
 export interface ISong {
     _id: string;
     title: string;
-    thumbnail?: string;
+    thumbnail: string;
     composerReference: IComposer;
     songPathReference: ISongPath;
     publish: Date;
