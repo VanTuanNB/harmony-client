@@ -6,7 +6,7 @@ import styles from './Home.module.scss';
 const cx = classNames.bind(styles);
 
 function HomePage() {
-    return <h1>Home Page Component</h1>;
+    return <h1>Home component page</h1>
 }
 
 export default HomePage;
