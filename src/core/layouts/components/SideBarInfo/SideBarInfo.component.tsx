@@ -45,36 +45,38 @@ const mockData = [
 function SideBarInfo() {
     return (
         <div className={cx('sidebar-info')}>
-            <h2 className={cx('title')}>Danh sách phát</h2>
-            <ul className={cx('list-listening')}>
-                {mockData.map((data) => {
-                    return (
-                        <li key={data._id} className={cx('item')}>
-                            <MediaItem title={data.title} thumbnail={data.thumbnail} performers={data.performers} />
-                        </li>
-                    );
-                })}
-            </ul>
-            <h2 className={cx('title')}>Tiếp theo</h2>
-            <ul className={cx('list-listening')}>
-                {mockData.map((data) => {
-                    return (
-                        <li key={data._id} className={cx('item')}>
-                            <MediaItem title={data.title} thumbnail={data.thumbnail} performers={data.performers} />
-                        </li>
-                    );
-                })}
-            </ul>
-            <h2 className={cx('title')}>Gợi ý cho bạn</h2>
-            <ul className={cx('list-listening')}>
-                {mockData.map((data) => {
-                    return (
-                        <li key={data._id} className={cx('item')}>
-                            <MediaItem title={data.title} thumbnail={data.thumbnail} performers={data.performers} />
-                        </li>
-                    );
-                })}
-            </ul>
+            <div className={cx('right-sidebar')}>
+                <h2 className={cx('title')}>Danh sách phát</h2>
+                <ul className={cx('list-listening')}>
+                    {mockData.map((data) => {
+                        return (
+                            <li key={data._id} className={cx('item')}>
+                                <MediaItem title={data.title} thumbnail={data.thumbnail} performers={data.performers} />
+                            </li>
+                        );
+                    })}
+                </ul>
+                <h2 className={cx('title')}>Tiếp theo</h2>
+                <ul className={cx('list-listening')}>
+                    {mockData.map((data) => {
+                        return (
+                            <li key={data._id} className={cx('item')}>
+                                <MediaItem title={data.title} thumbnail={data.thumbnail} performers={data.performers} />
+                            </li>
+                        );
+                    })}
+                </ul>
+                <h2 className={cx('title')}>Gợi ý cho bạn</h2>
+                <ul className={cx('list-listening')}>
+                    {mockData.map((data) => {
+                        return (
+                            <li key={data._id} className={cx('item')}>
+                                <MediaItem title={data.title} thumbnail={data.thumbnail} performers={data.performers} />
+                            </li>
+                        );
+                    })}
+                </ul>
+            </div>
         </div>
     );
 }

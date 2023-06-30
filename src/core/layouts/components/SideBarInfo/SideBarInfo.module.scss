@@ -5,6 +5,11 @@
     height: 100vh;
     padding: 10px 6px;
 
+    & .right-sidebar {
+        position: fixed;
+      
+    }
+
     & .title {
         font-size: 1.6rem;
         margin: 0;
