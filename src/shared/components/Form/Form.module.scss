@@ -5,12 +5,14 @@
     padding: 20px;
     color: white;
 
+    & h2 {
+        color: var(--theme-mode-color);
+    }
     & .col-3 {
         display: grid;
         grid-template-columns: 150px 1fr;
         margin-bottom: 20px;
-        // line-height: 50px;
-        height: 40px;
+        height: 45px;
 
         & label {
             text-align: right;
@@ -23,12 +25,8 @@
             border-radius: 5px;
             padding-left: 10px;
             // background: none;
-            border: 1px solid lightseagreen;
+            border: 1px solid #dfdfdf;
             outline: none;
-
-            &:focus {
-                box-shadow: 0 0 5px aqua;
-            }
         }
         & input[type='file'] {
             margin-top: 10px;
@@ -39,15 +37,13 @@
             height: 40px;
             border-radius: 5px;
             // background: none;
-            border: 1px solid lightseagreen;
+            border: 1px solid #dfdfdf;
             outline: none;
 
             & option {
                 color: black;
             }
-            &:focus {
-                box-shadow: 0 0 5px aqua;
-            }
+
         }
     }
     & button {
@@ -58,8 +54,8 @@
         border-radius: 5px;
         cursor: pointer;
 
-        &:hover{
-            box-shadow:  0 0 5px aqua;
+        &:hover {
+            box-shadow: 0 0 5px blue;
         }
     }
 }
@@ -67,6 +63,8 @@
 .select-input {
     color: black;
     width: 400px;
-    font-size: 15px;
+    // font-size: 15px;
     border-radius: 5px;
+
 }
+

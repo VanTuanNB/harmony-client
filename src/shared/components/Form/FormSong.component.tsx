@@ -58,7 +58,7 @@ function FormCreate() {
                     <Controller
                         name="genresReference"
                         control={control}
-                        render={({ field }) => <Select {...field} options={inputGenres} isMulti  className={cx('select-input')} />}
+                        render={({ field }) => <Select {...field} options={inputGenres} isMulti className={cx('select-input')} />}
                     />
                 </div>
                 <div className={cx('col-3')}>
