@@ -1,12 +1,11 @@
 import classNames from 'classnames/bind';
 
 import styles from './Home.module.scss';
-import FormCreate from '@/shared/components/Form/FormSong.component';
 
 const cx = classNames.bind(styles);
 
 function HomePage() {
-    return <FormCreate />;
+    return <h1>Home component page</h1>
 }
 
 export default HomePage;
