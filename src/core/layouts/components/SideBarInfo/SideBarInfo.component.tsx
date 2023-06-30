@@ -1,7 +1,6 @@
 import classNames from 'classnames/bind';
 
 import styles from './SideBarInfo.module.scss';
-import MediaItem from '@/shared/components/MediaItem/MediaItem.component';
 import PlaylistComponent from '@/shared/components/Playlist/Playlist.component';
 import SuggestComponent from '@/shared/components/Suggest/Suggest.component';
 

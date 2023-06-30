@@ -3,7 +3,6 @@
         font-size: 1.6rem;
         margin: 0;
         color: var(--theme-mode-color);
-        margin-left: 8px;
     }
     & .contents {
         margin-top: 10px;
@@ -17,6 +16,24 @@
                 &:hover {
                     background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
                 }
+            }
+        }
+
+        & .wrapper-disconnect-network {
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+
+            & .icon-wifi {
+                font-size: 1.8rem;
+                color: var(--theme-mode-color);
+            }
+
+            & .disconnect-network-title {
+                font-size: 1.6rem;
+                color: var(--theme-mode-color);
+                font-weight: 500;
+                margin-left: 10px;
             }
         }
     }

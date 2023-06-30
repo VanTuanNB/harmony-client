@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 import type { RootState } from '@/core/redux/store.redux';
-import { ISongStore } from '@/core/common/interfaces/index.interface';
+import { ISong, ISongStore } from '@/core/common/interfaces/index.interface';
 import { EScopeSongStore, ESelectReducer } from '@/core/common/constants/index.constant';
 
 const initialState: ISongStore = {
@@ -18,8 +18,12 @@ const initialState: ISongStore = {
 export const songSlice = createSlice({
     name: ESelectReducer.SONG,
     initialState,
-    reducers: {},
+    reducers: {
+        pushListSuggestSongIntoStore: (state, action: PayloadAction<ISong[]>) => {
+            state.playlist.suggests = action.payload;
+        },
+    },
 });
-// export const { changeNameAction } = songSlice.actions;
+export const { pushListSuggestSongIntoStore } = songSlice.actions;
 export const selectSongReducer = (state: RootState) => state[ESelectReducer.SONG];
 export default songSlice;
