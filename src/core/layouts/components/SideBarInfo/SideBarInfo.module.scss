@@ -3,29 +3,5 @@
     flex: 0 0 18%;
     border-left: 1px solid var(--theme-mode-color);
     height: 100vh;
-    padding: 10px 6px;
-
-    & .right-sidebar {
-        position: fixed;
-      
-    }
-
-    & .title {
-        font-size: 1.6rem;
-        margin: 0;
-        color: var(--theme-mode-color);
-        margin-left: 8px;
-    }
-
-    & .list-listening {
-        & .item {
-            padding: 8px;
-            border-radius: 6px;
-            cursor: pointer;
-
-            &:hover {
-                background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
-            }
-        }
-    }
+    padding: 10px;
 }

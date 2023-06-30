@@ -7,16 +7,13 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
+import { ISong } from '@/core/common/interfaces/collection.interface';
 
 const cx = classNames.bind(styles);
 
-interface IMediaItem {
-    thumbnail: string;
-    title: string;
-    performers: { _id: string; name: string; nickname: string }[];
-}
+interface IMediaItem extends Pick<ISong, '_id' | 'thumbnail' | 'title' | 'performers'> {}
 
-export default function MediaItem({ thumbnail, title, performers }: IMediaItem): ReactNode {
+export default function MediaItem({ _id, thumbnail, title, performers }: IMediaItem): ReactNode {
     const [favorite, setFavorite] = useState<boolean>(false);
     return (
         <div className={cx('media')}>

@@ -1,4 +1,4 @@
-export interface IUser {
+export interface IUserStore {
     _id: string;
     email: string;
     name: string;
