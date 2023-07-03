@@ -1,10 +1,12 @@
 .header {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: fixed;
+    z-index: 9999;
     padding: 0 20px;
     height: var(--header-height);
+    background: var(--theme-mode-background);
 
     & .header-left {
         display: flex;

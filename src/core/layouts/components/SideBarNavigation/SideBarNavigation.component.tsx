@@ -7,7 +7,9 @@ const cx = classNames.bind(styles);
 function SideBarNavigation() {
     return (
         <div className={cx('sidebar-navigation')}>
-            <h2>Sidebar Navigation Components</h2>
+            <div className={cx('left-sidebar')}>
+                <h2>Sidebar Navigation Components</h2>
+            </div>
         </div>
     );
 }

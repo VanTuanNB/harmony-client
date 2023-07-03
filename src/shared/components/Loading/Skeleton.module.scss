@@ -1,0 +1,75 @@
+.loading {
+    margin-bottom: 16px;
+    .content {
+        width: 100%;
+        display: flex;
+        align-items: center;
+
+        & .background {
+            position: relative;
+            width: 40px;
+            min-width: 40px;
+            border-radius: 6px;
+            height: 40px;
+            background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
+            overflow: hidden;
+        }
+
+        & .information {
+            margin-left: 12px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            & .title {
+                position: relative;
+                margin-top: 0px;
+                width: 90%;
+                height: 20px;
+                border-radius: 4px;
+                background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
+                overflow: hidden;
+            }
+            .channel {
+                position: relative;
+                margin-top: 6px;
+                width: 60%;
+                height: 20px;
+                border-radius: 2px;
+                background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
+                overflow: hidden;
+            }
+        }
+
+        & .animation {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            overflow: hidden;
+            &::after {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                transform: translateX(-100%);
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(#fff, 0.2) 30%,
+                    rgba(#fff, 0.2) 60%,
+                    rgba(#fff, 0)
+                );
+                animation: shimmer 2s infinite;
+                content: '';
+            }
+        }
+    }
+}
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
