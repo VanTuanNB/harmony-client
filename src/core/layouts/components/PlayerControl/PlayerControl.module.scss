@@ -26,12 +26,13 @@ $padding: 0.5em;
         justify-content: flex-start;
         gap: 1.5rem;
         width: 20%;
+        cursor: pointer;
         .song-infors {
             display: flex;
             align-items: center;
             gap: 1em;
             .image-container {
-                $size: 4nem;
+                $size: 3.5em;
                 flex-shrink: 0;
                 width: $size;
                 height: $size;
@@ -74,17 +75,20 @@ $padding: 0.5em;
         justify-content: center;
         flex-direction: column;
         align-items: center;
-        gap: 1.5em;
+        gap: 0.1em;
         color: $secondary-color;
         .control-buttons {
+            position: relative;
             display: flex;
             align-items: center;
             gap: 2em;
+            margin-top: 0.8em;
+            cursor: pointer;
             .play-pause {
                 width: 18px;
                 height: 18px;
                 display: flex;
-                padding: 1em;
+                padding: 0.5em;
                 color: #111;
                 background-color: $primary-color;
                 border-radius: 50%;
@@ -99,11 +103,13 @@ $padding: 0.5em;
             align-items: center;
             justify-content: center;
             gap: 1em;
+            // padding-bottom: 20px;
             .progress-bar {
                 height: 4px;
                 border-radius: 10px;
                 width: 40%;
                 background-color: #ccc4;
+
                 .progress {
                     position: relative;
                     height: 100%;
@@ -114,6 +120,7 @@ $padding: 0.5em;
             }
             .progress-bar:hover .progress {
                 background-color: $green-color;
+                cursor: pointer;
             }
             .progress-bar:hover .progress::after {
                 content: '';
@@ -134,6 +141,7 @@ $padding: 0.5em;
         display: flex;
         flex-direction: row;
         gap: 1em;
+        cursor: pointer;
         .volume-bar {
             display: flex;
             align-items: center;
