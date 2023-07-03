@@ -4,14 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import {
-    faBackward,
+    faBackwardStep,
+    faBars,
     faCompress,
-    faDesktop,
-    faForward,
-    faListUl,
+    faForwardStep,
+    faMicrophoneLines,
     faPlay,
+    faRetweet,
     faShuffle,
-    faUndoAlt,
     faVolumeDown,
 } from '@fortawesome/free-solid-svg-icons';
 const cx = classNames.bind(styles);
@@ -25,8 +25,8 @@ function PlayerControl() {
                         <Image className={cx('image1')} src="/images/img1.jpg" alt="" width={60} height={60} />
                     </div>
                     <div className={cx('song-description')}>
-                        <p className={cx('title')}>Một phút</p>
-                        <p className={cx('artist')}>Tiến Bách</p>
+                        <p className={cx('title')}>Đời là thế thôi</p>
+                        <p className={cx('artist')}>Phú Lê</p>
                     </div>
                 </div>
                 <div className={cx('icons')}>
@@ -37,12 +37,12 @@ function PlayerControl() {
             <div className={cx('progress-controller')}>
                 <div className={cx('control-buttons')}>
                     <FontAwesomeIcon icon={faShuffle} className={cx('icon')} />
-                    <FontAwesomeIcon icon={faBackward} className={cx('icon')} />
+                    <FontAwesomeIcon icon={faBackwardStep} className={cx('icon')} />
                     <FontAwesomeIcon icon={faPlay} className={cx('play-pause')} />
-                    <FontAwesomeIcon icon={faForward} className={cx('icon')} />
-                    <FontAwesomeIcon icon={faUndoAlt} className={cx('icon')} />
+                    <FontAwesomeIcon icon={faForwardStep} className={cx('icon')} />
+                    <FontAwesomeIcon icon={faRetweet} className={cx('icon')} />
                 </div>
-
+                {/* thanh am nhac */}
                 <div className={cx('progress-container')}>
                     <span>0:49</span>
                     <div className={cx('progress-bar')}>
@@ -52,8 +52,8 @@ function PlayerControl() {
                 </div>
             </div>
             <div className={cx('other-features')}>
-                <FontAwesomeIcon icon={faListUl} className={cx('icon')} />
-                <FontAwesomeIcon icon={faDesktop} className={cx('icon')} />
+                <FontAwesomeIcon icon={faMicrophoneLines} className={cx('icon')} />
+                <FontAwesomeIcon icon={faBars} className={cx('icon')} />
                 <div className={cx('volume-bar')}>
                     <FontAwesomeIcon icon={faVolumeDown} className={cx('icon')} />
                     <div className={cx('progress-bar')}>

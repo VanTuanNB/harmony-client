@@ -1,0 +1,51 @@
+.main-home {
+    margin-top: 100px;
+    .main-image {
+        display: flex;
+        gap: 16px;
+        margin: 25px;
+    }
+
+    color: rgb(87, 221, 125);
+    .main-just {
+        width: 90%;
+        margin: 25px;
+        & .list-listening {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            & .item {
+                padding: 10px;
+                border-radius: 6px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
+                }
+            }
+        }
+    }
+    .main-ranking {
+        margin: 25px;
+        .ranking-image {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+    }
+    .main-top {
+        margin: 25px;
+        .top-image {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+    }
+    .main-hot {
+        margin: 25px;
+        .hot-image {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+    }
+}
