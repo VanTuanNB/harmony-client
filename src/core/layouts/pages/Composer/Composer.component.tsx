@@ -209,7 +209,7 @@ function ComposerPage() {
                     {mockData.map((data) => {
                         return (
                             <li key={data._id} className={cx('item')}>
-                                <MediaItem title={data.title} thumbnail={data.thumbnail} performers={data.performers} />
+                                <MediaItem title={data.title} thumbnail={data.thumbnail} performers={data.} />
                             </li>
                         );
                     })}
