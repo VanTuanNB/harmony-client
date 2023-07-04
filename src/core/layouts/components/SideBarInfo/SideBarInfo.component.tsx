@@ -9,8 +9,10 @@ const cx = classNames.bind(styles);
 function SideBarInfo() {
     return (
         <div className={cx('sidebar-info')}>
-            <PlaylistComponent />
-            <SuggestComponent />
+            <div className={cx('right-sibar')}>
+                <PlaylistComponent />
+                <SuggestComponent />
+            </div>
         </div>
     );
 }
