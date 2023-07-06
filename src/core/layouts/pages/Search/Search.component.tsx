@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const cx = classNames.bind(styles);
 
-function Search() {
+function SearchPage() {
     const { data, error, isLoading } = useGetServiceSongsQuery('');
     const dispatch = useAppDispatch();
     useEffect(() => {
@@ -106,4 +106,4 @@ function Search() {
         </div>
     );
 }
-export default Search;
+export default SearchPage;
