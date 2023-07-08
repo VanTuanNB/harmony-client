@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './Login.module.scss';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Link from 'next/link';
 
 const cx = classNames.bind(styles);
 
@@ -10,14 +11,14 @@ function LoginPage() {
         <div className={cx('form')}>
             <div className={cx('form-top')}>
                 <h2>Login to Harmony</h2>
-                <a href="">
+                <Link href="">
                     <FontAwesomeIcon icon={faFacebook} className={cx('icon-facebook')} />
                     Continne with Facebook
-                </a>
-                <a href="">
+                </Link>
+                <Link href="">
                     <FontAwesomeIcon icon={faGoogle} className={cx('icon-facebook')} />
                     Continne with Google
-                </a>
+                </Link>
             </div>
             <hr />
             <form action="" className={cx('login-form')}>
@@ -30,11 +31,13 @@ function LoginPage() {
                 </p>
                 <button>Log in</button>
             </form>
-            <a href="" className={cx('forgot')}>
+            <Link href="" className={cx('forgot')}>
                 Forgot your password?
-            </a>
+            </Link>
             <hr />
-            <p>Don’t have an account? <a href="">Sign up Harmony for free</a></p>
+            <p>
+                Don't have an account? <Link href="">Sign up Harmony for free</Link>
+            </p>
         </div>
     );
 }
