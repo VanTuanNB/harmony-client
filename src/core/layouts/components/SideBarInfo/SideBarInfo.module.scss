@@ -3,6 +3,7 @@
     flex: 0 0 18%;
     height: 1200px;
     padding: 10px;
+    z-index: 3;
 
     & .right-sibar {
         border-left: 1px solid var(--theme-mode-color);
