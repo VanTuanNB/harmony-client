@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { faHome, faFolder, faHistory } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faFolder, faHistory, faStar, faMusic } from '@fortawesome/free-solid-svg-icons';
 import styles from './SideBarNavigation.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
@@ -15,7 +15,7 @@ function SideBarNavigation() {
                     <Image src={''} width={50} height={50} alt="" />
                     <h3>Harmory Music</h3>
                 </div>
-                <div className={cx('navigaiton')}>
+                <div className={cx('navigation')}>
                     <ul>
                         <li>
                             <Link href="">
@@ -23,6 +23,24 @@ function SideBarNavigation() {
                                 <span>Home</span>
                             </Link>
                         </li>
+
+                        <li>
+                            <Link href="">
+                                <FontAwesomeIcon icon={faMusic} className={cx('icon')} />
+                                <span>Chủ đề & Thể loại</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="">
+                                <FontAwesomeIcon icon={faStar} className={cx('icon')} />
+                                <span>Top 100</span>
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+                <hr />
+                <div className={cx('navigation')}>
+                    <ul>
                         <li>
                             <Link href="">
                                 <FontAwesomeIcon icon={faFolder} className={cx('icon')} />
