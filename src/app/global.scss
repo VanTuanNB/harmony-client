@@ -11,6 +11,7 @@
     --theme-mode-background: #18191a;
     --theme-mode-background-rgb: 24, 25, 26;
     --theme-mode-color: #fff;
+    --theme-mode-background-user: #000000;
     --theme-mode-color-rgb: 255, 255, 255;
     --box-shadow-search-input: hsla(0, 0%, 0%, 0);
     --search-box-legacy-button: hsl(0, 0%, 18.82%);
@@ -37,6 +38,7 @@ body {
     transition: background-color linear 0.2s;
     --theme-mode-background: #18191a;
     --theme-mode-background-rgb: 24, 25, 26;
+    --theme-mode-background-user: #000000;
     --theme-mode-color: #fff;
     --theme-mode-color-rgb: 255, 255, 255;
     background-color: var(--theme-mode-background);
@@ -47,6 +49,7 @@ body {
     --theme-mode-background-rgb: 255, 255, 255;
     --theme-mode-color: #18191a;
     --theme-mode-color-rgb: 24, 25, 26;
+    --theme-mode-background-user: #FFFFFF;
     background-color: var(--theme-mode-background);
     color: var(--theme-mode-color);
     transition: background-color linear 0.2s;

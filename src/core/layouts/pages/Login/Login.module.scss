@@ -1,0 +1,94 @@
+.form {
+    width: 50%;
+    background: var(--theme-mode-background-user);
+    margin-top: 100px;
+    text-align: center;
+    margin: auto;
+    border-radius: 5px;
+    padding-bottom: 10px;
+
+    hr {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+    .form-top {
+        display: grid;
+        grid-template-columns: 1fr;
+        justify-items: center;
+        row-gap: 20px;
+
+        h2 {
+            padding-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        a {
+            width: 250px;
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid var(--theme-mode-color);
+            border-radius: 5px;
+            color: var(--theme-mode-color);
+
+            .icon-facebook {
+                padding-right: 10px;
+            }
+        }
+        a:hover {
+            background: var(--theme-mode-color);
+            box-shadow: 0 0 5px var(--box-shadow-search-input);
+            color: var(--theme-mode-background-user);
+        }
+    }
+
+    .login-form {
+        margin-top: 50px;
+
+        input {
+            width: 250px;
+            height: 40px;
+            margin-bottom: 20px;
+            border: 1px solid var(--theme-mode-color);
+            background: none;
+            padding-left: 10px;
+            border-radius: 5px;
+            color: var(--theme-mode-color);
+        }
+        p {
+            height: 50px;
+            line-height: 50px;
+
+            input[type='checkbox'] {
+                width: 20px;
+                height: 20px;
+            }
+            span {
+                padding-left: 10px;
+            }
+        }
+        button {
+            width: 250px;
+            height: 40px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+    }
+    .forgot {
+        height: 50px;
+        line-height: 50px;
+        text-decoration: underline;
+        font-weight: 300;
+        font-style: oblique;
+        font-size: 15px;
+        color: var(--theme-mode-color);
+    }
+    p {
+        color: var(--theme-mode-color);
+        font-weight: 300;
+        a {
+            text-decoration: underline;
+            font-weight: 500;
+            color: var(--theme-mode-color);
+        }
+    }
+}
