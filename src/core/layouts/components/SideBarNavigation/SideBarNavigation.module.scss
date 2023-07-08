@@ -4,8 +4,41 @@
     height: 100vh;
     border-right: 1px solid var(--theme-mode-color);
 
-    & .left-sidebar{
-        max-width: 90%;
+    & .left-sidebar {
+        width: 18%;
         position: fixed;
+
+        .icon-logo {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 70px 1fr;
+            height: 80px;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid var(--theme-mode-color);
+            
+            h3{
+                color: aquamarine;
+            }
+        }
+        .navigaiton {
+            width: 100%;
+
+            li {
+                width: 100%;
+                padding: 10px;
+            }
+            li:hover {
+                cursor: pointer;
+                background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
+            }
+            .icon {
+                padding-right: 10px;
+                color: var(--theme-mode-color);
+            }
+            span {
+                color: var(--theme-mode-color);
+            }
+        }
     }
 }
