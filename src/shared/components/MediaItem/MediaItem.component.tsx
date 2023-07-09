@@ -19,7 +19,7 @@ export default function MediaItem({ _id, thumbnail, title, performers }: IMediaI
         <div className={cx('media')}>
             <div className={cx('box-left')}>
                 <div className={cx('thumbnail')}>
-                    <Image src={thumbnail} alt="fallback img" height={40} width={40} className={cx('img')} />
+                    <Image src={thumbnail} alt="" height={40} width={40} className={cx('img')} />
                 </div>
                 <div className={cx('info')}>
                     <h1 className={cx('title')}>{title}</h1>
