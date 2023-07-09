@@ -10,6 +10,7 @@ import { pushListSuggestSongIntoStore, selectSongReducer } from '@/core/redux/fe
 import SkeletonLoading from '@/shared/components/Loading/SkeletonLoading.component';
 import { faWifi } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import SearchFilterComponent from '@/shared/components/SearchFilter/SearchFilter.component';
 
 const cx = classNames.bind(styles);
 
@@ -26,6 +27,7 @@ function SearchPage() {
     const dataSong = store.playlist.suggests;
     return (
         <div className={cx('search')}>
+            <SearchFilterComponent/>
             <div className={cx('top-result')}>
                 <div className={cx('result-left')}>
                     <h2>Top result</h2>
