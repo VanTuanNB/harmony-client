@@ -7,7 +7,10 @@
 
     & .contents {
         flex: 1;
-        // height: 100vh;
+      
+        & .container{
+            margin-top: 60px;
+        }
     }
 
     & .component-outside {
