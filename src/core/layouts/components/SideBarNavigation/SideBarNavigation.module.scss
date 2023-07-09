@@ -2,10 +2,11 @@
     width: 30%;
     flex: 0 0 18%;
     height: 100vh;
-    border-right: 1px solid var(--theme-mode-color);
-
-    & .left-sidebar {
-        width: 18%;
+  
+    & .left-sidebar{
+        border-right: 1px solid var(--theme-mode-color);
+        width: 250px;
+        height: 100%;
         position: fixed;
 
         .icon-logo {

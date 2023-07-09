@@ -1,7 +1,14 @@
 .sidebar-info {
     width: 30%;
     flex: 0 0 18%;
-    border-left: 1px solid var(--theme-mode-color);
-    height: 100vh;
+    height: 1200px;
     padding: 10px;
+    z-index: 3;
+
+    & .right-sibar {
+        border-left: 1px solid var(--theme-mode-color);
+        width: 300px;
+        height: 100%;
+        position: fixed;
+    }
 }
