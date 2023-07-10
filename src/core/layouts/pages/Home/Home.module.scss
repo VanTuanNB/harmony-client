@@ -1,0 +1,113 @@
+.main-home {
+    margin-bottom: 150px;
+    .main-image {
+        display: flex;
+        gap: 16px;
+        margin: 25px;
+    }
+    .main-just {
+        width: 90%;
+        margin: 25px;
+        & .list-listening {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            & .item {
+                padding: 10px;
+                border-radius: 6px;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
+                }
+            }
+        }
+    }
+    .main-ranking {
+        margin: 25px;
+        .ranking-image {
+            display: inline-block;
+            margin: 0 5px;
+            .ranking-image-1 {
+                width: 300px;
+                height: 150px;
+                border: 1px solid #fff;
+                display: flex;
+                align-items: center;
+
+                .box-ranking {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    padding-left: 1rem;
+                    .image {
+                        width: 40%;
+                    }
+                    .songsinger-main {
+                        width: 60%;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        .songsinger-ranking {
+                            display: flex;
+                            flex-direction: column;
+                            .song {
+                                color: #ffffff;
+                                font-size: 1.8rem;
+                                font-weight: 500;
+                                line-height: 18.2px;
+                            }
+                            .singer {
+                                color: #949090;
+                                font-size: 1.5rem;
+                            }
+                        }
+                        .rankingdate-main {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            width: 100%;
+                            .ranking {
+                                color: green;
+                                font-size: 3.5rem;
+                                font-weight: 900;
+                                line-height: 40px;
+                            }
+                            .date {
+                                display: flex;
+                                align-items: flex-end;
+                                color: #ffffff;
+                                font-size: 14px;
+                                line-height: 25.2px;
+                                padding-right: 1rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .main-top {
+        margin: 25px;
+        .top-image {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            .top-image-1 {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+    .main-hot {
+        margin: 25px;
+        .hot-image {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            .hot-image-1 {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+}

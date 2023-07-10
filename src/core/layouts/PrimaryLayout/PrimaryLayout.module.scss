@@ -7,12 +7,16 @@
 
     & .contents {
         flex: 1;
-        height: 100vh;
+      
+        & .container{
+            margin-top: 60px;
+        }
     }
 
     & .component-outside {
         position: fixed;
         top: unset;
+        z-index: 5;
         left: 0;
         right: 0;
         bottom: 0;

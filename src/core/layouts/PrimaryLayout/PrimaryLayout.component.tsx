@@ -19,7 +19,7 @@ function PrimaryLayout({ children }: { children: ReactNode }) {
             <SideBarNavigation />
             <main className={cx('contents')}>
                 <HeaderComponent />
-                <div>{children}</div>
+                <div className={cx('container')}>{children}</div>
             </main>
             <SideBarInfo />
             <div className={cx('component-outside')}>

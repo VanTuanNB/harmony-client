@@ -50,6 +50,11 @@ function MediaItem({ _id, thumbnail, title, performers, active = false, onClick 
                             )}
                         </h3>
                     </div>
+        <div className={cx('media')}>
+            <div className={cx('box-left')}>
+                <div className={cx('thumbnail')}>
+                    <Image src={thumbnail} alt="" height={40} width={40} className={cx('img')} />
+
                 </div>
                 <div className={cx('box-right')}>
                     <button

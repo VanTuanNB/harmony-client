@@ -1,9 +1,9 @@
 .header {
-    max-width: 100%;
+    width: 65%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     position: fixed;
-    z-index: 9999;
+    z-index: 2;
     padding: 0 20px;
     height: var(--header-height);
     background: var(--theme-mode-background);
