@@ -1,6 +1,6 @@
 import SearchPagePlaylists from "@/core/layouts/pages/Search-Playlists/Search.component";
-function Search_PlaylistsRouting() {
+function SearchPlaylistsRouting() {
     return <SearchPagePlaylists></SearchPagePlaylists>;
 }
 
-export default Search_PlaylistsRouting;
+export default SearchPlaylistsRouting;

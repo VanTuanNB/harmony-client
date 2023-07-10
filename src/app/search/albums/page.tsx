@@ -1,6 +1,6 @@
 import SearchPageAlbums from "@/core/layouts/pages/Search-Albums/Search.component";
-function Search_AlbumsRouting() {
+function SearchAlbumsRouting() {
     return <SearchPageAlbums></SearchPageAlbums>;
 }
 
-export default Search_AlbumsRouting;
+export default SearchAlbumsRouting;

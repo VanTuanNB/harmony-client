@@ -1,6 +1,6 @@
 import SearchPageArtists from "@/core/layouts/pages/Search-Artists/Search.component";
-function Search_ArtistsRouting() {
+function SearchArtistsRouting() {
     return <SearchPageArtists></SearchPageArtists>;
 }
 
-export default Search_ArtistsRouting;
+export default SearchArtistsRouting;
