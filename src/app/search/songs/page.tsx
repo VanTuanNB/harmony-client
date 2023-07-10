@@ -1,6 +1,6 @@
-import SearchPage_Songs from "@/core/layouts/pages/Search-Songs/Search.component";
+import SearchPageSongs from "@/core/layouts/pages/Search-Songs/Search.component";
 function Search_SongsRouting() {
-    return <SearchPage_Songs></SearchPage_Songs>;
+    return <SearchPageSongs></SearchPageSongs>;
 }
 
 export default Search_SongsRouting;

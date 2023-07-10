@@ -15,7 +15,7 @@ import Image from 'next/image';
 
 const cx = classNames.bind(styles);
 
-function SearchPage_Playlists() {
+function SearchPagePlaylists() {
     return (
         <div className={cx('search-playlists')}>
             <SearchFilterComponent/>
@@ -172,4 +172,4 @@ function SearchPage_Playlists() {
         </div>
     )
 }
-export default SearchPage_Playlists;
+export default SearchPagePlaylists;

@@ -15,7 +15,7 @@ import Image from 'next/image';
 
 const cx = classNames.bind(styles);
 
-function SearchPage_Albums() {
+function SearchPageAlbums() {
     return (
         <div className={cx('search-albums')}>
             <SearchFilterComponent/>
@@ -150,4 +150,4 @@ function SearchPage_Albums() {
         </div>
     )
 }
-export default SearchPage_Albums;
+export default SearchPageAlbums;

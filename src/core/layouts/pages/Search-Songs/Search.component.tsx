@@ -14,7 +14,7 @@ import SearchFilterComponent from '@/shared/components/SearchFilter/SearchFilter
 
 const cx = classNames.bind(styles);
 
-function SearchPage_Songs() {
+function SearchPageSongs() {
     return (
         <div className={cx('search-songs')}>
             <SearchFilterComponent/>
@@ -111,4 +111,4 @@ function SearchPage_Songs() {
         </div>
     )
 }
-export default SearchPage_Songs;
+export default SearchPageSongs;
