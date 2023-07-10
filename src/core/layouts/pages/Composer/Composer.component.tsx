@@ -9,15 +9,13 @@ import MediaItem from '@/shared/components/MediaItem/MediaItem.component';
 
 const cx = classNames.bind(style);
 
-
-
 function ComposerPage() {
     function handleClickMediaItem(_id: string) {}
     return (
         <div className={cx('composer')}>
             <div className={cx('composer-info')}>
                 <div className={cx('info')}>
-                    <img src="/images/fallback-thumbnail-user.jpg" />
+                    <img src="/images/fallback-thumbnail-user.jpg" alt />
                     <h2>Hoài Lâm</h2>
                 </div>
             </div>

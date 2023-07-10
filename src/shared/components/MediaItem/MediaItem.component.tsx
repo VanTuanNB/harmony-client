@@ -50,22 +50,6 @@ function MediaItem({ _id, thumbnail, title, performers, active = false, onClick 
                             )}
                         </h3>
                     </div>
-        <div className={cx('media')}>
-            <div className={cx('box-left')}>
-                <div className={cx('thumbnail')}>
-                    <Image src={thumbnail} alt="" height={40} width={40} className={cx('img')} />
-
-                </div>
-                <div className={cx('box-right')}>
-                    <button
-                        className={cx('btn', 'btn-switch-favorite')}
-                        onClick={() => setFavorite((prevState) => !prevState)}
-                    >
-                        {favorite ? <FontAwesomeIcon icon={faHeart} /> : <FontAwesomeIcon icon={faHeartRegular} />}
-                    </button>
-                    <button className={cx('btn', 'more-options')}>
-                        <FontAwesomeIcon icon={faEllipsis} />
-                    </button>
                 </div>
             </div>
         </div>
