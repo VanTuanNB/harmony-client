@@ -16,7 +16,7 @@
     --box-shadow-search-input: hsla(0, 0%, 0%, 0);
     --search-box-legacy-button: hsl(0, 0%, 18.82%);
     --search-box-legacy-button-color: hsla(0, 0%, 100%, 0.08);
-
+    --theme-filter: #fff;
     --header-height: 56px;
     --width-header-search-input: 300px;
 }
@@ -40,6 +40,7 @@ body {
     --theme-mode-background-rgb: 24, 25, 26;
     --theme-mode-background-user: #000000;
     --theme-mode-color: #fff;
+    --theme-filter: #5A5A5A;
     --theme-mode-color-rgb: 255, 255, 255;
     background-color: var(--theme-mode-background);
     color: var(--theme-mode-color);
@@ -48,6 +49,7 @@ body {
     --theme-mode-background: #fff;
     --theme-mode-background-rgb: 255, 255, 255;
     --theme-mode-color: #18191a;
+    --theme-filter: #D9D9D9;
     --theme-mode-color-rgb: 24, 25, 26;
     --theme-mode-background-user: #FFFFFF;
     background-color: var(--theme-mode-background);
