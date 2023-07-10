@@ -7,17 +7,5 @@
             color: var(--theme-mode-color);
             margin-left: 8px;
         }
-
-        & .list-listening {
-            & .item {
-                padding: 8px;
-                border-radius: 6px;
-                cursor: pointer;
-
-                &:hover {
-                    background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
-                }
-            }
-        }
     }
 }

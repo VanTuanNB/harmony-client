@@ -193,6 +193,7 @@ const mockData = [
 ];
 
 function ComposerPage() {
+    function handleClickMediaItem(_id: string) {}
     return (
         <div className={cx('composer')}>
             <div className={cx('composer-info')}>
@@ -209,7 +210,13 @@ function ComposerPage() {
                     {mockData.map((data) => {
                         return (
                             <li key={data._id} className={cx('item')}>
-                                <MediaItem title={data.title} thumbnail={data.thumbnail} performers={data.performers} />
+                                <MediaItem
+                                    _id={data._id}
+                                    title={data.title}
+                                    thumbnail={data.thumbnail}
+                                    performers={data.performers as any}
+                                    onClick={handleClickMediaItem}
+                                />
                             </li>
                         );
                     })}
@@ -229,6 +236,7 @@ function ComposerPage() {
                     {albumList.map((data) => {
                         return (
                             <AlbumItem
+                                key={data._id}
                                 thumbnail={data.thumbnail}
                                 title={data.title}
                                 id={data._id}

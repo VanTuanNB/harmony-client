@@ -13,6 +13,8 @@ function NextListeningComponent(): ReactNode {
     const store = useAppSelector(selectSongReducer);
     const [data, setData] = useState<ISong[]>([]);
     // useEffect(() => {}, []);
+
+    function handleClickMediaItem(_id: string) {}
     return (
         <div className={cx('next-wrapper')}>
             {data.length > 0 && (
@@ -27,6 +29,7 @@ function NextListeningComponent(): ReactNode {
                                         title={song.title}
                                         thumbnail={song.thumbnail}
                                         performers={song.performers}
+                                        onClick={handleClickMediaItem}
                                     />
                                 </li>
                             );

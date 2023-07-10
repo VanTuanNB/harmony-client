@@ -15,4 +15,13 @@ export enum EScopeSongStore {
     NEXT_SONGS = 'nextSongs',
     SUGGESTS = 'suggests',
     HISTORIES = 'histories',
+    CURRENT_SONG = 'currentSong',
+    STATE = 'state',
+}
+
+export enum EStateCurrentSong {
+    PLAYING = 'playing',
+    PAUSED = 'paused',
+    LOADING = 'loading',
+    FAILED = 'failed',
 }

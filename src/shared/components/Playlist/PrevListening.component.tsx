@@ -16,22 +16,25 @@ interface IPrevListeningProps {
 
 function PrevListeningComponent(): ReactNode {
     const store = useAppSelector(selectSongReducer);
-    const [data, setData] = useState<ISong[]>([]);
-    // useEffect(() => {}, []);
+    const listSong: ISong[] = store.playlist.prevSongs ?? [];
+
+    function handleClickMediaItem(_id: string) {}
     return (
         <div className={cx('prev-wrapper')}>
-            {data.length > 0 && (
+            {listSong.length > 0 && (
                 <>
                     <h2 className={cx('title')}>Danh sách phát</h2>
                     <ul className={cx('list-listening')}>
-                        {data.map((song) => {
+                        {listSong.map((song) => {
                             return (
                                 <li key={song._id} className={cx('item')}>
                                     <MediaItem
+                                        active={store.playing.currentSong && store.playing.currentSong._id === song._id}
                                         _id={song._id}
                                         title={song.title}
                                         thumbnail={song.thumbnail}
                                         performers={song.performers}
+                                        onClick={handleClickMediaItem}
                                     />
                                 </li>
                             );
