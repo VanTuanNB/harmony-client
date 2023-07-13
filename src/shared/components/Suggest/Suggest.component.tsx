@@ -5,11 +5,11 @@ import { ReactNode, useCallback, useEffect, useState } from 'react';
 import MediaItem from '../MediaItem/MediaItem.component';
 import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import {
-    pushListSuggestSongIntoStore,
-    pushSongIntoPrevPlayList,
-    removeSongFromSuggestList,
+    pushListSuggestSongIntoStoreAction,
+    pushSongIntoPrevPlayListAction,
+    removeSongFromSuggestListAction,
     selectSongReducer,
-    startPlaying,
+    startPlayingAction,
 } from '@/core/redux/features/song/song.slice';
 import { ISong } from '@/core/common/interfaces/collection.interface';
 import SkeletonLoading from '../Loading/Skeleton/SkeletonLoading.component';
@@ -25,7 +25,7 @@ function SuggestComponent(): ReactNode {
     const dispatch = useAppDispatch();
     useEffect(() => {
         if (data) {
-            dispatch(pushListSuggestSongIntoStore(data.data));
+            dispatch(pushListSuggestSongIntoStoreAction(data.data));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
@@ -33,9 +33,9 @@ function SuggestComponent(): ReactNode {
     const handleClickMediaItem = useCallback(
         (_id: string) => {
             const songSelected = store.playlist.suggests.find((song) => song._id === _id);
-            dispatch(pushSongIntoPrevPlayList(songSelected as any));
-            dispatch(removeSongFromSuggestList({ _id }));
-            dispatch(startPlaying(songSelected as ISong));
+            dispatch(pushSongIntoPrevPlayListAction(songSelected as any));
+            dispatch(removeSongFromSuggestListAction({ _id }));
+            dispatch(startPlayingAction(songSelected as ISong));
         },
         [dispatch, store.playlist.suggests],
     );

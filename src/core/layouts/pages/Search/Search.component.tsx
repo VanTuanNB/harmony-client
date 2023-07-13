@@ -6,8 +6,8 @@ import { ISongStore } from '@/core/common/interfaces/songStore.interface';
 import { useEffect } from 'react';
 import { useGetServiceSongsQuery } from '@/core/redux/services/song.service';
 import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
-import { pushListSuggestSongIntoStore, selectSongReducer } from '@/core/redux/features/song/song.slice';
-import SkeletonLoading from '@/shared/components/Loading/SkeletonLoading.component';
+import { pushListSuggestSongIntoStoreAction, selectSongReducer } from '@/core/redux/features/song/song.slice';
+import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
 import { faWifi } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SearchFilterComponent from '@/shared/components/SearchFilter/SearchFilter.component';
@@ -19,7 +19,7 @@ function SearchPage() {
     const dispatch = useAppDispatch();
     useEffect(() => {
         if (data) {
-            dispatch(pushListSuggestSongIntoStore(data.data));
+            dispatch(pushListSuggestSongIntoStoreAction(data.data));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
@@ -27,7 +27,7 @@ function SearchPage() {
     const dataSong = store.playlist.suggests;
     return (
         <div className={cx('search')}>
-            <SearchFilterComponent/>
+            <SearchFilterComponent />
             <div className={cx('top-result')}>
                 <div className={cx('result-left')}>
                     <h2>Top result</h2>
@@ -56,6 +56,7 @@ function SearchPage() {
                                                 title={song.title}
                                                 thumbnail={song.thumbnail}
                                                 performers={song.performers}
+                                                onClick={() => {}}
                                             />
                                         </li>
                                     );

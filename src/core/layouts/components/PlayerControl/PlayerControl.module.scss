@@ -20,6 +20,7 @@ $padding: 0.5em;
     align-items: center;
     position: relative;
     color: $primary-color;
+
     .song-bar {
         position: absolute;
         left: $padding;
@@ -30,6 +31,7 @@ $padding: 0.5em;
         gap: 1.5rem;
         width: 20%;
         cursor: pointer;
+
         .song-infors {
             display: flex;
             align-items: center;
@@ -45,6 +47,7 @@ $padding: 0.5em;
                     object-fit: cover;
                 }
             }
+
             .song-description {
                 p {
                     margin: 0.2em;
@@ -86,17 +89,26 @@ $padding: 0.5em;
             align-items: center;
             gap: 2em;
             margin-top: 0.8em;
-            cursor: pointer;
-            .play-pause {
-                width: 18px;
-                height: 18px;
+
+            .btn-toggle-play-paused {
+                width: 40px;
+                height: 40px;
                 display: flex;
-                padding: 0.5em;
+                align-items: center;
+                justify-content: center;
                 color: #111;
-                background-color: $primary-color;
+                border: 1px solid var(--theme-mode-color);
+                background-color: transparent;
                 border-radius: 50%;
+                cursor: pointer;
+
                 &:hover {
                     transform: scale(1.1);
+                }
+
+                & .icon-play-or-pause {
+                    font-size: 18px;
+                    color: var(--theme-mode-color);
                 }
             }
         }
@@ -107,35 +119,6 @@ $padding: 0.5em;
             justify-content: center;
             gap: 1em;
             // padding-bottom: 20px;
-            .progress-bar {
-                height: 4px;
-                border-radius: 10px;
-                width: 40%;
-                background-color: #ccc4;
-
-                .progress {
-                    position: relative;
-                    height: 100%;
-                    width: 30%;
-                    border-radius: 10px;
-                    background-color: $secondary-color;
-                }
-            }
-            .progress-bar:hover .progress {
-                background-color: $green-color;
-                cursor: pointer;
-            }
-            .progress-bar:hover .progress::after {
-                content: '';
-                position: absolute;
-                $size: 1em;
-                width: $size;
-                height: $size;
-                right: 0;
-                border-radius: 50%;
-                background-color: $primary-color;
-                transform: translate(50%, calc(2px - 50%));
-            }
         }
     }
     .other-features {
