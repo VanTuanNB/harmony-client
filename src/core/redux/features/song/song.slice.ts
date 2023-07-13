@@ -24,28 +24,36 @@ export const songSlice = createSlice({
     initialState,
     reducers: {
         // suggest store
-        pushListSuggestSongIntoStore: (state, action: PayloadAction<ISong[]>) => {
+        pushListSuggestSongIntoStoreAction: (state, action: PayloadAction<ISong[]>) => {
             state[EScopeSongStore.PLAYLIST][EScopeSongStore.SUGGESTS] = action.payload;
         },
-        removeSongFromSuggestList: (state, action: PayloadAction<{ _id: string }>) => {
+        removeSongFromSuggestListAction: (state, action: PayloadAction<{ _id: string }>) => {
             state[EScopeSongStore.PLAYLIST][EScopeSongStore.SUGGESTS] = state[EScopeSongStore.PLAYLIST][
                 EScopeSongStore.SUGGESTS
             ].filter((song: ISong) => song._id !== action.payload._id);
         },
 
         // prev store
-        pushSongIntoPrevPlayList: (state, action: PayloadAction<ISong>) => {
+        pushSongIntoPrevPlayListAction: (state, action: PayloadAction<ISong>) => {
             state[EScopeSongStore.PLAYLIST][EScopeSongStore.PREV_SONGS].push(action.payload);
         },
 
         // playing store
-        startPlaying: (state, action: PayloadAction<ISong>) => {
+        startPlayingAction: (state, action: PayloadAction<ISong>) => {
             state[EScopeSongStore.PLAYING][EScopeSongStore.CURRENT_SONG] = action.payload;
             state[EScopeSongStore.PLAYING][EScopeSongStore.STATE] = EStateCurrentSong.LOADING;
         },
+        updateStatePlayingAction: (state, action: PayloadAction<EStateCurrentSong>) => {
+            state[EScopeSongStore.PLAYING][EScopeSongStore.STATE] = action.payload;
+        },
     },
 });
-export const { pushListSuggestSongIntoStore, pushSongIntoPrevPlayList, removeSongFromSuggestList, startPlaying } =
-    songSlice.actions;
+export const {
+    pushListSuggestSongIntoStoreAction,
+    pushSongIntoPrevPlayListAction,
+    removeSongFromSuggestListAction,
+    startPlayingAction,
+    updateStatePlayingAction,
+} = songSlice.actions;
 export const selectSongReducer = (state: RootState) => state[ESelectReducer.SONG];
 export default songSlice;
