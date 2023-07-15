@@ -1,0 +1,19 @@
+.main-album{
+    margin-bottom: 50px;
+    .album-header{
+        display: inline-flex;       
+    }
+    .prev-button{
+        background: none;
+        width: 100px;
+        height: 100px;
+    }
+    .next-button{
+        background: none;
+        width: 100px;
+        height: 100px;
+    }
+    table{
+        border-collapse: collapse;
+    }
+}
