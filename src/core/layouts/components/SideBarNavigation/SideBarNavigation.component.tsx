@@ -11,11 +11,11 @@ function SideBarNavigation() {
     return (
         <div className={cx('sidebar-navigation')}>
             <div className={cx('left-sidebar')}>
-                <div className={cx('icon-logo')}>
-                    <Image src={''} width={50} height={50} alt="" />
-                    <h3>Harmory Music</h3>
-                </div>
                 <div className={cx('navigation')}>
+                    <div className={cx('icon-logo')}>
+                        <Image src={''} width={50} height={50} alt="" />
+                        <h3>Harmory Music</h3>
+                    </div>
                     <ul>
                         <li>
                             <Link href="">
@@ -38,8 +38,7 @@ function SideBarNavigation() {
                         </li>
                     </ul>
                 </div>
-                <hr />
-                <div className={cx('navigation')}>
+                <div className={cx('navigation')} id={cx('navigation-end')}>
                     <ul>
                         <li>
                             <Link href="">

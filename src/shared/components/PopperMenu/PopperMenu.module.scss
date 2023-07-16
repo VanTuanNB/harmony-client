@@ -6,7 +6,7 @@
     min-height: 100px;
     padding-top: 8px;
     border-radius: 8px;
-    background: var(--theme-mode-color);
+    background: var(--theme-mode-background-user);
     box-shadow: rgb(0 0 0 / 12%) 0px 2px 12px;
 }
 
@@ -18,7 +18,7 @@
 
     & .menu-item {
         margin-left: 0;
-        color: var(--theme-mode-background);
+        color: var(--theme-mode-color);
     }
 }
 
@@ -55,7 +55,7 @@
     flex-shrink: 0;
     height: 50px;
     margin-top: -8px;
-    color: var(--theme-mode-background);
+    color: var(--theme-mode-color);
 }
 
 .back-btn {
@@ -63,12 +63,12 @@
     height: 100%;
     background-color: transparent;
     cursor: pointer;
-    color: var(--theme-mode-background);
+    color: var(--theme-mode-color);
 }
 
 .relativeElement {
     position: relative;
     display: flex;
     align-items: center;
-    color: var(--theme-mode-background);
+    color: var(--theme-mode-color);
 }

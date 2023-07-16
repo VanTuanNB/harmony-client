@@ -147,12 +147,12 @@ function HomePage() {
     return (
         <div className={cx('main-home')}>
             <div className={cx('main-image')}>
-                <Image className={cx('image2')} src="/images/img1.jpg" alt="" width={300} height={200} />
-                <Image className={cx('image2')} src="/images/img1.jpg" alt="" width={300} height={200} />
-                <Image className={cx('image2')} src="/images/img1.jpg" alt="" width={300} height={200} />
+                <Image className={cx('image2')} src="/images/img1.jpg" alt="" width={350} height={200} />
+                <Image className={cx('image2')} src="/images/img1.jpg" alt="" width={350} height={200} />
+                <Image className={cx('image2')} src="/images/img1.jpg" alt="" width={350} height={200} />
             </div>
             <div className={cx('main-just')}>
-                <h3 className={cx('title')}>JustReleased</h3>
+                <h3 className={cx('title')}>Just Released</h3>
                 <ul className={cx('list-listening')}>
                     {mockData.map((data) => {
                         return (
@@ -184,8 +184,8 @@ function HomePage() {
                                     className={cx('image3')}
                                     src="/images/img1.jpg"
                                     alt=""
-                                    width={100}
-                                    height={100}
+                                    width={115}
+                                    height={115}
                                 />
                             </div>
                             <div className={cx('songsinger-main')}>
@@ -215,8 +215,8 @@ function HomePage() {
                                     className={cx('image3')}
                                     src="/images/img1.jpg"
                                     alt=""
-                                    width={100}
-                                    height={100}
+                                    width={115}
+                                    height={115}
                                 />
                             </div>
                             <div className={cx('songsinger-main')}>
@@ -246,8 +246,8 @@ function HomePage() {
                                     className={cx('image3')}
                                     src="/images/img1.jpg"
                                     alt=""
-                                    width={100}
-                                    height={100}
+                                    width={115}
+                                    height={115}
                                 />
                             </div>
                             <div className={cx('songsinger-main')}>
@@ -289,12 +289,20 @@ function HomePage() {
                         <Image className={cx('image4')} src="/images/img1.jpg" alt="" width={200} height={200} />
                         <span>Top 100 Teenagers Songs</span>
                     </div>
+                    <div className={cx('top-image-1')}>
+                        <Image className={cx('image4')} src="/images/img1.jpg" alt="" width={200} height={200} />
+                        <span>Top 100 Teenagers Songs</span>
+                    </div>
                 </div>
             </div>
 
             <div className={cx('main-hot')}>
                 <h3>Hot Album</h3>
                 <div className={cx('hot-image')}>
+                    <div className={cx('hot-image-1')}>
+                        <Image className={cx('image5')} src="/images/img1.jpg" alt="" width={200} height={200} />
+                        <span>99%</span>
+                    </div>
                     <div className={cx('hot-image-1')}>
                         <Image className={cx('image5')} src="/images/img1.jpg" alt="" width={200} height={200} />
                         <span>99%</span>

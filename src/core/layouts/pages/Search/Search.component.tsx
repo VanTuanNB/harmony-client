@@ -7,7 +7,8 @@ import { useEffect } from 'react';
 import { useGetServiceSongsQuery } from '@/core/redux/services/song.service';
 import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import { pushListSuggestSongIntoStore, selectSongReducer } from '@/core/redux/features/song/song.slice';
-import SkeletonLoading from '@/shared/components/Loading/SkeletonLoading.component';
+// import SkeletonLoading from '@/shared/components/Loading/SkeletonLoading.component';
+import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
 import { faWifi } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SearchFilterComponent from '@/shared/components/SearchFilter/SearchFilter.component';
@@ -37,9 +38,10 @@ function SearchPage() {
                             alt=""
                             className={cx('img')}
                         />
-
-                        <h3>Phiêu bồng</h3>
-                        <p>Composer</p>
+                        <div className={cx('top-result-infor')}>
+                            <h3>Phiêu bồng</h3>
+                            <p>Composer</p>
+                        </div>
                     </div>
                 </div>
                 <div className={cx('result-right')}>

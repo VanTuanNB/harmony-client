@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { useGetServiceSongsQuery } from '@/core/redux/services/song.service';
 import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import { pushListSuggestSongIntoStore, selectSongReducer } from '@/core/redux/features/song/song.slice';
-import SkeletonLoading from '@/shared/components/Loading/SkeletonLoading.component';
+// import SkeletonLoading from '@/shared/components/Loading/SkeletonLoading.component';
 import { faClock, faEllipsis, faHeart, faWifi } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SearchFilterComponent from '@/shared/components/SearchFilter/SearchFilter.component';

@@ -4,8 +4,7 @@
     height: 100vh;
   
     & .left-sidebar{
-        border-right: 1px solid var(--theme-mode-color);
-        width: 15%;
+        width: 18%;
         height: 100%;
         position: fixed;
 
@@ -16,10 +15,10 @@
             height: 80px;
             justify-content: center;
             align-items: center;
-            border-bottom: 1px solid var(--theme-mode-color);
 
             h3 {
-                color: aquamarine;
+                color: #4ad5e4;
+                font-size: 200%;
             }
         }
         hr {
@@ -30,15 +29,20 @@
         .navigation {
             width: 100%;
             margin: auto;
-            margin-top: 20px;
+            margin-top: 10px;
+            background-color: var(--theme-mode-background-user);
+            padding: 20px 5px;
+            border-radius: 10px;
 
             li {
                 width: 100%;
                 padding: 10px;
+                border-radius: 10px;
             }
             li:hover {
                 cursor: pointer;
                 background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
+
             }
             .icon {
                 padding-right: 10px;
@@ -47,6 +51,9 @@
             span {
                 color: var(--theme-mode-color);
             }
+        }
+        #navigation-end{
+            height: 60.7%;
         }
     }
 }
