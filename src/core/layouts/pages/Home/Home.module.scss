@@ -1,17 +1,31 @@
 .main-home {
     margin-bottom: 150px;
     .main-image {
-        display: flex;
+        margin: 0 auto;
+        padding-top: 1em;
+        width: 90%;
+        display: -webkit-flex;
+        justify-content: center;
+        flex-direction: row;
         gap: 16px;
-        margin: 25px;
+        // margin: 25px;
     }
     .main-just {
-        width: 90%;
-        margin: 25px;
+        width: 89%;
+        // margin: 25px;
+        margin: 0 auto;
+        margin-top: 2em;
+
+
         & .list-listening {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            // display: grid;
+            // grid-template-columns: 1fr 1fr;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+
             & .item {
+                width: 33%;
                 padding: 10px;
                 border-radius: 6px;
                 cursor: pointer;
@@ -23,16 +37,23 @@
         }
     }
     .main-ranking {
+        width: 89%;
         margin: 25px;
-        .ranking-image {
+        margin: 0 auto;
+
+        .ranking-image {       
+            width: 32%; 
             display: inline-block;
-            margin: 0 5px;
+            margin: 20px 10px 15px 0px;
+            
             .ranking-image-1 {
-                width: 300px;
-                height: 150px;
-                border: 1px solid #fff;
+                width: 340px;
+                height: 165px;
+                background-color: var(--theme-mode-background-user);
                 display: flex;
                 align-items: center;
+                padding: 0px 10px 0px 10px;
+                border-radius: 5px;
 
                 .box-ranking {
                     width: 100%;
@@ -41,6 +62,10 @@
                     padding-left: 1rem;
                     .image {
                         width: 40%;
+
+                        img{
+                            border-radius: 5px;
+                        }
                     }
                     .songsinger-main {
                         width: 60%;
@@ -51,7 +76,7 @@
                             display: flex;
                             flex-direction: column;
                             .song {
-                                color: #ffffff;
+                                color: var(--theme-mode-color);
                                 font-size: 1.8rem;
                                 font-weight: 500;
                                 line-height: 18.2px;
@@ -75,7 +100,7 @@
                             .date {
                                 display: flex;
                                 align-items: flex-end;
-                                color: #ffffff;
+                                color: var(--theme-mode-color);
                                 font-size: 14px;
                                 line-height: 25.2px;
                                 padding-right: 1rem;
@@ -88,23 +113,30 @@
     }
     .main-top {
         margin: 25px;
+        width: 89%;
+        margin: 0 auto;
+
         .top-image {
             display: flex;
             gap: 16px;
-            justify-content: center;
+            // justify-content: center;
             .top-image-1 {
+                margin: 20px 0px;
                 display: flex;
                 flex-direction: column;
             }
         }
     }
     .main-hot {
+        width: 89%;
         margin: 25px;
+        margin: 0 auto;
         .hot-image {
             display: flex;
             gap: 16px;
-            justify-content: center;
+            // justify-content: center;
             .hot-image-1 {
+                margin-top: 20px;
                 display: flex;
                 flex-direction: column;
             }
