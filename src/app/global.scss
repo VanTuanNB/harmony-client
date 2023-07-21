@@ -40,7 +40,7 @@ body {
     --theme-mode-background-rgb: 24, 25, 26;
     --theme-mode-background-user: #000000;
     --theme-mode-color: #fff;
-    --theme-filter: #5A5A5A;
+    --theme-filter: #5a5a5a;
     --theme-mode-color-rgb: 255, 255, 255;
     background-color: var(--theme-mode-background);
     color: var(--theme-mode-color);
@@ -49,9 +49,9 @@ body {
     --theme-mode-background: #fff;
     --theme-mode-background-rgb: 255, 255, 255;
     --theme-mode-color: #18191a;
-    --theme-filter: #D9D9D9;
+    --theme-filter: #d9d9d9;
     --theme-mode-color-rgb: 24, 25, 26;
-    --theme-mode-background-user: #FFFFFF;
+    --theme-mode-background-user: #ffffff;
     background-color: var(--theme-mode-background);
     color: var(--theme-mode-color);
     transition: background-color linear 0.2s;
@@ -122,5 +122,10 @@ body {
     div[data-tippy-root] {
         transform: unset !important;
         width: 100%;
+    }
+
+    svg {
+        // width: 1em;
+        height: 1em;
     }
 }
