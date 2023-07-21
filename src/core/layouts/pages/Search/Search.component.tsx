@@ -37,9 +37,10 @@ function SearchPage() {
                             alt=""
                             className={cx('img')}
                         />
-
-                        <h3>Phiêu bồng</h3>
-                        <p>Composer</p>
+                        <div className={cx('top-result-infor')}>
+                            <h3>Phiêu bồng</h3>
+                            <p>Composer</p>
+                        </div>
                     </div>
                 </div>
                 <div className={cx('result-right')}>
