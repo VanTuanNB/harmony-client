@@ -2,23 +2,21 @@ import { IClientStoreSide } from '@/core/common/interfaces/index.interface';
 
 export class LocalStorageSide implements IClientStoreSide {
     getStore(key: string): any {
-        if (typeof window === 'undefined') return null;
-        const store = JSON.parse(window.localStorage.getItem(key) || 'null');
+        const store = JSON.parse(localStorage.getItem(key) || 'null');
         return store;
     }
     setStore<T>(key: string, value: T): void {
-        window.localStorage.setItem(key, JSON.stringify(value));
+        localStorage.setItem(key, JSON.stringify(value));
     }
 }
 
 export class sessionStorageSide implements IClientStoreSide {
     getStore(key: string): any {
-        if (typeof window === 'undefined') return null;
-        const store = JSON.parse(window.sessionStorage.getItem(key) || 'null');
+        const store = JSON.parse(sessionStorage.getItem(key) || 'null');
         return store;
     }
     setStore<T>(key: string, value: T): void {
-        window.sessionStorage.setItem(key, JSON.stringify(value));
+        sessionStorage.setItem(key, JSON.stringify(value));
     }
 }
 

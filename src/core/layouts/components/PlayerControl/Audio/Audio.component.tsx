@@ -82,6 +82,10 @@ function AudioComponent({ data }: IAudioProps) {
         }
     }, [audioRef.current?.duration]);
 
+    useEffect(() => {
+        if (audioRef.current) audioRef.current.volume = store.playing.volume;
+    }, [store.playing.volume]);
+
     return (
         <div className={cx('wrapper-media')}>
             <audio autoPlay onPause={handleOnPause} onPlay={handleOnPlay} loop ref={audioRef} src={data || ''}></audio>
