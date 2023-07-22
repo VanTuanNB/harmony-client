@@ -22,6 +22,7 @@ import { useEffect } from 'react';
 import { EStateCurrentSong } from '@/core/common/constants/common.constant';
 import LoadingSpinner from '@/shared/components/Loading/LoadingSpinner/LoadingSpinner.component';
 import AudioComponent from './Audio/Audio.component';
+import VolumeComponent from './Volume/Volume.component';
 const cx = classNames.bind(styles);
 
 function PlayerControl() {
@@ -104,14 +105,7 @@ function PlayerControl() {
                 <AudioComponent data={data || ''}></AudioComponent>
             </div>
             <div className={cx('other-features')}>
-                <FontAwesomeIcon icon={faMicrophoneLines} className={cx('icon')} />
-                <FontAwesomeIcon icon={faBars} className={cx('icon')} />
-                <div className={cx('volume-bar')}>
-                    <FontAwesomeIcon icon={faVolumeDown} className={cx('icon')} />
-                    <div className={cx('progress-bar')}>
-                        <div className={cx('progress-inner')}></div>
-                    </div>
-                </div>
+                <VolumeComponent />
             </div>
         </div>
     );

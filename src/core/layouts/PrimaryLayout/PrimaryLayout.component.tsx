@@ -9,13 +9,14 @@ import PlayerControl from '../components/PlayerControl/PlayerControl.component';
 import HeaderComponent from '../components/Header/Header.component';
 import { useAppSelector } from '@/core/redux/hook.redux';
 import { selectClientStoreReducer } from '@/core/redux/features/client/client.slice';
+import { ELocalStorageKey } from '@/core/common/constants/common.constant';
 
 const cx = classNames.bind(styles);
 
 function PrimaryLayout({ children }: { children: ReactNode }) {
     const store = useAppSelector(selectClientStoreReducer);
     return (
-        <div id="root" data-theme={store.localStoreSide['data-theme']} className={cx('primary-layout')}>
+        <div id="root" data-theme={store.localStoreSide[ELocalStorageKey.DATA_THEME]} className={cx('primary-layout')}>
             <SideBarNavigation />
             <main className={cx('contents')}>
                 <HeaderComponent />
