@@ -15,7 +15,13 @@ export const songApi = rootSplitApi.injectEndpoints({
                 responseHandler: async (response) => URL.createObjectURL(await response.blob()),
             }),
         }),
+        getServiceSongsJustReleased: builder.query<IResponseServer<ISong[]>, string>({
+            query: (param?: string) => `/song/justReleased/${param ?? ''}`,
+        }),
+        getServiceSongsViewTop: builder.query<IResponseServer<ISong[]>, string>({
+            query: (param?: string) => `/song/${param ?? ''}`,
+        }),
     }),
 });
 
-export const { useGetServiceSongsQuery, useGetSuggestSongQuery, useGetStreamSongQuery } = songApi;
+export const { useGetServiceSongsQuery, useGetSuggestSongQuery, useGetStreamSongQuery, useGetServiceSongsJustReleasedQuery, useGetServiceSongsViewTopQuery } = songApi;
