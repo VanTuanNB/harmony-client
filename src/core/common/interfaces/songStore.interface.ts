@@ -5,6 +5,7 @@ export interface ISongStore {
     [EScopeSongStore.PLAYING]: {
         [EScopeSongStore.CURRENT_SONG]: ISong;
         [EScopeSongStore.STATE]: EStateCurrentSong;
+        [EScopeSongStore.VOLUME]: number;
     };
     [EScopeSongStore.PLAYLIST]: {
         [EScopeSongStore.PREV_SONGS]: ISong[];

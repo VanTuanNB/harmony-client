@@ -30,3 +30,7 @@ const USER_SETTINGS: IPopperListOptions[] = [
 ];
 
 export { MENU_SETTINGS, USER_SETTINGS };
+
+export enum EDurationSong {
+    DEFAULT = '00:00',
+}

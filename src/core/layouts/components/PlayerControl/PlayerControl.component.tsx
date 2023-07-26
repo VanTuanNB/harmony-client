@@ -18,18 +18,17 @@ import {
 import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import { selectSongReducer, updateStatePlayingAction } from '@/core/redux/features/song/song.slice';
 import { useGetStreamSongQuery } from '@/core/redux/services/song.service';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import { EStateCurrentSong } from '@/core/common/constants/common.constant';
 import LoadingSpinner from '@/shared/components/Loading/LoadingSpinner/LoadingSpinner.component';
-import ProcessBar from './ProcessBar/ProcessBar.component';
+import AudioComponent from './Audio/Audio.component';
+import VolumeComponent from './Volume/Volume.component';
 const cx = classNames.bind(styles);
 
 function PlayerControl() {
     const store = useAppSelector(selectSongReducer);
     const dispatch = useAppDispatch();
-    const [timeProcess, setTimeProcess] = useState<number>(0);
     const { data, error, isLoading } = useGetStreamSongQuery(store.playing.currentSong._id);
-    const audioRef = useRef<HTMLAudioElement>(null);
 
     useEffect(() => {
         if (data) {
@@ -44,49 +43,14 @@ function PlayerControl() {
         if (data) {
             switch (store.playing.state) {
                 case EStateCurrentSong.PLAYING:
-                    audioRef.current?.pause();
                     dispatch(updateStatePlayingAction(EStateCurrentSong.PAUSED));
                     break;
                 default:
-                    audioRef.current?.play();
                     dispatch(updateStatePlayingAction(EStateCurrentSong.PLAYING));
                     break;
             }
         }
     };
-
-    const handleTakeSeekTime = useCallback((processPercent: number) => {
-        console.log(`processPercent: `, processPercent);
-        if (audioRef.current) {
-            const duration = audioRef.current.duration;
-            const seekTime = (processPercent / 100) * duration;
-            if (!isNaN(seekTime) && isFinite(seekTime)) {
-                audioRef.current.currentTime = seekTime;
-            }
-        }
-    }, []);
-
-    const handleOnPause = () => {
-        dispatch(updateStatePlayingAction(EStateCurrentSong.PAUSED));
-    };
-
-    const handleOnPlay = () => {
-        dispatch(updateStatePlayingAction(EStateCurrentSong.PLAYING));
-    };
-
-    useEffect(() => {
-        if (audioRef.current) {
-            const handleUpdateProgress = () => {
-                const duration = audioRef.current!.duration;
-                const currentTime = audioRef.current!.currentTime;
-                const newProgressWidth = (currentTime / duration) * 100;
-                setTimeProcess(newProgressWidth);
-            };
-            audioRef.current.addEventListener('timeupdate', handleUpdateProgress);
-            return () => audioRef.current!.removeEventListener('timeupdate', handleUpdateProgress);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [audioRef.current]);
 
     return (
         <div hidden={store.playing.state === EStateCurrentSong.FAILED} className={cx('player-control')}>
@@ -138,32 +102,10 @@ function PlayerControl() {
                     <FontAwesomeIcon icon={faForwardStep} className={cx('icon')} />
                     <FontAwesomeIcon icon={faRetweet} className={cx('icon')} />
                 </div>
-                <div className={cx('wrapper-media')}>
-                    <audio
-                        autoPlay
-                        onPause={handleOnPause}
-                        onPlay={handleOnPlay}
-                        loop
-                        ref={audioRef}
-                        src={data || ''}
-                    ></audio>
-                </div>
-                {/* thanh am nhac */}
-                <div className={cx('progress-container')}>
-                    <span>0:49</span>
-                    <ProcessBar timeProcess={timeProcess} onDispatchSeekTime={handleTakeSeekTime} />
-                    <span>3:15</span>
-                </div>
+                <AudioComponent data={data || ''}></AudioComponent>
             </div>
             <div className={cx('other-features')}>
-                <FontAwesomeIcon icon={faMicrophoneLines} className={cx('icon')} />
-                <FontAwesomeIcon icon={faBars} className={cx('icon')} />
-                <div className={cx('volume-bar')}>
-                    <FontAwesomeIcon icon={faVolumeDown} className={cx('icon')} />
-                    <div className={cx('progress-bar')}>
-                        <div className={cx('progress-inner')}></div>
-                    </div>
-                </div>
+                <VolumeComponent />
             </div>
         </div>
     );
