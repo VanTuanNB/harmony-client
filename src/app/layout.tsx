@@ -1,6 +1,9 @@
+'use client';
 import './global.scss';
 import Providers from '@/core/redux/rootProvider.component';
 import PrimaryLayout from '@/core/layouts/PrimaryLayout/PrimaryLayout.component';
+import { usePathname } from 'next/navigation';
+import AuthLayout from '@/core/layouts/AuthLayout/AuthLayout.component';
 
 export const metadata = {
     title: 'Create Next App',
@@ -8,11 +11,15 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+    const path = usePathname();
+    const regex = /\/auth\//;
+    const condition = regex.test(path);
+
     return (
         <html lang="en">
             <body suppressHydrationWarning={true}>
                 <Providers>
-                    <PrimaryLayout>{children}</PrimaryLayout>
+                    {condition ? <AuthLayout>{children}</AuthLayout> : <PrimaryLayout>{children}</PrimaryLayout>}
                 </Providers>
             </body>
         </html>

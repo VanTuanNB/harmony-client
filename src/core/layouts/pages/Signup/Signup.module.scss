@@ -18,26 +18,38 @@
         row-gap: 20px;
 
         h2 {
+            font-size: 2em;
             padding-top: 50px;
             margin-bottom: 20px;
         }
 
         a {
-            width: 250px;
-            height: 40px;
+            width: 50%;
+            height: 50px;
             line-height: 40px;
+            display: grid;
+            grid-template-columns: 50px 200px;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
             border: 1px solid var(--theme-mode-color);
             border-radius: 5px;
             color: var(--theme-mode-color);
 
             .icon-facebook {
-                padding-right: 10px;
+                width: 20px;
+                height: 20px;
+                line-height: 40px;
+                object-fit: cover;
+                margin: auto;
+            }
+            p {
+                text-align: left;
+                color: var(--theme-mode-color);
             }
         }
         a:hover {
-            background: var(--theme-mode-color);
-            box-shadow: 0 0 5px var(--box-shadow-search-input);
-            color: var(--theme-mode-background-user);
+            box-shadow: 0 0 10px #cbcaca;
         }
     }
 
@@ -46,7 +58,7 @@
         margin-top: 50px;
 
         input {
-            width: 250px;
+            width: 50%;
             height: 40px;
             margin-bottom: 20px;
             border: 1px solid var(--theme-mode-color);
@@ -56,8 +68,8 @@
             color: var(--theme-mode-color);
         }
         p {
-            height: 50px;
-            line-height: 50px;
+            width: 80%;
+            margin: auto;
 
             input[type='checkbox'] {
                 width: 20px;
@@ -67,9 +79,7 @@
                 padding-left: 10px;
             }
         }
-        span{
-            font-weight: 300;
-        }
+
         button {
             width: 250px;
             height: 40px;
