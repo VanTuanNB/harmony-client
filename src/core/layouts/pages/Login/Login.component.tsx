@@ -3,6 +3,8 @@ import styles from './Login.module.scss';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
+import Image from 'next/image';
+import { FacebookIcon, GoogleIcon } from '@/shared/components/Svg/index.component';
 
 const cx = classNames.bind(styles);
 
@@ -12,12 +14,12 @@ function LoginPage() {
             <div className={cx('form-top')}>
                 <h2>Login to Harmony</h2>
                 <Link href="">
-                    <FontAwesomeIcon icon={faFacebook} className={cx('icon-facebook')} />
-                    Continne with Facebook
+                    <FacebookIcon width="30px" height="30px" className={cx('icon-facebook')} fill="none" />
+                    <p> Continne with Facebook</p>
                 </Link>
                 <Link href="">
-                    <FontAwesomeIcon icon={faGoogle} className={cx('icon-facebook')} />
-                    Continne with Google
+                    <GoogleIcon width="30px" height="30px" className={cx('icon-facebook')} fill="none" />
+                    <p> Continne with Google</p>
                 </Link>
             </div>
             <hr />

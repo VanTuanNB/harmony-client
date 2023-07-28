@@ -16,9 +16,14 @@
             justify-content: center;
             align-items: center;
 
-            h3 {
-                color: #4ad5e4;
-                font-size: 1em;
+            .title {
+                font-family: var(--font-inter);
+                font-size: 1.3em;
+                font-weight: bold;
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+                background-image: linear-gradient(to right, #9cb5e4, #91c9e0, #78e7d7);
             }
         }
         hr {

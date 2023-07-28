@@ -1,0 +1,35 @@
+
+.header {
+    width: 100%;
+    height: 80px;
+    background: var(--theme-mode-background-user);
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    .logo-title {
+        display: grid;
+        grid-template-columns: 70px 200px;
+        height: 80px;
+        align-items: center;
+
+        padding-left: 10px;
+        .logo {
+            width: 50px;
+            height: 50px;
+        }
+        .title {
+            font-family: var(--font-inter);
+            font-size: 20px;
+            font-weight: bold;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(to right, #9cb5e4, #91c9e0, #78e7d7);
+        }
+    }
+}
+.contents{
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
