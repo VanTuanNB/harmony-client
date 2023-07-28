@@ -13,8 +13,8 @@ function SideBarNavigation() {
             <div className={cx('left-sidebar')}>
                 <div className={cx('navigation')}>
                     <div className={cx('icon-logo')}>
-                        <Image src={''} width={50} height={50} alt="" />
-                        <h3>Harmory Music</h3>
+                        <Image className={cx('logo')} src="/images/logo-1.png" width={50} height={50} alt="" />
+                        <h3 className={cx('title')}>Harmory Music</h3>
                     </div>
                     <ul>
                         <li>
