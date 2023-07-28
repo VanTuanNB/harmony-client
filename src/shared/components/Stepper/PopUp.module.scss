@@ -1,0 +1,132 @@
+.pop-up {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+
+    .controller {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        align-items: center;
+        justify-content: center;
+
+        .form-pop-up {
+            width: 700px;
+            height: 400px;
+            border-radius: 9px;
+            background-color: #fff;
+            position: relative;
+
+            .step-wizard {
+                width: 100%;
+                height: 100px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: black;
+
+                .step-wizard-list {
+                    list-style-type: none;
+                    display: flex;
+                    padding: 20px 10px;
+                    position: relative;
+                    z-index: 10;
+
+                    .step-wizard-item {
+                        padding: 0 20px;
+                        flex-basis: 0;
+                        -webkit-box-flex: 1;
+                        -ms-flex-position: 1;
+                        flex-grow: 1;
+                        max-width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        text-align: center;
+                        min-width: 170px;
+                        cursor: pointer;
+                        position: relative;
+
+                        .progress-count {
+                            height: 40px;
+                            width: 40px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 50%;
+                            font-weight: 600;
+                            margin: 0 auto;
+                            position: relative;
+                            z-index: 10;
+                            color: transparent;
+                        }
+                        .progress-count::after {
+                            content: '';
+                            height: 40px;
+                            width: 40px;
+                            position: absolute;
+                            background: #21d4fd;
+                            left: 50%;
+                            top: 50%;
+                            transform: translate(-50%, -50%);
+                            border-radius: 50%;
+                            z-index: -10;
+                        }
+                        .progress-count::before {
+                            content: '';
+                            height: 10px;
+                            width: 20px;
+                            border-left: 3px solid #fff;
+                            border-bottom: 3px solid #fff;
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%,-60%) rotate(-45deg);
+                            transform-origin: center center;
+                        }
+                        .progress-label{
+                            font-size: 1.3rem;
+                            font-weight: 600;
+                            margin-top: 10px;
+                        }
+                    }
+                    .current-item .progress-count::before,
+                    .current-item ~ .step-wizard-item .progress-count::before{
+                        display: none;
+                    }
+                    .current-item ~ .step-wizard-item .progress-count::after{
+                        width: 10px;
+                        height: 10px;
+                    }
+                    .current-item ~ .step-wizard-item .progress-label{
+                        opacity: 0.5;
+                    }
+                    .current-item .progress-count::after{
+                        background: #fff;
+                        border:  2px solid #21d4fd;
+                    }
+                    .current-item .progress-count{
+                        color: #21d4fd;
+                    }
+
+                    .step-wizard-item + .step-wizard-item::after {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        top: 19px;
+                        background: #21d4fd;
+                        width: 100%;
+                        height: 2px;
+                        transform: translateX(-50%);
+                        z-index: -10;
+                    }
+                }
+            }
+          
+        }
+    }
+}

@@ -1,5 +1,12 @@
+import PopperFormComponent from "@/shared/components/PopperForm/PopperForm.component";
+
 function DashboardPage() {
-    return <h1>Dashboard Page Component</h1>;
+    return (
+        <div>
+            <PopperFormComponent />
+
+        </div>
+    );
 }
 
 export default DashboardPage;
