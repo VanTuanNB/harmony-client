@@ -4,25 +4,22 @@ import classNames from 'classnames/bind';
 import styles from './AlbumItem.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
-
+import { IAlbum } from '@/core/common/interfaces/collection.interface';
 
 const cx = classNames.bind(styles);
 
-interface IAlbumItem {
-    id: string;
-    thumbnail: string;
-    title: string;
-    performers: { _id: string; name: string; nickname: string };
-}
+interface IAlbumItem
+    extends Pick<IAlbum, '_id' | 'publish' | 'title' | 'listSong' | 'composerReference' | 'thumbnail'> {}
 
-export default function AlbumItem({ id, thumbnail, title, performers }: IAlbumItem): ReactNode {
+
+export default function AlbumItem({ _id, thumbnail, title, composerReference}: IAlbumItem): ReactNode {
     return (
         <div className={cx('album')}>
-            <Link href={'/album/' + id}>
+            <Link href={'/album/' + _id}>
                 <Image src={thumbnail} width={150} height={1150} alt="fallback img" className={cx('img')} />
                 <div className="title">
                     <h3>{title}</h3>
-                    <p>{performers.name}</p>
+                    <p>{composerReference.name}</p>
                 </div>
             </Link>
         </div>

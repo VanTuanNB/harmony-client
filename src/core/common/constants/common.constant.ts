@@ -6,6 +6,7 @@ export enum EScopeClientStore {
 
 export enum ELocalStorageKey {
     DATA_THEME = 'data-theme',
+    VOLUME = 'volume',
 }
 
 export enum EScopeSongStore {
@@ -15,4 +16,14 @@ export enum EScopeSongStore {
     NEXT_SONGS = 'nextSongs',
     SUGGESTS = 'suggests',
     HISTORIES = 'histories',
+    CURRENT_SONG = 'currentSong',
+    STATE = 'state',
+    VOLUME = 'volume',
+}
+
+export enum EStateCurrentSong {
+    PLAYING = 'playing',
+    PAUSED = 'paused',
+    LOADING = 'loading',
+    FAILED = 'failed',
 }

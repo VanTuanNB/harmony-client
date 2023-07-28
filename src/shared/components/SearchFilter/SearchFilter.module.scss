@@ -1,0 +1,23 @@
+.filter{
+    margin-top: 1em;
+    // margin-left: 1.5em;
+    // border-radius: 10px;
+    button{
+        margin-right: 1em;
+        width: auto;
+        height: 32px;
+        border-radius: 15px;
+        padding: 0px 15px;
+        background-color: var(--theme-filter);
+        cursor: pointer;
+        font-size: 14px;
+
+        a{
+            color: var(--theme-mode-color);
+        }
+    };
+    .color-set{
+        background-color: var(--theme-mode-color);
+        color: var(--theme-mode-background);
+    }
+}

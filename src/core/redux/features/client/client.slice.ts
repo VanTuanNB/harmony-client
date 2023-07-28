@@ -27,7 +27,7 @@ export const clientStoreSlice = createSlice({
     initialState,
     reducers: {
         changeGlobalThemes(state, actions: PayloadAction<{ theme: EDataTheme }>) {
-            state.localStoreSide['data-theme'] = actions.payload.theme;
+            state.localStoreSide[ELocalStorageKey.DATA_THEME] = actions.payload.theme;
             localStoreInstance.setStore<EDataTheme>(ELocalStorageKey.DATA_THEME, actions.payload.theme);
         },
     },

@@ -6,11 +6,13 @@ import { ISongStore } from '@/core/common/interfaces/songStore.interface';
 import { useEffect } from 'react';
 import { useGetServiceSongsQuery } from '@/core/redux/services/song.service';
 import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
-import { pushListSuggestSongIntoStore, selectSongReducer } from '@/core/redux/features/song/song.slice';
-import SkeletonLoading from '@/shared/components/Loading/SkeletonLoading.component';
+import { pushListSuggestSongIntoStoreAction, selectSongReducer } from '@/core/redux/features/song/song.slice';
+import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
 import { faWifi } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
+import SearchFilterComponent from '@/shared/components/SearchFilter/SearchFilter.component';
+
 
 const cx = classNames.bind(styles);
 
@@ -19,7 +21,7 @@ function SearchPage() {
     const dispatch = useAppDispatch();
     useEffect(() => {
         if (data) {
-            dispatch(pushListSuggestSongIntoStore(data.data));
+            dispatch(pushListSuggestSongIntoStoreAction(data.data));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
@@ -27,6 +29,7 @@ function SearchPage() {
     const dataSong = store.playlist.suggests;
     return (
         <div className={cx('search')}>
+            <SearchFilterComponent />
             <div className={cx('top-result')}>
                 <div className={cx('result-left')}>
                     <h2>Top result</h2>
@@ -36,9 +39,10 @@ function SearchPage() {
                             alt=""
                             className={cx('img')}
                         />
-
-                        <h3>Phiêu bồng</h3>
-                        <p>Composer</p>
+                        <div className={cx('top-result-infor')}>
+                            <h3>Phiêu bồng</h3>
+                            <p>Composer</p>
+                        </div>
                     </div>
                 </div>
                 <div className={cx('result-right')}>
@@ -55,6 +59,7 @@ function SearchPage() {
                                                 title={song.title}
                                                 thumbnail={song.thumbnail}
                                                 performers={song.performers}
+                                                onClick={() => {}}
                                             />
                                         </li>
                                     );

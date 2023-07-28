@@ -30,9 +30,10 @@ export interface IAlbum {
     _id: string;
     title: string;
     publish: Date;
-    composerReference: string;
+    composerReference: IComposer;
     listSong?: string[];
     information?: string;
+    thumbnail: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
