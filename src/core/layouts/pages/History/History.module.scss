@@ -1,0 +1,38 @@
+.main-history{
+    margin-bottom: 50px;
+   .title{
+       font-size: large;
+       font-weight: bold;
+   }
+   .menu-bar{
+       display: inline-block;
+       list-style: none;
+   }
+   .menu{
+       list-style: none;
+       font-size: medium;
+       color: white;
+   }
+   .menu:hover{
+        color: wheat
+   }
+}
+.content-history{
+    padding-left: 50px;
+    padding-right: 50px;
+    .content{
+        padding: 5px;
+        .song-thumnail{
+            margin-right: 10px;
+        }
+        .song-name{
+            margin-left: 40px;
+        }
+        .album-name{
+            margin-left: 200px;
+        }
+        .duration{
+            margin-left: 150px;
+        }
+    }
+}
