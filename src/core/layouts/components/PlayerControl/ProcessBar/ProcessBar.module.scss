@@ -1,0 +1,48 @@
+$primary-color: #ddd;
+$secondary-color: #999;
+$green-color: #2d5;
+$padding: 0.5em;
+
+.progress-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+
+    .progress-bar {
+        height: 4px;
+        border-radius: 10px;
+        width: 40%;
+        background-color: #ccc4;
+        cursor: pointer;
+
+        &:hover {
+            height: 0.5rem;
+        }
+
+        .progress {
+            position: relative;
+            height: 100%;
+            width: 30%;
+            border-radius: 10px;
+            background-color: $secondary-color;
+        }
+    }
+    .progress-bar:hover .progress {
+        background-color: $green-color;
+        cursor: pointer;
+    }
+    .progress-bar:hover .progress::after {
+        content: '';
+        position: absolute;
+        $size: 1em;
+        width: $size;
+        height: 1em;
+        right: 0;
+        border-radius: 50%;
+        background-color: $primary-color;
+        top: 50%;
+        transform: translate(50%, -50%);
+    }
+}

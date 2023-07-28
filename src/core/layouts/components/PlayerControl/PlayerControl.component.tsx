@@ -9,24 +9,71 @@ import {
     faCompress,
     faForwardStep,
     faMicrophoneLines,
+    faPause,
     faPlay,
     faRetweet,
     faShuffle,
     faVolumeDown,
 } from '@fortawesome/free-solid-svg-icons';
+import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
+import { selectSongReducer, updateStatePlayingAction } from '@/core/redux/features/song/song.slice';
+import { useGetStreamSongQuery } from '@/core/redux/services/song.service';
+import { useEffect } from 'react';
+import { EStateCurrentSong } from '@/core/common/constants/common.constant';
+import LoadingSpinner from '@/shared/components/Loading/LoadingSpinner/LoadingSpinner.component';
+import AudioComponent from './Audio/Audio.component';
+import VolumeComponent from './Volume/Volume.component';
 const cx = classNames.bind(styles);
 
 function PlayerControl() {
+    const store = useAppSelector(selectSongReducer);
+    const dispatch = useAppDispatch();
+    const { data, error, isLoading } = useGetStreamSongQuery(store.playing.currentSong._id);
+
+    useEffect(() => {
+        if (data) {
+            dispatch(updateStatePlayingAction(EStateCurrentSong.PLAYING));
+        } else {
+            dispatch(updateStatePlayingAction(EStateCurrentSong.FAILED));
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data, error]);
+
+    const handleTogglePlaySong = () => {
+        if (data) {
+            switch (store.playing.state) {
+                case EStateCurrentSong.PLAYING:
+                    dispatch(updateStatePlayingAction(EStateCurrentSong.PAUSED));
+                    break;
+                default:
+                    dispatch(updateStatePlayingAction(EStateCurrentSong.PLAYING));
+                    break;
+            }
+        }
+    };
+
     return (
-        <div className={cx('player-control')}>
+        <div hidden={store.playing.state === EStateCurrentSong.FAILED} className={cx('player-control')}>
             <div className={cx('song-bar')}>
                 <div className={cx('song-infors')}>
                     <div className={cx('image-container')}>
-                        <Image className={cx('image1')} src="/images/img1.jpg" alt="" width={60} height={60} />
+                        <Image
+                            className={cx('image1')}
+                            src={store.playing.currentSong.thumbnail}
+                            alt=""
+                            width={60}
+                            height={60}
+                        />
                     </div>
                     <div className={cx('song-description')}>
-                        <p className={cx('title')}>Đời là thế thôi</p>
-                        <p className={cx('artist')}>Phú Lê</p>
+                        <p className={cx('title')}>{store.playing.currentSong.title || ''}</p>
+                        <p className={cx('artist')}>
+                            {(store.playing.currentSong.performers &&
+                                store.playing.currentSong.performers.map((performer) => (
+                                    <span key={performer._id}>{performer.name}</span>
+                                ))) ||
+                                ''}
+                        </p>
                     </div>
                 </div>
                 <div className={cx('icons')}>
@@ -38,28 +85,27 @@ function PlayerControl() {
                 <div className={cx('control-buttons')}>
                     <FontAwesomeIcon icon={faShuffle} className={cx('icon')} />
                     <FontAwesomeIcon icon={faBackwardStep} className={cx('icon')} />
-                    <FontAwesomeIcon icon={faPlay} className={cx('play-pause')} />
+                    <button className={cx('btn-toggle-play-paused')} onClick={handleTogglePlaySong}>
+                        {isLoading || store.playing.state === EStateCurrentSong.LOADING ? (
+                            <LoadingSpinner width={20} height={20} />
+                        ) : (
+                            <>
+                                {data && store.playing.state === EStateCurrentSong.PLAYING && (
+                                    <FontAwesomeIcon icon={faPause} className={cx('icon-play-or-pause')} />
+                                )}
+                                {data && store.playing.state === EStateCurrentSong.PAUSED && (
+                                    <FontAwesomeIcon icon={faPlay} className={cx('icon-play-or-pause')} />
+                                )}
+                            </>
+                        )}
+                    </button>
                     <FontAwesomeIcon icon={faForwardStep} className={cx('icon')} />
                     <FontAwesomeIcon icon={faRetweet} className={cx('icon')} />
                 </div>
-                {/* thanh am nhac */}
-                <div className={cx('progress-container')}>
-                    <span>0:49</span>
-                    <div className={cx('progress-bar')}>
-                        <div className={cx('progress')}></div>
-                    </div>
-                    <span>3:15</span>
-                </div>
+                <AudioComponent data={data || ''}></AudioComponent>
             </div>
             <div className={cx('other-features')}>
-                <FontAwesomeIcon icon={faMicrophoneLines} className={cx('icon')} />
-                <FontAwesomeIcon icon={faBars} className={cx('icon')} />
-                <div className={cx('volume-bar')}>
-                    <FontAwesomeIcon icon={faVolumeDown} className={cx('icon')} />
-                    <div className={cx('progress-bar')}>
-                        <div className={cx('progress-inner')}></div>
-                    </div>
-                </div>
+                <VolumeComponent />
             </div>
         </div>
     );

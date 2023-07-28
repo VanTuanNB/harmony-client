@@ -1,0 +1,80 @@
+$primary-color: #ddd;
+$secondary-color: #999;
+$green-color: #2d5;
+$padding: 0.5em;
+.volume-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+
+    &:hover .progress-bar {
+        height: 0.6rem;
+    }
+
+    &:hover .progress-bar .progress-inner {
+        background-color: $green-color;
+    }
+
+    &:hover .progress-inner::after {
+        content: '';
+        position: absolute;
+        $size: 1em;
+        width: $size;
+        height: $size;
+        right: 0;
+        border-radius: 50%;
+        background-color: $primary-color;
+        top: 50%;
+        transform: translate(50%, -50%);
+    }
+
+    & .btn-toggle-volume {
+        width: 3.2rem;
+        height: 3.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 50%;
+        color: var(--theme-mode-color);
+        background-color: transparent;
+
+        &:hover {
+            background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
+        }
+    }
+
+    .progress-bar {
+        height: 4px;
+        border-radius: 10px;
+        width: 6em;
+        background-color: #ccc4;
+
+        &:hover {
+            height: 0.5rem;
+        }
+
+        .progress-inner {
+            position: relative;
+            height: 100%;
+            width: 30%;
+            border-radius: 10px;
+            background-color: $secondary-color;
+        }
+    }
+    .progress-bar:hover .progress-inner {
+        background-color: $green-color;
+    }
+    .progress-bar:hover .progress-inner::after {
+        content: '';
+        position: absolute;
+        $size: 1em;
+        width: $size;
+        height: $size;
+        right: 0;
+        border-radius: 50%;
+        background-color: $primary-color;
+        top: 50%;
+        transform: translate(50%, -50%);
+    }
+}

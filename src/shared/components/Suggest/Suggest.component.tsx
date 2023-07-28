@@ -1,12 +1,18 @@
 'use client';
 import classNames from 'classnames/bind';
 import styles from './Suggest.module.scss';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useState } from 'react';
 import MediaItem from '../MediaItem/MediaItem.component';
 import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
-import { pushListSuggestSongIntoStore, selectSongReducer } from '@/core/redux/features/song/song.slice';
+import {
+    pushListSuggestSongIntoStoreAction,
+    pushSongIntoPrevPlayListAction,
+    removeSongFromSuggestListAction,
+    selectSongReducer,
+    startPlayingAction,
+} from '@/core/redux/features/song/song.slice';
 import { ISong } from '@/core/common/interfaces/collection.interface';
-import SkeletonLoading from '../Loading/SkeletonLoading.component';
+import SkeletonLoading from '../Loading/Skeleton/SkeletonLoading.component';
 import { useGetServiceSongsQuery } from '@/core/redux/services/song.service';
 import { ISongStore } from '@/core/common/interfaces/songStore.interface';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,11 +25,20 @@ function SuggestComponent(): ReactNode {
     const dispatch = useAppDispatch();
     useEffect(() => {
         if (data) {
-            dispatch(pushListSuggestSongIntoStore(data.data));
+            dispatch(pushListSuggestSongIntoStoreAction(data.data));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
     const store: ISongStore = useAppSelector(selectSongReducer);
+    const handleClickMediaItem = useCallback(
+        (_id: string) => {
+            const songSelected = store.playlist.suggests.find((song) => song._id === _id);
+            dispatch(pushSongIntoPrevPlayListAction(songSelected as any));
+            dispatch(removeSongFromSuggestListAction({ _id }));
+            dispatch(startPlayingAction(songSelected as ISong));
+        },
+        [dispatch, store.playlist.suggests],
+    );
     const dataSong = store.playlist.suggests;
     return (
         <div className={cx('wrapper')}>
@@ -40,6 +55,7 @@ function SuggestComponent(): ReactNode {
                                         title={song.title}
                                         thumbnail={song.thumbnail}
                                         performers={song.performers}
+                                        onClick={handleClickMediaItem}
                                     />
                                 </li>
                             );
