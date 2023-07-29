@@ -1,9 +1,8 @@
-import PopperFormComponent from "@/shared/components/PopperForm/PopperForm.component";
-import PopUpComponent from "@/shared/components/Stepper/PopUp.component";
+
 function DashboardPage() {
     return (
         <div>
-            <PopUpComponent />
+            Dashboard page
 
         </div>
     );
