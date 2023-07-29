@@ -13,7 +13,9 @@
         font-size: 1.5em;
         padding-left: 10px;
     }
-
+    p{
+        color: var(--theme-mode-color);
+    }
     .zone {
         margin: auto;
         position: absolute;
@@ -33,7 +35,7 @@
             position: relative;
             width: 200px;
         }
-
+       
         label,
         input {
             cursor: pointer;
