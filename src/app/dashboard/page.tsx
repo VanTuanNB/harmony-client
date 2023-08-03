@@ -1,4 +1,4 @@
-import DashboardPage from '@/core/layouts/pages/Dashboard/Dashboard.component';
+import DashboardPage from "@/core/layouts/pages/Dashboard/Dashboard.component"; 
 function DashboardRouting() {
     return <DashboardPage></DashboardPage>;
 }

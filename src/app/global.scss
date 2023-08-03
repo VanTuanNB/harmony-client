@@ -18,6 +18,7 @@
     --search-box-legacy-button: hsl(0, 0%, 18.82%);
     --search-box-legacy-button-color: hsla(0, 0%, 100%, 0.08);
     --theme-filter: #fff;
+    --theme-mode-background-stepper: #000;
     --theme-switch-button: #fff;
     --theme-switch-icon: #fff;
     --header-height: 56px;
@@ -47,6 +48,7 @@ body {
     --theme-filter: #5a5a5a;
     --theme-switch-button: linear-gradient(to right, #ff65dd, #3c0089);
     --theme-switch-icon: #3c0089;
+    --theme-mode-background-stepper: #000;
 
     --theme-mode-color-rgb: 255, 255, 255;
     background-color: var(--theme-mode-background);
@@ -61,6 +63,7 @@ body {
     --theme-switch-icon: #ff7a00;
     --theme-mode-color-rgb: 24, 25, 26;
     --theme-mode-background-user: #ffffff;
+    --theme-mode-background-stepper: #ffffff;
     background-color: var(--theme-mode-background);
     color: var(--theme-mode-color);
     transition: background-color linear 0.2s;

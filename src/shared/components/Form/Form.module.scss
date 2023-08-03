@@ -1,7 +1,4 @@
 .form {
-    width: 100%;
-    height: 800px;
-    padding: 20px;
     color: white;
 
     & h2 {
@@ -9,7 +6,7 @@
     }
     & .col-3 {
         display: grid;
-        grid-template-columns: 150px 1fr;
+        grid-template-columns: 1fr 1fr;
         margin-bottom: 20px;
         height: 45px;
 
@@ -19,7 +16,7 @@
         }
 
         & .input {
-            width: 400px;
+            width: 80%;
             height: 40px;
             border-radius: 5px;
             padding-left: 10px;
@@ -32,7 +29,7 @@
         }
 
         & select {
-            width: 400px;
+            width: 80%;
             height: 40px;
             border-radius: 5px;
             // background: none;
@@ -46,7 +43,7 @@
         }
     }
     & button {
-        width: 200px;
+        width: 50%;
         height: 50px;
         font-size: 1em;
         background: lightblue;
@@ -61,7 +58,7 @@
 
 .select-input {
     color: black;
-    width: 400px;
+    width: 80%;
     // font-size: 15px;
     border-radius: 5px;
 

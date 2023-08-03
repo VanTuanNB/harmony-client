@@ -31,7 +31,6 @@ function FormCreate() {
     const onSubmit = handleSubmit((data) => console.log(data));
     return (
         <div className={cx('form')}>
-            <h2>Thêm bài hát mới</h2>
             <form onSubmit={onSubmit}>
                 <div className={cx('col-3')}>
                     <label htmlFor="">Tiêu đề: </label>
@@ -68,14 +67,6 @@ function FormCreate() {
                         control={control}
                         render={({ field }) => <Select {...field} options={inputAlbum} isMulti   className={cx('select-input')} />}
                     />
-                </div>
-                <div className={cx('col-3')}>
-                    <label htmlFor="">Hình ảnh: </label>
-                    <input type="file" {...register('thumbnail')} />
-                </div>
-                <div className={cx('col-3')}>
-                    <label htmlFor="">File nhạc: </label>
-                    <input type="file" {...register('fileSong')} />
                 </div>
                 <button>Thêm bài hát</button>
             </form>
