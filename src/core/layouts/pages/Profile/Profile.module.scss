@@ -1,0 +1,25 @@
+.profile {
+    .profile-user {
+        .information {
+            display: flex;
+            .image-profile {
+                .image2 {
+                    border-radius: 50%;
+                    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                }
+            }
+            .name {
+                .name-profile {
+                    padding: 50px;
+                }
+            }
+        }
+    }
+    .link {
+        display: flex;
+        gap: 20px;
+        .custom-link {
+            color: aquamarine;
+        }
+    }
+}
