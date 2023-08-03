@@ -48,10 +48,15 @@
                 cursor: pointer;
                 background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
 
+                a{
+                    span{
+                        color: var(--theme-item-highlight);
+                    }
+                }
             }
             .icon {
                 padding-right: 10px;
-                color: var(--theme-mode-color);
+                color: var(--theme-item-highlight);
             }
             span {
                 color: var(--theme-mode-color);

@@ -14,6 +14,7 @@
     --theme-mode-color: #fff;
     --theme-mode-background-user: #000000;
     --theme-mode-color-rgb: 255, 255, 255;
+    --theme-item-highlight: #fff;
     --box-shadow-search-input: hsla(0, 0%, 0%, 0);
     --search-box-legacy-button: hsl(0, 0%, 18.82%);
     --search-box-legacy-button-color: hsla(0, 0%, 100%, 0.08);
@@ -45,8 +46,9 @@ body {
     --theme-mode-background-user: #000000;
     --theme-mode-color: #fff;
     --theme-filter: #5a5a5a;
-    --theme-switch-button: linear-gradient(to right, #ff65dd, #3c0089);
-    --theme-switch-icon: #3c0089;
+    --theme-item-highlight: #75E6DA;
+    --theme-switch-button: linear-gradient(to right, #D9DCE2, #31568E);
+    --theme-switch-icon: #31568E;
 
     --theme-mode-color-rgb: 255, 255, 255;
     background-color: var(--theme-mode-background);
@@ -57,8 +59,9 @@ body {
     --theme-mode-background-rgb: 255, 255, 255;
     --theme-mode-color: #000000;
     --theme-filter: #d9d9d9;
-    --theme-switch-button: linear-gradient(to right, #ff7a00, #f876bc);
-    --theme-switch-icon: #ff7a00;
+    --theme-item-highlight: #31568E;
+    --theme-switch-button: linear-gradient(to right, #75E6DA, #D4F1F4);
+    --theme-switch-icon: #75E6DA;
     --theme-mode-color-rgb: 24, 25, 26;
     --theme-mode-background-user: #ffffff;
     background-color: var(--theme-mode-background);
