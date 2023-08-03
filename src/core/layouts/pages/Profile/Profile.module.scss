@@ -1,65 +1,25 @@
-.profile-main {
-    .information {
+.profile {
+    .profile-user {
+        .information {
+            display: flex;
+            .image-profile {
+                .image2 {
+                    border-radius: 50%;
+                    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                }
+            }
+            .name {
+                .name-profile {
+                    padding: 50px;
+                }
+            }
+        }
+    }
+    .link {
         display: flex;
-        .image-profile {
-            .image2 {
-                border-radius: 50%;
-            }
-        }
-        .name {
-            .name-profile {
-                margin: 0px 0px 0px 10px;
-            }
-        }
-    }
-    .tabs {
-        display: flex;
-        cursor: pointer;
-        .tab {
-            margin: 5px;
-            border-bottom: 2px solid transparent;
-            transition: border-color 0.3s ease;
-            &.active {
-                border-bottom: 2px solid rgb(58, 205, 227);
-            }
-        }
-    }
-    hr {
-        width: 95%;
-    }
-    .tab-content {
-        margin-top: 20px;
-        .playlist-songs {
-            padding: 10px;
-            .playlist-table {
-                border-collapse: collapse;
-                width: 100%;
-
-                & td {
-                    padding: 4px;
-                }
-
-                & .wrapper-info {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-                .song-tittle-main {
-                    display: flex;
-                    align-items: center;
-                }
-            }
-        }
-        .main-album {
-            .album-image {
-                display: flex;
-                gap: 16px;
-                justify-content: center;
-                .album-image-1 {
-                    display: flex;
-                    flex-direction: column;
-                }
-            }
+        gap: 20px;
+        .custom-link {
+            color: aquamarine;
         }
     }
 }
