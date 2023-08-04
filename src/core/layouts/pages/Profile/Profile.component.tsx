@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 import styles from './Profile.module.scss';
 import Link from 'next/link';
-import ListSongComponent from '@/core/layouts/pages/LibraryProfile/LibraryProfile.component';
+import LibraryProfileComponent from '../LibraryProfile/LibraryProfile.component';
 
 const cx = classNames.bind(styles);
 
@@ -42,7 +42,7 @@ function Profile() {
                         </Link>
                     </li>
                 </ul>
-                <ListSongComponent />
+                <LibraryProfileComponent />
             </div>
         </div>
     );
