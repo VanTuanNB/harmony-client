@@ -4,17 +4,26 @@ import styles from './SideBarNavigation.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import Image from 'next/image';
+import { MainLogo } from '@/shared/components/Svg/index.component';
+import { selectClientStoreReducer } from '@/core/redux/features/client/client.slice';
+import { useAppSelector } from '@/core/redux/hook.redux';
+import { ELocalStorageKey } from '@/core/common/constants/common.constant';
+import { EDataTheme } from '@/core/common/constants/reduxSlice.constant';
 
 const cx = classNames.bind(styles);
 
 function SideBarNavigation() {
+    const store = useAppSelector(selectClientStoreReducer);
+    const currentTheme = store.localStoreSide[ELocalStorageKey.DATA_THEME];
     return (
         <div className={cx('sidebar-navigation')}>
             <div className={cx('left-sidebar')}>
                 <div className={cx('navigation')}>
                     <div className={cx('icon-logo')}>
-                        <Image className={cx('logo')} src="/images/logo-1.png" width={50} height={50} alt="" />
-                        <h3 className={cx('title')}>Harmory Music</h3>
+                        <MainLogo
+                            fillIcon={currentTheme === EDataTheme.DARK ? 'white' : 'black'}
+                            className={cx('Layer_1')}
+                        />
                     </div>
                     <ul>
                         <li>
