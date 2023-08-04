@@ -4,7 +4,7 @@ import PlaylistSongComponent from './PlaylistSong.component';
 import { usePathname } from 'next/navigation';
 
 
-function ListSongComponent() {
+function LibraryProfileComponent() {
     const path = usePathname();
     console.log(path);
     
@@ -23,4 +23,4 @@ function ListSongComponent() {
     return displayStep();
 }
 
-export default ListSongComponent;
+export default LibraryProfileComponent;

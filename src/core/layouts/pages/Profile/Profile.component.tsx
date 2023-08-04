@@ -4,9 +4,7 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 import styles from './Profile.module.scss';
 import Link from 'next/link';
-import PlaylistComponent from '@/shared/components/Playlist/Playlist.component';
-import PlaylistSongComponent from '@/shared/components/Listsong/PlaylistSong.component';
-import ListSongComponent from '@/shared/components/Listsong/ListSong.component';
+import ListSongComponent from '@/core/layouts/pages/LibraryProfile/LibraryProfile.component';
 
 const cx = classNames.bind(styles);
 

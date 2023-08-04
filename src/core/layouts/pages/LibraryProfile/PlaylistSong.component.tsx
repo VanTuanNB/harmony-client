@@ -2,7 +2,7 @@
 import React from 'react';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import styles from './PlaylistSong.module.scss';
+import styles from './LibraryProfile.module.scss';
 import { faEllipsis, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
