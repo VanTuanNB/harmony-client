@@ -1,6 +1,6 @@
 import FavouriteComponent from './Favourite.component';
 import HistoryComponent from './History.component';
-import PlaylistSongComponent from './PlaylistSong.component';
+import PlaylistProfileComponent from './PlaylistProfile.component';
 import { usePathname } from 'next/navigation';
 
 
@@ -13,7 +13,7 @@ function LibraryProfileComponent() {
             case '/profile/favourite':
                 return <FavouriteComponent />;
             case '/profile/playlist':
-                return <PlaylistSongComponent />;
+                return <PlaylistProfileComponent />;
             case '/profile/history':
                 return <HistoryComponent />;
             default:

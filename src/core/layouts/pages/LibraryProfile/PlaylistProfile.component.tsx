@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
 
 const cx = classNames.bind(styles);
-function PlaylistSongComponent() {
+function PlaylistProfileComponent() {
     return (
         <div className={cx('album-render')}>
             <div className={cx('title')}>
@@ -111,4 +111,4 @@ function PlaylistSongComponent() {
     );
 }
 
-export default PlaylistSongComponent;
+export default PlaylistProfileComponent;
