@@ -1,4 +1,4 @@
-import FavoriteComponent from './Favorite.component';
+import FavouriteComponent from './Favourite.component';
 import HistoryComponent from './History.component';
 import PlaylistSongComponent from './PlaylistSong.component';
 import { usePathname } from 'next/navigation';
@@ -10,14 +10,14 @@ function LibraryProfileComponent() {
     
     const displayStep = () => {
         switch (path) {
-            case '/profile/favorit':
-                return <FavoriteComponent />;
+            case '/profile/favourite':
+                return <FavouriteComponent />;
             case '/profile/playlist':
                 return <PlaylistSongComponent />;
             case '/profile/history':
                 return <HistoryComponent />;
             default:
-                return <FavoriteComponent />;
+                return <FavouriteComponent />;
         }
     };
     return displayStep();

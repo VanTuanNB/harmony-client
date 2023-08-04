@@ -27,7 +27,7 @@ function Profile() {
             <div>
                 <ul className={cx('link')}>
                     <li>
-                        <Link className={cx('custom-link')} href={'/profile/favorit'}>
+                        <Link className={cx('custom-link')} href={'/profile/favourite'}>
                             Farvorite
                         </Link>
                     </li>
