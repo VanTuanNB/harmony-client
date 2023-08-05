@@ -2,15 +2,16 @@
 import React from 'react';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import styles from './PlaylistSong.module.scss';
+import styles from './LibraryProfile.module.scss';
 import { faEllipsis, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
 
 const cx = classNames.bind(styles);
-function PlaylistSongComponent() {
+function PlaylistProfileComponent() {
     return (
         <div className={cx('album-render')}>
+            <h2>My playList</h2>
             <div className={cx('title')}>
                 <div id={cx('id')}>#</div>
                 <div id={cx('song')}>Bài hát</div>
@@ -111,4 +112,4 @@ function PlaylistSongComponent() {
     );
 }
 
-export default PlaylistSongComponent;
+export default PlaylistProfileComponent;

@@ -4,16 +4,17 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 import styles from './Profile.module.scss';
 import Link from 'next/link';
-import PlaylistComponent from '@/shared/components/Playlist/Playlist.component';
-import PlaylistSongComponent from '@/shared/components/Listsong/PlaylistSong.component';
+import { usePathname } from 'next/navigation';
+import LibraryProfileComponent from '../LibraryProfile/LibraryProfile.component';
 
 const cx = classNames.bind(styles);
 
 function Profile() {
-    const [activeTab, setActiveTab] = useState('tab1');
+    const pathName = usePathname();
+    const [activeLink, setActiveLink] = useState(pathName === '/profile' ? '/profile/favourite' : pathName);
 
-    const handleTabChange = (tab: React.SetStateAction<string>) => {
-        setActiveTab(tab);
+    const handleLinkClick = (href: string) => {
+        setActiveLink(href);
     };
 
     return (
@@ -34,22 +35,34 @@ function Profile() {
             <div>
                 <ul className={cx('link')}>
                     <li>
-                        <Link className={cx('custom-link')} href={'/favorit'}>
-                            Farvorite
+                        <Link
+                            className={cx('custom-link', { active: activeLink === '/profile/favourite' })}
+                            href={'/profile/favourite'}
+                            onClick={() => handleLinkClick('/profile/favourite')}
+                        >
+                            Farvourite
                         </Link>
                     </li>
                     <li>
-                        <Link className={cx('custom-link')} href={'/playlist'}>
+                        <Link
+                            className={cx('custom-link', { active: activeLink === '/profile/playlist' })}
+                            href={'/profile/playlist'}
+                            onClick={() => handleLinkClick('/profile/playlist')}
+                        >
                             Playlist
                         </Link>
                     </li>
                     <li>
-                        <Link className={cx('custom-link')} href={'/history'}>
+                        <Link
+                            className={cx('custom-link', { active: activeLink === '/profile/history' })}
+                            href={'/profile/history'}
+                            onClick={() => handleLinkClick('/profile/history')}
+                        >
                             History
                         </Link>
                     </li>
                 </ul>
-                <PlaylistSongComponent />
+                <LibraryProfileComponent />
             </div>
         </div>
     );
