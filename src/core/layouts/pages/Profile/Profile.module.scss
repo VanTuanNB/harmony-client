@@ -1,5 +1,8 @@
 .profile {
     padding: 5%;
+    h2{
+        padding-top: 1em;
+    }
     .profile-user {
         .information {
             display: flex;
@@ -17,11 +20,20 @@
         }
     }
     .link {
+        width: 100%;
         padding-top: 5%;
         display: flex;
         gap: 20px;
         .custom-link {
-            color: aquamarine;
+            padding: 5px 20px;
+            border: 1px solid #00bf63;
+            border-radius: 10px;
+            color: var(--theme-mode-color);
+        }
+        .active {
+            background-color: #00bf63;
+            color: var(--theme-mode-background-user);
+            transition: 0.5s ease-in-out;
         }
     }
 }

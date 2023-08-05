@@ -11,6 +11,7 @@ const cx = classNames.bind(styles);
 function PlaylistProfileComponent() {
     return (
         <div className={cx('album-render')}>
+            <h2>My playList</h2>
             <div className={cx('title')}>
                 <div id={cx('id')}>#</div>
                 <div id={cx('song')}>Bài hát</div>
