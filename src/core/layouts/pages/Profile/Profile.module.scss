@@ -22,18 +22,24 @@
     .link {
         width: 100%;
         padding-top: 5%;
+        height: 72px;
         display: flex;
+        z-index: 1;
         gap: 20px;
+        border-bottom: 1px solid var(--theme-mode-color);
         .custom-link {
+           
             padding: 5px 20px;
-            border: 1px solid #00bf63;
-            border-radius: 10px;
+            // border: 1px solid #00bf63;
+            // border-radius: 10px;
             color: var(--theme-mode-color);
         }
         .active {
-            background-color: #00bf63;
-            color: var(--theme-mode-background-user);
-            transition: 0.5s ease-in-out;
+            z-index: 3;
+            height: 80px;
+            color: #00bf63;
+            border-bottom: 1px solid #00bf63;
+            position: abso;
         }
     }
 }
