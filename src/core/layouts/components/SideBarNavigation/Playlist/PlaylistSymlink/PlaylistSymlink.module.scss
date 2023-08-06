@@ -1,0 +1,153 @@
+.right-slide {
+    width: 100%;
+    overflow: auto;
+    .main-container {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        .main-header {
+            display: flex;
+            align-items: center;
+            height: 58px;
+            flex-shrink: 0;
+            .header-menu {
+                .main-header-link {
+                    padding: 4px 12px;
+                    color: #fff;
+                    border-radius: 50px;
+                    background-color: #242323;
+                    margin-right: 5px;
+                    transition: 0.3s;
+                }
+                .main-header-link:hover {
+                    background-color: #4c4b4b;
+                }
+            }
+        }
+    }
+    .search-sidebar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .container {
+            position: relative;
+            .input {
+                padding-left: 30px;
+                height: 30px;
+                font-size: 15px;
+                border: none;
+                color: #fff;
+                outline: none;
+                width: 30px;
+                transition: all ease 0.3s;
+                background-color: #191a1e;
+                border-radius: 50px;
+                cursor: pointer;
+
+                &:focus {
+                    width: 200px;
+                    cursor: text;
+                }
+
+                &:focus + .icon {
+                    pointer-events: all;
+                    cursor: pointer;
+                }
+            }
+        }
+        .icon {
+            color: #fff;
+            margin-right: 5px;
+            padding: 4px 12px;
+        }
+        .icon1 {
+            padding: 4px 12px;
+        }
+        .container .icon {
+            position: absolute;
+            // width: 30px;
+            // height: 30px;
+            top: 0;
+            left: 0;
+            padding: 8px;
+            pointer-events: none;
+        }
+    }
+    .album-render {
+        width: 100%;
+
+        .title {
+            width: 95%;
+            display: flex;
+            flex-direction: row;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #b6b6b6;
+
+            #id {
+                width: 2%;
+                text-align: end;
+            }
+            #song {
+                width: 40%;
+                margin-left: 1em;
+            }
+            #album {
+                width: 18%;
+                text-align: start;
+            }
+            #date {
+                width: 20%;
+                text-align: center;
+            }
+            #lenght {
+                width: 20%;
+                text-align: center;
+            }
+        }
+
+        .list-songs {
+            width: 95%;
+            display: flex;
+            flex-direction: column;
+
+            .single-song {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin-top: 0.7em;
+                height: 56px;
+                border-radius: 5px;
+                transition: 0.15s;
+                cursor: pointer;
+
+                #song {
+                    margin-left: 1em;
+                    display: flex;
+                    flex-direction: row;
+
+                    #song-title {
+                        height: 40px;
+                        line-height: 20px;
+                        justify-content: center;
+                        margin-left: 0.5em;
+                    }
+                    #author {
+                        font-size: 14px;
+                        font-weight: 400;
+                        color: #b6b6b6;
+                    }
+                }
+            }
+            .single-song:hover {
+                background-color: rgba(184, 180, 180, 0.329);
+
+                #lenght {
+                    #icon {
+                        opacity: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
