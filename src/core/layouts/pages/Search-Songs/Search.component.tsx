@@ -11,6 +11,7 @@ import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoadin
 import { faClock, faEllipsis, faHeart, faWifi } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SearchFilterComponent from '@/shared/components/SearchFilter/SearchFilter.component';
+import Image from 'next/image';
 
 const cx = classNames.bind(styles);
 
@@ -31,10 +32,7 @@ function SearchPageSongs() {
                     <div className={cx('single-song')}>
                         <div id={cx('id')}>1</div>
                         <div id={cx('song')}>
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
-                                width={'40px'}
-                            />
+                            <Image src="" width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -50,10 +48,7 @@ function SearchPageSongs() {
                     <div className={cx('single-song')}>
                         <div id={cx('id')}>2</div>
                         <div id={cx('song')}>
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
-                                width={'40px'}
-                            />
+                            <Image src="" width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -69,10 +64,7 @@ function SearchPageSongs() {
                     <div className={cx('single-song')}>
                         <div id={cx('id')}>...</div>
                         <div id={cx('song')}>
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
-                                width={'40px'}
-                            />
+                            <Image src="" width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -88,10 +80,7 @@ function SearchPageSongs() {
                     <div className={cx('single-song')}>
                         <div id={cx('id')}>10</div>
                         <div id={cx('song')}>
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
-                                width={'40px'}
-                            />
+                            <Image src="" width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -107,10 +96,7 @@ function SearchPageSongs() {
                     <div className={cx('single-song')}>
                         <div id={cx('id')}>11</div>
                         <div id={cx('song')}>
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
-                                width={'40px'}
-                            />
+                            <Image src="" width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
