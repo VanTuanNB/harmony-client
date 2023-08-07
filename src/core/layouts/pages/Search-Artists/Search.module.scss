@@ -39,18 +39,22 @@
             }
 
             .image{
+                width: 90%;
                 position: relative;
+                margin: auto;
             }
             .image img{
-                border-radius: 50%;
+                width: 100%;
+                border-radius: 5px;
                 z-index: 3;
             }
             .playButton{
+                font-size: 3em;
                 position: absolute;
                 opacity: 0%;
-                // top: 0;
-                left: 35%;
-                top: 40%;
+                left: 40%;
+                top: 70%;
+                color: #00bf63;
                 transition: 0.3s;
                 z-index: 2;
             }
