@@ -20,15 +20,12 @@ function HistoryPage() {
                     <li className={cx('menu')}>PODCAST</li>
                 </ul>
             </div>
-            <hr className={cx('line')}/>
+            <hr className={cx('line')} />
             <div className={cx('album-render')}>
                 <div className={cx('list-songs')}>
                     <div className={cx('single-song')}>
                         <div id={cx('song')}>
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
-                                width={'40px'}
-                            />
+                            <Image src={''} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -43,10 +40,7 @@ function HistoryPage() {
                     </div>
                     <div className={cx('single-song')}>
                         <div id={cx('song')}>
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
-                                width={'40px'}
-                            />
+                            <Image src={''} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -61,10 +55,7 @@ function HistoryPage() {
                     </div>
                     <div className={cx('single-song')}>
                         <div id={cx('song')}>
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
-                                width={'40px'}
-                            />
+                            <Image src={''} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -79,10 +70,7 @@ function HistoryPage() {
                     </div>
                     <div className={cx('single-song')}>
                         <div id={cx('song')}>
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
-                                width={'40px'}
-                            />
+                            <Image src={''} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -97,10 +85,7 @@ function HistoryPage() {
                     </div>
                     <div className={cx('single-song')}>
                         <div id={cx('song')}>
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
-                                width={'40px'}
-                            />
+                            <Image src={''} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -116,6 +101,6 @@ function HistoryPage() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 export default HistoryPage;
