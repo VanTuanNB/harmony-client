@@ -12,14 +12,12 @@ interface UploadSongComponentProps {
 const UploadSongComponent: FC<UploadSongComponentProps> = ({ handleUploadSong, label }) => {
     const [error, setError] = useState<string | ''>('');
     const [fileSong, setFileSong] = useState<File | null>(null);
-    const [uploadID, setUploadID] = useState<string | ''>('');
     const [uploadAudio] = useUploadAudioMutation();
     const [postSong, { data }] = usePostSongMutation();
 
     useEffect(() => {
         if (data) {
             const privateUrl = data.data.privateUrl;
-            setUploadID(data.data.uploadID);
             if (fileSong) uploadAudio({ privateUrl, file: fileSong });
             const response = {
                 status: data.status,

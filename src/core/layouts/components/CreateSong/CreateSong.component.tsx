@@ -1,6 +1,6 @@
 'use client';
 import classNames from 'classnames/bind';
-import style from './PopUp.module.scss';
+import style from './CreateSong.module.scss';
 import UploadSongComponent from './Upload/UpLoadSong.component';
 import {  useCallback, useEffect, useState } from 'react';
 import UploadThumnailComponent from './Upload/UploadThumnail.component';
@@ -19,7 +19,7 @@ type IResponse = {
 
 const label = ['Thêm bài hát', 'Thêm hình ảnh', 'Thêm thông tin'];
 
-function PopUpComponent() {
+function CreateSongComponent() {
     const [step, setStep] = useState(1);
     const [showPopUp, setShowPopUp] = useState(true);
     const [uploadId, setUploadId] = useState('');
@@ -99,4 +99,4 @@ function PopUpComponent() {
     );
 }
 
-export default PopUpComponent;
+export default CreateSongComponent;
