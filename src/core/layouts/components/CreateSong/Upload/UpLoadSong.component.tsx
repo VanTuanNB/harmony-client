@@ -23,8 +23,9 @@ const UploadSongComponent: FC<UploadSongComponentProps> = ({ handleUploadSong, l
                 status: data.status,
                 success: data.success,
                 message: data.message,
-                data: data.data.uploadId
+                data: data.data
             };
+            
             handleUploadSong(response);
         }
     }, [data]);

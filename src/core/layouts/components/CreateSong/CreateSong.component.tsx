@@ -2,20 +2,14 @@
 import classNames from 'classnames/bind';
 import style from './CreateSong.module.scss';
 import UploadSongComponent from './Upload/UpLoadSong.component';
-import {  useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import UploadThumnailComponent from './Upload/UploadThumnail.component';
 import DetailComponent from './Detail/Detail.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
+import { IResponseServer } from '@/core/common/interfaces/IResponseServer.interface';
 
 const cx = classNames.bind(style);
-
-type IResponse = {
-    status: string;
-    success: string;
-    message: string;
-    data: string;
-};
 
 const label = ['Thêm bài hát', 'Thêm hình ảnh', 'Thêm thông tin'];
 
@@ -30,25 +24,19 @@ function CreateSongComponent() {
         }
     }, [uploadId]);
 
-    const uploadSong = useCallback(
-        (data: IResponse) => {
-            if (data.success) {
-                setUploadId(data.data);
-                setStep(2);
-            }
-        },
-        [],
-    );
-    const UploadThumnail = useCallback(
-        (data: IResponse) => {
-            if (data.success) {
-                setStep(3);
-            }
-        },
-        [],
-    );
-    const uploadDetail = useCallback((data: IResponse) => {
-        if(data.success){
+    const uploadSong = useCallback((data: IResponseServer) => {
+        if (data.success) {
+            setUploadId(data.data.uploadId);
+            setStep(2);
+        }
+    }, []);
+    const UploadThumnail = useCallback((data: IResponseServer) => {
+        if (data.success) {
+            setStep(3);
+        }
+    }, []);
+    const uploadDetail = useCallback((data: IResponseServer) => {
+        if (data.success) {
             console.log(data);
             setShowPopUp(false);
         }
