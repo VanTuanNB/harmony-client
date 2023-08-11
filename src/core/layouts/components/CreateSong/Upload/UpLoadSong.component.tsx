@@ -1,7 +1,7 @@
 import { memo, FC, useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import style from './Upload.module.scss';
-import { UploadIcon } from '@/shared/components/Svg/index.component'; 
+import { UploadIcon } from '@/shared/components/Svg/index.component';
 import { usePostSongMutation, useUploadAudioMutation } from '@/core/redux/services/s3.service';
 const cx = classNames.bind(style);
 
@@ -23,11 +23,12 @@ const UploadSongComponent: FC<UploadSongComponentProps> = ({ handleUploadSong, l
                 status: data.status,
                 success: data.success,
                 message: data.message,
-                data: data.data
+                data: data.data,
             };
-            
+
             handleUploadSong(response);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
 
     const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
