@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import style from './Upload.module.scss';
 import { ChangeEvent, FC, memo, useEffect, useState } from 'react';
-import { UploadIcon } from '@/shared/components/Svg/index.component'; 
+import { UploadIcon } from '@/shared/components/Svg/index.component';
 import { usePostThumnailMutation, useUploadThumnailMutation } from '@/core/redux/services/s3.service';
 
 const cx = classNames.bind(style);
@@ -29,7 +29,8 @@ const UploadThumnailComponent: FC<UploadThumnailComponentProps> = ({ handleUploa
             };
             handleUploadThumnail(response);
         }
-    }, [data, fileThumnail]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data, fileThumnail, uploadId]);
 
     const onChange = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {

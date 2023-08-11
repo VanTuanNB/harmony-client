@@ -1,9 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './Login.module.scss';
-import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
-import Image from 'next/image';
 import { FacebookIcon, GoogleIcon } from '@/shared/components/Svg/index.component';
 
 const cx = classNames.bind(styles);

@@ -67,6 +67,7 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
             console.log('response: ' + response);
             handleUploadDetail(response);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
     const handleChange = (ars: any) => {
         setListGenreId(() => {
