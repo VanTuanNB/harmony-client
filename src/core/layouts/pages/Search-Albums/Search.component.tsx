@@ -23,10 +23,10 @@ function SearchPageAlbums() {
                 <div className={cx('single-album')}>
                     <div className={cx('mask')}></div>
                     <div className={cx('image')}>
-                        <img
+                        {/* <img
                             src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
                             width={'168px'}
-                        />
+                        /> */}
                         <Image
                             width={40}
                             height={40}
@@ -43,10 +43,10 @@ function SearchPageAlbums() {
                 <div className={cx('single-album')}>
                     <div className={cx('mask')}></div>
                     <div className={cx('image')}>
-                        <img
+                        {/* <img
                             src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
                             width={'168px'}
-                        />
+                        /> */}
                         <Image
                             width={40}
                             height={40}
@@ -63,10 +63,10 @@ function SearchPageAlbums() {
                 <div className={cx('single-album')}>
                     <div className={cx('mask')}></div>
                     <div className={cx('image')}>
-                        <img
+                        {/* <img
                             src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
                             width={'168px'}
-                        />
+                        /> */}
                         <Image
                             width={40}
                             height={40}
@@ -83,10 +83,10 @@ function SearchPageAlbums() {
                 <div className={cx('single-album')}>
                     <div className={cx('mask')}></div>
                     <div className={cx('image')}>
-                        <img
+                        {/* <img
                             src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
                             width={'168px'}
-                        />
+                        /> */}
                         <Image
                             width={40}
                             height={40}
@@ -103,10 +103,10 @@ function SearchPageAlbums() {
                 <div className={cx('single-album')}>
                     <div className={cx('mask')}></div>
                     <div className={cx('image')}>
-                        <img
+                        {/* <img
                             src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
                             width={'168px'}
-                        />
+                        /> */}
                         <Image
                             width={40}
                             height={40}
@@ -123,10 +123,10 @@ function SearchPageAlbums() {
                 <div className={cx('single-album')}>
                     <div className={cx('mask')}></div>
                     <div className={cx('image')}>
-                        <img
+                        {/* <img
                             src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
                             width={'168px'}
-                        />
+                        /> */}
                         <Image
                             width={40}
                             height={40}

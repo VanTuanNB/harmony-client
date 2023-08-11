@@ -31,10 +31,10 @@ function SearchPageSongs() {
                     <div className={cx('single-song')}>
                         <div id={cx('id')}>1</div>
                         <div id={cx('song')}>
-                            <img
+                            {/* <img
                                 src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
                                 width={'40px'}
-                            />
+                            /> */}
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -50,10 +50,10 @@ function SearchPageSongs() {
                     <div className={cx('single-song')}>
                         <div id={cx('id')}>2</div>
                         <div id={cx('song')}>
-                            <img
+                            {/* <img
                                 src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
                                 width={'40px'}
-                            />
+                            /> */}
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -69,10 +69,10 @@ function SearchPageSongs() {
                     <div className={cx('single-song')}>
                         <div id={cx('id')}>...</div>
                         <div id={cx('song')}>
-                            <img
+                            {/* <img
                                 src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
                                 width={'40px'}
-                            />
+                            /> */}
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -88,10 +88,10 @@ function SearchPageSongs() {
                     <div className={cx('single-song')}>
                         <div id={cx('id')}>10</div>
                         <div id={cx('song')}>
-                            <img
+                            {/* <img
                                 src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
                                 width={'40px'}
-                            />
+                            /> */}
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -107,10 +107,10 @@ function SearchPageSongs() {
                     <div className={cx('single-song')}>
                         <div id={cx('id')}>11</div>
                         <div id={cx('song')}>
-                            <img
+                            {/* <img
                                 src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
                                 width={'40px'}
-                            />
+                            /> */}
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>

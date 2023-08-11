@@ -57,13 +57,13 @@ function PlayerControl() {
             <div className={cx('song-bar')}>
                 <div className={cx('song-infors')}>
                     <div className={cx('image-container')}>
-                        <Image
+                        {/* <Image
                             className={cx('image1')}
                             src={store.playing.currentSong.thumbnail}
                             alt=""
                             width={60}
                             height={60}
-                        />
+                        /> */}
                     </div>
                     <div className={cx('song-description')}>
                         <p className={cx('title')}>{store.playing.currentSong.title || ''}</p>

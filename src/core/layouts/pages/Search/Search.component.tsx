@@ -32,11 +32,11 @@ function SearchPage() {
                 <div className={cx('result-left')}>
                     <h2>Top result</h2>
                     <div className={cx('left')}>
-                        <img
+                        {/* <img
                             src="https://hamony-music-web.onrender.com/api/v1/thumbnail/ccbd9ef1-e672-4484-b4b0-e10a481b7125"
                             alt=""
                             className={cx('img')}
-                        />
+                        /> */}
                         <div className={cx('top-result-infor')}>
                             <h3>Phiêu bồng</h3>
                             <p>Composer</p>
@@ -78,30 +78,30 @@ function SearchPage() {
                 <h2>Related Artist</h2>
                 <div className={cx('item-artist')}>
                     <div className={cx('item')}>
-                        <img src="../images/img1.jpg" alt="" className={cx('img')} />
+                        {/* <img src="../images/img1.jpg" alt="" className={cx('img')} /> */}
                         <h3>Tuan Cao</h3>
                         <p>Artist</p>
                     </div>
                     <div className={cx('item')}>
-                        <img
+                        {/* <img
                             src="https://hamony-music-web.onrender.com/api/v1/thumbnail/ccbd9ef1-e672-4484-b4b0-e10a481b7125"
                             alt=""
                             className={cx('img')}
-                        />
+                        /> */}
                         <h3>Huy Nguyen</h3>
                         <p>Artist</p>
                     </div>
                     <div className={cx('item')}>
-                        <img src="../images/img1.jpg" alt="" className={cx('img')} />
+                        {/* <img src="../images/img1.jpg" alt="" className={cx('img')} /> */}
                         <h3>Tuan Cao</h3>
                         <p>Artist</p>
                     </div>
                     <div className={cx('item')}>
-                        <img
+                        {/* <img
                             src="https://hamony-music-web.onrender.com/api/v1/thumbnail/ccbd9ef1-e672-4484-b4b0-e10a481b7125"
                             alt=""
                             className={cx('img')}
-                        />
+                        /> */}
                         <h3>Huy Nguyen</h3>
                         <p>Artist</p>
                     </div>
