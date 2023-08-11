@@ -45,3 +45,22 @@ export const GoogleIcon = ({ width = '100%', height = '100%', className, fill = 
         <path clip-path="url(#b)" fill="#4285F4" d="M48 48L17 24l-4-3 35-10z" />
     </svg>
 );
+
+export const UploadIcon = ({ width = '100%', height = '100%', className }: IIconPropsComponent) => (
+    <svg
+        width={width}
+        height={height}
+        className={className}
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <path
+            d="M12.5 17L12.5 4M12.5 4L18 8.78947M12.5 4L7 8.78947"
+            stroke="#909090"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+        />
+        <path d="M6 21H19" stroke="#909090" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+);
