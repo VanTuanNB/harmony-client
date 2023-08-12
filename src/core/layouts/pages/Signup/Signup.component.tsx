@@ -32,16 +32,21 @@ function SignupPage() {
                 <br />
                 <input type="password" placeholder="Confirm Password" />
                 <br />
-                <p>By clicking on sign-up, you agree to Harmony's Terms and Conditions of Use.</p>
-                <p>
-                    To learn more about how Devify collects, uses, shares and protects your personal data, please see
-                    Harmony's Privacy Policy.
-                </p>
+                <div className={cx('terms')}>
+                    <p>By clicking on sign-up, you agree to Harmony's Terms and Conditions of Use.</p>
+                    <p>
+                        To learn more about how Devify collects, uses, shares and protects your personal data, please
+                        see Harmony's Privacy Policy.
+                    </p>
+                </div>
                 <button>Sign up</button>
             </form>
             <hr />
             <p>
-                Already have an account? <Link href="">Log in now</Link>
+                Already have an account?{' '}
+                <Link href="">
+                    <i>Log in now</i>
+                </Link>
             </p>
         </div>
     );
