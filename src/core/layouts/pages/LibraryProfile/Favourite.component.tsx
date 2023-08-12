@@ -10,15 +10,6 @@ const cx = classNames.bind(styles);
 export default function FavouriteComponent() {
     return (
         <div className={cx('album-render')}>
-            <div className={cx('title')}>
-                <div id={cx('id')}>#</div>
-                <div id={cx('song')}>Bài hát</div>
-                <div id={cx('album')}>Album</div>
-                <div id={cx('date')}>Ngày phát hành</div>
-                <div id={cx('lenght')}>
-                    <FontAwesomeIcon icon={faClock} />
-                </div>
-            </div>
             <div className={cx('list-songs')}>
                 <div className={cx('single-song')}>
                     <div id={cx('id')}>1</div>

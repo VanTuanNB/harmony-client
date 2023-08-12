@@ -10,6 +10,13 @@ const environment = {
 };
 const nextConfig = {
     assetPrefix: `${environment.origin}`,
+    images: {
+        domains: [
+            'lh3.googleusercontent.com',
+            'platform-lookaside.fbsbx.com',
+            'harmony-music-app.s3.ap-southeast-1.amazonaws.com',
+        ],
+    },
 };
 
 module.exports = nextConfig;

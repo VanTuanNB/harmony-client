@@ -1,4 +1,28 @@
-export interface IUser {}
+export interface IUser {
+    _id: string;
+    email: string;
+    name: string;
+    refreshToken: string;
+    password?: string;
+    avatarUrl?: string;
+    avatarS3: {
+        bucketName: string;
+        keyObject: string;
+        contentType: string;
+    } | null;
+    locale?: string;
+    playlistReference?: string[];
+    favoriteListReference?: string;
+    historyReference?: string;
+    isRegistrationForm?: boolean;
+    role: string;
+    nickname?: string;
+    albumsReference?: string[];
+    songsReference?: string[];
+    isPendingUpgradeComposer?: boolean;
+    createdAt?: Date;
+    updatedAt?: Date;
+}
 
 export interface ISong {
     _id: string;
