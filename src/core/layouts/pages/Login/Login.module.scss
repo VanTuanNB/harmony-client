@@ -79,10 +79,16 @@
             }
         }
         button {
-            width: 250px;
+            width: 50%;
             height: 40px;
             border-radius: 10px;
             font-weight: 500;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: var(--theme-item-highlight);
+            color: white;
         }
     }
     .forgot {

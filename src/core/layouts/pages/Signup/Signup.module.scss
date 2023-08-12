@@ -67,7 +67,7 @@
             border-radius: 5px;
             color: var(--theme-mode-color);
         }
-        .terms{
+        .terms {
             margin-top: 1em;
         }
         p {
@@ -85,11 +85,17 @@
         }
 
         button {
-            width: 250px;
+            width: 50%;
             height: 40px;
             border-radius: 10px;
             font-weight: 500;
             margin-top: 30px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: var(--theme-item-highlight);
+            color: white;
         }
     }
     .forgot {

@@ -1,6 +1,7 @@
 .filter{
     margin-top: 1em;
-    // margin-left: 1.5em;
+    margin-left: 0.76em;
+    margin-bottom: 1em;
     // border-radius: 10px;
     button{
         margin-right: 1em;
@@ -8,7 +9,7 @@
         height: 32px;
         border-radius: 15px;
         padding: 0px 15px;
-        background-color: var(--theme-filter);
+        background-color: var(--theme-mode-background);
         cursor: pointer;
         font-size: 14px;
 
