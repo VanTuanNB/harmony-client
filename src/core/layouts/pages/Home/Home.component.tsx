@@ -2,175 +2,41 @@
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import styles from './Home.module.scss';
-import MediaItem from '@/shared/components/MediaItem/MediaItem.component';
 
 const cx = classNames.bind(styles);
-const mockData = [
-    {
-        _id: 'eqwe_E123dqs_312ewq',
-        title: 'Chỉ vì quá Hy vọng',
-        performers: [
-            {
-                _id: 'eqwdsacasc',
-                name: 'Hoài Lâm',
-                nickname: 'hoailam',
-            },
-            {
-                _id: 'tewrmewklfmrekwf',
-                name: 'TuanCao',
-                nickname: 'tuancao',
-            },
-        ],
-        thumbnail: '/images/fallback-thumbnail-user.jpg',
-    },
-    {
-        _id: 'eqwe_E123dqs_312ewq3434',
-        title: 'Tình yêu đẹp nhất',
-        performers: [
-            {
-                _id: 'eqwdsacasc',
-                name: 'Hoài Lâm',
-                nickname: 'hoailam',
-            },
-            {
-                _id: 'tewrmewklfmrekwf',
-                name: 'TuanCao',
-                nickname: 'tuancao',
-            },
-        ],
-        thumbnail: '/images/fallback-thumbnail-user.jpg',
-    },
-    {
-        _id: 'eqwe_E123dqs_312ewq3434',
-        title: 'Tình yêu đẹp nhất',
-        performers: [
-            {
-                _id: 'eqwdsacasc',
-                name: 'Hoài Lâm',
-                nickname: 'hoailam',
-            },
-            {
-                _id: 'tewrmewklfmrekwf',
-                name: 'TuanCao',
-                nickname: 'tuancao',
-            },
-        ],
-        thumbnail: '/images/fallback-thumbnail-user.jpg',
-    },
-    {
-        _id: 'eqwe_E123dqs_312ewq3434',
-        title: 'Tình yêu đẹp nhất',
-        performers: [
-            {
-                _id: 'eqwdsacasc',
-                name: 'Hoài Lâm',
-                nickname: 'hoailam',
-            },
-            {
-                _id: 'tewrmewklfmrekwf',
-                name: 'TuanCao',
-                nickname: 'tuancao',
-            },
-        ],
-        thumbnail: '/images/fallback-thumbnail-user.jpg',
-    },
-    {
-        _id: 'eqwe_E123dqs_312ewq3434',
-        title: 'Tình yêu đẹp nhất',
-        performers: [
-            {
-                _id: 'eqwdsacasc',
-                name: 'Hoài Lâm',
-                nickname: 'hoailam',
-            },
-            {
-                _id: 'tewrmewklfmrekwf',
-                name: 'TuanCao',
-                nickname: 'tuancao',
-            },
-        ],
-        thumbnail: '/images/fallback-thumbnail-user.jpg',
-    },
-    {
-        _id: 'eqwe_E123dqs_312ewq3434',
-        title: 'Tình yêu đẹp nhất',
-        performers: [
-            {
-                _id: 'eqwdsacasc',
-                name: 'Hoài Lâm',
-                nickname: 'hoailam',
-            },
-            {
-                _id: 'tewrmewklfmrekwf',
-                name: 'TuanCao',
-                nickname: 'tuancao',
-            },
-        ],
-        thumbnail: '/images/fallback-thumbnail-user.jpg',
-    },
-    {
-        _id: 'eqwe_E123dqs_312ewq3434',
-        title: 'Tình yêu đẹp nhất',
-        performers: [
-            {
-                _id: 'eqwdsacasc',
-                name: 'Hoài Lâm',
-                nickname: 'hoailam',
-            },
-            {
-                _id: 'tewrmewklfmrekwf',
-                name: 'TuanCao',
-                nickname: 'tuancao',
-            },
-        ],
-        thumbnail: '/images/fallback-thumbnail-user.jpg',
-    },
-    {
-        _id: 'eqwe_E123dqs_312ewq3434',
-        title: 'Tình yêu đẹp nhất',
-        performers: [
-            {
-                _id: 'eqwdsacasc',
-                name: 'Hoài Lâm',
-                nickname: 'hoailam',
-            },
-            {
-                _id: 'tewrmewklfmrekwf',
-                name: 'TuanCao',
-                nickname: 'tuancao',
-            },
-        ],
-        thumbnail: '/images/fallback-thumbnail-user.jpg',
-    },
-];
+// const mockData: ISong = [{
+//     _id: 'ewqeisad_$12312_#12312e',
+//     title: 'Bật tình yêu lên',
+
+// }]
 function HomePage() {
     return (
         <div className={cx('main-home')}>
             <div className={cx('main-image')}>
-                <Image className={cx('image2')} src="/images/img1.jpg" width={1} height={0.6} alt=""/>
-                <Image className={cx('image2')} src="/images/img1.jpg" width={1} height={0.6} alt=""/>
-                <Image className={cx('image2')} src="/images/img1.jpg" width={1} height={0.6} alt=""/>
+                <Image className={cx('image2')} src="/images/img1.jpg" width={1} height={0.6} alt="" />
+                <Image className={cx('image2')} src="/images/img1.jpg" width={1} height={0.6} alt="" />
+                <Image className={cx('image2')} src="/images/img1.jpg" width={1} height={0.6} alt="" />
             </div>
             <div className={cx('main-just')}>
                 <h3 className={cx('title')}>Just Released</h3>
                 <ul className={cx('list-listening')}>
-                    {mockData.map((data) => {
+                    {/* {mockData.map((data) => {
                         return (
                             <li key={data._id} className={cx('item')}>
                                 <MediaItem title={data.title} thumbnail={data.thumbnail} performers={data.performers} />
                             </li>
                         );
-                    })}
+                    })} */}
                 </ul>
                 <h3 className={cx('title')}>Trending</h3>
                 <ul className={cx('list-listening')}>
-                    {mockData.map((data) => {
+                    {/* {mockData.map((data) => {
                         return (
                             <li key={data._id} className={cx('item')}>
                                 <MediaItem title={data.title} thumbnail={data.thumbnail} performers={data.performers} />
                             </li>
                         );
-                    })}
+                    })} */}
                 </ul>
             </div>
             <div className={cx('main-ranking')}>
@@ -179,13 +45,7 @@ function HomePage() {
                 <div className={cx('list-rank')}>
                     <div className={cx('ranking-image-1')}>
                         <div className={cx('image')}>
-                            <Image
-                                className={cx('image3')}
-                                src="/images/img1.jpg"
-                                alt=""
-                                width={1}
-                                height={1}
-                            />
+                            <Image className={cx('image3')} src="/images/img1.jpg" alt="" width={1} height={1} />
                         </div>
                         <div className={cx('songsinger-main')}>
                             <div className={cx('songsinger-ranking')}>
@@ -206,13 +66,7 @@ function HomePage() {
                     </div>
                     <div className={cx('ranking-image-1')}>
                         <div className={cx('image')}>
-                            <Image
-                                className={cx('image3')}
-                                src="/images/img1.jpg"
-                                alt=""
-                                width={1}
-                                height={1}
-                            />
+                            <Image className={cx('image3')} src="/images/img1.jpg" alt="" width={1} height={1} />
                         </div>
                         <div className={cx('songsinger-main')}>
                             <div className={cx('songsinger-ranking')}>
@@ -233,13 +87,7 @@ function HomePage() {
                     </div>
                     <div className={cx('ranking-image-1')}>
                         <div className={cx('image')}>
-                            <Image
-                                className={cx('image3')}
-                                src="/images/img1.jpg"
-                                alt=""
-                                width={1}
-                                height={1}
-                            />
+                            <Image className={cx('image3')} src="/images/img1.jpg" alt="" width={1} height={1} />
                         </div>
                         <div className={cx('songsinger-main')}>
                             <div className={cx('songsinger-ranking')}>
