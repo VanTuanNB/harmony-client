@@ -1,5 +1,14 @@
 .main-home {
+    width: 98%;
+    margin: 0 auto;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     margin-bottom: 150px;
+    background-color: var(--theme-mode-background-user);
+    transition: background-color linear 0.2s;
+    padding-top: 1.5em;
+    padding-bottom: 3em;
+
     .main-image {
         margin: 0 auto;
         padding-top: 1em;
@@ -10,7 +19,7 @@
         gap: 16px;
         // margin: 25px;
 
-        img{
+        img {
             width: 100%;
             height: 100%;
         }
@@ -20,7 +29,6 @@
         // margin: 25px;
         margin: 0 auto;
         margin-top: 2em;
-
 
         & .list-listening {
             // display: grid;
@@ -46,7 +54,7 @@
         margin: 25px;
         margin: 0 auto;
 
-        .list-rank{
+        .list-rank {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
@@ -66,7 +74,7 @@
                 .image {
                     width: 40%;
 
-                    img{
+                    img {
                         width: 130px;
                         height: 130px;
                         border-radius: 5px;
@@ -117,46 +125,46 @@
     }
 }
 
-    .main-top {
-        margin: 25px;
-        width: 89%;
-        margin: 0 auto;
+.main-top {
+    margin: 25px;
+    width: 89%;
+    margin: 0 auto;
 
-        .top-image {
+    .top-image {
+        display: flex;
+        gap: 16px;
+        // justify-content: center;
+        .top-image-1 {
+            width: 24%;
+            margin: 20px 0px;
             display: flex;
-            gap: 16px;
-            // justify-content: center;
-            .top-image-1 {
-                width: 24%;
-                margin: 20px 0px;
-                display: flex;
-                flex-direction: column;
+            flex-direction: column;
 
-                .image4{
-                    width: 100%;
-                    height: 100%;
-                }
+            .image4 {
+                width: 100%;
+                height: 100%;
             }
         }
     }
-    .main-hot {
-        width: 89%;
-        margin: 25px;
-        margin: 0 auto;
-        .hot-image {
+}
+.main-hot {
+    width: 89%;
+    margin: 25px;
+    margin: 0 auto;
+    .hot-image {
+        display: flex;
+        gap: 16px;
+        // justify-content: center;
+        .hot-image-1 {
+            width: 24%;
+            margin-top: 20px;
             display: flex;
-            gap: 16px;
-            // justify-content: center;
-            .hot-image-1 {
-                width: 24%;
-                margin-top: 20px;
-                display: flex;
-                flex-direction: column;
+            flex-direction: column;
 
-                .image5{
-                    width: 100%;
-                    height: 100%;
-                }
+            .image5 {
+                width: 100%;
+                height: 100%;
             }
         }
     }
+}
