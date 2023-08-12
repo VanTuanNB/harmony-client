@@ -35,7 +35,7 @@ function LoginPage() {
             </Link>
             <hr />
             <p>
-                Don't have an account? <Link href="">Sign up Harmony for free</Link>
+                Don't have an account? <Link href=""><i>Sign up Harmony for free</i></Link>
             </p>
         </div>
     );

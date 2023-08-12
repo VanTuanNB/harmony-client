@@ -1,5 +1,5 @@
 .form {
-    width: 50%;
+    width: 35%;
     background: var(--theme-mode-background-user);
     margin-top: 100px;
     text-align: center;
@@ -67,7 +67,11 @@
             border-radius: 5px;
             color: var(--theme-mode-color);
         }
+        .terms{
+            margin-top: 1em;
+        }
         p {
+            font-size: 11px;
             width: 80%;
             margin: auto;
 
