@@ -1,24 +1,25 @@
 .search {
-    width: 92%;
-    padding: 0px 20px 5px 20px;
+    width: 98%;
+    padding: 1px 20px 50px 5px;
     flex-direction: column;
     display: -webkit-box-flex;
     margin: 0 auto;
-    // background-color: var(--theme-mode-background-user);
-    // border-radius: 10px;
-    
-    h2{
+    background-color: var(--theme-mode-background-user);
+    border-radius: 10px;
+
+    h2 {
         margin-bottom: 0.5em;
     }
 
     .top-result {
-        width: 100%;
+        width: 97.5%;
         height: auto;
         display: -webkit-box;
         flex-direction: row;
         align-items: center;
         column-gap: 20px;
-        margin-top: 1em;
+        margin: 0 auto;
+        margin-bottom: 1em;
 
         .result-left {
             // width: 33%;
@@ -39,16 +40,16 @@
                     background: #c35151;
                     margin: 20px 0px 0px 20px;
                 }
-                
-                .top-result-infor{
+
+                .top-result-infor {
                     margin: 10px 0px 0px 20px;
 
-                    h3{
+                    h3 {
                         font-size: 32px;
                         line-height: 30px;
                         text-transform: uppercase;
                     }
-                    p{
+                    p {
                         line-height: 20px;
                         font-size: 14px;
                     }
@@ -70,9 +71,9 @@
         }
     }
 
-    .artist-result {
-        width: 100%;
-        margin-top: 1.5em;
+    .artist-result {    
+        width: 97.5%;
+        margin: 0 auto;
 
         .item-artist {
             display: flex;
@@ -89,7 +90,7 @@
                 margin-right: 27px;
                 margin-bottom: 1em;
 
-                .img{
+                .img {
                     width: 156px;
                     height: 156px;
                     border-radius: 50%;

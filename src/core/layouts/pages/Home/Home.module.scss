@@ -3,16 +3,16 @@
     margin: 0 auto;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    margin-bottom: 150px;
     background-color: var(--theme-mode-background-user);
     transition: background-color linear 0.2s;
     padding-top: 1.5em;
-    padding-bottom: 3em;
+    padding-bottom: 2em;
+    margin-bottom: 6.5em;
 
     .main-image {
         margin: 0 auto;
         padding-top: 1em;
-        width: 90%;
+        width: 94.6%;
         display: -webkit-flex;
         justify-content: center;
         flex-direction: row;
@@ -25,7 +25,7 @@
         }
     }
     .main-just {
-        width: 89%;
+        width: 94.6%;
         // margin: 25px;
         margin: 0 auto;
         margin-top: 2em;
@@ -50,7 +50,7 @@
         }
     }
     .main-ranking {
-        width: 89%;
+        width: 94.6%;
         margin: 25px;
         margin: 0 auto;
 
@@ -127,7 +127,7 @@
 
 .main-top {
     margin: 25px;
-    width: 89%;
+    width: 94.6%;
     margin: 0 auto;
 
     .top-image {
@@ -148,7 +148,7 @@
     }
 }
 .main-hot {
-    width: 89%;
+    width: 94.6%;
     margin: 25px;
     margin: 0 auto;
     .hot-image {

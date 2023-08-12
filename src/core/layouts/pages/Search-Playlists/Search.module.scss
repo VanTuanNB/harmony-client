@@ -1,21 +1,22 @@
-.search-playlists{
-    width: 91.5%;
-    padding: 0px 20px;
+.search-playlists {
+    width: 98%;
+    padding: 1px 20px 50px 20px;
     margin: 0 auto;
-
-    .result-render{
-        margin-top: 1.5em;
-        width: 100%;
+    background-color: var(--theme-mode-background-user);
+    
+    .result-render {
+        margin: 0 auto;
+        width: 97.5%;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        gap: 15px;
+        gap: 25px;
 
-        .single-playlist{
+        .single-playlist {
             width: 200px;
             height: 280px;
             // border: 1px solid black;
-            background-color: var(--theme-filter);
+            background-color: var(--theme-mode-background);
             // display: flex;
             // flex-direction: column;
             // justify-content: center;
@@ -23,9 +24,8 @@
             padding: 15px;
             cursor: pointer;
             position: relative;
-            margin-bottom: 1.5em;
 
-            .mask{
+            .mask {
                 position: absolute;
                 width: 100%;
                 height: 100%;
@@ -38,43 +38,42 @@
                 border-radius: 5px;
             }
 
-            .image{
+            .image {
                 width: 90%;
                 position: relative;
                 margin: auto;
             }
-            .image img{
+            .image img {
                 width: 100%;
                 border-radius: 5px;
                 z-index: 3;
             }
-            .playButton{
+            .playButton {
                 font-size: 3em;
                 position: absolute;
                 opacity: 0%;
-                left: 40%;
+                left: 35%;
                 top: 70%;
                 color: #00bf63;
                 transition: 0.3s;
                 z-index: 2;
             }
 
-            .title{
-                #title{
+            .title {
+                #title {
                     font-weight: 600;
                 }
-                #owner{
+                #owner {
                     font-size: 14px;
                 }
             }
         }
-        .single-playlist:hover{
-
-            .playButton{
+        .single-playlist:hover {
+            .playButton {
                 opacity: 100%;
                 top: 35%;
             }
-            .mask{
+            .mask {
                 opacity: 100%;
             }
         }

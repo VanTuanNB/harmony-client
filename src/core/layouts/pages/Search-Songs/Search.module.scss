@@ -1,31 +1,15 @@
 .search-songs{
-    width: 91.5%;
+    width: 98%;
     margin: 0 auto;
-    padding: 0px 20px;
+    padding: 1px 20px 50px 20px;
+    background-color: var(--theme-mode-background-user);
 
-    .filter{
-        button{
-            margin-right: 1em;
-            width: auto;
-            height: 32px;
-            border-radius: 15px;
-            padding: 0px 15px;
-            background-color: var(--theme-filter);
-            color: var(--theme-mode-color);
-            cursor: pointer;
-            font-size: 14px;
-        };
-        .color-set{
-            background-color: var(--theme-mode-color);
-            color: var(--theme-mode-background);
-        }
-    }
     .result-render{
-        margin-top: 1.5em;
-        width: 100%;
+        margin: 0 auto;
+        width: 97.5%;
 
         .title{
-            width: 95%;
+            width: 99%;
             display: flex;
             flex-direction: row;
             padding-bottom: 2px;
@@ -54,7 +38,7 @@
         }
 
         .list-songs{
-            width: 95%;
+            width: 99%;
             display: flex;
             flex-direction: column;
 
