@@ -1,27 +1,24 @@
-import classNames from 'classnames/bind';
-import styles from './PlayerControl.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Image from 'next/image';
+import { EStateCurrentSong } from '@/core/common/constants/common.constant';
+import { selectSongReducer, updateStatePlayingAction } from '@/core/redux/features/song/song.slice';
+import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
+import { useGetStreamSongQuery } from '@/core/redux/services/song.service';
+import LoadingSpinner from '@/shared/components/Loading/LoadingSpinner/LoadingSpinner.component';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import {
     faBackwardStep,
-    faBars,
     faCompress,
     faForwardStep,
-    faMicrophoneLines,
     faPause,
     faPlay,
     faRetweet,
     faShuffle,
-    faVolumeDown,
 } from '@fortawesome/free-solid-svg-icons';
-import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
-import { selectSongReducer, updateStatePlayingAction } from '@/core/redux/features/song/song.slice';
-import { useGetStreamSongQuery } from '@/core/redux/services/song.service';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames/bind';
+import Image from 'next/image';
 import { useEffect } from 'react';
-import { EStateCurrentSong } from '@/core/common/constants/common.constant';
-import LoadingSpinner from '@/shared/components/Loading/LoadingSpinner/LoadingSpinner.component';
 import AudioComponent from './Audio/Audio.component';
+import styles from './PlayerControl.module.scss';
 import VolumeComponent from './Volume/Volume.component';
 const cx = classNames.bind(styles);
 
@@ -59,7 +56,7 @@ function PlayerControl() {
                     <div className={cx('image-container')}>
                         <Image
                             className={cx('image1')}
-                            src={store.playing.currentSong.thumbnail}
+                            src={store.playing.currentSong.thumbnail || '/'}
                             alt=""
                             width={60}
                             height={60}

@@ -1,11 +1,9 @@
 'use client';
-import classNames from 'classnames/bind';
-import style from './Album.module.scss';
-import AlbumItem from '@/shared/components/AlbumItem/AlbumItem.component';
+import { faClock, faEllipsis, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock, faEllipsis, faHeart, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import classNames from 'classnames/bind';
 import Image from 'next/image';
-import ButtonSwitchTheme from '../../../../shared/components/ButtonSwitchTheme/ButtonSwitchTheme.component';
+import style from './Album.module.scss';
 
 const cx = classNames.bind(style);
 
@@ -29,7 +27,7 @@ function AlbumPage() {
         <div className={cx('main-album')}>
             <div className={cx('album-infor')}>
                 <div className={cx('image')}>
-                    <Image src={''} width={232} height={232} alt="" />
+                    <Image src={'/'} width={232} height={232} alt="" />
                 </div>
                 <div className={cx('album-detail')}>
                     <div className={cx('title')}>
@@ -37,7 +35,7 @@ function AlbumPage() {
                         <span className={cx('album-name')}>Starboy</span>
                     </div>
                     <div className={cx('detail')}>
-                        <Image className={cx('detail-image')} src={''} width={24} height={24} alt="" />
+                        <Image className={cx('detail-image')} src={'/'} width={24} height={24} alt="" />
                         <div className={cx('infor')}>
                             <span>
                                 <b>The Weeknd</b> • 2016 • 100 thích • 18 bài hát, khoảng 2 giờ
@@ -60,7 +58,7 @@ function AlbumPage() {
                     <div className={cx('single-song')}>
                         <div id={cx('id')}>1</div>
                         <div id={cx('song')}>
-                            <Image src={''} width={40} height={40} alt="" />
+                            <Image src={'/'} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -77,7 +75,7 @@ function AlbumPage() {
                     <div className={cx('single-song')}>
                         <div id={cx('id')}>1</div>
                         <div id={cx('song')}>
-                            <Image src={''} width={40} height={40} alt="" />
+                            <Image src={'/'} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -94,7 +92,7 @@ function AlbumPage() {
                     <div className={cx('single-song')}>
                         <div id={cx('id')}>1</div>
                         <div id={cx('song')}>
-                            <Image src={''} width={40} height={40} alt="" />
+                            <Image src={'/'} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -111,7 +109,7 @@ function AlbumPage() {
                     <div className={cx('single-song')}>
                         <div id={cx('id')}>1</div>
                         <div id={cx('song')}>
-                            <Image src={''} width={40} height={40} alt="" />
+                            <Image src={'/'} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -128,7 +126,7 @@ function AlbumPage() {
                     <div className={cx('single-song')}>
                         <div id={cx('id')}>1</div>
                         <div id={cx('song')}>
-                            <Image src={''} width={40} height={40} alt="" />
+                            <Image src={'/'} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>

@@ -1,9 +1,9 @@
 'use client';
-import classNames from 'classnames/bind';
-import style from './History.module.scss';
-import Image from 'next/image';
+import { faEllipsis, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock, faEllipsis, faHeart } from '@fortawesome/free-solid-svg-icons';
+import classNames from 'classnames/bind';
+import Image from 'next/image';
+import style from './History.module.scss';
 
 const cx = classNames.bind(style);
 
@@ -25,7 +25,7 @@ function HistoryPage() {
                 <div className={cx('list-songs')}>
                     <div className={cx('single-song')}>
                         <div id={cx('song')}>
-                            <Image src={''} width={40} height={40} alt="" />
+                            <Image src={'/'} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -40,7 +40,7 @@ function HistoryPage() {
                     </div>
                     <div className={cx('single-song')}>
                         <div id={cx('song')}>
-                            <Image src={''} width={40} height={40} alt="" />
+                            <Image src={'/'} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -55,7 +55,7 @@ function HistoryPage() {
                     </div>
                     <div className={cx('single-song')}>
                         <div id={cx('song')}>
-                            <Image src={''} width={40} height={40} alt="" />
+                            <Image src={'/'} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -70,7 +70,7 @@ function HistoryPage() {
                     </div>
                     <div className={cx('single-song')}>
                         <div id={cx('song')}>
-                            <Image src={''} width={40} height={40} alt="" />
+                            <Image src={'/'} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
@@ -85,7 +85,7 @@ function HistoryPage() {
                     </div>
                     <div className={cx('single-song')}>
                         <div id={cx('song')}>
-                            <Image src={''} width={40} height={40} alt="" />
+                            <Image src={'/'} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>

@@ -1,10 +1,8 @@
-import React from 'react';
+import { faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import styles from './PlaylistSymlink.module.scss';
-import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
@@ -39,7 +37,7 @@ export default function PlaylistSymlinkComponent() {
                 <div className={cx('list-songs')}>
                     <div className={cx('single-song')}>
                         <div id={cx('song')}>
-                            <Image src={''} alt={''} width={40} height={40}></Image>
+                            <Image src={'/'} alt={''} width={40} height={40}></Image>
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Chúng ta của hiện tại</div>
                                 <div id={cx('author')}>Sơn Tùng MTP</div>
