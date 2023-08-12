@@ -1,31 +1,106 @@
 'use client';
 import classNames from 'classnames/bind';
-import style from './Composer.module.scss';
+import style from './History.module.scss';
 import Image from 'next/image';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock, faEllipsis, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(style);
 
 function HistoryPage() {
     return (
-        <><div className={cx('main-history')}>
-            <div className={cx('title')}>Phat Gan Day</div>
-            <ul className={cx('menu-bar')}>
-                <li className={cx('menu')}>BÀI HÁT</li>
-                <li className={cx('menu')}>PLAYLIST</li>
-                <li className={cx('menu')}>MV</li>
-                <li className={cx('menu')}>RADIO</li>
-                <li className={cx('menu')}>PODCAST</li>
-            </ul>
+        <div className={cx('main-history')}>
+            <div className={cx('header')}>
+                <div className={cx('title')}>Phát gần đây</div>
+                <ul className={cx('menu-bar')}>
+                    <li className={cx('menu')}>BÀI HÁT</li>
+                    <li className={cx('menu')}>PLAYLIST</li>
+                    <li className={cx('menu')}>MV</li>
+                    <li className={cx('menu')}>RADIO</li>
+                    <li className={cx('menu')}>PODCAST</li>
+                </ul>
             </div>
-            <div className={cx('content-history')}>
-                <div className={cx('content')}>
-                    <Image className={cx('song-thumnail')} src="/images/img1.jpg" alt="" width={100} height={100} />
-                    <div className={cx('song-name')}>Song Name</div>
-                    <div className={cx('album-name')}>Album Name</div>
-                    <div className={cx('duration')}>04:44</div>
+            <hr className={cx('line')} />
+            <div className={cx('album-render')}>
+                <div className={cx('list-songs')}>
+                    <div className={cx('single-song')}>
+                        <div id={cx('song')}>
+                            <Image src={''} width={40} height={40} alt="" />
+                            <div id={cx('song-title')}>
+                                <div id={cx('title')}>Starboy</div>
+                                <div id={cx('author')}>The Weeknd, Daft Punk</div>
+                            </div>
+                        </div>
+                        <div id={cx('album')}>Starboy</div>
+                        <div id={cx('lenght')}>
+                            <FontAwesomeIcon id={cx('icon')} icon={faHeart} />
+                            <span id={cx('lenght')}>3:40</span>
+                            <FontAwesomeIcon id={cx('icon')} icon={faEllipsis} />
+                        </div>
+                    </div>
+                    <div className={cx('single-song')}>
+                        <div id={cx('song')}>
+                            <Image src={''} width={40} height={40} alt="" />
+                            <div id={cx('song-title')}>
+                                <div id={cx('title')}>Starboy</div>
+                                <div id={cx('author')}>The Weeknd, Daft Punk</div>
+                            </div>
+                        </div>
+                        <div id={cx('album')}>Starboy</div>
+                        <div id={cx('lenght')}>
+                            <FontAwesomeIcon id={cx('icon')} icon={faHeart} />
+                            <span id={cx('lenght')}>3:40</span>
+                            <FontAwesomeIcon id={cx('icon')} icon={faEllipsis} />
+                        </div>
+                    </div>
+                    <div className={cx('single-song')}>
+                        <div id={cx('song')}>
+                            <Image src={''} width={40} height={40} alt="" />
+                            <div id={cx('song-title')}>
+                                <div id={cx('title')}>Starboy</div>
+                                <div id={cx('author')}>The Weeknd, Daft Punk</div>
+                            </div>
+                        </div>
+                        <div id={cx('album')}>Starboy</div>
+                        <div id={cx('lenght')}>
+                            <FontAwesomeIcon id={cx('icon')} icon={faHeart} />
+                            <span id={cx('lenght')}>3:40</span>
+                            <FontAwesomeIcon id={cx('icon')} icon={faEllipsis} />
+                        </div>
+                    </div>
+                    <div className={cx('single-song')}>
+                        <div id={cx('song')}>
+                            <Image src={''} width={40} height={40} alt="" />
+                            <div id={cx('song-title')}>
+                                <div id={cx('title')}>Starboy</div>
+                                <div id={cx('author')}>The Weeknd, Daft Punk</div>
+                            </div>
+                        </div>
+                        <div id={cx('album')}>Starboy</div>
+                        <div id={cx('lenght')}>
+                            <FontAwesomeIcon id={cx('icon')} icon={faHeart} />
+                            <span id={cx('lenght')}>3:40</span>
+                            <FontAwesomeIcon id={cx('icon')} icon={faEllipsis} />
+                        </div>
+                    </div>
+                    <div className={cx('single-song')}>
+                        <div id={cx('song')}>
+                            <Image src={''} width={40} height={40} alt="" />
+                            <div id={cx('song-title')}>
+                                <div id={cx('title')}>Starboy</div>
+                                <div id={cx('author')}>The Weeknd, Daft Punk</div>
+                            </div>
+                        </div>
+                        <div id={cx('album')}>Starboy</div>
+                        <div id={cx('lenght')}>
+                            <FontAwesomeIcon id={cx('icon')} icon={faHeart} />
+                            <span id={cx('lenght')}>3:40</span>
+                            <FontAwesomeIcon id={cx('icon')} icon={faEllipsis} />
+                        </div>
+                    </div>
                 </div>
             </div>
-        </>
-    )
+        </div>
+    );
 }
 export default HistoryPage;

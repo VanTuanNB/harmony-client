@@ -1,20 +1,31 @@
 import classNames from 'classnames/bind';
-import { faHome, faFolder, faHistory, faStar, faMusic } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faStar, faMusic, faBookmark } from '@fortawesome/free-solid-svg-icons';
 import styles from './SideBarNavigation.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import Image from 'next/image';
+import { MainLogo } from '@/shared/components/Svg/index.component';
+import { selectClientStoreReducer } from '@/core/redux/features/client/client.slice';
+import { useAppSelector } from '@/core/redux/hook.redux';
+import { ELocalStorageKey } from '@/core/common/constants/common.constant';
+import { EDataTheme } from '@/core/common/constants/reduxSlice.constant';
+import PlaylistSymlinkComponent from './Playlist/PlaylistSymlink/PlaylistSymlink.component';
+
 
 const cx = classNames.bind(styles);
 
 function SideBarNavigation() {
+    const store = useAppSelector(selectClientStoreReducer);
+    const currentTheme = store.localStoreSide[ELocalStorageKey.DATA_THEME];
     return (
         <div className={cx('sidebar-navigation')}>
             <div className={cx('left-sidebar')}>
                 <div className={cx('navigation')}>
                     <div className={cx('icon-logo')}>
-                        <Image className={cx('logo')} src="/images/logo-1.png" width={50} height={50} alt="" />
-                        <h3 className={cx('title')}>Harmory Music</h3>
+                        <MainLogo
+                            fillIcon={currentTheme === EDataTheme.DARK ? 'white' : 'black'}
+                            className={cx('Layer_1')}
+                        />
                     </div>
                     <ul>
                         <li>
@@ -42,18 +53,14 @@ function SideBarNavigation() {
                     <ul>
                         <li>
                             <Link href="">
-                                <FontAwesomeIcon icon={faFolder} className={cx('icon')} />
-                                <span>Your Library</span>
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="">
-                                <FontAwesomeIcon icon={faHistory} className={cx('icon')} />
-                                <span>History</span>
+                                <FontAwesomeIcon icon={faBookmark} className={cx('icon')} />
+                                <span>Thư viện</span>
                             </Link>
                         </li>
                     </ul>
+                    <div className="wrapper-symlink-content">
+                        <PlaylistSymlinkComponent />
+                    </div>
                 </div>
             </div>
         </div>

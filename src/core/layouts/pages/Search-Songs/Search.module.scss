@@ -1,48 +1,48 @@
-.search-songs{
+.search-songs {
     width: 98%;
     margin: 0 auto;
     padding: 1px 20px 50px 20px;
     background-color: var(--theme-mode-background-user);
 
-    .result-render{
+    .result-render {
         margin: 0 auto;
         width: 97.5%;
 
-        .title{
+        .title {
             width: 99%;
             display: flex;
             flex-direction: row;
             padding-bottom: 2px;
-            border-bottom: 1px solid #B6B6B6;
+            border-bottom: 1px solid #b6b6b6;
 
-            #id{
+            #id {
                 width: 2%;
                 text-align: end;
             }
-            #song{
+            #song {
                 width: 58%;
                 margin-left: 1em;
 
-                img{
+                img {
                     width: 40px;
                 }
             }
-            #album{
+            #album {
                 width: 20%;
                 text-align: start;
             }
-            #lenght{
+            #lenght {
                 width: 20%;
                 text-align: center;
             }
         }
 
-        .list-songs{
+        .list-songs {
             width: 99%;
             display: flex;
             flex-direction: column;
 
-            .single-song{
+            .single-song {
                 width: 100%;
                 display: flex;
                 flex-direction: row;
@@ -53,53 +53,54 @@
                 transition: 0.15s;
                 cursor: pointer;
 
-                #id{
+                #id {
                     width: 2%;
                     text-align: end;
                 }
-                #song{
+                #song {
                     width: 58%;
                     margin-left: 1em;
                     display: flex;
                     flex-direction: row;
 
-                    #song-title{
+                    #song-title {
                         height: 40px;
                         line-height: 20px;
                         justify-content: center;
                         margin-left: 0.5em;
 
-                        #title{
+                        #title {
                             font-size: 16px;
                             font-weight: 500;
                         }
-                        #author{
+                        #author {
                             font-size: 14px;
                             font-weight: 400;
+                            color: gray;
                         }
                     }
                 }
-                #album{
+                #album {
                     width: 20%;
                     text-align: start;
                 }
-                #lenght{
+                #lenght {
                     width: 20%;
                     text-align: center;
 
-                    #lenght{
+                    #lenght {
                         padding: 0px 25px;
                     }
-                    #icon{
+                    #icon {
                         opacity: 0%;
                     }
                 }
             }
-            .single-song:hover{
+            .single-song:hover {
                 background-color: rgba(184, 180, 180, 0.329);
 
-                #lenght{
-                    #icon{
+                #lenght {
+                    #icon {
                         opacity: 100%;
                     }
                 }

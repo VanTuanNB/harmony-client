@@ -1,9 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './Login.module.scss';
-import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
-import Image from 'next/image';
 import { FacebookIcon, GoogleIcon } from '@/shared/components/Svg/index.component';
 
 const cx = classNames.bind(styles);
@@ -38,7 +35,7 @@ function LoginPage() {
             </Link>
             <hr />
             <p>
-                Don't have an account? <Link href="">Sign up Harmony for free</Link>
+                Don't have an account? <Link href=""><i>Sign up Harmony for free</i></Link>
             </p>
         </div>
     );
