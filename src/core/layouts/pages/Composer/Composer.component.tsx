@@ -2,10 +2,9 @@
 import classNames from 'classnames/bind';
 import style from './Composer.module.scss';
 import Link from 'next/link';
-import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AlbumItem from '@/shared/components/AlbumItem/AlbumItem.component';
 import MediaItem from '@/shared/components/MediaItem/MediaItem.component';
+import Image from 'next/image';
 
 const cx = classNames.bind(style);
 
@@ -15,7 +14,7 @@ function ComposerPage() {
         <div className={cx('composer')}>
             <div className={cx('composer-info')}>
                 <div className={cx('info')}>
-                    <img src="/images/fallback-thumbnail-user.jpg" alt />
+                    <Image src="/images/fallback-thumbnail-user.jpg" alt="" />
                     <h2>Hoài Lâm</h2>
                 </div>
             </div>
@@ -24,7 +23,7 @@ function ComposerPage() {
                     <h3>Bài hát nổi bật</h3>
                 </div>
                 <div className={cx('itemSong')}>
-                    {mockData.map((data) => {
+                    {/* {mockData.map((data) => {
                         return (
                             <li key={data._id} className={cx('item')}>
                                 <MediaItem
@@ -36,7 +35,7 @@ function ComposerPage() {
                                 />
                             </li>
                         );
-                    })}
+                    })} */}
                 </div>
             </div>
             <div className={cx('composer-album')}>
@@ -50,7 +49,7 @@ function ComposerPage() {
                     </div> */}
                 </div>
                 <div className={cx('item')}>
-                    {albumList.map((data) => {
+                    {/* {albumList.map((data) => {
                         return (
                             <AlbumItem
                                 key={data._id}
@@ -60,7 +59,7 @@ function ComposerPage() {
                                 performers={data.composerReference}
                             />
                         );
-                    })}
+                    })} */}
                 </div>
             </div>
         </div>

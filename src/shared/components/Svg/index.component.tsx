@@ -39,9 +39,22 @@ export const GoogleIcon = ({ width = '100%', height = '100%', className, fill = 
         <clipPath id="b">
             <use href="#a" overflow="visible" />
         </clipPath>
-        <path clip-path="url(#b)" fill="#FBBC05" d="M0 37V11l17 13z" />
-        <path clip-path="url(#b)" fill="#EA4335" d="M0 11l17 13 7-6.1L48 14V0H0z" />
-        <path clip-path="url(#b)" fill="#34A853" d="M0 37l30-23 7.9 1L48 0v48H0z" />
-        <path clip-path="url(#b)" fill="#4285F4" d="M48 48L17 24l-4-3 35-10z" />
+        <path clipPath="url(#b)" fill="#FBBC05" d="M0 37V11l17 13z" />
+        <path clipPath="url(#b)" fill="#EA4335" d="M0 11l17 13 7-6.1L48 14V0H0z" />
+        <path clipPath="url(#b)" fill="#34A853" d="M0 37l30-23 7.9 1L48 0v48H0z" />
+        <path clipPath="url(#b)" fill="#4285F4" d="M48 48L17 24l-4-3 35-10z" />
+    </svg>
+);
+
+export const UploadIcon = ({ width = '100%', height = '100%', className }: IIconPropsComponent) => (
+    <svg width={width} height={height} className={className} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M12.5 17L12.5 4M12.5 4L18 8.78947M12.5 4L7 8.78947"
+            stroke="#909090"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        />
+        <path d="M6 21H19" stroke="#909090" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
 );
