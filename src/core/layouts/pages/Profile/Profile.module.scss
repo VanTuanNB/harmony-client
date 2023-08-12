@@ -1,18 +1,61 @@
 .profile {
     .profile-user {
         padding: 3%;
-        box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(4, 185, 246, 0.22) 0px 15px 12px;
-        background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.5))), #0b5f7b;
+        box-shadow: rgba(43, 43, 43, 0.3) 0px 19px 38px, rgba(126, 126, 126, 0.22) 0px 15px 12px;
+        background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.5))), #606060;
         .information {
             width: 100%;
-            // position: relative;
             display: flex;
             align-items: center;
             .image-profile {
+                position: relative;
+                cursor: pointer;
                 .image2 {
+                    width: 200px;
+                    height: 200px;
                     object-fit: cover;
                     border-radius: 50%;
                     box-shadow: var(--theme-mode-shadow-profile);
+                }
+                .update-profile {
+                    position: absolute;
+                    cursor: pointer;
+                    left: 0%;
+                    top: 0%;
+                    opacity: 0%;
+                    width: 200px;
+                    height: 200px;
+                    border-radius: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: bold;
+                    transition: 0.3s;
+                    .icon-edit {
+                        cursor: pointer;
+                        color: white;
+                        display: flex;
+                        opacity: 0%;
+                        left: 0%;
+                        top: 0%;
+                        width: 80px;
+                        height: 40px;
+                        transition: 0.3s;
+                        z-index: 3;
+                    }
+                }
+            }
+            .image-profile:hover {
+                .image2 {
+                    filter: blur(2px);
+                }
+                .update-profile {
+                    opacity: 100%;
+                    background-color: rgba($color: black, $alpha: 0.3);
+                    .icon-edit {
+                        opacity: 100%;
+                        text-align: center;
+                    }
                 }
             }
             .name {
@@ -115,7 +158,7 @@
                     display: flex;
                     flex-direction: row;
 
-                    img{
+                    img {
                         border-radius: 5px;
                     }
 
