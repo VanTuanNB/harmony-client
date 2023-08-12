@@ -26,6 +26,7 @@
     --header-height: 56px;
     --width-header-search-input: 300px;
     --font-inter: 'Inter', sans-serif;
+    --background: #444444;
 }
 
 html {
@@ -62,6 +63,7 @@ body {
     --theme-mode-color-rgb: 255, 255, 255;
     background-color: var(--theme-mode-background);
     color: var(--theme-mode-color);
+    --background: #444444;
 }
 [data-theme='light'] {
     --theme-mode-background: #f1f1f1;
@@ -80,6 +82,7 @@ body {
     background-color: var(--theme-mode-background);
     color: var(--theme-mode-color);
     transition: background-color linear 0.2s;
+    --background: #fff;
 }
 
 button,
