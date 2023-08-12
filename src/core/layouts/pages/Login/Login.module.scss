@@ -1,5 +1,5 @@
 .form {
-    width: 50%;
+    width: 35%;
     background: var(--theme-mode-background-user);
     margin-top: 100px;
     text-align: center;
@@ -79,10 +79,16 @@
             }
         }
         button {
-            width: 250px;
+            width: 50%;
             height: 40px;
             border-radius: 10px;
             font-weight: 500;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: var(--theme-item-highlight);
+            color: white;
         }
     }
     .forgot {

@@ -1,11 +1,9 @@
 'use client';
-import classNames from 'classnames/bind';
-import style from './Composer.module.scss';
-import AlbumItem from '@/shared/components/AlbumItem/AlbumItem.component';
+import { faClock, faEllipsis, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
+import classNames from 'classnames/bind';
 import Image from 'next/image';
-import ButtonSwitchTheme from '../../../../shared/components/ButtonSwitchTheme/ButtonSwitchTheme.component'
+import style from './Album.module.scss';
 
 const cx = classNames.bind(style);
 
@@ -18,66 +16,134 @@ const mockData = [
                 _id: '1f1ec177-a843-4e39-8734-e23faf7adbba',
                 title: 'Phiêu Bồng',
                 duration: 195.63102,
-            }
+            },
         ],
         updateAt: '2023-06-10T14:35:23.402Z',
-    }
+    },
 ];
 
-function AlbumPage () {
+function AlbumPage() {
     return (
         <div className={cx('main-album')}>
-            <nav className={cx('album-header')}>
-                <div className={cx('prev-button')}><a>&lt;</a></div>
-                <div className={cx('next-button')}><a>&gt;</a></div>
-                <div className={cx('search-bar')}>
-                    <FontAwesomeIcon icon={faMagnifyingGlass} className={cx('search-icon-style')} />
-                    <input className={cx('search-box')} type="text" />
+            <div className={cx('album-infor')}>
+                <div className={cx('image')}>
+                    <Image src={'/'} width={232} height={232} alt="" />
                 </div>
-                <div>
-                    {/* <ButtonSwitchTheme/> */} <button>switch theme</button>
-                </div>
-                <div>
-                    <Image className={cx('avatar-user')} src="/images/img1.jpg" alt="" width={100} height={100} border-radius={100} />
-                    <p className={cx('user-name')}>User-name</p>
-                </div>
-            </nav>
-            <div className={cx('album-info')}>
-                <Image className={cx('album-image')} src="/images/img1.jpg" alt="" width={300} height={300}/>
-                <p>Playlist</p>
-                <div className={cx('album-name')}>Album name</div>
-                <div className={cx('detail')}>
-                    <Image className={cx('detail-image')} src="/images/img1.jpg" alt="" width={40} height={40} border-radius={40} />
-                    <div className={cx('number-info')}>500likes - 20 songs. start 2 hour</div>
+                <div className={cx('album-detail')}>
+                    <div className={cx('title')}>
+                        <p>Album</p>
+                        <span className={cx('album-name')}>Starboy</span>
+                    </div>
+                    <div className={cx('detail')}>
+                        <Image className={cx('detail-image')} src={'/'} width={24} height={24} alt="" />
+                        <div className={cx('infor')}>
+                            <span>
+                                <b>The Weeknd</b> • 2016 • 100 thích • 18 bài hát, khoảng 2 giờ
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div className={cx('list-song')}>
-                <table className={cx('songs')}>
-                    <tr>
-                        <td>#</td>
-                        <td>Title</td>
-                        <td>Album</td>
-                        <td>Date Add</td>
-                        <td>Length</td>
-                    </tr>
-                    {mockData.map((data) => {
-                        return (
-                            <tr key={data._id} className={cx('item')}>
-                                <td>1</td>
-                                <td>
-                                    <Image className={cx('song-thumnail')} src="/images/img1.jpg" alt="" width={100} height={100}/>
-                                    <div> Song Name</div>
-                                </td>
-                                <td>Album Name</td>
-                                <td>May 17, 2023</td>
-                                <td>Length</td>
-                            </tr>
-                        );
-                    })}
-                </table>
+            <div className={cx('album-render')}>
+                <div className={cx('title')}>
+                    <div id={cx('id')}>#</div>
+                    <div id={cx('song')}>Bài hát</div>
+                    <div id={cx('album')}>Album</div>
+                    <div id={cx('date')}>Ngày phát hành</div>
+                    <div id={cx('lenght')}>
+                        <FontAwesomeIcon icon={faClock} />
+                    </div>
+                </div>
+                <div className={cx('list-songs')}>
+                    <div className={cx('single-song')}>
+                        <div id={cx('id')}>1</div>
+                        <div id={cx('song')}>
+                            <Image src={'/'} width={40} height={40} alt="" />
+                            <div id={cx('song-title')}>
+                                <div id={cx('title')}>Starboy</div>
+                                <div id={cx('author')}>The Weeknd, Daft Punk</div>
+                            </div>
+                        </div>
+                        <div id={cx('album')}>Starboy</div>
+                        <div id={cx('date')}>19/12/2020</div>
+                        <div id={cx('lenght')}>
+                            <FontAwesomeIcon id={cx('icon')} icon={faHeart} />
+                            <span id={cx('lenght')}>3:40</span>
+                            <FontAwesomeIcon id={cx('icon')} icon={faEllipsis} />
+                        </div>
+                    </div>
+                    <div className={cx('single-song')}>
+                        <div id={cx('id')}>1</div>
+                        <div id={cx('song')}>
+                            <Image src={'/'} width={40} height={40} alt="" />
+                            <div id={cx('song-title')}>
+                                <div id={cx('title')}>Starboy</div>
+                                <div id={cx('author')}>The Weeknd, Daft Punk</div>
+                            </div>
+                        </div>
+                        <div id={cx('album')}>Starboy</div>
+                        <div id={cx('date')}>19/12/2020</div>
+                        <div id={cx('lenght')}>
+                            <FontAwesomeIcon id={cx('icon')} icon={faHeart} />
+                            <span id={cx('lenght')}>3:40</span>
+                            <FontAwesomeIcon id={cx('icon')} icon={faEllipsis} />
+                        </div>
+                    </div>
+                    <div className={cx('single-song')}>
+                        <div id={cx('id')}>1</div>
+                        <div id={cx('song')}>
+                            <Image src={'/'} width={40} height={40} alt="" />
+                            <div id={cx('song-title')}>
+                                <div id={cx('title')}>Starboy</div>
+                                <div id={cx('author')}>The Weeknd, Daft Punk</div>
+                            </div>
+                        </div>
+                        <div id={cx('album')}>Starboy</div>
+                        <div id={cx('date')}>19/12/2020</div>
+                        <div id={cx('lenght')}>
+                            <FontAwesomeIcon id={cx('icon')} icon={faHeart} />
+                            <span id={cx('lenght')}>3:40</span>
+                            <FontAwesomeIcon id={cx('icon')} icon={faEllipsis} />
+                        </div>
+                    </div>
+                    <div className={cx('single-song')}>
+                        <div id={cx('id')}>1</div>
+                        <div id={cx('song')}>
+                            <Image src={'/'} width={40} height={40} alt="" />
+                            <div id={cx('song-title')}>
+                                <div id={cx('title')}>Starboy</div>
+                                <div id={cx('author')}>The Weeknd, Daft Punk</div>
+                            </div>
+                        </div>
+                        <div id={cx('album')}>Starboy</div>
+                        <div id={cx('date')}>19/12/2020</div>
+                        <div id={cx('lenght')}>
+                            <FontAwesomeIcon id={cx('icon')} icon={faHeart} />
+                            <span id={cx('lenght')}>3:40</span>
+                            <FontAwesomeIcon id={cx('icon')} icon={faEllipsis} />
+                        </div>
+                    </div>
+                    <div className={cx('single-song')}>
+                        <div id={cx('id')}>1</div>
+                        <div id={cx('song')}>
+                            <Image src={'/'} width={40} height={40} alt="" />
+                            <div id={cx('song-title')}>
+                                <div id={cx('title')}>Starboy</div>
+                                <div id={cx('author')}>The Weeknd, Daft Punk</div>
+                            </div>
+                        </div>
+                        <div id={cx('album')}>Starboy</div>
+                        <div id={cx('date')}>19/12/2020</div>
+                        <div id={cx('lenght')}>
+                            <FontAwesomeIcon id={cx('icon')} icon={faHeart} />
+                            <span id={cx('lenght')}>3:40</span>
+                            <FontAwesomeIcon id={cx('icon')} icon={faEllipsis} />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default AlbumPage;
