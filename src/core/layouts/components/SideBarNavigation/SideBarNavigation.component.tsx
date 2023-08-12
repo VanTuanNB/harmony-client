@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { faHome, faFolder, faHistory, faStar, faMusic } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faStar, faMusic, faBookmark } from '@fortawesome/free-solid-svg-icons';
 import styles from './SideBarNavigation.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
@@ -9,6 +9,8 @@ import { selectClientStoreReducer } from '@/core/redux/features/client/client.sl
 import { useAppSelector } from '@/core/redux/hook.redux';
 import { ELocalStorageKey } from '@/core/common/constants/common.constant';
 import { EDataTheme } from '@/core/common/constants/reduxSlice.constant';
+import PlaylistSymlinkComponent from './Playlist/PlaylistSymlink/PlaylistSymlink.component';
+
 
 const cx = classNames.bind(styles);
 
@@ -51,18 +53,14 @@ function SideBarNavigation() {
                     <ul>
                         <li>
                             <Link href="">
-                                <FontAwesomeIcon icon={faFolder} className={cx('icon')} />
-                                <span>Your Library</span>
-                            </Link>
-                        </li>
-
-                        <li>
-                            <Link href="">
-                                <FontAwesomeIcon icon={faHistory} className={cx('icon')} />
-                                <span>History</span>
+                                <FontAwesomeIcon icon={faBookmark} className={cx('icon')} />
+                                <span>Thư viện</span>
                             </Link>
                         </li>
                     </ul>
+                    <div className="wrapper-symlink-content">
+                        <PlaylistSymlinkComponent />
+                    </div>
                 </div>
             </div>
         </div>

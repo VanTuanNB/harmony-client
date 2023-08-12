@@ -44,15 +44,20 @@ body {
 [data-theme='dark'] {
     transition: background-color linear 0.2s;
     --theme-mode-background: #191919;
+    --theme-mode-color-stepper: #606060;
     --theme-mode-background-rgb: 24, 25, 26;
     --theme-mode-background-user: #000000;
     --theme-mode-color: #fff;
     --theme-filter: #5a5a5a;
 
+
     --theme-item-highlight: #00bf63;
     --theme-switch-button: linear-gradient(to right, #00bf63, #003d1f);
     --theme-switch-icon: #00bf63;
     --theme-item-hover: #454545;
+
+    --theme-mode-background-stepper: #282828;
+
 
     --theme-mode-color-rgb: 255, 255, 255;
     background-color: var(--theme-mode-background);
@@ -67,6 +72,8 @@ body {
     --theme-switch-button: linear-gradient(to right, #00bf63, rgba(0, 191, 99, 0.13));
     --theme-switch-icon: #00bf63;
     --theme-item-hover: rgba(117, 230, 218, 0.25);
+    --theme-mode-color-stepper: #e5e5e5;
+
     --theme-mode-color-rgb: 24, 25, 26;
     --theme-mode-background-user: #ffffff;
     --theme-mode-background-stepper: #ffffff;
