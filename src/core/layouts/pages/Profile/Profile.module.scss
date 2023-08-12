@@ -1,8 +1,18 @@
 .profile {
+    width: 98%;
+    margin: 0 auto;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: var(--theme-mode-background-user);
+    transition: background-color linear 0.2s;
+    padding-top: 1.5em;
+    padding-bottom: 100%;
+    margin-bottom: 6.5em;
+
     .profile-user {
         padding: 3%;
         box-shadow: rgba(43, 43, 43, 0.3) 0px 19px 38px, rgba(126, 126, 126, 0.22) 0px 15px 12px;
-        background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.5))), #606060;
+        background: var(--theme-mode-profile);
         .information {
             width: 100%;
             display: flex;
@@ -33,7 +43,7 @@
                     transition: 0.3s;
                     .icon-edit {
                         cursor: pointer;
-                        color: white;
+                        color: black;
                         display: flex;
                         opacity: 0%;
                         left: 0%;
@@ -51,7 +61,7 @@
                 }
                 .update-profile {
                     opacity: 100%;
-                    background-color: rgba($color: black, $alpha: 0.3);
+                    background-color: rgba($color: var(--theme-mode-background-album), $alpha: 0.5);
                     .icon-edit {
                         opacity: 100%;
                         text-align: center;
@@ -274,7 +284,7 @@
             }
         }
         .item:hover {
-            background-color: rgb(78, 78, 78);
+            box-shadow: 0 0 15px var(--theme-filter);
             .playButton {
                 opacity: 100%;
                 top: 35%;

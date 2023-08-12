@@ -6,14 +6,17 @@ import style from './UpdateProfile.module.scss';
 
 const cx = classNames.bind(style);
 
-function UpdateProfile() {
+interface IState {
+    close: () => void;
+}
+function UpdateProfile({ close }: IState) {
     return (
         <div className={cx('pop-up')}>
             <div className={cx('controller')}>
                 <div className={cx('form-pop-up')}>
                     <div className={cx('title')}>
                         <h2>Profile detail</h2>
-                        <button>
+                        <button onClick={close}>
                             <FontAwesomeIcon icon={faClose} className={cx('close')} />
                         </button>
                     </div>

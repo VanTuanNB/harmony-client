@@ -1,13 +1,13 @@
 .main-home {
     width: 98%;
+    height: 100%;
     margin: 0 auto;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     background-color: var(--theme-mode-background-user);
     transition: background-color linear 0.2s;
     padding-top: 1.5em;
-    padding-bottom: 2em;
-    margin-bottom: 6.5em;
+    padding-bottom: 20%;
 
     h3 {
         color: var(--theme-item-highlight);

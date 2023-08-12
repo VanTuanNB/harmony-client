@@ -11,17 +11,22 @@ import styles from './Profile.module.scss';
 const cx = classNames.bind(styles);
 
 function Profile() {
-    const [isComposer, setIsComposer] = useState(false);
+    const [isComposer, setIsComposer] = useState(true);
     const [popupSong, setPopupSong] = useState(false);
     const [popupUploadProfile, setPopupUploadProfile] = useState(false);
 
     const closePopup = useCallback(() => {
         setPopupSong(false);
     }, []);
+    const closePopupProfile = useCallback(() => {
+        setPopupUploadProfile(false);
+    }, []);
     const stateCreateSong = () => {
         if (!popupSong) {
             setPopupSong(true);
         }
+    };
+    const stateUpdateProfile = () => {
         if (!popupUploadProfile) {
             setPopupUploadProfile(true);
         }
@@ -39,10 +44,10 @@ function Profile() {
                             height={200}
                         />
 
-                        <button onClick={stateCreateSong} className={cx('update-profile')}>
+                        <button onClick={stateUpdateProfile} className={cx('update-profile')}>
                             <FontAwesomeIcon icon={faPen} className={cx('icon-edit')} />
                         </button>
-                        {popupUploadProfile && <UpdateProfile />}
+                        {popupUploadProfile && <UpdateProfile close={closePopupProfile} />}
                     </div>
                     <div className={cx('name')}>
                         <p>Profile</p>

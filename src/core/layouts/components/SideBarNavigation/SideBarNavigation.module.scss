@@ -10,19 +10,20 @@
 
         .icon-logo {
             width: 100%;
-            height: 80px;
+            height: 100px;
             display: flex;
-            justify-content: left;
-            justify-items: left;
+            text-align: center;
+            // justify-content: center;
+            // justify-items: center;
             align-items: center;
             position: relative;
             // height: 100%;
 
             .Layer_1 {
-                width: 110%;
-                height: 180%;
-                left: -13%;
-                margin-top: 1em;
+                width: 100%;
+                height: 100%;
+                font-size: 3em;
+                left: -10%;
                 position: absolute;
             }
         }

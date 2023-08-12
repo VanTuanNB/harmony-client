@@ -112,7 +112,7 @@
                     }
                     .current-item ~ .step-wizard-item .progress-label {
                         opacity: 0.5;
-                        color: #e2e2e2;
+                        color: var(--theme-mode-shadow-profile);
                     }
                     .current-item .progress-count::after {
                         background: var(--theme-mode-background-stepper);
