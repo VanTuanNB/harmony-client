@@ -1,0 +1,181 @@
+.pop-up {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+
+    .controller {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        align-items: center;
+        justify-content: center;
+
+        .form-pop-up {
+            width: 60vw;
+            height: 80%;
+            display: grid;
+            grid-template-rows: 50px 50px 1fr 60px;
+            border-radius: 10px;
+            background-color: var(--theme-mode-background-stepper);
+            position: relative;
+
+            .step-wizard {
+                width: 100%;
+                height: 100px;
+                display: flex;
+                line-height: 100px;
+                justify-content: center;
+                margin-top: 30px;
+                align-items: center;
+                color: var(--theme-mode-color-rgb);
+
+                .step-wizard-list {
+                    list-style-type: none;
+                    display: flex;
+                    padding: 20px 10px;
+                    position: relative;
+                    z-index: 10;
+
+                    .step-wizard-item {
+                        padding: 0 20px;
+                        flex-basis: 0;
+                        -webkit-box-flex: 1;
+                        -ms-flex-position: 1;
+                        flex-grow: 1;
+                        max-width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        text-align: center;
+                        min-width: 170px;
+                        cursor: pointer;
+                        position: relative;
+
+                        .progress-count {
+                            height: 40px;
+                            width: 40px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 50%;
+                            font-weight: 600;
+                            margin: 0 auto;
+                            position: relative;
+                            z-index: 10;
+                            color: transparent;
+                        }
+                        .progress-count::after {
+                            content: '';
+                            height: 20px;
+                            width: 20px;
+                            position: absolute;
+                            background: #00bf63;
+                            left: 50%;
+                            top: 50%;
+                            transform: translate(-50%, -50%);
+                            border-radius: 50%;
+                            z-index: -10;
+                        }
+                        .progress-count::before {
+                            content: '';
+                            height: 5px;
+                            width: 10px;
+                            border-left: 3px solid #fff;
+                            border-bottom: 3px solid #fff;
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -60%) rotate(-45deg);
+                            transform-origin: center center;
+                        }
+                        .progress-label {
+                            font-size: 1.3rem;
+                            font-weight: 600;
+                            margin-top: -75%;
+                            color: var(--theme-mode-color);
+                            opacity: 1;
+                            position: relative;
+                        }
+                    }
+                    .current-item .progress-count::before,
+                    .current-item ~ .step-wizard-item .progress-count::before {
+                        display: none;
+                    }
+                    .current-item ~ .step-wizard-item .progress-count::after {
+                        width: 10px;
+                        height: 10px;
+                    }
+                    .current-item ~ .step-wizard-item .progress-label {
+                        opacity: 0.5;
+                        color: var(--theme-mode-shadow-profile);
+                    }
+                    .current-item .progress-count::after {
+                        background: var(--theme-mode-background-stepper);
+                        border: 4px solid #00bf63;
+                    }
+                    .current-item .progress-count {
+                        color: var(--theme-mode-color);
+                    }
+
+                    .step-wizard-item + .step-wizard-item::after {
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        top: 19px;
+                        background: var(--theme-mode-color-stepper);
+                        width: 100%;
+                        height: 2px;
+                        transform: translateX(-50%);
+                        z-index: -10;
+                    }
+                }
+            }
+
+            .line-btn {
+                width: 100%;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                border-top: 1px solid var(--theme-mode-color);
+                bottom: 0;
+                position: relative;
+
+                .next {
+                    width: 80px;
+                    height: 40px;
+                    cursor: pointer;
+                    background: skyblue;
+                    right: 1%;
+                    position: absolute;
+                    color: white;
+                    box-shadow: 0 0 5px gray;
+                }
+            }
+        }
+    }
+}
+.btn-top {
+    width: 100%;
+    height: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--theme-mode-color);
+}
+
+.close {
+    width: 50px;
+    height: 40px;
+    line-height: 60px;
+    color: var(--theme-mode-color);
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: none;
+    font-size: 1.5em;
+    z-index: 3;
+    cursor: pointer;
+}
