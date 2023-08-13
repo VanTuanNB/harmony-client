@@ -1,22 +1,26 @@
 'use client';
-import classNames from 'classnames/bind';
-import style from './CreateSong.module.scss';
-import UploadSongComponent from './Upload/UpLoadSong.component';
-import { useCallback, useEffect, useState } from 'react';
-import UploadThumnailComponent from './Upload/UploadThumnail.component';
-import DetailComponent from './Detail/Detail.component';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { IResponseServer } from '@/core/common/interfaces/IResponseServer.interface';
+import Toast from '@/shared/components/ToastNotification/Toast/Toast.component';
+import { faClose } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames/bind';
+import { useCallback, useEffect, useState } from 'react';
+import style from './CreateSong.module.scss';
+import DetailComponent from './Detail/Detail.component';
+import UploadSongComponent from './Upload/UpLoadSong.component';
+import UploadThumnailComponent from './Upload/UploadThumnail.component';
 
 const cx = classNames.bind(style);
 
 const label = ['Thêm bài hát', 'Thêm hình ảnh', 'Thêm thông tin'];
 
-function CreateSongComponent() {
+interface IState {
+    close: () => void;
+}
+function CreateSongComponent({ close }: IState) {
     const [step, setStep] = useState(1);
-    const [showPopUp, setShowPopUp] = useState(true);
     const [uploadId, setUploadId] = useState('');
+    const [success, setSuccess] = useState(true);
 
     useEffect(() => {
         if (uploadId == '') {
@@ -37,8 +41,7 @@ function CreateSongComponent() {
     }, []);
     const uploadDetail = useCallback((data: IResponseServer) => {
         if (data.success) {
-            console.log(data);
-            setShowPopUp(false);
+            setSuccess(false);
         }
     }, []);
 
@@ -52,12 +55,13 @@ function CreateSongComponent() {
     });
     return (
         <>
-            {showPopUp && (
+            {!success && <Toast message="Thêm bài hát mới thành công" state="success" title="Thành công" />}
+            {success && (
                 <div className={cx('pop-up')}>
                     <div className={cx('controller')}>
                         <div className={cx('form-pop-up')}>
                             <div className={cx('btn-top')}>
-                                <button onClick={() => setShowPopUp(false)} className={cx('close')}>
+                                <button onClick={close} className={cx('close')}>
                                     <FontAwesomeIcon icon={faClose} fill="#909090" />
                                 </button>
                             </div>

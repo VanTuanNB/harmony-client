@@ -38,7 +38,7 @@ function AlbumPage() {
                         <Image className={cx('detail-image')} src={'/'} width={24} height={24} alt="" />
                         <div className={cx('infor')}>
                             <span>
-                                <b>The Weeknd</b> • 2016 • 100 thích • 18 bài hát, khoảng 2 giờ
+                                <b>The Weeknd</b>
                             </span>
                         </div>
                     </div>

@@ -49,18 +49,17 @@ body {
     --theme-mode-background-rgb: 24, 25, 26;
     --theme-mode-background-user: #000000;
     --theme-mode-color: #fff;
+    --theme-mode-background-album: rgb(36, 36, 36);
     --theme-filter: #5a5a5a;
-
-
+    --theme-mode-shadow-profile: hsla(0, 0%, 100%, 0.08) 0px 5px 15px;
     --theme-item-highlight: #00bf63;
     --theme-switch-button: linear-gradient(to right, #00bf63, #003d1f);
     --theme-switch-icon: #00bf63;
     --theme-item-hover: #454545;
-
     --theme-mode-background-stepper: #282828;
-
-
     --theme-mode-color-rgb: 255, 255, 255;
+    --theme-mode-profile: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(6, 90, 48, 0.5))),
+        rgba(255, 255, 255, 0.4);
     background-color: var(--theme-mode-background);
     color: var(--theme-mode-color);
     --background: #444444;
@@ -75,10 +74,13 @@ body {
     --theme-switch-icon: #00bf63;
     --theme-item-hover: rgba(117, 230, 218, 0.25);
     --theme-mode-color-stepper: #e5e5e5;
-
+    --theme-mode-background-album: rgb(234, 232, 232);
     --theme-mode-color-rgb: 24, 25, 26;
     --theme-mode-background-user: #ffffff;
     --theme-mode-background-stepper: #ffffff;
+    --theme-mode-shadow-profile: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    --theme-mode-profile: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(3, 41, 22, 0.5))),
+        rgb(119, 214, 169);
     background-color: var(--theme-mode-background);
     color: var(--theme-mode-color);
     transition: background-color linear 0.2s;

@@ -1,45 +1,294 @@
 .profile {
-    padding: 5%;
-    h2{
-        padding-top: 1em;
-    }
+    width: 98%;
+    margin: 0 auto;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: var(--theme-mode-background-user);
+    transition: background-color linear 0.2s;
+    padding-top: 1.5em;
+    padding-bottom: 100%;
+    margin-bottom: 6.5em;
+
     .profile-user {
+        padding: 3%;
+        box-shadow: rgba(22, 57, 40, 0.3) 0px 19px 38px, rgba(0,191,99, 0.22) 0px 15px 12px;
+        background: var(--theme-mode-profile);
         .information {
+            width: 100%;
             display: flex;
+            align-items: center;
             .image-profile {
+                position: relative;
+                cursor: pointer;
                 .image2 {
+                    width: 200px;
+                    height: 200px;
+                    object-fit: cover;
                     border-radius: 50%;
-                    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                    box-shadow: var(--theme-mode-shadow-profile);
+                }
+                .update-profile {
+                    position: absolute;
+                    cursor: pointer;
+                    left: 0%;
+                    top: 0%;
+                    opacity: 0%;
+                    width: 200px;
+                    height: 200px;
+                    border-radius: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: bold;
+                    transition: 0.3s;
+                    .icon-edit {
+                        cursor: pointer;
+                        color: black;
+                        display: flex;
+                        opacity: 0%;
+                        left: 0%;
+                        top: 0%;
+                        width: 80px;
+                        height: 40px;
+                        transition: 0.3s;
+                        z-index: 3;
+                    }
+                }
+            }
+            .image-profile:hover {
+                .image2 {
+                    filter: blur(2px);
+                }
+                .update-profile {
+                    opacity: 100%;
+                    background-color: rgba($color: var(--theme-mode-background-album), $alpha: 0.5);
+                    .icon-edit {
+                        opacity: 100%;
+                        text-align: center;
+                    }
                 }
             }
             .name {
+                width: 100%;
+                padding: 4%;
+                position: relative;
+
                 .name-profile {
-                    padding: 50px;
+                    font-size: 4.5em;
+                }
+                p {
+                    position: absolute;
                 }
             }
         }
     }
-    .link {
+    .composer {
         width: 100%;
-        padding-top: 5%;
-        height: 72px;
-        display: flex;
-        z-index: 1;
-        gap: 20px;
-        border-bottom: 1px solid var(--theme-mode-color);
-        .custom-link {
-           
-            padding: 5px 20px;
-            // border: 1px solid #00bf63;
-            // border-radius: 10px;
-            color: var(--theme-mode-color);
+        padding: 3%;
+
+        .control-title {
+            position: relative;
+            height: 50px;
+            line-height: 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            button {
+                width: 30px;
+                height: 30px;
+                border-radius: 100%;
+                margin-top: 10px;
+                cursor: pointer;
+                position: absolute;
+                right: 10%;
+                color: var(--theme-mode-color);
+                background-color: var(--theme-filter);
+                box-shadow: 0 0 5px lightgray;
+            }
         }
-        .active {
-            z-index: 3;
-            height: 80px;
-            color: #00bf63;
-            border-bottom: 1px solid #00bf63;
-            position: abso;
+    }
+    .history {
+        width: 100%;
+        padding: 3%;
+        margin-top: 3%;
+        padding-bottom: 5%;
+        h2 {
+            text-align: left;
+        }
+        p {
+            color: gray;
+        }
+    }
+
+    .playlist {
+        width: 100%;
+        padding: 3%;
+        padding-bottom: 5%;
+    }
+    .favorite {
+        width: 100%;
+        padding: 3%;
+        margin-bottom: 10%;
+        h2 {
+            text-align: left;
+        }
+        p {
+            color: gray;
+        }
+    }
+    .list-songs {
+        width: 100%;
+        display: flex;
+        margin: auto;
+        flex-direction: column;
+
+        .single-song {
+            width: 90%;
+            display: grid;
+            margin: auto;
+            grid-template-columns: 1fr 1fr;
+            justify-content: center;
+            align-items: center;
+            height: 56px;
+            border-radius: 5px;
+            transition: 0.15s;
+            cursor: pointer;
+
+            .single-left {
+                width: 100%;
+                display: flex;
+                #id {
+                    width: 2%;
+                    padding-left: 1%;
+                    text-align: center;
+                }
+                #song {
+                    width: 80%;
+                    margin-left: 1em;
+                    display: flex;
+                    flex-direction: row;
+
+                    img {
+                        border-radius: 5px;
+                    }
+
+                    #song-title {
+                        height: 40px;
+                        line-height: 20px;
+                        justify-content: center;
+                        margin-left: 0.5em;
+
+                        #title {
+                            font-size: 16px;
+                            font-weight: 500;
+                        }
+                        #author {
+                            font-size: 14px;
+                            font-weight: 400;
+                            color: gray;
+                        }
+                    }
+                }
+            }
+            .single-right {
+                width: 100%;
+                display: flex;
+                #album {
+                    width: 50%;
+                    text-align: start;
+                    padding-right: 10px;
+                    color: gray;
+                }
+
+                #lenght {
+                    width: 10%;
+                    display: flex;
+                    text-align: center;
+
+                    #lenght {
+                        padding: 0px 10px;
+                        color: gray;
+                    }
+                    #icon1 {
+                        padding: 5px;
+                    }
+                    #icon {
+                        opacity: 0%;
+                        padding: 0px 50px;
+                    }
+                }
+            }
+        }
+        .single-song:hover {
+            background-color: rgba(184, 180, 180, 0.329);
+
+            .single-left {
+                #song {
+                    #song-title {
+                        #author {
+                            color: var(--theme-mode-color);
+                        }
+                    }
+                }
+            }
+
+            .single-right {
+                #album {
+                    color: var(--theme-mode-color);
+                }
+
+                #lenght {
+                    #lenght {
+                        color: var(--theme-mode-color);
+                    }
+
+                    #icon {
+                        opacity: 100%;
+                    }
+                }
+            }
+        }
+    }
+    .list {
+        display: flex;
+        flex-wrap: wrap;
+        .item {
+            width: 20%;
+            height: 30%;
+            margin: 10px;
+            text-align: center;
+            border-radius: 5px;
+            background-color: var(--theme-mode-background-album);
+            padding: 2%;
+            position: relative;
+            cursor: pointer;
+
+            .playButton {
+                font-size: 3em;
+                position: absolute;
+                opacity: 0%;
+                left: 40%;
+                top: 70%;
+                color: #00bf63;
+                transition: 0.3s;
+                z-index: 2;
+            }
+            img {
+                width: 100%;
+                height: 40%;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+            p {
+                font-size: 1.3rem;
+            }
+        }
+        .item:hover {
+            box-shadow: 0 0 15px var(--theme-filter);
+            .playButton {
+                opacity: 100%;
+                top: 35%;
+            }
         }
     }
 }

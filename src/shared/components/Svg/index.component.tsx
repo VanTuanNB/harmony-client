@@ -60,8 +60,8 @@ export const UploadIcon = ({ width = '100%', height = '100%', className }: IIcon
 );
 
 export const MainLogo = ({
-    width = '90%',
-    height = '100%',
+    width = '100',
+    height = '100',
     className,
     fillIcon = 'blue',
 }: IIconPropsComponent & { fillIcon: string }) => (
