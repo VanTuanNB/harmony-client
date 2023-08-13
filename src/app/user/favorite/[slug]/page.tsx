@@ -1,4 +1,4 @@
-import FavoritePage from '@/core/layouts/pages/Favorite/Favorite.component';
+import FavoritePage from '@/core/layouts/pages/User/Favorite/Favorite.component';
 
 function FavoriteRouting() {
     return <FavoritePage />;

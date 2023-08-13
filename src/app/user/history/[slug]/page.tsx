@@ -1,4 +1,4 @@
-import HistoryPage from '@/core/layouts/pages/History/History.component';
+import HistoryPage from '@/core/layouts/pages/User/History/History.component';
 
 function HistoryRouting() {
     return <HistoryPage />;
