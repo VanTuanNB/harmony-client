@@ -56,7 +56,7 @@ function PlayerControl() {
                     <div className={cx('image-container')}>
                         <Image
                             className={cx('image1')}
-                            src={store.playing.currentSong.thumbnail || '/'}
+                            src={store.playing.currentSong.thumbnailUrl || '/'}
                             alt=""
                             width={60}
                             height={60}

@@ -42,7 +42,7 @@ export interface ISong {
     publish: Date;
     albumReference?: IAlbum[];
     genresReference: IGenre[];
-    performers: Array<string>;
+    performers: IUser[];
     views?: number;
     createdAt?: Date;
     updatedAt?: Date;

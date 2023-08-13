@@ -16,13 +16,13 @@ import { selectSongReducer } from '@/core/redux/features/song/song.slice';
 
 const cx = classNames.bind(styles);
 
-interface IMediaItem extends Pick<ISong, '_id' | 'thumbnail' | 'title' | 'performers'> {
+interface IMediaItem extends Pick<ISong, '_id' | 'thumbnailUrl' | 'title' | 'performers'> {
     active?: boolean;
     state?: EStateCurrentSong;
     onClick: (_id: string) => void;
 }
 
-function MediaItem({ _id, thumbnail, title, performers, active = false, onClick }: IMediaItem): ReactNode {
+function MediaItem({ _id, thumbnailUrl, title, performers, active = false, onClick }: IMediaItem): ReactNode {
     const [favorite, setFavorite] = useState<boolean>(false);
     const store: ISongStore = useAppSelector(selectSongReducer);
 
@@ -31,7 +31,7 @@ function MediaItem({ _id, thumbnail, title, performers, active = false, onClick 
             <div className={cx('media')} onClick={() => onClick(_id)}>
                 <div className={cx('box-left')}>
                     <div className={cx('thumbnail')}>
-                        <Image src={thumbnail} alt="fallback img" height={40} width={40} className={cx('img')} />
+                        <Image src={thumbnailUrl} alt="fallback img" height={40} width={40} className={cx('img')} />
                         {store.playing.state === EStateCurrentSong.LOADING && store.playing.currentSong._id === _id && (
                             <div className={cx('loading-spinner')}>
                                 <LoadingSong width={4} subHeight={8} primaryHeight={14} />

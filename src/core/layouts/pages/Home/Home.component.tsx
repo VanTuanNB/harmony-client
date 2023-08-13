@@ -4,11 +4,6 @@ import Image from 'next/image';
 import styles from './Home.module.scss';
 
 const cx = classNames.bind(styles);
-// const mockData: ISong = [{
-//     _id: 'ewqeisad_$12312_#12312e',
-//     title: 'Bật tình yêu lên',
-
-// }]
 function HomePage() {
     return (
         <div className={cx('main-home')}>
