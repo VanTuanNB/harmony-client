@@ -1,7 +1,7 @@
 .upload {
     width: 100%;
     margin: 0 auto;
-    margin-top: 15%;
+    margin-top: 12%;
     position: relative;
 
     h2 {
@@ -14,6 +14,12 @@
         padding-left: 10px;
     }
     p {
+        width: 90%;
+        position: absolute;
+        bottom: -15%;
+        left: 5%;
+        font-size: 1.4rem;
+        text-align: center;
         color: var(--theme-mode-color);
     }
     .zone {
@@ -39,37 +45,34 @@
             }
         }
         .selectFile {
-            height: 50px;
             margin: 20px auto;
             position: relative;
-            width: 200px;
+            width: 150px;
         }
 
-        label,
+        label {
+            cursor: pointer;
+        }
+        .chon,
         input {
             cursor: pointer;
             display: block;
-            height: 50px;
-            left: 25%;
+            left: 1%;
             position: absolute;
-            // top: 0;
             width: 100%;
             border-radius: 5px;
         }
 
-        label {
-            background-color: #065fd4;
+        .chon {
+            background-color: #00bf63;
             color: white;
+            cursor: pointer;
             display: inline-block;
             font-size: 1em;
-            line-height: 40px;
-            padding: 0;
             text-align: center;
             white-space: nowrap;
-            text-transform: uppercase;
             font-weight: 400;
-            width: 100px;
-            height: 40px;
+            padding: 10px;
             margin: 0 auto;
             box-shadow: 0 1px 1px gray;
         }

@@ -1,110 +1,179 @@
-.main-album{
-    margin-bottom: 50px;
-    width: 88.5%;
+.main-album {
+    width: 98%;
     margin: 0 auto;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: var(--theme-mode-background-user);
+    transition: background-color linear 0.2s;
+    padding-top: 1.5em;
+    padding-bottom: 100%;
+    margin-bottom: 6.5em;
 
-    .album-infor{
+    .album-infor {
+        padding: 10px;
         display: flex;
         flex-direction: row;
-        height: 232px;
+        padding-bottom: 20px;
         gap: 1em;
-        
-        .album-detail{
+        border-bottom: 1px solid rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
+
+        .album-detail {
             display: flex;
             flex-direction: column;
-            justify-content: end;
-            
-            .title{
+            justify-content: flex-end;
+
+            .title {
                 line-height: 3.5em;
                 margin-bottom: 2em;
             }
-            img{
+            img {
                 border-radius: 50%;
             }
-            span{
+
+            span {
                 font-size: 14px;
                 font-weight: 600;
             }
-            p{
+            p {
                 font-size: 14px;
                 font-weight: 600;
             }
-            .album-name{
+            .album-name {
                 font-size: 90px;
             }
-            .detail{
+            .detail {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 margin-bottom: 0px;
 
-                .detail-image{
+                .detail-image {
                     margin-right: 0.5em;
                 }
-                .infor{
-                    span{
+                .infor {
+                    span {
                         font-weight: 400;
                         font-size: 14px;
                     }
                 }
             }
         }
+        .image {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+        }
+        .image:hover {
+            .album-img {
+                filter: blur(2px);
+            }
+            .update-profile {
+                opacity: 100%;
+                background-color: rgba($color: var(--theme-mode-background-album), $alpha: 0.5);
+                .icon-edit {
+                    opacity: 100%;
+                    text-align: center;
+                }
+            }
+        }
+        .update-profile {
+            position: absolute;
+            cursor: pointer;
+            left: 0%;
+            top: 0%;
+            opacity: 0%;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            border-radius: 10px;
+            justify-content: center;
+            font-weight: bold;
+            transition: 0.3s;
+            .icon-edit {
+                cursor: pointer;
+                color: var(--theme-mode-color);
+                display: flex;
+                opacity: 0%;
+                left: 0%;
+                top: 0%;
+                width: 80px;
+                height: 40px;
+                transition: 0.3s;
+                z-index: 3;
+            }
+        }
     }
-    .album-header{
-        display: inline-flex;       
+    .album-header {
+        display: inline-flex;
     }
-    .prev-button{
+    .prev-button {
         background: none;
         width: 100px;
         height: 100px;
     }
-    .next-button{
+    .next-button {
         background: none;
         width: 100px;
         height: 100px;
     }
-    table{
+    table {
         border-collapse: collapse;
     }
-    .album-render{
-        margin-top: 1.5em;
+
+    .album-render {
+        margin-top: 1em;
+        padding: 20px;
         width: 100%;
 
-        .title{
+        .img {
+            border-radius: 5px;
+        }
+        .title {
             width: 100%;
             display: flex;
             flex-direction: row;
+            height: 50px;
+            line-height: 50px;
             padding-bottom: 2px;
-            border-bottom: 1px solid #B6B6B6;
+            color: #6c6c6c;
+            border-bottom: 1px solid rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
 
-            #id{
+            #id {
                 width: 2%;
                 text-align: end;
             }
-            #song{
+            #song {
                 width: 40%;
                 margin-left: 1em;
             }
-            #album{
+            #album {
                 width: 18%;
                 text-align: start;
             }
-            #date{
-                width: 20%;
+            #date {
+                padding: 0px 10px;
                 text-align: center;
+                color: gray;
             }
-            #lenght{
-                width: 20%;
+            #lenght {
+                padding: 0px 8%;
                 text-align: center;
             }
         }
 
-        .list-songs{
+        .list-songs {
             width: 100%;
             display: flex;
             flex-direction: column;
 
-            .single-song{
+            .single-song {
                 width: 100%;
                 display: flex;
                 flex-direction: row;
@@ -115,61 +184,181 @@
                 transition: 0.15s;
                 cursor: pointer;
 
-                #id{
+                #id {
                     width: 2%;
                     text-align: end;
                 }
-                #song{
+                #song {
                     width: 40%;
                     margin-left: 1em;
                     display: flex;
                     flex-direction: row;
 
-                    #song-title{
+                    #song-title {
                         height: 40px;
                         line-height: 20px;
                         justify-content: center;
                         margin-left: 0.5em;
 
-                        #title{
+                        #title {
                             font-size: 16px;
                             font-weight: 500;
                         }
-                        #author{
+                        #author {
                             font-size: 14px;
                             font-weight: 400;
                             color: gray;
                         }
                     }
                 }
-                #album{
+                #album {
                     width: 18%;
                     text-align: start;
+                    color: gray;
                 }
-                #date{
-                    width: 20%;
+                #date {
+                    padding: 10px;
                     text-align: center;
+                    color: gray;
                 }
-                #lenght{
-                    width: 20%;
+                #lenght {
+                    padding: 0px 20px;
                     text-align: center;
+                    display: flex;
+                    align-items: center;
 
-                    #lenght{
-                        padding: 0px 25px;
+                    #lenght {
+                        padding: 0px 20px;
+                        color: gray;
                     }
-                    #icon{
+                    #icon {
                         opacity: 0%;
                     }
                 }
             }
-            .single-song:hover{
+            .single-song:hover {
                 background-color: rgba(184, 180, 180, 0.329);
-
-                #lenght{
-                    #icon{
+                #song {
+                    #song-title {
+                        #author {
+                            color: var(--theme-mode-color);
+                        }
+                    }
+                }
+                #album {
+                    color: var(--theme-mode-color);
+                }
+                #date {
+                    color: var(--theme-mode-color);
+                }
+                #lenght {
+                    #lenght {
+                        color: var(--theme-mode-color);
+                    }
+                    #icon {
                         opacity: 100%;
                     }
                 }
+            }
+        }
+    }
+    .btn-icon {
+        width: 90%;
+        height: 60px;
+        margin: auto;
+        line-height: 60px;
+
+        .icon-Play {
+            color: #00bf63;
+            cursor: pointer;
+            font-size: 4em;
+            margin-top: 20px;
+        }
+        .icon-Play:hover {
+            color: #03d16d;
+        }
+    }
+    .heart-container {
+        --heart-color: #00bf63;
+        position: relative;
+        width: 50px;
+        height: 50px;
+        transition: 0.3s;
+
+        .checkbox {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 20;
+            cursor: pointer;
+        }
+
+        .svg-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .svg-outline,
+            .svg-filled {
+                fill: var(--heart-color);
+                position: absolute;
+            }
+
+            .svg-filled {
+                animation: keyframes-svg-filled 1s;
+                display: none;
+            }
+
+            .svg-celebrate {
+                position: absolute;
+                animation: keyframes-svg-celebrate 0.5s;
+                animation-fill-mode: forwards;
+                display: none;
+                stroke: var(--heart-color);
+                fill: var(--heart-color);
+                stroke-width: 2px;
+            }
+        }
+        .checkbox:checked ~ .svg-container .svg-filled {
+            display: block;
+        }
+
+        .checkbox:checked ~ .svg-container .svg-celebrate {
+            display: block;
+        }
+
+        @keyframes keyframes-svg-filled {
+            0% {
+                transform: scale(0);
+            }
+
+            25% {
+                transform: scale(1.2);
+            }
+
+            50% {
+                transform: scale(1);
+                filter: brightness(1.5);
+            }
+        }
+
+        @keyframes keyframes-svg-celebrate {
+            0% {
+                transform: scale(0);
+            }
+
+            50% {
+                opacity: 1;
+                filter: brightness(1.5);
+            }
+
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+                display: none;
             }
         }
     }

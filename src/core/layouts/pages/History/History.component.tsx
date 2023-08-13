@@ -1,5 +1,6 @@
 'use client';
-import { faEllipsis, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { HeartIcon1, HeartIcon2, HeartIcon3 } from '@/shared/components/Svg/index.component';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
@@ -9,93 +10,135 @@ const cx = classNames.bind(style);
 
 function HistoryPage() {
     return (
-        <div className={cx('main-history')}>
-            <div className={cx('header')}>
-                <div className={cx('title')}>Phát gần đây</div>
-                <ul className={cx('menu-bar')}>
-                    <li className={cx('menu')}>BÀI HÁT</li>
-                    <li className={cx('menu')}>PLAYLIST</li>
-                    <li className={cx('menu')}>MV</li>
-                    <li className={cx('menu')}>RADIO</li>
-                    <li className={cx('menu')}>PODCAST</li>
-                </ul>
+        <div className={cx('main-album')}>
+            <div className={cx('title')}>
+                <h2>Danh sách bài hát đã nghe</h2>
+                <p>Chỉ hiển thị với bạn</p>
             </div>
-            <hr className={cx('line')} />
             <div className={cx('album-render')}>
+                <div className={cx('title')}>
+                    <div id={cx('id')}>#</div>
+                    <div id={cx('song')}>Bài hát</div>
+                    <div id={cx('album')}>Album</div>
+                    <div id={cx('date')}>Ngày phát hành</div>
+                    <div id={cx('lenght')}>
+                        <FontAwesomeIcon className={cx('icon-clock')} icon={faClock} />
+                    </div>
+                </div>
                 <div className={cx('list-songs')}>
                     <div className={cx('single-song')}>
+                        <div id={cx('id')}>1</div>
                         <div id={cx('song')}>
-                            <Image src={'/'} width={40} height={40} alt="" />
+                            <Image className={cx('img')} src={'/'} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
                             </div>
                         </div>
                         <div id={cx('album')}>Starboy</div>
+                        <div id={cx('date')}>19/12/2020</div>
                         <div id={cx('lenght')}>
-                            <FontAwesomeIcon id={cx('icon')} icon={faHeart} />
+                            <div className={cx('heart-container')} title="Like">
+                                <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
+                                <div className={cx('svg-container')}>
+                                    <HeartIcon1 className={cx('svg-outline')} />
+                                    <HeartIcon2 className={cx('svg-filled')} />
+                                    <HeartIcon3 className={cx('svg-celebrate')} />
+                                </div>
+                            </div>
                             <span id={cx('lenght')}>3:40</span>
-                            <FontAwesomeIcon id={cx('icon')} icon={faEllipsis} />
                         </div>
                     </div>
                     <div className={cx('single-song')}>
+                        <div id={cx('id')}>1</div>
                         <div id={cx('song')}>
-                            <Image src={'/'} width={40} height={40} alt="" />
+                            <Image className={cx('img')} src={'/'} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
                             </div>
                         </div>
                         <div id={cx('album')}>Starboy</div>
+                        <div id={cx('date')}>19/12/2020</div>
                         <div id={cx('lenght')}>
-                            <FontAwesomeIcon id={cx('icon')} icon={faHeart} />
+                            <div className={cx('heart-container')} title="Like">
+                                <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
+                                <div className={cx('svg-container')}>
+                                    <HeartIcon1 className={cx('svg-outline')} />
+                                    <HeartIcon2 className={cx('svg-filled')} />
+                                    <HeartIcon3 className={cx('svg-celebrate')} />
+                                </div>
+                            </div>
                             <span id={cx('lenght')}>3:40</span>
-                            <FontAwesomeIcon id={cx('icon')} icon={faEllipsis} />
                         </div>
                     </div>
                     <div className={cx('single-song')}>
+                        <div id={cx('id')}>1</div>
                         <div id={cx('song')}>
-                            <Image src={'/'} width={40} height={40} alt="" />
+                            <Image className={cx('img')} src={'/'} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
                             </div>
                         </div>
                         <div id={cx('album')}>Starboy</div>
+                        <div id={cx('date')}>19/12/2020</div>
                         <div id={cx('lenght')}>
-                            <FontAwesomeIcon id={cx('icon')} icon={faHeart} />
+                            <div className={cx('heart-container')} title="Like">
+                                <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
+                                <div className={cx('svg-container')}>
+                                    <HeartIcon1 className={cx('svg-outline')} />
+                                    <HeartIcon2 className={cx('svg-filled')} />
+                                    <HeartIcon3 className={cx('svg-celebrate')} />
+                                </div>
+                            </div>
                             <span id={cx('lenght')}>3:40</span>
-                            <FontAwesomeIcon id={cx('icon')} icon={faEllipsis} />
                         </div>
                     </div>
                     <div className={cx('single-song')}>
+                        <div id={cx('id')}>1</div>
                         <div id={cx('song')}>
-                            <Image src={'/'} width={40} height={40} alt="" />
+                            <Image className={cx('img')} src={'/'} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
                             </div>
                         </div>
                         <div id={cx('album')}>Starboy</div>
+                        <div id={cx('date')}>19/12/2020</div>
                         <div id={cx('lenght')}>
-                            <FontAwesomeIcon id={cx('icon')} icon={faHeart} />
+                            <div className={cx('heart-container')} title="Like">
+                                <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
+                                <div className={cx('svg-container')}>
+                                    <HeartIcon1 className={cx('svg-outline')} />
+                                    <HeartIcon2 className={cx('svg-filled')} />
+                                    <HeartIcon3 className={cx('svg-celebrate')} />
+                                </div>
+                            </div>
                             <span id={cx('lenght')}>3:40</span>
-                            <FontAwesomeIcon id={cx('icon')} icon={faEllipsis} />
                         </div>
                     </div>
                     <div className={cx('single-song')}>
+                        <div id={cx('id')}>1</div>
                         <div id={cx('song')}>
-                            <Image src={'/'} width={40} height={40} alt="" />
+                            <Image className={cx('img')} src={'/'} width={40} height={40} alt="" />
                             <div id={cx('song-title')}>
                                 <div id={cx('title')}>Starboy</div>
                                 <div id={cx('author')}>The Weeknd, Daft Punk</div>
                             </div>
                         </div>
                         <div id={cx('album')}>Starboy</div>
+                        <div id={cx('date')}>19/12/2020</div>
                         <div id={cx('lenght')}>
-                            <FontAwesomeIcon id={cx('icon')} icon={faHeart} />
+                            <div className={cx('heart-container')} title="Like">
+                                <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
+                                <div className={cx('svg-container')}>
+                                    <HeartIcon1 className={cx('svg-outline')} />
+                                    <HeartIcon2 className={cx('svg-filled')} />
+                                    <HeartIcon3 className={cx('svg-celebrate')} />
+                                </div>
+                            </div>
                             <span id={cx('lenght')}>3:40</span>
-                            <FontAwesomeIcon id={cx('icon')} icon={faEllipsis} />
                         </div>
                     </div>
                 </div>
@@ -103,4 +146,5 @@ function HistoryPage() {
         </div>
     );
 }
+
 export default HistoryPage;

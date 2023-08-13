@@ -1,6 +1,5 @@
 'use client';
-import { IAlbum } from '@/core/common/interfaces/collection.interface';
-import { useGetServiceProfileQuery } from '@/core/redux/services/user.service';
+import { useGetPlaylistByUserIdQuery } from '@/core/redux/services/playlist.service';
 import { HeartIcon1, HeartIcon2, HeartIcon3 } from '@/shared/components/Svg/index.component';
 import { faClock, faClose, faPen, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,53 +7,48 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
-import UpdateAlbum from '../../components/PopUp/UpdateAlbum/UpdateAlbum.component';
-import style from './Album.module.scss';
-import { useGetServiceAlbumQuery } from '@/core/redux/services/album.service';
+import UpdatePlaylist from '../../components/PopUp/UpdatePlaylist/UpdatePlaylist.component';
+import style from './PlayList.module.scss';
 
 const cx = classNames.bind(style);
 
-function AlbumPage() {
-    const [popupUploadAlbum, setPopupUploadAlbum] = useState(false);
-    const [album, setAlbum] = useState<IAlbum>();
+function PlayListPage() {
+    const [popupUploadPlaylist, setPopupUploadPlaylist] = useState(false);
+    const [playlist, setPlaylist] = useState('');
     const path = usePathname();
-    const resurt = path.split('/album/')[1];
-    const apiAlbum = useGetServiceAlbumQuery(resurt);
+    const resurt = path.split('/playlist/')[1];
+    const apiPlaylist = useGetPlaylistByUserIdQuery(resurt);
 
     useEffect(() => {
-        if (apiAlbum.data) {
-            let profile = apiAlbum.data.data;
-
-            if (profile) {
-                setAlbum(profile);
-            }
+        if (apiPlaylist.data) {
+            let profile = apiPlaylist.data.data;
         }
-    }, [apiAlbum.data, ]);
+    }, [apiPlaylist.data]);
     const closePopupAlbum = useCallback(() => {
-        setPopupUploadAlbum(false);
+        setPopupUploadPlaylist(false);
     }, []);
     const openPopUpProfile = () => {
-        if (!popupUploadAlbum) {
-            setPopupUploadAlbum(true);
+        if (!popupUploadPlaylist) {
+            setPopupUploadPlaylist(true);
         }
     };
     return (
         <div className={cx('main-album')}>
             <div className={cx('album-infor')}>
                 <div className={cx('image')}>
-                    <Image className={cx('album-img')} src={'/images/playlist.png'} width={232} height={232} alt="" />
+                    <Image src={'/images/playlist.png'} width={232} height={232} alt="" />
                     <button onClick={openPopUpProfile} className={cx('update-profile')}>
                         <FontAwesomeIcon icon={faPen} className={cx('icon-edit')} />
                     </button>
-                    {popupUploadAlbum && <UpdateAlbum close={closePopupAlbum} data={album} />}
+                    {popupUploadPlaylist && <UpdatePlaylist close={closePopupAlbum}  />}
                 </div>
                 <div className={cx('album-detail')}>
                     <div className={cx('title')}>
-                        <p>Album</p>
+                        <p>Playlist</p>
                         <span className={cx('album-name')}>Starboy</span>
                     </div>
                     <div className={cx('detail')}>
-                        <Image className={cx('detail-image')} src={'/'} width={24} height={24} alt="" />
+                        <Image className={cx('detail-image')} src={''} width={24} height={24} alt="" />
                         <div className={cx('infor')}>
                             <span>
                                 <b>The Weeknd</b>
@@ -203,4 +197,4 @@ function AlbumPage() {
     );
 }
 
-export default AlbumPage;
+export default PlayListPage;

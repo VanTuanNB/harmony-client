@@ -1,10 +1,10 @@
 'use client';
-import style from './Detail.module.scss';
-import classNames from 'classnames/bind';
-import React, { FC, useEffect, useState } from 'react';
-import Select, { StylesConfig } from 'react-select';
-import { useForm } from 'react-hook-form';
 import { usePostCreateSongMutation } from '@/core/redux/services/song.service';
+import classNames from 'classnames/bind';
+import { FC, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import Select, { StylesConfig } from 'react-select';
+import style from './Detail.module.scss';
 const cx = classNames.bind(style);
 
 const inputGenres = [
@@ -109,10 +109,11 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
                         </div>
 
                         <div className={cx('coolinput')}>
-                            <label htmlFor="" className={cx('text')}>
+                            <label htmlFor="date-create" className={cx('text')}>
                                 Ngày sáng tác:
                             </label>
                             <input
+                                id="date-create"
                                 className={cx('input')}
                                 type="datetime-local"
                                 {...register('publish', { required: true })}
@@ -168,11 +169,15 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
                             />
                         </div>
                     </div>
+                    <button type={'submit'} className={cx('next')}>
+                        Thêm bài hát mới
+                    </button>
                 </div>
                 <div className={cx('line-btn')}>
-                    <button type={'submit'} className={cx('next')}>
-                        Gửi
-                    </button>
+                    <p>
+                        Bước cuối cùng rồi. Thêm các thông tin cần thiết của bài hát. Việc còn lại, Harmony chúng tôi sẽ
+                        đưa bài hát của bạn đến với mọi người.
+                    </p>
                 </div>
             </form>
         </>

@@ -47,7 +47,7 @@ export const GoogleIcon = ({ width = '100%', height = '100%', className, fill = 
 );
 
 export const UploadIcon = ({ width = '100%', height = '100%', className }: IIconPropsComponent) => (
-    <svg width={width} height={height} className={className} viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <svg width={width} height={height} className={className} fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path
             d="M12.5 17L12.5 4M12.5 4L18 8.78947M12.5 4L7 8.78947"
             stroke="#909090"
@@ -314,5 +314,90 @@ export const MainLogo = ({
             fillOpacity="1"
             fillRule="nonzero"
         />
+    </svg>
+);
+
+export const AlbumIcon = ({ width = '100', height = '100', className }: IIconPropsComponent) => (
+    <svg width={width} height={height} viewBox="0 0 24 24" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M4.00033 7H20.0003M5.00033 4H19.0003M6.89629 20H17.1044C18.1275 20 18.639 20 19.0447 19.8084C19.402 19.6396 19.7012 19.3687 19.9047 19.03C20.1358 18.6454 20.1867 18.1364 20.2885 17.1184L20.7365 12.6388C20.8279 11.7244 20.8736 11.2672 20.7236 10.9138C20.5918 10.6034 20.3593 10.3465 20.0635 10.1844C19.7268 10 19.2673 10 18.3484 10H5.6523C4.73336 10 4.27389 10 3.93718 10.1844C3.64141 10.3465 3.40887 10.6034 3.27708 10.9138C3.12706 11.2672 3.17278 11.7244 3.26422 12.6388L3.71218 17.1184C3.81398 18.1364 3.86488 18.6454 4.09593 19.03C4.29943 19.3687 4.59872 19.6396 4.95601 19.8084C5.36167 20 5.87321 20 6.89629 20ZM15.0003 15C15.0003 16.1046 13.6572 17 12.0003 17C10.3435 17 9.00033 16.1046 9.00033 15C9.00033 13.8954 10.3435 13 12.0003 13C13.6572 13 15.0003 13.8954 15.0003 15Z"
+            stroke="#000000"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        />
+    </svg>
+);
+
+export const PlayListIcon = ({ width = '100', height = '100', className }: IIconPropsComponent) => (
+    <svg width={width} height={height} viewBox="0 0 24 24" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11 14L3 14" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M11 18H3" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" />
+        <path
+            d="M18.875 14.1183C20.5288 15.0732 21.3558 15.5506 21.4772 16.2394C21.5076 16.4118 21.5076 16.5881 21.4772 16.7604C21.3558 17.4492 20.5288 17.9266 18.875 18.8815C17.2212 19.8363 16.3942 20.3137 15.737 20.0745C15.5725 20.0147 15.4199 19.9265 15.2858 19.814C14.75 19.3644 14.75 18.4096 14.75 16.4999C14.75 14.5902 14.75 13.6354 15.2858 13.1858C15.4199 13.0733 15.5725 12.9852 15.737 12.9253C16.3942 12.6861 17.2212 13.1635 18.875 14.1183Z"
+            stroke="#1C274C"
+            strokeWidth="1.5"
+        />
+        <path d="M3 6L13.5 6M20 6L17.75 6" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M20 10L9.5 10M3 10H5.25" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+);
+
+export const HistoryIcon = ({ width = '100', height = '100', className }: IIconPropsComponent) => (
+    <svg width={width} height={height} fill="none" viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M2 12C2 17.5228 6.47715 22 12 22C13.8214 22 15.5291 21.513 17 20.6622M12 2C17.5228 2 22 6.47715 22 12C22 13.8214 21.513 15.5291 20.6622 17"
+            stroke="#1C274C"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+        />
+        <path d="M12 9V13H16" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path
+            d="M17 20.6622C15.5291 21.513 13.8214 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 13.8214 21.513 15.5291 20.6622 17"
+            stroke="#1C274C"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeDasharray="0.5 3.5"
+        />
+    </svg>
+);
+export const ListSongIcon = ({ width = '100', height = '100', className }: IIconPropsComponent) => (
+    <svg width={width} height={height} viewBox="0 0 24 24" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 14H3" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M12 9L3 9" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" />
+        <path
+            d="M16 17.4286C16 18.8487 14.8807 20 13.5 20C12.1193 20 11 18.8487 11 17.4286C11 16.0084 12.1193 14.8571 13.5 14.8571C14.8807 14.8571 16 16.0084 16 17.4286ZM16 17.4286V11"
+            stroke="#1C274C"
+            strokeWidth="1.5"
+        />
+        <path
+            d="M18.675 8.11607L16.9205 8.95824C16.5788 9.12225 16.408 9.20426 16.2845 9.33067C16.1855 9.43211 16.1091 9.55346 16.0605 9.68666C16 9.85265 16 10.0422 16 10.4212C16 11.2976 16 11.7358 16.1911 11.9987C16.3421 12.2066 16.5673 12.3483 16.8201 12.3945C17.1397 12.453 17.5348 12.2634 18.325 11.8841L20.0795 11.0419C20.4212 10.8779 20.592 10.7959 20.7155 10.6695C20.8145 10.5681 20.8909 10.4467 20.9395 10.3135C21 10.1475 21 9.95803 21 9.57901C21 8.70256 21 8.26434 20.8089 8.00144C20.6579 7.79361 20.4327 7.65188 20.1799 7.60565C19.8603 7.54717 19.4652 7.7368 18.675 8.11607Z"
+            stroke="#1C274C"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+        />
+        <path d="M20 4L9.5 4M3 4L5.25 4" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+);
+
+export const HeartIcon1 = ({ width = '100', height = '100', className }: IIconPropsComponent) => (
+    <svg viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Zm-3.585,18.4a2.973,2.973,0,0,1-3.83,0C4.947,16.006,2,11.87,2,8.967a4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,11,8.967a1,1,0,0,0,2,0,4.8,4.8,0,0,1,4.5-5.05A4.8,4.8,0,0,1,22,8.967C22,11.87,19.053,16.006,13.915,20.313Z"></path>
+    </svg>
+);
+
+export const HeartIcon3 = ({  className }: IIconPropsComponent) => (
+    <svg className={className} width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="10,10 20,20"></polygon>
+        <polygon points="10,50 20,50"></polygon>
+        <polygon points="20,80 30,70"></polygon>
+        <polygon points="90,10 80,20"></polygon>
+        <polygon points="90,50 80,50"></polygon>
+        <polygon points="80,80 70,70"></polygon>
+    </svg>
+);
+export const HeartIcon2 = ({ className }: IIconPropsComponent) => (
+    <svg viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
     </svg>
 );

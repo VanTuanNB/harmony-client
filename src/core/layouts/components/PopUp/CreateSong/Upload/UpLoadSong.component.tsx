@@ -1,8 +1,8 @@
-import { memo, FC, useEffect, useState } from 'react';
-import classNames from 'classnames/bind';
-import style from './Upload.module.scss';
-import { UploadIcon } from '@/shared/components/Svg/index.component';
 import { usePostSongMutation, useUploadAudioMutation } from '@/core/redux/services/s3.service';
+import { UploadIcon } from '@/shared/components/Svg/index.component';
+import classNames from 'classnames/bind';
+import { FC, memo, useEffect, useState } from 'react';
+import style from './Upload.module.scss';
 const cx = classNames.bind(style);
 
 interface UploadSongComponentProps {
@@ -50,16 +50,23 @@ const UploadSongComponent: FC<UploadSongComponentProps> = ({ handleUploadSong, l
             <h2 className={cx('title')}>{label}</h2>
             <form className={cx('upload')}>
                 <div className={cx('zone')}>
-                    <div className={cx('zone-icon')}>
-                        <UploadIcon className={cx('icon')} />
-                    </div>
+                    <label htmlFor="file">
+                        <div className={cx('zone-icon')}>
+                            <UploadIcon className={cx('icon')} />
+                        </div>
+                    </label>
                     <div className={cx('selectFile')}>
-                        <label htmlFor="file">Chọn tệp</label>
-                        <input type="file" onChange={handleUpload} />
+                        <label htmlFor="file" className={cx('chon')}>
+                            Chọn tệp
+                        </label>
+                        <input type="file" id="file" onChange={handleUpload} />
                     </div>
-
                     {error && <p>{error}</p>}
                 </div>
+                <p>
+                    Bằng cách tải bài hát lên, bạn đồng ý cấp cho Harmony quyền truy cập vào bài hát bạn chọn tải lên.
+                    Hãy chắc chắn rằng bạn có quyền tải lên bài hát.
+                </p>
             </form>
         </>
     );

@@ -73,7 +73,7 @@
                             height: 20px;
                             width: 20px;
                             position: absolute;
-                            background: skyblue;
+                            background: #00bf63;
                             left: 50%;
                             top: 50%;
                             transform: translate(-50%, -50%);
@@ -96,8 +96,7 @@
                             font-size: 1.3rem;
                             font-weight: 600;
                             margin-top: -75%;
-                            // color: skyblue;
-                            color: skyblue;
+                            color: var(--theme-mode-color);
                             opacity: 1;
                             position: relative;
                         }
@@ -116,10 +115,10 @@
                     }
                     .current-item .progress-count::after {
                         background: var(--theme-mode-background-stepper);
-                        border: 4px solid skyblue;
+                        border: 4px solid #00bf63;
                     }
                     .current-item .progress-count {
-                        color: #fff;
+                        color: var(--theme-mode-color);
                     }
 
                     .step-wizard-item + .step-wizard-item::after {

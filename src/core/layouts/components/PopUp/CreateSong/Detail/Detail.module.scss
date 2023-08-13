@@ -85,6 +85,32 @@
             transition: 0.5 ease-in-out;
         }
     }
+    .next {
+        position: absolute;
+        bottom: 12%;
+        left: 41%;
+        padding: 15px 20px;
+        cursor: pointer;
+        background: #00bf63;
+        margin-top: 20px;
+        color: white;
+        border-radius: 10px;
+        margin: auto;
+    }
+    .next:hover{
+        background: #01d06c;
+        box-shadow: 0 0 5px #00fb82;
+    }
+}
+.line-btn {
+    width: 100%;
+    position: absolute;
+    bottom: 1%;
+
+    p {
+        font-size: 1.4rem;
+        text-align: center;
+    }
 }
 .err {
     color: brown;
@@ -98,18 +124,6 @@
     // font-size: 15px;
     background: none;
     border-radius: 5px;
-}
-.next {
-    width: 80px;
-    height: 40px;
-    cursor: pointer;
-    background: #065fd4;
-    right: 1%;
-    position: absolute;
-    color: white;
-    position: absolute;
-    bottom: 1%;
-    box-shadow: 0 0 5px gray;
 }
 
 .title {
