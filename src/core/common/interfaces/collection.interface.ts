@@ -1,3 +1,5 @@
+import { EContentTypeObjectS3 } from '../constants/common.constant';
+
 export interface IUser {
     _id: string;
     email: string;
@@ -27,13 +29,22 @@ export interface IUser {
 export interface ISong {
     _id: string;
     title: string;
-    thumbnail: string;
-    composerReference: IComposer;
-    songPathReference: ISongPath;
+    thumbnailUrl: string;
+    userReference: string;
+    thumbnail: {
+        bucketName: string;
+        keyObject: string;
+        contentType: EContentTypeObjectS3;
+    };
+    audio: {
+        bucketName: string;
+        keyObject: string;
+        contentType: EContentTypeObjectS3.AUDIO;
+    };
     publish: Date;
-    albumReference?: IAlbum[];
-    genresReference: IGenre[];
-    performers: Array<IComposer>;
+    albumReference?: string[];
+    genresReference: string[];
+    performers: Array<IUser>;
     views?: number;
     createdAt?: Date;
     updatedAt?: Date;

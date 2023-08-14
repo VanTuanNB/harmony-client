@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
-import logger from 'redux-logger';
 import { batchedSubscribe } from 'redux-batched-subscribe';
+import logger from 'redux-logger';
 
-import userSlice from './features/user/user.slice';
 import { ESelectReducer } from '../common/constants/reduxSlice.constant';
 import clientStoreSlice from './features/client/client.slice';
 import songSlice from './features/song/song.slice';
+import userSlice from './features/user/user.slice';
 import { rootSplitApi } from './services/index.service';
 
 export const store = configureStore({

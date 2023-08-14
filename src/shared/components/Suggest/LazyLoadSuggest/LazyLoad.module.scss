@@ -1,0 +1,16 @@
+.list-listening {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+.trigger {
+    visibility: hidden;
+    background: rebeccapurple;
+    color: white;
+    padding: 2.5vh;
+    font-size: 1.5em;
+    text-align: center;
+
+    &.visible {
+        visibility: visible;
+    }
+}

@@ -1,9 +1,6 @@
 'use client';
-import classNames from 'classnames/bind';
-import styles from './Suggest.module.scss';
-import { ReactNode, useCallback, useEffect, useState } from 'react';
-import MediaItem from '../MediaItem/MediaItem.component';
-import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
+import { ISong } from '@/core/common/interfaces/collection.interface';
+import { ISongStore } from '@/core/common/interfaces/songStore.interface';
 import {
     pushListSuggestSongIntoStoreAction,
     pushSongIntoPrevPlayListAction,
@@ -11,25 +8,45 @@ import {
     selectSongReducer,
     startPlayingAction,
 } from '@/core/redux/features/song/song.slice';
-import { ISong } from '@/core/common/interfaces/collection.interface';
-import SkeletonLoading from '../Loading/Skeleton/SkeletonLoading.component';
-import { useGetServiceSongsQuery } from '@/core/redux/services/song.service';
-import { ISongStore } from '@/core/common/interfaces/songStore.interface';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
+import { useGetSuggestSongQuery } from '@/core/redux/services/song.service';
 import { faWifi } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames/bind';
+import { ReactNode, memo, useCallback, useEffect, useRef, useState } from 'react';
+import SkeletonLoading from '../Loading/Skeleton/SkeletonLoading.component';
+import LazyLoadSuggestComponent from './LazyLoadSuggest/LazyLoad.component';
+import styles from './Suggest.module.scss';
 
 const cx = classNames.bind(styles);
 
 function SuggestComponent(): ReactNode {
-    const { data, error, isLoading } = useGetServiceSongsQuery('');
+    const [pageNumber, setPageNumber] = useState<number>(1);
+    const [skip, setSkip] = useState<boolean>(false);
+    const { data, error, isLoading, isFetching } = useGetSuggestSongQuery(
+        { page: pageNumber, size: 10 },
+        { skip: skip },
+    );
+    const observer = useRef<IntersectionObserver>();
+    const triggerRef = useCallback((node: HTMLDivElement) => {
+        if (observer.current) observer.current.disconnect();
+        observer.current = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                setPageNumber((prevPageNumber) => prevPageNumber + 1);
+            }
+        });
+        if (node) observer.current.observe(node);
+    }, []);
+
     const dispatch = useAppDispatch();
+    const store: ISongStore = useAppSelector(selectSongReducer);
     useEffect(() => {
         if (data) {
             dispatch(pushListSuggestSongIntoStoreAction(data.data));
+            if (data.paging?.totalPages === pageNumber) setSkip(true);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
-    const store: ISongStore = useAppSelector(selectSongReducer);
     const handleClickMediaItem = useCallback(
         (_id: string) => {
             const songSelected = store.playlist.suggests.find((song) => song._id === _id);
@@ -46,22 +63,15 @@ function SuggestComponent(): ReactNode {
             <div className={cx('contents')}>
                 {isLoading && <SkeletonLoading count={10} />}
                 {dataSong.length > 0 && (
-                    <ul className={cx('list-listening')}>
-                        {dataSong.map((song) => {
-                            return (
-                                <li key={song._id} className={cx('item')}>
-                                    <MediaItem
-                                        _id={song._id}
-                                        title={song.title}
-                                        thumbnail={song.thumbnail}
-                                        performers={song.performers}
-                                        onClick={handleClickMediaItem}
-                                    />
-                                </li>
-                            );
-                        })}
-                    </ul>
+                    <>
+                        <LazyLoadSuggestComponent
+                            items={dataSong}
+                            onClickItem={handleClickMediaItem}
+                            trigger={triggerRef}
+                        />
+                    </>
                 )}
+                {isFetching && <SkeletonLoading count={10} />}
                 {error && (
                     <div className={cx('wrapper-disconnect-network')}>
                         <FontAwesomeIcon className={cx('icon-wifi')} icon={faWifi} />
@@ -73,4 +83,4 @@ function SuggestComponent(): ReactNode {
     );
 }
 
-export default SuggestComponent;
+export default memo(SuggestComponent);

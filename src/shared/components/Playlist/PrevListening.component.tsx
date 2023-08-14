@@ -1,12 +1,12 @@
 'use client';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode } from 'react';
 
-import classNames from 'classnames/bind';
-import styles from './Playlist.module.scss';
-import MediaItem from '../MediaItem/MediaItem.component';
 import { ISong } from '@/core/common/interfaces/collection.interface';
-import { useAppSelector } from '@/core/redux/hook.redux';
 import { selectSongReducer } from '@/core/redux/features/song/song.slice';
+import { useAppSelector } from '@/core/redux/hook.redux';
+import classNames from 'classnames/bind';
+import MediaItem from '../MediaItem/MediaItem.component';
+import styles from './Playlist.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -32,7 +32,7 @@ function PrevListeningComponent(): ReactNode {
                                         active={store.playing.currentSong && store.playing.currentSong._id === song._id}
                                         _id={song._id}
                                         title={song.title}
-                                        thumbnail={song.thumbnail}
+                                        thumbnailUrl={song.thumbnailUrl}
                                         performers={song.performers}
                                         onClick={handleClickMediaItem}
                                     />
