@@ -31,7 +31,7 @@ function SideBarNavigation() {
                         <li>
                             <Link href="">
                                 <FontAwesomeIcon icon={faHome} className={cx('icon')} />
-                                <span>Home</span>
+                                <span>Trang chủ</span>
                             </Link>
                         </li>
 

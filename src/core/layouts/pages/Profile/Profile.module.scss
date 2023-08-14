@@ -8,10 +8,13 @@
     padding-top: 1.5em;
     padding-bottom: 100%;
     margin-bottom: 6.5em;
+    a {
+        color: var(--theme-mode-color);
+    }
 
     .profile-user {
         padding: 3%;
-        box-shadow: rgba(22, 57, 40, 0.3) 0px 19px 38px, rgba(0,191,99, 0.22) 0px 15px 12px;
+        box-shadow: rgba(22, 57, 40, 0.3) 0px 19px 38px, rgba(0, 191, 99, 0.22) 0px 15px 12px;
         background: var(--theme-mode-profile);
         .information {
             width: 100%;
@@ -86,24 +89,24 @@
         width: 100%;
         padding: 3%;
 
-        .control-title {
-            position: relative;
-            height: 50px;
-            line-height: 50px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .composer-song {
+            margin-bottom: 5%;
+        }
 
-            button {
-                width: 30px;
-                height: 30px;
-                border-radius: 100%;
-                margin-top: 10px;
-                cursor: pointer;
-                position: absolute;
-                right: 10%;
+        .albumNot {
+            width: 100%;
+            text-align: center;
+
+            .icon-album {
                 color: var(--theme-mode-color);
-                background-color: var(--theme-filter);
-                box-shadow: 0 0 5px lightgray;
+                width: 100px;
+                height: 100px;
+                background-color: #00bf63;
+                border-radius: 10px;
+            }
+            h2 {
+                color: gray;
+                font-size: 1.3em;
             }
         }
     }
@@ -119,7 +122,55 @@
             color: gray;
         }
     }
+    .control-title {
+        position: relative;
+        height: 70px;
+        line-height: 70px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
 
+        .title-left {
+            h2 {
+                font-size: 1.5em;
+                height: 30px;
+                line-height: 30px;
+            }
+            p {
+                font-size: 1em;
+                height: 30px;
+                line-height: 30px;
+                color: gray;
+            }
+        }
+
+        .btn {
+            position: absolute;
+            right: 10%;
+            button {
+                width: 30px;
+                height: 30px;
+                border-radius: 100%;
+                margin-top: 10px;
+                cursor: pointer;
+                right: 10%;
+                color: var(--theme-mode-color);
+                background-color: var(--theme-filter);
+                box-shadow: 0 0 5px lightgray;
+                margin-right: 20px;
+            }
+            button:hover {
+                background-color: #00bf63;
+                transition: 0.5 ease-in-out;
+            }
+            a {
+                color: gray;
+            }
+            a:hover {
+                color: var(--theme-mode-color);
+                text-decoration: underline;
+            }
+        }
+    }
     .playlist {
         width: 100%;
         padding: 3%;
@@ -160,7 +211,8 @@
                 #id {
                     width: 2%;
                     padding-left: 1%;
-                    text-align: center;
+                    display: flex;
+                    align-items: center;
                 }
                 #song {
                     width: 80%;
@@ -195,15 +247,19 @@
                 display: flex;
                 #album {
                     width: 50%;
-                    text-align: start;
-                    padding-right: 10px;
+                    text-align: center;
+                    line-height: 50px;
                     color: gray;
                 }
-
+                #icon {
+                    opacity: 0%;
+                    padding: 0px 50px;
+                }
                 #lenght {
                     width: 10%;
                     display: flex;
                     text-align: center;
+                    align-items: center;
 
                     #lenght {
                         padding: 0px 10px;
@@ -212,10 +268,15 @@
                     #icon1 {
                         padding: 5px;
                     }
-                    #icon {
-                        opacity: 0%;
-                        padding: 0px 50px;
-                    }
+                }
+                .edit{
+                    width: 10%;
+                    display: flex;
+                    text-align: center;
+                    align-items: center;
+                    margin-left: 5%;
+                    opacity: 0%;
+                    text-decoration: underline;
                 }
             }
         }
@@ -236,15 +297,16 @@
                 #album {
                     color: var(--theme-mode-color);
                 }
-
+                #icon {
+                    opacity: 100%;
+                }
                 #lenght {
                     #lenght {
                         color: var(--theme-mode-color);
                     }
-
-                    #icon {
-                        opacity: 100%;
-                    }
+                }
+                .edit{
+                    opacity: 100%;
                 }
             }
         }
@@ -288,6 +350,90 @@
             .playButton {
                 opacity: 100%;
                 top: 35%;
+            }
+        }
+    }
+    .heart-container {
+        --heart-color: #00bf63;
+        position: relative;
+        width: 50px;
+        height: 50px;
+        transition: 0.3s;
+
+        .checkbox {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 20;
+            cursor: pointer;
+        }
+
+        .svg-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .svg-outline,
+            .svg-filled {
+                fill: var(--heart-color);
+                position: absolute;
+            }
+
+            .svg-filled {
+                animation: keyframes-svg-filled 1s;
+                display: none;
+            }
+
+            .svg-celebrate {
+                position: absolute;
+                animation: keyframes-svg-celebrate 0.5s;
+                animation-fill-mode: forwards;
+                display: none;
+                stroke: var(--heart-color);
+                fill: var(--heart-color);
+                stroke-width: 2px;
+            }
+        }
+        .checkbox:checked ~ .svg-container .svg-filled {
+            display: block;
+        }
+
+        .checkbox:checked ~ .svg-container .svg-celebrate {
+            display: block;
+        }
+
+        @keyframes keyframes-svg-filled {
+            0% {
+                transform: scale(0);
+            }
+
+            25% {
+                transform: scale(1.2);
+            }
+
+            50% {
+                transform: scale(1);
+                filter: brightness(1.5);
+            }
+        }
+
+        @keyframes keyframes-svg-celebrate {
+            0% {
+                transform: scale(0);
+            }
+
+            50% {
+                opacity: 1;
+                filter: brightness(1.5);
+            }
+
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+                display: none;
             }
         }
     }

@@ -19,8 +19,8 @@ export interface IUser {
     isRegistrationForm?: boolean;
     role: string;
     nickname?: string;
-    albumsReference?: string[];
-    songsReference?: string[];
+    albumsReference?: IAlbum[];
+    songsReference?: ISong[];
     isPendingUpgradeComposer?: boolean;
     createdAt?: Date;
     updatedAt?: Date;
@@ -30,7 +30,7 @@ export interface ISong {
     _id: string;
     title: string;
     thumbnailUrl: string;
-    userReference: string;
+    userReference: IUser;
     thumbnail: {
         bucketName: string;
         keyObject: string;
@@ -42,9 +42,9 @@ export interface ISong {
         contentType: EContentTypeObjectS3.AUDIO;
     };
     publish: Date;
-    albumReference?: string[];
-    genresReference: string[];
-    performers: Array<IUser>;
+    albumReference?: IAlbum[];
+    genresReference: IGenre[];
+    performers: IUser[];
     views?: number;
     createdAt?: Date;
     updatedAt?: Date;
@@ -65,10 +65,15 @@ export interface IAlbum {
     _id: string;
     title: string;
     publish: Date;
-    composerReference: IComposer;
-    listSong?: string[];
+    userReference: string;
+    listSong: string[];
+    thumbnailUrl: string | null;
+    thumbnail: {
+        bucketName: string;
+        keyObject: string;
+        contentType: string;
+    } | null;
     information?: string;
-    thumbnail: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -93,5 +98,21 @@ export interface IHistory {
     _id: string;
     listSong: string[];
     createdAt?: string;
+    updatedAt?: Date;
+}
+
+export interface IFavorite {
+    _id: string;
+    listSong: ISong[];
+    userReference: string;
+    createdAt?: Date;
+    updatedAt?: Date;
+}
+export interface IPlaylist {
+    _id: string;
+    title: string;
+    listSong: ISong[];
+    userReference: string;
+    createdAt?: Date;
     updatedAt?: Date;
 }
