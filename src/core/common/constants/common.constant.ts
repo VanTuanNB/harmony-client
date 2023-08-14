@@ -27,3 +27,11 @@ export enum EStateCurrentSong {
     LOADING = 'loading',
     FAILED = 'failed',
 }
+
+export enum EContentTypeObjectS3 {
+    AUDIO = 'audio/mpeg',
+    JPEG = 'jpeg',
+    JPG = 'jpg',
+    PNG = 'png',
+    AUDIO_EXTENSION = 'mp3',
+}
