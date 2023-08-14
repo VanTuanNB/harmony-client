@@ -3,6 +3,8 @@ import styles from './Signup.module.scss';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
+import Image from 'next/image';
+import { FacebookIcon, GoogleIcon } from '@/shared/components/Svg/index.component';
 
 const cx = classNames.bind(styles);
 
@@ -12,12 +14,12 @@ function SignupPage() {
             <div className={cx('form-top')}>
                 <h2>Sign up Harmony for free</h2>
                 <Link href="">
-                    <FontAwesomeIcon icon={faFacebook} className={cx('icon-facebook')} />
-                    Continne with Facebook
+                    <FacebookIcon width="30px" height="30px" className={cx('icon-facebook')} fill="none" />
+                    <p> Continne with Facebook</p>
                 </Link>
                 <Link href="">
-                    <FontAwesomeIcon icon={faGoogle} className={cx('icon-facebook')} />
-                    Continne with Google
+                    <GoogleIcon width="30px" height="30px" className={cx('icon-facebook')} fill="none" />
+                    <p> Continne with Google</p>
                 </Link>
             </div>
             <hr />
@@ -30,16 +32,21 @@ function SignupPage() {
                 <br />
                 <input type="password" placeholder="Confirm Password" />
                 <br />
-                <span>By clicking on sign-up, you agree to Harmony's Terms and Conditions of Use.</span><br />
-                <span>
-                    To learn more about how Devify collects, uses, shares and protects your personal data, please see
-                    Harmony's Privacy Policy.
-                </span>
+                <div className={cx('terms')}>
+                    <p>By clicking on sign-up, you agree to Harmony's Terms and Conditions of Use.</p>
+                    <p>
+                        To learn more about how Devify collects, uses, shares and protects your personal data, please
+                        see Harmony's Privacy Policy.
+                    </p>
+                </div>
                 <button>Sign up</button>
             </form>
             <hr />
             <p>
-                Already have an account? <Link href="">Log in now</Link>
+                Already have an account?{' '}
+                <Link href="">
+                    <i>Log in now</i>
+                </Link>
             </p>
         </div>
     );

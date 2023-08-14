@@ -19,6 +19,7 @@ function PrimaryLayout({ children }: { children: ReactNode }) {
         <div id="root" data-theme={store.localStoreSide[ELocalStorageKey.DATA_THEME]} className={cx('primary-layout')}>
             <SideBarNavigation />
             <main className={cx('contents')}>
+                <div className={cx('block')}></div>
                 <HeaderComponent />
                 <div className={cx('container')}>{children}</div>
             </main>

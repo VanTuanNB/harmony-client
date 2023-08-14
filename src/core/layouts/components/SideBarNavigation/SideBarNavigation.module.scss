@@ -2,23 +2,29 @@
     width: 30%;
     flex: 0 0 18%;
     height: 100vh;
-  
-    & .left-sidebar{
+
+    & .left-sidebar {
         width: 18%;
         height: 100%;
         position: fixed;
 
         .icon-logo {
             width: 100%;
-            display: grid;
-            grid-template-columns: 70px 1fr;
-            height: 80px;
-            justify-content: center;
+            height: 100px;
+            display: flex;
+            text-align: center;
+            // justify-content: center;
+            // justify-items: center;
             align-items: center;
+            position: relative;
+            // height: 100%;
 
-            h3 {
-                color: #4ad5e4;
-                font-size: 1em;
+            .Layer_1 {
+                width: 100%;
+                height: 100%;
+                font-size: 3em;
+                left: -10%;
+                position: absolute;
             }
         }
         hr {
@@ -33,6 +39,7 @@
             background-color: var(--theme-mode-background-user);
             padding: 20px 5px;
             border-radius: 10px;
+            font-weight: 500;
 
             li {
                 width: 100%;
@@ -42,7 +49,6 @@
             li:hover {
                 cursor: pointer;
                 background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
-
             }
             .icon {
                 padding-right: 10px;
@@ -52,8 +58,8 @@
                 color: var(--theme-mode-color);
             }
         }
-        #navigation-end{
-            height: 60.7%;
+        #navigation-end {
+            height: 59.3%;
         }
     }
 }

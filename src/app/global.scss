@@ -1,5 +1,6 @@
 @import 'normalize.css';
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap');
 
 * {
     margin: 0;
@@ -13,14 +14,19 @@
     --theme-mode-color: #fff;
     --theme-mode-background-user: #000000;
     --theme-mode-color-rgb: 255, 255, 255;
+    --theme-item-highlight: #fff;
     --box-shadow-search-input: hsla(0, 0%, 0%, 0);
     --search-box-legacy-button: hsl(0, 0%, 18.82%);
     --search-box-legacy-button-color: hsla(0, 0%, 100%, 0.08);
     --theme-filter: #fff;
+    --theme-mode-background-stepper: #000;
     --theme-switch-button: #fff;
     --theme-switch-icon: #fff;
+    --theme-item-hover: #fff;
     --header-height: 56px;
     --width-header-search-input: 300px;
+    --font-inter: 'Inter', sans-serif;
+    --background: #444444;
 }
 
 html {
@@ -39,29 +45,46 @@ body {
 [data-theme='dark'] {
     transition: background-color linear 0.2s;
     --theme-mode-background: #191919;
+    --theme-mode-color-stepper: #606060;
     --theme-mode-background-rgb: 24, 25, 26;
     --theme-mode-background-user: #000000;
     --theme-mode-color: #fff;
+    --theme-mode-background-album: rgb(36, 36, 36);
     --theme-filter: #5a5a5a;
-    --theme-switch-button: linear-gradient(to right, #ff65dd, #3c0089);
-    --theme-switch-icon: #3c0089;
-
+    --theme-mode-shadow-profile: hsla(0, 0%, 100%, 0.08) 0px 5px 15px;
+    --theme-item-highlight: #00bf63;
+    --theme-switch-button: linear-gradient(to right, #00bf63, #003d1f);
+    --theme-switch-icon: #00bf63;
+    --theme-item-hover: #454545;
+    --theme-mode-background-stepper: #282828;
     --theme-mode-color-rgb: 255, 255, 255;
+    --theme-mode-profile: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(6, 90, 48, 0.5))),
+        rgba(255, 255, 255, 0.4);
     background-color: var(--theme-mode-background);
     color: var(--theme-mode-color);
+    --background: #444444;
 }
 [data-theme='light'] {
     --theme-mode-background: #f1f1f1;
     --theme-mode-background-rgb: 255, 255, 255;
     --theme-mode-color: #000000;
     --theme-filter: #d9d9d9;
-    --theme-switch-button: linear-gradient(to right, #ff7a00, #f876bc);
-    --theme-switch-icon: #ff7a00;
+    --theme-item-highlight: #00bf63;
+    --theme-switch-button: linear-gradient(to right, #00bf63, rgba(0, 191, 99, 0.13));
+    --theme-switch-icon: #00bf63;
+    --theme-item-hover: rgba(117, 230, 218, 0.25);
+    --theme-mode-color-stepper: #e5e5e5;
+    --theme-mode-background-album: rgb(234, 232, 232);
     --theme-mode-color-rgb: 24, 25, 26;
     --theme-mode-background-user: #ffffff;
+    --theme-mode-background-stepper: #ffffff;
+    --theme-mode-shadow-profile: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    --theme-mode-profile: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(3, 41, 22, 0.5))),
+        rgb(119, 214, 169);
     background-color: var(--theme-mode-background);
     color: var(--theme-mode-color);
     transition: background-color linear 0.2s;
+    --background: #fff;
 }
 
 button,

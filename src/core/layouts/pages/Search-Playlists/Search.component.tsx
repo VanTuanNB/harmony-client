@@ -1,14 +1,7 @@
 'use client';
 import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
-import MediaItem from '@/shared/components/MediaItem/MediaItem.component';
-import { ISongStore } from '@/core/common/interfaces/songStore.interface';
-import { useEffect } from 'react';
-import { useGetServiceSongsQuery } from '@/core/redux/services/song.service';
-import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
-import { pushListSuggestSongIntoStoreAction, selectSongReducer } from '@/core/redux/features/song/song.slice';
-import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
-import { faClock, faEllipsis, faHeart, faWifi } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SearchFilterComponent from '@/shared/components/SearchFilter/SearchFilter.component';
 import Image from 'next/image';
@@ -23,17 +16,8 @@ function SearchPagePlaylists() {
                 <div className={cx('single-playlist')}>
                     <div className={cx('mask')}></div>
                     <div className={cx('image')}>
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
-                            width={'168px'}
-                        />
-                        <Image
-                            width={40}
-                            height={40}
-                            className={cx('playButton')}
-                            src={'/images/playButton.png'}
-                            alt=""
-                        />
+                        <Image src="" width={100} height={100} alt="" />
+                        <FontAwesomeIcon icon={faCirclePlay} className={cx('playButton')} />
                     </div>
                     <div className={cx('title')}>
                         <div id={cx('title')}>I Love You</div>
@@ -43,17 +27,8 @@ function SearchPagePlaylists() {
                 <div className={cx('single-playlist')}>
                     <div className={cx('mask')}></div>
                     <div className={cx('image')}>
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
-                            width={'168px'}
-                        />
-                        <Image
-                            width={40}
-                            height={40}
-                            className={cx('playButton')}
-                            src={'/images/playButton.png'}
-                            alt=""
-                        />
+                        <Image src="" width={100} height={100} alt="" />
+                        <FontAwesomeIcon icon={faCirclePlay} className={cx('playButton')} />
                     </div>
                     <div className={cx('title')}>
                         <div id={cx('title')}>I Love You</div>
@@ -63,17 +38,8 @@ function SearchPagePlaylists() {
                 <div className={cx('single-playlist')}>
                     <div className={cx('mask')}></div>
                     <div className={cx('image')}>
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
-                            width={'168px'}
-                        />
-                        <Image
-                            width={40}
-                            height={40}
-                            className={cx('playButton')}
-                            src={'/images/playButton.png'}
-                            alt=""
-                        />
+                        <Image src="" width={100} height={100} alt="" />
+                        <FontAwesomeIcon icon={faCirclePlay} className={cx('playButton')} />
                     </div>
                     <div className={cx('title')}>
                         <div id={cx('title')}>I Love You</div>
@@ -83,17 +49,8 @@ function SearchPagePlaylists() {
                 <div className={cx('single-playlist')}>
                     <div className={cx('mask')}></div>
                     <div className={cx('image')}>
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
-                            width={'168px'}
-                        />
-                        <Image
-                            width={40}
-                            height={40}
-                            className={cx('playButton')}
-                            src={'/images/playButton.png'}
-                            alt=""
-                        />
+                        <Image src="" width={100} height={100} alt="" />
+                        <FontAwesomeIcon icon={faCirclePlay} className={cx('playButton')} />
                     </div>
                     <div className={cx('title')}>
                         <div id={cx('title')}>I Love You</div>
@@ -103,17 +60,8 @@ function SearchPagePlaylists() {
                 <div className={cx('single-playlist')}>
                     <div className={cx('mask')}></div>
                     <div className={cx('image')}>
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
-                            width={'168px'}
-                        />
-                        <Image
-                            width={40}
-                            height={40}
-                            className={cx('playButton')}
-                            src={'/images/playButton.png'}
-                            alt=""
-                        />
+                        <Image src="" width={100} height={100} alt="" />
+                        <FontAwesomeIcon icon={faCirclePlay} className={cx('playButton')} />
                     </div>
                     <div className={cx('title')}>
                         <div id={cx('title')}>I Love You</div>
@@ -123,17 +71,8 @@ function SearchPagePlaylists() {
                 <div className={cx('single-playlist')}>
                     <div className={cx('mask')}></div>
                     <div className={cx('image')}>
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
-                            width={'168px'}
-                        />
-                        <Image
-                            width={40}
-                            height={40}
-                            className={cx('playButton')}
-                            src={'/images/playButton.png'}
-                            alt=""
-                        />
+                        <Image src="" width={100} height={100} alt="" />
+                        <FontAwesomeIcon icon={faCirclePlay} className={cx('playButton')} />
                     </div>
                     <div className={cx('title')}>
                         <div id={cx('title')}>I Love You</div>
@@ -143,17 +82,8 @@ function SearchPagePlaylists() {
                 <div className={cx('single-playlist')}>
                     <div className={cx('mask')}></div>
                     <div className={cx('image')}>
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/en/3/39/The_Weeknd_-_Starboy.png"
-                            width={'168px'}
-                        />
-                        <Image
-                            width={40}
-                            height={40}
-                            className={cx('playButton')}
-                            src={'/images/playButton.png'}
-                            alt=""
-                        />
+                        <Image src="" width={100} height={100} alt="" />
+                        <FontAwesomeIcon icon={faCirclePlay} className={cx('playButton')} />
                     </div>
                     <div className={cx('title')}>
                         <div id={cx('title')}>I Love You</div>

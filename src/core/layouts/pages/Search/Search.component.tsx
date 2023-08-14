@@ -10,7 +10,9 @@ import { pushListSuggestSongIntoStoreAction, selectSongReducer } from '@/core/re
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
 import { faWifi } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Image from 'next/image';
 import SearchFilterComponent from '@/shared/components/SearchFilter/SearchFilter.component';
+
 
 const cx = classNames.bind(styles);
 
@@ -32,9 +34,11 @@ function SearchPage() {
                 <div className={cx('result-left')}>
                     <h2>Top result</h2>
                     <div className={cx('left')}>
-                        <img
-                            src="https://hamony-music-web.onrender.com/api/v1/thumbnail/ccbd9ef1-e672-4484-b4b0-e10a481b7125"
+                        <Image
+                            src=""
                             alt=""
+                            width={100}
+                            height={100}
                             className={cx('img')}
                         />
                         <div className={cx('top-result-infor')}>
@@ -78,28 +82,30 @@ function SearchPage() {
                 <h2>Related Artist</h2>
                 <div className={cx('item-artist')}>
                     <div className={cx('item')}>
-                        <img src="../images/img1.jpg" alt="" className={cx('img')} />
+                        <Image src="" alt="" width={100} height={100} className={cx('img')} />
                         <h3>Tuan Cao</h3>
                         <p>Artist</p>
                     </div>
                     <div className={cx('item')}>
-                        <img
-                            src="https://hamony-music-web.onrender.com/api/v1/thumbnail/ccbd9ef1-e672-4484-b4b0-e10a481b7125"
+                        <Image
+                            src=""
                             alt=""
+                            width={100} height={100}
                             className={cx('img')}
                         />
                         <h3>Huy Nguyen</h3>
                         <p>Artist</p>
                     </div>
                     <div className={cx('item')}>
-                        <img src="../images/img1.jpg" alt="" className={cx('img')} />
+                        <Image src="" alt="" width={100} height={100} className={cx('img')} />
                         <h3>Tuan Cao</h3>
                         <p>Artist</p>
                     </div>
                     <div className={cx('item')}>
-                        <img
-                            src="https://hamony-music-web.onrender.com/api/v1/thumbnail/ccbd9ef1-e672-4484-b4b0-e10a481b7125"
+                        <Image
+                            src=""
                             alt=""
+                            width={100} height={100}
                             className={cx('img')}
                         />
                         <h3>Huy Nguyen</h3>

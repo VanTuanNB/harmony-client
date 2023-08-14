@@ -1,12 +1,16 @@
 .header {
-    width: 64.5%;
+    width: 62.8%;
+    left: 18.6%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     position: fixed;
-    z-index: 2;
-    padding: 0 4.3em;
+    top: 0.65em;
+    z-index: 9999;
+    padding: 0 2em;
     height: var(--header-height);
-    background: var(--theme-mode-background);
+    background: var(--theme-mode-background-user);
     transition: background-color linear 0.2s;
 
     & .header-left {

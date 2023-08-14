@@ -21,6 +21,7 @@ import { faWifi } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
+
 function HomePage() {
     const { data, error, isLoading } = useGetServiceSongsJustReleasedQuery('');
     const viewtop = useGetServiceSongsViewTopQuery('');
@@ -58,7 +59,9 @@ function HomePage() {
                 <h3 className={cx('title')}>Just Released</h3>
                 {isLoading && <SkeletonLoading count={3} />}
                 <ul className={cx('list-listening')}>
+
                     {dataSong.map((song) => {
+
                         return (
                             <li key={song._id} className={cx('item')}>
                                 <MediaItem
@@ -70,7 +73,7 @@ function HomePage() {
                                 />
                             </li>
                         );
-                    })}
+                    })} 
                 </ul>
                 {error && (
                     <div className={cx('wrapper-disconnect-network')}>
@@ -81,7 +84,9 @@ function HomePage() {
                 <h3 className={cx('title')}>Trending</h3>
                 {isLoading && <SkeletonLoading count={3} />}
                 <ul className={cx('list-listening')}>
+
                     {dataSong.map((song) => {
+
                         return (
                             <li key={song._id} className={cx('item')}>
                                 <MediaItem
@@ -93,7 +98,7 @@ function HomePage() {
                                 />
                             </li>
                         );
-                    })}
+                    })} 
                 </ul>
                 {error && (
                     <div className={cx('wrapper-disconnect-network')}>
