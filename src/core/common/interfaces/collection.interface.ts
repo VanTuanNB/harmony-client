@@ -1,3 +1,5 @@
+import { EContentTypeObjectS3 } from '../constants/common.constant';
+
 export interface IUser {
     _id: string;
     email: string;
@@ -32,12 +34,12 @@ export interface ISong {
     thumbnail: {
         bucketName: string;
         keyObject: string;
-        contentType: string;
+        contentType: EContentTypeObjectS3;
     };
     audio: {
         bucketName: string;
         keyObject: string;
-        contentType: string;
+        contentType: EContentTypeObjectS3.AUDIO;
     };
     publish: Date;
     albumReference?: IAlbum[];

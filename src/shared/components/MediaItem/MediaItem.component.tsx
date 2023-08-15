@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
 import { ReactNode, memo, useState } from 'react';
-
 import { EStateCurrentSong } from '@/core/common/constants/common.constant';
 import { ISong } from '@/core/common/interfaces/collection.interface';
 import { ISongStore } from '@/core/common/interfaces/songStore.interface';
@@ -45,6 +44,7 @@ function MediaItem({ _id, thumbnailUrl, title, performers, active = false, onCli
                                     </Link>
                                 );
                             })}
+
                         </h3>
                     </div>
                 </div>

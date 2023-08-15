@@ -1,9 +1,8 @@
-import { MutableRefObject } from 'react';
-import { useEffect, useMemo, useState } from 'react';
+import { MutableRefObject, useEffect, useMemo, useState } from 'react';
 
 export default function useElementIntersectionObserver<T extends Element>(
     options: IntersectionObserverInit,
-    targetRef: MutableRefObject<T>,
+    targetRef: MutableRefObject<T | null> | null,
 ): boolean {
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const callbackFunction = (entries: IntersectionObserverEntry[]) => {
@@ -16,7 +15,7 @@ export default function useElementIntersectionObserver<T extends Element>(
 
     useEffect(() => {
         const observer = new IntersectionObserver(callbackFunction, optionsMemo);
-        const currentTarget: T = targetRef.current;
+        const currentTarget: T | null = targetRef ? targetRef.current : null;
         if (currentTarget) observer.observe(currentTarget);
 
         return () => {

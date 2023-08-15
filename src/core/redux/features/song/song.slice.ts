@@ -1,10 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import type { RootState } from '@/core/redux/store.redux';
-import { ISong, ISongStore } from '@/core/common/interfaces/index.interface';
-import { EScopeSongStore, ESelectReducer } from '@/core/common/constants/index.constant';
 import { ELocalStorageKey, EStateCurrentSong } from '@/core/common/constants/common.constant';
+import { EScopeSongStore, ESelectReducer } from '@/core/common/constants/index.constant';
+import { ISong, ISongStore } from '@/core/common/interfaces/index.interface';
+import type { RootState } from '@/core/redux/store.redux';
 import { LocalStorageSide } from '@/utils/clientStore.util';
 
 const localStorageSide = new LocalStorageSide();
@@ -29,7 +29,9 @@ export const songSlice = createSlice({
     reducers: {
         // suggest store
         pushListSuggestSongIntoStoreAction: (state, action: PayloadAction<ISong[]>) => {
-            state[EScopeSongStore.PLAYLIST][EScopeSongStore.SUGGESTS] = action.payload;
+            state[EScopeSongStore.PLAYLIST][EScopeSongStore.SUGGESTS] = state[EScopeSongStore.PLAYLIST][
+                EScopeSongStore.SUGGESTS
+            ].concat(action.payload);
         },
         removeSongFromSuggestListAction: (state, action: PayloadAction<{ _id: string }>) => {
             state[EScopeSongStore.PLAYLIST][EScopeSongStore.SUGGESTS] = state[EScopeSongStore.PLAYLIST][
