@@ -28,7 +28,7 @@ export interface ISong {
     _id: string;
     title: string;
     thumbnailUrl: string;
-    userReference: string;
+    userReference: IUser;
     thumbnail: {
         bucketName: string;
         keyObject: string;

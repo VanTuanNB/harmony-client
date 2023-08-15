@@ -17,7 +17,7 @@ function UpdateAlbum({ close, data }: IState) {
             <div className={cx('controller')}>
                 <div className={cx('form-pop-up')}>
                     <div className={cx('title')}>
-                        <h2>Cập nhập album</h2>
+                        <h2>Cập nhật album</h2>
                         <button onClick={close}>
                             <FontAwesomeIcon icon={faClose} className={cx('close')} />
                         </button>
@@ -31,7 +31,7 @@ function UpdateAlbum({ close, data }: IState) {
                             <input type="file" name="file" id="file" />
                         </div>
                         <form action="" className={cx('form')}>
-                            <input type="text" placeholder="Nhập tên album mới" value={''} />
+                            <input type="text" placeholder="Nhập tên album mới"  />
                             <button type="submit">Cập nhập</button>
                         </form>
                     </div>

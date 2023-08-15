@@ -1,4 +1,5 @@
 'use client';
+import { ISong } from '@/core/common/interfaces/collection.interface';
 import { usePostCreateSongMutation } from '@/core/redux/services/song.service';
 import classNames from 'classnames/bind';
 import { FC, useEffect, useState } from 'react';
@@ -18,16 +19,10 @@ const inputAlbum = [
     { label: 'Điều anh muốn', value: 'ea2f0e54-73c7-4ed9-a183-d7bf5a9833e9d5' },
     { label: 'Điều ước số nhất', value: 'ea2f0e54-73c7-4ed9-a183-d7bf58452e9d5' },
 ];
-type ISong = {
-    title: string;
-    publish: string;
-    performers: [];
-    composerReference: string;
-    albumReference: string[];
-    genresReference: string[];
-    thumbnail: string;
-    fileSong: string;
-};
+const inputPerformers = [
+    { label: 'Nguyễn Quang Huy', value: 'b2b46512-5e07-4b13-8260-328852364bf2' },
+    { label: 'Huy Nguyễn Quang', value: '2cbbe26b-173f-4fee-af7c-1c8fdeedee9f' },
+];
 
 const customStyles: StylesConfig = {
     control: (provided) => ({
@@ -55,6 +50,8 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
     } = useForm<ISong>();
     const [genresReference, setListGenreId] = useState<string[]>([]);
     const [albumReference, setListAlbumId] = useState<string[]>([]);
+    const [performers, setListPerformers] = useState<string[]>([]);
+
     const [postCreateSong, { data }] = usePostCreateSongMutation();
 
     useEffect(() => {
@@ -76,6 +73,9 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
         setListAlbumId(() => {
             return ars.map((option: any) => option.value);
         });
+        setListPerformers(() => {
+            return ars.map((option: any) => option.value);
+        });
     };
 
     const onSubmitDetail = (values: any) => {
@@ -83,6 +83,7 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
             ...values,
             albumReference,
             genresReference,
+            performers,
             uploadId,
         };
         console.log(newValue);
@@ -105,7 +106,7 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
                                 className={cx('input')}
                                 {...register('title', { required: true })}
                             />
-                            {errors.title && <p className={cx('err')}>Title is required</p>}
+                            {errors.title && <p className={cx('err')}>Bạn chưa thêm tiêu đề</p>}
                         </div>
 
                         <div className={cx('coolinput')}>
@@ -118,7 +119,7 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
                                 type="datetime-local"
                                 {...register('publish', { required: true })}
                             />
-                            {errors.publish && <p className={cx('err')}>Publish is required</p>}
+                            {errors.publish && <p className={cx('err')}>Bạn chưa thêm ngày phát hành</p>}
                         </div>
                     </div>
                     <div className={cx('col-6')}>
@@ -126,19 +127,32 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
                             <label htmlFor="" className={cx('text')}>
                                 Tác giả:
                             </label>
-                            <select {...register('composerReference', { required: true })}>
+                            <select {...register('userReference', { required: true })}>
                                 <option value="2cbbe26b-173f-4fee-af7c-1c8fdeedee9f">Huy Nguyen</option>
                             </select>
-                            {errors.composerReference && <p className={cx('err')}>ComposerReference is required</p>}
+                            {errors.userReference && <p className={cx('err')}>Bạn chưa thêm tác giả</p>}
                         </div>
-                        <div className={cx('coolinput')}>
+                        {/* <div className={cx('coolinput')}>
                             <label htmlFor="" className={cx('text')}>
                                 Thể hiện
                             </label>
                             <select {...register('performers', { required: true })}>
                                 <option value="2cbbe26b-173f-4fee-af7c-1c8fdeedee9f">Nguyễn Quang Huy</option>
                             </select>
-                            {errors.performers && <p className={cx('err')}>Performers is required</p>}
+                            
+                        </div> */}
+                        <div className={cx('coolinput')}>
+                            <label htmlFor="" className={cx('text')}>
+                                Ca sỹ:
+                            </label>
+                            <Select
+                                isMulti
+                                required
+                                onChange={handleChange}
+                                options={inputPerformers}
+                                styles={customStyles}
+                                className={cx('select-input')}
+                            />
                         </div>
                     </div>
                     <div className={cx('col-6')}>

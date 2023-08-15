@@ -24,19 +24,24 @@ export const songApi = rootSplitApi.injectEndpoints({
             }),
         }),
         getServiceSongsJustReleased: builder.query<IResponseServer<ISong[]>, string>({
-            query: (param?: string) => `/song/justReleased/${param ?? ''}`,
+            query: (param?: string) => ({
+                url: '/song/released',
+                params: { item: param ?? '' },
+            }),
         }),
         getServiceSongsViewTop: builder.query<IResponseServer<ISong[]>, string>({
-            query: (param?: string) => `/song/${param ?? ''}`,
+            query: (param?: string) => ({
+                url: '/song/songTop',
+                params: { item: param ?? '' },
+            }),
         }),
-
         postCreateSong: builder.mutation<IResponseServer, Partial<Post>>({
             query: (body) => ({
                 url: '/song/',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyY2JiZTI2Yi0xNzNmLTRmZWUtYWY3Yy0xYzhmZGVlZGVlOWYiLCJlbWFpbCI6Imh1eWRlcHRyYWkxOTA2MjAwMkBnbWFpbC5jb20iLCJyb2xlIjoiY29tcG9zZXIiLCJpYXQiOjE2OTE2NzEzNjEsImV4cCI6MTY5MTkzMDU2MX0.vCQk1NNP2-Wk-AeALieTX-TlHs-VuuC_UiKWVJS4tBc'
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyY2JiZTI2Yi0xNzNmLTRmZWUtYWY3Yy0xYzhmZGVlZGVlOWYiLCJlbWFpbCI6Imh1eWRlcHRyYWkxOTA2MjAwMkBnbWFpbC5jb20iLCJyb2xlIjoiY29tcG9zZXIiLCJpYXQiOjE2OTE5OTgwOTksImV4cCI6MTY5MjI1NzI5OX0.qYOZHiwPlbznVMZtWfQZjMkpHii8tb2mIMZ9hxw6Sqk'
                 },
                 body
             }),
@@ -44,5 +49,5 @@ export const songApi = rootSplitApi.injectEndpoints({
     }),
 });
 
-export const { useGetServiceSongsQuery, useGetSuggestSongQuery, useGetStreamSongQuery, usePostCreateSongMutation,useGetServiceSongsJustReleasedQuery,useGetServiceSongsViewTopQuery } = songApi;
+export const { useGetServiceSongsQuery, useGetSuggestSongQuery, useGetStreamSongQuery, usePostCreateSongMutation, useGetServiceSongsJustReleasedQuery, useGetServiceSongsViewTopQuery } = songApi;
 
