@@ -2,7 +2,7 @@
 import { ISong } from '@/core/common/interfaces/collection.interface';
 import { usePostCreateSongMutation } from '@/core/redux/services/song.service';
 import classNames from 'classnames/bind';
-import { FC, useEffect, useState } from 'react';
+import { FC, memo, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Select, { StylesConfig } from 'react-select';
 import style from './Detail.module.scss';
@@ -21,7 +21,7 @@ const inputAlbum = [
 ];
 const inputPerformers = [
     { label: 'Nguyễn Quang Huy', value: 'b2b46512-5e07-4b13-8260-328852364bf2' },
-    { label: 'Huy Nguyễn Quang', value: '2cbbe26b-173f-4fee-af7c-1c8fdeedee9f' },
+    { label: 'Huy Nguyễn', value: '2cbbe26b-173f-4fee-af7c-1c8fdeedee9f' },
 ];
 
 const customStyles: StylesConfig = {
@@ -51,7 +51,6 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
     const [genresReference, setListGenreId] = useState<string[]>([]);
     const [albumReference, setListAlbumId] = useState<string[]>([]);
     const [performers, setListPerformers] = useState<string[]>([]);
-
     const [postCreateSong, { data }] = usePostCreateSongMutation();
 
     useEffect(() => {
@@ -61,18 +60,22 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
                 success: data.success,
                 message: data.message,
             };
-            console.log('response: ' + response);
             handleUploadDetail(response);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
-    const handleChange = (ars: any) => {
+    const handleChangeGenre = (ars: any) => {
         setListGenreId(() => {
             return ars.map((option: any) => option.value);
         });
+    };
+    const handleChangeAlbum = (ars: any) => {
         setListAlbumId(() => {
             return ars.map((option: any) => option.value);
         });
+    };
+
+    const handleChangePerformers = (ars: any) => {
         setListPerformers(() => {
             return ars.map((option: any) => option.value);
         });
@@ -86,7 +89,6 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
             performers,
             uploadId,
         };
-        console.log(newValue);
         postCreateSong(newValue);
     };
 
@@ -132,15 +134,6 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
                             </select>
                             {errors.userReference && <p className={cx('err')}>Bạn chưa thêm tác giả</p>}
                         </div>
-                        {/* <div className={cx('coolinput')}>
-                            <label htmlFor="" className={cx('text')}>
-                                Thể hiện
-                            </label>
-                            <select {...register('performers', { required: true })}>
-                                <option value="2cbbe26b-173f-4fee-af7c-1c8fdeedee9f">Nguyễn Quang Huy</option>
-                            </select>
-                            
-                        </div> */}
                         <div className={cx('coolinput')}>
                             <label htmlFor="" className={cx('text')}>
                                 Ca sỹ:
@@ -148,7 +141,7 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
                             <Select
                                 isMulti
                                 required
-                                onChange={handleChange}
+                                onChange={handleChangePerformers}
                                 options={inputPerformers}
                                 styles={customStyles}
                                 className={cx('select-input')}
@@ -163,7 +156,7 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
                             <Select
                                 isMulti
                                 required
-                                onChange={handleChange}
+                                onChange={handleChangeGenre}
                                 options={inputGenres}
                                 styles={customStyles}
                                 className={cx('select-input')}
@@ -176,7 +169,7 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
                             <Select
                                 isMulti
                                 required
-                                onChange={handleChange}
+                                onChange={handleChangeAlbum}
                                 options={inputAlbum}
                                 styles={customStyles}
                                 className={cx('select-input')}
@@ -198,4 +191,4 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
     );
 };
 
-export default DetailComponent;
+export default memo(DetailComponent);

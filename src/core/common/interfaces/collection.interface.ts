@@ -13,9 +13,9 @@ export interface IUser {
         contentType: string;
     } | null;
     locale?: string;
-    playlistReference?: string[];
-    favoriteListReference?: string;
-    historyReference?: string;
+    playlistReference?: IPlaylist[];
+    favoriteListReference?: IFavorite;
+    historyReference?: IHistory;
     isRegistrationForm?: boolean;
     role: string;
     nickname?: string;
@@ -65,8 +65,8 @@ export interface IAlbum {
     _id: string;
     title: string;
     publish: Date;
-    userReference: string;
-    listSong: string[];
+    userReference: IUser;
+    listSong: ISong[];
     thumbnailUrl: string | null;
     thumbnail: {
         bucketName: string;
@@ -96,7 +96,7 @@ export interface ISongPath {
 
 export interface IHistory {
     _id: string;
-    listSong: string[];
+    listSong: ISong[];
     createdAt?: string;
     updatedAt?: Date;
 }
@@ -104,7 +104,7 @@ export interface IHistory {
 export interface IFavorite {
     _id: string;
     listSong: ISong[];
-    userReference: string;
+    userReference: IUser;
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -112,7 +112,7 @@ export interface IPlaylist {
     _id: string;
     title: string;
     listSong: ISong[];
-    userReference: string;
+    userReference: IUser;
     createdAt?: Date;
     updatedAt?: Date;
 }

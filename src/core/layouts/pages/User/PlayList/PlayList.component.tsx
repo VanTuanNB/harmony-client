@@ -1,6 +1,5 @@
 'use client';
 import { useGetPlaylistByUserIdQuery } from '@/core/redux/services/playlist.service';
-import { HeartIcon1, HeartIcon2, HeartIcon3 } from '@/shared/components/Svg/index.component';
 import { faClock, faClose, faPen, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
@@ -9,6 +8,7 @@ import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import UpdatePlaylist from '../../../components/PopUp/UpdatePlaylist/UpdatePlaylist.component';
 import style from './PlayList.module.scss';
+import HeartComponent from '@/shared/components/Heart/Heart.component';
 
 const cx = classNames.bind(style);
 
@@ -83,14 +83,7 @@ function PlayListPage() {
                         <div id={cx('album')}>Starboy</div>
                         <div id={cx('date')}>19/12/2020</div>
                         <div id={cx('lenght')}>
-                            <div className={cx('heart-container')} title="Like">
-                                <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
-                                <div className={cx('svg-container')}>
-                                    <HeartIcon1 className={cx('svg-outline')} />
-                                    <HeartIcon2 className={cx('svg-filled')} />
-                                    <HeartIcon3 className={cx('svg-celebrate')} />
-                                </div>
-                            </div>
+                           <HeartComponent />
                             <span id={cx('lenght')}>3:40</span>
                             <FontAwesomeIcon id={cx('icon')} icon={faClose} />
                         </div>
@@ -107,14 +100,7 @@ function PlayListPage() {
                         <div id={cx('album')}>Starboy</div>
                         <div id={cx('date')}>19/12/2020</div>
                         <div id={cx('lenght')}>
-                            <div className={cx('heart-container')} title="Like">
-                                <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
-                                <div className={cx('svg-container')}>
-                                    <HeartIcon1 className={cx('svg-outline')} />
-                                    <HeartIcon2 className={cx('svg-filled')} />
-                                    <HeartIcon3 className={cx('svg-celebrate')} />
-                                </div>
-                            </div>
+                           <HeartComponent />
                             <span id={cx('lenght')}>3:40</span>
                             <FontAwesomeIcon id={cx('icon')} icon={faClose} />
                         </div>
@@ -131,14 +117,7 @@ function PlayListPage() {
                         <div id={cx('album')}>Starboy</div>
                         <div id={cx('date')}>19/12/2020</div>
                         <div id={cx('lenght')}>
-                            <div className={cx('heart-container')} title="Like">
-                                <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
-                                <div className={cx('svg-container')}>
-                                    <HeartIcon1 className={cx('svg-outline')} />
-                                    <HeartIcon2 className={cx('svg-filled')} />
-                                    <HeartIcon3 className={cx('svg-celebrate')} />
-                                </div>
-                            </div>
+                           <HeartComponent />
                             <span id={cx('lenght')}>3:40</span>
                             <FontAwesomeIcon id={cx('icon')} icon={faClose} />
                         </div>
@@ -155,14 +134,7 @@ function PlayListPage() {
                         <div id={cx('album')}>Starboy</div>
                         <div id={cx('date')}>19/12/2020</div>
                         <div id={cx('lenght')}>
-                            <div className={cx('heart-container')} title="Like">
-                                <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
-                                <div className={cx('svg-container')}>
-                                    <HeartIcon1 className={cx('svg-outline')} />
-                                    <HeartIcon2 className={cx('svg-filled')} />
-                                    <HeartIcon3 className={cx('svg-celebrate')} />
-                                </div>
-                            </div>
+                           <HeartComponent />
                             <span id={cx('lenght')}>3:40</span>
                             <FontAwesomeIcon id={cx('icon')} icon={faClose} />
                         </div>
@@ -179,14 +151,7 @@ function PlayListPage() {
                         <div id={cx('album')}>Starboy</div>
                         <div id={cx('date')}>19/12/2020</div>
                         <div id={cx('lenght')}>
-                            <div className={cx('heart-container')} title="Like">
-                                <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
-                                <div className={cx('svg-container')}>
-                                    <HeartIcon1 className={cx('svg-outline')} />
-                                    <HeartIcon2 className={cx('svg-filled')} />
-                                    <HeartIcon3 className={cx('svg-celebrate')} />
-                                </div>
-                            </div>
+                           <HeartComponent />
                             <span id={cx('lenght')}>3:40</span>
                             <FontAwesomeIcon id={cx('icon')} icon={faClose} />
                         </div>

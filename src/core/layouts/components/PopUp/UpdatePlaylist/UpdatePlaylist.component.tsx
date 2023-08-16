@@ -1,6 +1,7 @@
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
+import { memo } from 'react';
 import style from './UpdatePlaylist.module.scss';
 
 const cx = classNames.bind(style);
@@ -31,4 +32,4 @@ function UpdatePlaylist({ close }: IState) {
     );
 }
 
-export default UpdatePlaylist;
+export default memo(UpdatePlaylist);

@@ -4,7 +4,7 @@ import Toast from '@/shared/components/ToastNotification/Toast/Toast.component';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
-import { useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import style from './CreateSong.module.scss';
 import DetailComponent from './Detail/Detail.component';
 import UploadSongComponent from './Upload/UpLoadSong.component';
@@ -91,4 +91,4 @@ function CreateSongComponent({ close }: IState) {
     );
 }
 
-export default CreateSongComponent;
+export default memo(CreateSongComponent);

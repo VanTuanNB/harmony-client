@@ -6,7 +6,33 @@ export const albumApi = rootSplitApi.injectEndpoints({
         getServiceAlbum: builder.query<IResponseServer<IAlbum>, string>({
             query: (param?: string) => `/album/${param ?? ''}`,
         }),
+        getServiceAlbumNewWeek: builder.query<IResponseServer<IAlbum[]>, string>({
+            query: (param?: string) => ({
+                url: `/album/newWeek`,
+                params: { item: param ?? '' },
+            }),
+        }),
+        postCreateAlbum: builder.mutation<IResponseServer, Partial<IAlbum>>({
+            query: (body) => ({
+                url: '/album/',
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyY2JiZTI2Yi0xNzNmLTRmZWUtYWY3Yy0xYzhmZGVlZGVlOWYiLCJlbWFpbCI6Imh1eWRlcHRyYWkxOTA2MjAwMkBnbWFpbC5jb20iLCJyb2xlIjoiY29tcG9zZXIiLCJpYXQiOjE2OTIxMTAzMTcsImV4cCI6MTY5NDcwMjMxN30.vc-ALzbdEVA19Ri-Qa_pd9REcQFHzluAkKZva4S5IoA'
+                },
+                body,
+            }),
+        }),
+        putServiceAlbum: builder.mutation<IResponseServer, Partial<IAlbum>>({
+            query: (body)=>({
+                url: '/album',
+                method: 'PUT',
+                headers: {
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyY2JiZTI2Yi0xNzNmLTRmZWUtYWY3Yy0xYzhmZGVlZGVlOWYiLCJlbWFpbCI6Imh1eWRlcHRyYWkxOTA2MjAwMkBnbWFpbC5jb20iLCJyb2xlIjoiY29tcG9zZXIiLCJpYXQiOjE2OTIxMTAzMTcsImV4cCI6MTY5NDcwMjMxN30.vc-ALzbdEVA19Ri-Qa_pd9REcQFHzluAkKZva4S5IoA'
+                },
+                body,
+            })
+        })
     })
 })
 
-export const { useGetServiceAlbumQuery } = albumApi;
+export const { useGetServiceAlbumQuery, usePostCreateAlbumMutation, useGetServiceAlbumNewWeekQuery, usePutServiceAlbumMutation } = albumApi; 

@@ -3,6 +3,7 @@ import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
+import { memo, useState } from 'react';
 import style from './UpdateProfile.module.scss';
 
 const cx = classNames.bind(style);
@@ -12,6 +13,14 @@ interface IState {
     data: IUser | any;
 }
 function UpdateProfile({ close, data }: IState) {
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setImagePreview(URL.createObjectURL(e.target.files[0]));
+        }
+    };
+
     return (
         <div className={cx('pop-up')}>
             <div className={cx('controller')}>
@@ -24,16 +33,33 @@ function UpdateProfile({ close, data }: IState) {
                     </div>
                     <div className={cx('profile')}>
                         <div className={cx('img-upload')}>
-                            <Image
+                            {/* <Image
                                 src={data.avatarUrl || '/images/fallback-thumbnail-user.jpg'}
                                 width={100}
                                 height={100}
                                 alt=""
-                            />
+                            /> */}
+                            {imagePreview ? (
+                                <Image
+                                    className={cx('img')}
+                                    src={imagePreview}
+                                    width={100}
+                                    height={100}
+                                    alt=""
+                                />
+                            ) : (
+                                <Image
+                                    className={cx('img')}
+                                    src={data.avatarUrl || '/images/fallback-thumbnail-user.jpg'}
+                                    width={100}
+                                    height={100}
+                                    alt=""
+                                />
+                            )}
                             <label htmlFor="file" className={cx('title-upload')}>
                                 Thêm ảnh
                             </label>
-                            <input type="file" name="file" id="file" />
+                            <input type="file" name="file" id="file" onChange={handleImageChange} />
                         </div>
                         <form action="" className={cx('form')}>
                             <input type="text" placeholder="Nhập tên của bạn" value={data.name} />
@@ -51,4 +77,4 @@ function UpdateProfile({ close, data }: IState) {
     );
 }
 
-export default UpdateProfile;
+export default memo(UpdateProfile);

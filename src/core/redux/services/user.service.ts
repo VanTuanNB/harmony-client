@@ -6,7 +6,10 @@ export const userApi = rootSplitApi.injectEndpoints({
         getServiceProfile: builder.query<IResponseServer<IUser>, string>({
             query: (param?: string) => `/user/${param ?? ''}`,
         }),
+        getServicePerformer: builder.query<IResponseServer<IUser>, string>({
+            query: (param?: string) => `/user/composer/${param ?? ''}`,
+        }),
     })
 })
 
-export const { useGetServiceProfileQuery } = userApi;
+export const { useGetServiceProfileQuery, useGetServicePerformerQuery} = userApi;

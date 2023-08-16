@@ -2,8 +2,8 @@ import { EStateCurrentSong } from '@/core/common/constants/common.constant';
 import { selectSongReducer, updateStatePlayingAction } from '@/core/redux/features/song/song.slice';
 import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import { useGetStreamSongQuery } from '@/core/redux/services/song.service';
+import HeartComponent from '@/shared/components/Heart/Heart.component';
 import LoadingSpinner from '@/shared/components/Loading/LoadingSpinner/LoadingSpinner.component';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import {
     faBackwardStep,
     faCompress,
@@ -74,7 +74,7 @@ function PlayerControl() {
                     </div>
                 </div>
                 <div className={cx('icons')}>
-                    <FontAwesomeIcon icon={faHeart} className={cx('icon')} />
+                    <HeartComponent />
                     <FontAwesomeIcon icon={faCompress} className={cx('icon')} />
                 </div>
             </div>
