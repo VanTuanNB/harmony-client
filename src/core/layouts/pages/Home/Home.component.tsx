@@ -18,14 +18,14 @@ import HeartComponent from '@/shared/components/Heart/Heart.component';
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
 import { AlbumIcon } from '@/shared/components/Svg/index.component';
 import { faWifi } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import { format } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import styles from './Home.module.scss';
-
 const cx = classNames.bind(styles);
 
 function HomePage() {
@@ -54,12 +54,39 @@ function HomePage() {
         dispatch(startPlayingAction(songSelected as ISong));
     };
 
+    const [startImageIndex, setStartImageIndex] = useState(0); // Vị trí của ảnh đầu tiên trong vùng
+
+    const images = [
+        '/images/thumnail1.jpg',
+        '/images/thumnail2.jpg',
+        '/images/thumnail3.jpg',
+        '/images/thumnail4.jpg',
+        '/images/thumnail1.jpg',
+        '/images/thumnail2.jpg',
+    ]; // Đường dẫn của các ảnh
+    const imagesToShow = images.slice(startImageIndex, startImageIndex + 3); // Lấy ra 3 ảnh để hiển thị
+
+    const showNextImages = () => {
+        setStartImageIndex((prevIndex) => Math.min(prevIndex + 1, images.length - 3));
+    };
+
+    const showPreviousImages = () => {
+        setStartImageIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+    };
+
     return (
         <div className={cx('main-home')}>
             <div className={cx('main-image')}>
-                <Image className={cx('image2')} src="/images/img1.jpg" width={1} height={0.6} alt="" />
-                <Image className={cx('image2')} src="/images/img1.jpg" width={1} height={0.6} alt="" />
-                <Image className={cx('image2')} src="/images/img1.jpg" width={1} height={0.6} alt="" />
+                <button className={cx('icon-slideright')} onClick={showPreviousImages}>
+                    <FontAwesomeIcon icon={faArrowRight} />
+                </button>
+
+                {imagesToShow.map((image, index) => (
+                    <Image key={index} className={cx('image2')} src={image} width={1000} height={1000} alt="" />
+                ))}
+                <button className={cx('icon-slideleft')} onClick={showNextImages}>
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                </button>
             </div>
             <div className={cx('main-just')}>
                 <h3 className={cx('title')}>Bài hát vừa phát hành</h3>
