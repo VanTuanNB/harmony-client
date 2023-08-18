@@ -18,6 +18,16 @@ const nextConfig = {
             'fullstack.edu.vn',
         ],
     },
+    webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+        // Cấu hình CORS tại đây
+        config.plugins.push(
+            new webpack.DefinePlugin({
+                'process.env.ALLOWED_ORIGIN': JSON.stringify('*'), // Cấu hình tên miền cho Access-Control-Allow-Origin
+            }),
+        );
+
+        return config;
+    },
 };
 
 module.exports = nextConfig;

@@ -7,6 +7,7 @@ export enum EScopeClientStore {
 export enum ELocalStorageKey {
     DATA_THEME = 'data-theme',
     VOLUME = 'volume',
+    HARMONY_USER_TOKEN = 'harmony_user_token',
 }
 
 export enum EScopeSongStore {
@@ -19,6 +20,7 @@ export enum EScopeSongStore {
     CURRENT_SONG = 'currentSong',
     STATE = 'state',
     VOLUME = 'volume',
+    PROFILE = 'profile',
 }
 
 export enum EStateCurrentSong {
@@ -35,3 +37,22 @@ export enum EContentTypeObjectS3 {
     PNG = 'png',
     AUDIO_EXTENSION = 'mp3',
 }
+
+export enum ECookieStorage {
+    HARMONY_USER_TOKEN = 'harmony_user_token',
+}
+
+export enum ROLE_CUSTOMER {
+    USER = 'user',
+    ROOT_ADMIN = 'root_admin',
+    COMPOSER = 'composer',
+}
+
+export enum EDateFormat {
+    DD_MM_YYYY = 'dd/MM/yyyy',
+    YYYY_MM_DD = 'yyyy/MM/dd',
+}
+
+export const REGEX = {
+    EMAIL: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+};

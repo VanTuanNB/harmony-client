@@ -1,4 +1,4 @@
-import { EContentTypeObjectS3 } from '../constants/common.constant';
+import { EContentTypeObjectS3, ROLE_CUSTOMER } from '../constants/common.constant';
 
 export interface IUser {
     _id: string;
@@ -17,7 +17,7 @@ export interface IUser {
     favoriteListReference?: string;
     historyReference?: string;
     isRegistrationForm?: boolean;
-    role: string;
+    role: ROLE_CUSTOMER;
     nickname?: string;
     albumsReference?: IAlbum[];
     songsReference?: ISong[];

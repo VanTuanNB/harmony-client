@@ -1,18 +1,64 @@
-import { ReactNode, useState } from 'react';
-import HeadlessTippy from '@tippyjs/react/headless';
+import { ReactNode, memo, useEffect, useState } from 'react';
 
-import classNames from 'classnames/bind';
-import styles from './HeaderRight.module.scss';
+import { selectUserReducer } from '@/core/redux/features/user/user.slice';
+import { useAppSelector } from '@/core/redux/hook.redux';
 import ButtonSwitchTheme from '@/shared/components/ButtonSwitchTheme/ButtonSwitchTheme.component';
-import Image from 'next/image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGear } from '@fortawesome/free-solid-svg-icons';
 import PopperMenuComponent from '@/shared/components/PopperMenu/PopperMenu.component';
-import { USER_SETTINGS, MENU_SETTINGS } from '@/shared/constants/index.constant';
+import { IPopperListOptions } from '@/shared/interfaces/IPopperListOptions.interface';
+import { faBan, faGear, faHome, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames/bind';
+import Image from 'next/image';
+import styles from './HeaderRight.module.scss';
 
 const cx = classNames.bind(styles);
 
 function HeaderRight(): ReactNode {
+    const [avatar, setAvatar] = useState<string>('');
+    const { profile } = useAppSelector(selectUserReducer);
+    console.log(profile);
+    const MENU_SETTINGS: IPopperListOptions[] = [
+        {
+            icon: faHome,
+            title: 'Home settings',
+            href: '/dashboard',
+        },
+        {
+            icon: faUser,
+            title: 'Profile',
+            href: `/profile/${profile ? profile._id : ''}`,
+        },
+        {
+            icon: faRightFromBracket,
+            title: 'Log out',
+            href: '/logout',
+        },
+    ];
+
+    const USER_SETTINGS: IPopperListOptions[] = [
+        {
+            icon: faBan,
+            title: 'Danh sách chặn',
+            children: {
+                title: 'Nested Setting',
+                data: [
+                    {
+                        icon: faBan,
+                        title: 'Nested Setting',
+                    },
+                    {
+                        icon: faBan,
+                        title: 'Nested Setting2',
+                    },
+                ],
+            },
+        },
+    ];
+
+    useEffect(() => {
+        if (profile) setAvatar(profile.avatarUrl);
+    }, [profile]);
+
     return (
         <ul className={cx('header-right-options')}>
             <li className={cx('item')}>
@@ -27,17 +73,15 @@ function HeaderRight(): ReactNode {
             </li>
             <li className={cx('item')}>
                 <PopperMenuComponent listOptions={USER_SETTINGS} position={{ top: 46, right: 0 }}>
-                    <Image
-                        width={40}
-                        height={40}
-                        className={cx('avatar')}
-                        src={'/images/fallback-thumbnail-user.jpg'}
-                        alt=""
-                    />
+                    {!!avatar ? (
+                        <Image src={avatar} width={40} height={40} alt="image" className={cx('avatar')} />
+                    ) : (
+                        <></>
+                    )}
                 </PopperMenuComponent>
             </li>
         </ul>
     );
 }
 
-export default HeaderRight;
+export default memo(HeaderRight);

@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { batchedSubscribe } from 'redux-batched-subscribe';
-import logger from 'redux-logger';
 
+import logger from 'redux-logger';
 import { ESelectReducer } from '../common/constants/reduxSlice.constant';
 import clientStoreSlice from './features/client/client.slice';
 import songSlice from './features/song/song.slice';

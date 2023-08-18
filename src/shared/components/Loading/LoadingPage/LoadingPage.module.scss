@@ -1,0 +1,64 @@
+.wrapper-loading {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & .overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: rgba($color: #000000, $alpha: 0.6);
+    }
+
+    & .content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & .loader {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        & .loader::before,
+        & .loader::after {
+            content: '';
+            position: absolute;
+            border-radius: inherit;
+        }
+
+        & .loader::before {
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(0deg, #00bf63 0%, #003d1f 100%);
+            animation: load012323 0.5s infinite linear;
+        }
+
+        & .loader::after {
+            width: 85%;
+            height: 85%;
+            background-color: var(--theme-mode-background);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
+@keyframes load012323 {
+    to {
+        transform: rotate(360deg);
+    }
+}
