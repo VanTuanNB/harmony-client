@@ -1,7 +1,6 @@
-import AlbumPage from '@/core/layouts/pages/Composer/Album/Album.component';
-
+import AlbumComposerPage from '@/core/layouts/pages/Composer/AlbumComposer/Album.component';
 function AlbumRouting() {
-    return <AlbumPage />;
+    return <AlbumComposerPage />;
 }
 
 export default AlbumRouting;

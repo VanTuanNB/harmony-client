@@ -66,7 +66,7 @@ export interface IAlbum {
     title: string;
     publish: Date;
     userReference: IUser;
-    listSong: ISong[];
+    listSong: ISong[] | string[];
     thumbnailUrl: string | null;
     thumbnail: {
         bucketName: string;
@@ -81,7 +81,8 @@ export interface IAlbum {
 export interface IGenre {
     _id: string;
     title: string;
-    listSong?: string[];
+    thumbnailUrl?: string;
+    listSong?: ISong[];
     createdAt?: Date;
     updatedAt?: Date;
 }

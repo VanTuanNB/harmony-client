@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import { useGetServiceAlbumQuery } from '@/core/redux/services/album.service';
 import HeartComponent from '@/shared/components/Heart/Heart.component';
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
-import { AlbumIcon, ListSongIcon } from '@/shared/components/Svg/index.component';
+import { ListSongIcon } from '@/shared/components/Svg/index.component';
 import { faClock, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
@@ -24,19 +24,19 @@ const cx = classNames.bind(style);
 
 function AlbumUserPage() {
     const [album, setAlbum] = useState<IAlbum>();
+    const [listSong, setListSong] = useState<ISong[]>();
+
     const path = usePathname();
     const resurt = path.split('/album/')[1];
-    const apiAlbum = useGetServiceAlbumQuery(resurt);
+    const { data, isLoading, isError } = useGetServiceAlbumQuery(resurt);
     const dispatch = useAppDispatch();
     useEffect(() => {
-        if (apiAlbum.data) {
-            let profile = apiAlbum.data.data;
-
-            if (profile) {
-                setAlbum(profile);
-            }
+        if (data) {
+            const song = data.data.listSong as ISong[]
+            setAlbum(data.data);
+            setListSong(song)
         }
-    }, [apiAlbum.data]);
+    }, [data, listSong]);
 
     const store: ISongStore = useAppSelector(selectSongReducer);
     const onClick = (_id: string) => {
@@ -46,14 +46,14 @@ function AlbumUserPage() {
     };
     return (
         <div className={cx('main-album')}>
-            {apiAlbum.isLoading && <SkeletonLoading count={10} />}
-            {apiAlbum.data?.status && (
+            {isLoading && <SkeletonLoading count={10} />}
+            {data?.status && (
                 <>
                     <div className={cx('album-infor')}>
                         <div className={cx('image')}>
                             <Image
                                 className={cx('album-img')}
-                                src={'/images/playlist.png'}
+                                src={album?.thumbnailUrl || '/images/playlist.png'}
                                 width={232}
                                 height={232}
                                 alt=""
@@ -94,23 +94,23 @@ function AlbumUserPage() {
                             </div>
                         </div>
                         <div className={cx('list-songs')}>
-                            {album?.listSong.map((song, index) => (
+                            {listSong?.map((song , index) => (
                                 <div onClick={() => onClick(song._id)} key={index} className={cx('single-song')}>
                                     <div id={cx('id')}>{index + 1}</div>
                                     <div id={cx('song')}>
                                         <Image
                                             className={cx('img')}
                                             src={song.thumbnailUrl}
-                                            width={40}
-                                            height={40}
+                                            width={100}
+                                            height={100}
                                             alt=""
                                         />
                                         <div id={cx('song-title')}>
                                             <div id={cx('title')}>{song.title}</div>
-                                            <div id={cx('author')}>{album.userReference.name}</div>
+                                            <div id={cx('author')}>{album?.userReference.name}</div>
                                         </div>
                                     </div>
-                                    <div id={cx('album')}>{album.title}</div>
+                                    <div id={cx('album')}>{album?.title}</div>
                                     <div id={cx('date')}>{format(new Date(song.publish), 'dd-MM-yyyy HH:mm:ss')}</div>
                                     <div id={cx('lenght')}>
                                         <HeartComponent />
@@ -122,9 +122,9 @@ function AlbumUserPage() {
                     </div>
                 </>
             )}
-            {apiAlbum.error && (
+            {isError && (
                 <div className={cx('wrapper-disconnect-network')}>
-                    <ListSongIcon className={cx('icon')}/>
+                    <ListSongIcon className={cx('icon')} />
                     <p className={cx('disconnect-network-title')}>Album không tồn tại</p>
                 </div>
             )}

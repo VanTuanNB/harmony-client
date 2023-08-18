@@ -30,34 +30,45 @@ function Profile() {
     const path = usePathname();
     const resurt = path.split('/profile/')[1];
     const [isComposer, setIsComposer] = useState('');
+    const [isUpdated, setIsUpdated] = useState(false);
     const [popupSong, setPopupSong] = useState(false);
     const [popupUploadProfile, setPopupUploadProfile] = useState(false);
     const [popupCreateAlbum, setPopupCreateAlbum] = useState(false);
     const [profile, setProfile] = useState<IUser>();
-    const apiUser = useGetServiceProfileQuery(resurt);
+    const { data, isLoading, refetch } = useGetServiceProfileQuery(resurt);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (apiUser.data) {
-            let profile = apiUser.data.data;
-            console.log(profile);
-
+        if (data) {
+            let profile = data.data;
             if (profile) {
                 setIsComposer(profile.role);
                 setProfile(profile);
             }
         }
-    }, [apiUser.data, isComposer, profile]);
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data]);
     const closePopupSong = useCallback(() => {
         setPopupSong(false);
     }, []);
-    const closePopupAlbum = useCallback(() => {
-        setPopupCreateAlbum(false);
+    const closePopupAlbum = useCallback((isReload: boolean) => {
+        if (isReload) {
+            refetch();
+            setPopupCreateAlbum(false);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    const closePopupProfile = useCallback(() => {
-        setPopupUploadProfile(false);
-    }, []);
+    const closePopupProfile = useCallback(
+        (isReload: boolean) => {
+            if (isReload) {
+                // refetch();
+                setPopupUploadProfile(false);
+                console.log('profile', data);
+            }
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [],
+    );
     const openPopUpSong = () => {
         if (!popupSong) {
             setPopupSong(true);
@@ -82,7 +93,7 @@ function Profile() {
     };
     return (
         <div className={cx('profile')}>
-            {apiUser.isLoading && <SkeletonLoading count={20} />}
+            {isLoading && <SkeletonLoading count={20} />}
             {profile && (
                 <>
                     <div className={cx('profile-user')}>
@@ -92,19 +103,21 @@ function Profile() {
                                     className={cx('image2')}
                                     src={profile?.avatarUrl || '/images/fallback-thumbnail-user.jpg'}
                                     alt=""
-                                    width={200}
-                                    height={200}
+                                    width={500}
+                                    height={500}
                                 />
 
                                 <button onClick={openPopUpProfile} className={cx('update-profile')}>
                                     <FontAwesomeIcon icon={faPen} className={cx('icon-edit')} />
                                 </button>
-                                {popupUploadProfile && <UpdateProfile close={closePopupProfile} data={profile} />}
+                                {popupUploadProfile && (
+                                    <UpdateProfile close={closePopupProfile} dataProfile={profile} />
+                                )}
                             </div>
                             <div className={cx('name')}>
                                 <p>Profile</p>
                                 <h2 className={cx('name-profile')}>{profile?.name}</h2>
-                                <p>{profile?.playlistReference?.length} PlayList</p>
+                                <p>{profile?.albumsReference?.length} Album</p>
                             </div>
                         </div>
                     </div>
@@ -118,7 +131,7 @@ function Profile() {
                                             <FontAwesomeIcon className={cx('icon-add')} icon={faAdd} />
                                         </button>
                                         {profile.songsReference?.length !== 0 && (
-                                            <Link href={`/profile/song/${profile._id}`}>Xem tất cả</Link>
+                                            <Link href={`/composer/song/${profile._id}`}>Xem tất cả</Link>
                                         )}
                                     </div>
                                 </div>
@@ -126,19 +139,18 @@ function Profile() {
                                     {profile.songsReference?.map((item, index) => {
                                         return (
                                             <>
-                                                <div
-                                                    onClick={() => onClick(item._id)}
-                                                    key={item._id}
-                                                    className={cx('single-song')}
-                                                >
-                                                    <div className={cx('single-left')}>
+                                                <div key={item._id} className={cx('single-song')}>
+                                                    <div
+                                                        onClick={() => onClick(item._id)}
+                                                        className={cx('single-left')}
+                                                    >
                                                         <div id={cx('id')}>{index + 1}</div>
                                                         <div id={cx('song')}>
                                                             <Image
                                                                 src={item.thumbnailUrl}
                                                                 alt={''}
-                                                                width={40}
-                                                                height={40}
+                                                                width={100}
+                                                                height={100}
                                                             ></Image>
                                                             <div id={cx('song-title')}>
                                                                 <div id={cx('title')}>{item.title}</div>
@@ -148,7 +160,11 @@ function Profile() {
                                                     </div>
                                                     <div className={cx('single-right')}>
                                                         <div id={cx('album')}>
-                                                            {format(new Date(item.publish), 'dd-MM-yyyy HH:mm:ss')}
+                                                            {item.albumReference?.map((item, index) => (
+                                                                <Link href={'/composer/album/' + item._id} key={index}>
+                                                                    {item.title}
+                                                                </Link>
+                                                            ))}
                                                         </div>
                                                         <HeartComponent />
                                                         <div id={cx('lenght')}>
@@ -169,7 +185,13 @@ function Profile() {
                                         </div>
                                     )}
                                 </div>
-                                {popupSong && <CreateSongComponent close={closePopupSong} />}
+                                {popupSong && (
+                                    <CreateSongComponent
+                                        data={profile}
+                                        setIsUpdated={setIsUpdated}
+                                        close={closePopupSong}
+                                    />
+                                )}
                             </div>
                             <div className={cx('composer-album')}>
                                 <div className={cx('control-title')}>
@@ -186,7 +208,7 @@ function Profile() {
                                         return (
                                             <Link className={cx('item')} href={'/composer/album/' + item._id} key={key}>
                                                 {item.thumbnailUrl && (
-                                                    <Image src={item.thumbnailUrl} alt="" width={100} height={100} />
+                                                    <Image src={item.thumbnailUrl} alt="" width={500} height={500} />
                                                 )}
                                                 {item.thumbnailUrl === null && (
                                                     <AlbumIcon className={cx('icon-album')} />
@@ -203,7 +225,7 @@ function Profile() {
                                         </div>
                                     )}
                                 </div>
-                                {popupCreateAlbum && <CreateAlbum close={closePopupAlbum} data={profile} />}
+                                {popupCreateAlbum && <CreateAlbum close={closePopupAlbum} dataProfile={profile} />}
                             </div>
                         </div>
                     )}

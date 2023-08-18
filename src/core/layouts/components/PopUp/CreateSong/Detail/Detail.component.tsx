@@ -1,28 +1,15 @@
 'use client';
-import { ISong } from '@/core/common/interfaces/collection.interface';
+import { IGenre, ISong, IUser } from '@/core/common/interfaces/collection.interface';
+import { useGetServiceGenreQuery } from '@/core/redux/services/genre.service';
 import { usePostCreateSongMutation } from '@/core/redux/services/song.service';
+import { useGetServiceUserRoleComposerQuery } from '@/core/redux/services/user.service';
+import Toast from '@/shared/components/ToastNotification/Toast/Toast.component';
 import classNames from 'classnames/bind';
 import { FC, memo, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Select, { StylesConfig } from 'react-select';
 import style from './Detail.module.scss';
 const cx = classNames.bind(style);
-
-const inputGenres = [
-    { label: 'Lofi', value: '78383b39-7c8d-4788-adb5-ca47e05cee5f' },
-    { label: 'rap', value: 'e6579dcc-9449-4852-b962-cd8bdffc0743' },
-    { label: 'Ballad', value: '401dfd91-5dc9-4062-8bb5-53f529f9727f' },
-];
-const inputAlbum = [
-    { label: 'Ngày Không Còn Em', value: 'e9cdc1ac-7d99-4283-8d31-88cfe137b604' },
-    { label: 'Ngày Mất Em', value: 'ea2f0e04-73c7-4ed9-a183-d7bf1233e9d5' },
-    { label: 'Điều anh muốn', value: 'ea2f0e54-73c7-4ed9-a183-d7bf5a9833e9d5' },
-    { label: 'Điều ước số nhất', value: 'ea2f0e54-73c7-4ed9-a183-d7bf58452e9d5' },
-];
-const inputPerformers = [
-    { label: 'Nguyễn Quang Huy', value: 'b2b46512-5e07-4b13-8260-328852364bf2' },
-    { label: 'Huy Nguyễn', value: '2cbbe26b-173f-4fee-af7c-1c8fdeedee9f' },
-];
 
 const customStyles: StylesConfig = {
     control: (provided) => ({
@@ -41,17 +28,22 @@ interface UploadDetailComponentProps {
     handleUploadDetail: any;
     label: string;
     uploadId: string;
+    user: IUser;
 }
-const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, label, uploadId }) => {
+const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, label, uploadId, user }) => {
     const {
         handleSubmit,
         register,
         formState: { errors },
     } = useForm<ISong>();
     const [genresReference, setListGenreId] = useState<string[]>([]);
-    const [albumReference, setListAlbumId] = useState<string[]>([]);
     const [performers, setListPerformers] = useState<string[]>([]);
+    const [success, setSuccess] = useState(true);
+    const [dataGenre, setDataGenre] = useState<IGenre[]>();
+    const [dataUser, setDataUser] = useState<IUser[]>();
     const [postCreateSong, { data }] = usePostCreateSongMutation();
+    const aipGetGenre = useGetServiceGenreQuery();
+    const aipGetUserComposer = useGetServiceUserRoleComposerQuery();
 
     useEffect(() => {
         if (data) {
@@ -64,17 +56,29 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
+
+    useEffect(() => {
+        if (aipGetGenre.data) {
+            setDataGenre(aipGetGenre.data.data);
+        }
+        if (aipGetUserComposer.data) {
+            setDataUser(aipGetUserComposer.data.data);
+        }
+    }, [aipGetGenre.data, aipGetUserComposer.data]);
     const handleChangeGenre = (ars: any) => {
         setListGenreId(() => {
             return ars.map((option: any) => option.value);
         });
     };
-    const handleChangeAlbum = (ars: any) => {
-        setListAlbumId(() => {
-            return ars.map((option: any) => option.value);
-        });
-    };
 
+    const inputGenre = dataGenre?.map((song) => ({
+        label: song.title,
+        value: song._id,
+    }));
+    const inputUsers = dataUser?.map((user) => ({
+        label: user.name,
+        value: user._id,
+    }));
     const handleChangePerformers = (ars: any) => {
         setListPerformers(() => {
             return ars.map((option: any) => option.value);
@@ -84,16 +88,17 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
     const onSubmitDetail = (values: any) => {
         const newValue = {
             ...values,
-            albumReference,
             genresReference,
             performers,
             uploadId,
         };
         postCreateSong(newValue);
+        setSuccess(false);
     };
 
     return (
         <>
+            {!success && <Toast message="Thêm bài hát mới thành công" state="success" title="Thành công" />}
             <h2 className={cx('title')}>{label}</h2>
             <form onSubmit={handleSubmit(onSubmitDetail)}>
                 <div className={cx('form')}>
@@ -130,7 +135,7 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
                                 Tác giả:
                             </label>
                             <select {...register('userReference', { required: true })}>
-                                <option value="2cbbe26b-173f-4fee-af7c-1c8fdeedee9f">Huy Nguyen</option>
+                                <option value={user._id}>{user.name}</option>
                             </select>
                             {errors.userReference && <p className={cx('err')}>Bạn chưa thêm tác giả</p>}
                         </div>
@@ -142,7 +147,7 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
                                 isMulti
                                 required
                                 onChange={handleChangePerformers}
-                                options={inputPerformers}
+                                options={inputUsers}
                                 styles={customStyles}
                                 className={cx('select-input')}
                             />
@@ -157,20 +162,7 @@ const DetailComponent: FC<UploadDetailComponentProps> = ({ handleUploadDetail, l
                                 isMulti
                                 required
                                 onChange={handleChangeGenre}
-                                options={inputGenres}
-                                styles={customStyles}
-                                className={cx('select-input')}
-                            />
-                        </div>
-                        <div className={cx('coolinput')}>
-                            <label htmlFor="" className={cx('text')}>
-                                Album:
-                            </label>
-                            <Select
-                                isMulti
-                                required
-                                onChange={handleChangeAlbum}
-                                options={inputAlbum}
+                                options={inputGenre}
                                 styles={customStyles}
                                 className={cx('select-input')}
                             />

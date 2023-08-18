@@ -116,7 +116,7 @@ function PerformerPage() {
                             {profile.albumsReference?.map((album) => (
                                 <Link href={'/user/album/' + album._id} key={album._id} className={cx('item')}>
                                     {album.thumbnailUrl && (
-                                        <Image src={album.thumbnailUrl} alt="" width={100} height={100} />
+                                        <Image src={album.thumbnailUrl} alt="" width={500} height={500} />
                                     )}
                                     {album.thumbnailUrl === null && <AlbumIcon className={cx('icon-album')} />}
                                     <FontAwesomeIcon icon={faCirclePlay} className={cx('playButton')} />

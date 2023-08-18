@@ -21,9 +21,15 @@
             flex-direction: column;
             justify-content: flex-end;
 
+            .information{
+                height: 50px;
+                line-height: 50px;
+                font-size: 1.2em;
+                font-weight: lighter;
+                color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.6);
+            }
             .title {
                 line-height: 3.5em;
-                margin-bottom: 2em;
             }
             img {
                 border-radius: 50%;

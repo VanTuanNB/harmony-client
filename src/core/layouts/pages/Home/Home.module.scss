@@ -54,72 +54,79 @@
         width: 94.6%;
         margin: 25px;
         margin: 0 auto;
+        margin-bottom: 20px;
 
+        h3 {
+            padding: 20px;
+        }
         .list-rank {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
+            justify-content: center;
             gap: 10px;
 
             .ranking-image-1 {
-                width: 32.5%;
-                min-width: 260px;
-                height: auto;
-                background-color: var(--theme-mode-background-user);
-                display: -webkit-flex;
-                flex-direction: row;
-                // align-items: center;
+                width: 32%;
+                background-color: rgba($color: #b9b7b7, $alpha: 0.2);
+                display: flex;
                 padding: 10px;
                 border-radius: 5px;
                 gap: 10px;
 
                 .image {
-                    width: 40%;
+                    width: 200px;
+                    height: 150px;
 
                     img {
-                        min-width: 100px;
+                        height: 100%;
                         width: 100%;
+                        object-fit: cover;
                         height: 97.5%;
                         border-radius: 5px;
+                        box-shadow: 0 0 5px lightgray;
                     }
                 }
                 .songsinger-main {
                     width: 59%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
+                    display: grid;
                     .songsinger-ranking {
                         display: flex;
                         flex-direction: column;
                         .song {
                             color: var(--theme-mode-color);
-                            font-size: 1.8rem;
+                            font-size: 1.3rem;
                             font-weight: 500;
                             line-height: 18.2px;
                         }
                         .singer {
                             color: #949090;
-                            font-size: 1.5rem;
+                            font-size: 1.2rem;
                         }
                     }
                     .rankingdate-main {
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: space-between;
+                        position: relative;
                         width: 100%;
                         .ranking {
-                            color: green;
+                            color: #00a153;
                             font-size: 3.5rem;
                             font-weight: 900;
                             line-height: 40px;
+                            padding-bottom: 10px;
+                            span {
+                                color: none;
+                                text-shadow: 2px 0 2px #b9b7b7;
+                            }
                         }
                         .date {
-                            display: flex;
-                            align-items: flex-end;
+                            position: absolute;
+                            right: 5px;
                             color: var(--theme-mode-color);
                             font-size: 14px;
-                            line-height: 25.2px;
+                            text-align: right;
+
                             padding-right: 1rem;
+                            bottom: 5px;
                         }
                     }
                 }
@@ -159,23 +166,33 @@
     width: 94.6%;
     margin: 25px;
     margin: 0 auto;
+    margin-bottom: 20px;
+    h3 {
+        padding-bottom: 10px;
+    }
     .hot-image {
         display: flex;
         gap: 16px;
         // justify-content: center;
+
         .hot-image-1 {
             width: 24%;
             padding: 10px;
-            margin-top: 20px;
             display: flex;
             flex-direction: column;
             color: var(--theme-mode-color);
             .image-album {
                 width: 200px;
                 height: 200px;
-                object-fit: cover;
                 border-radius: 10px;
                 background-color: #00a153;
+                position: relative;
+
+                img {
+                    height: 100%;
+                    border-radius: 10px;
+                    object-fit: cover;
+                }
                 .image5 {
                     width: 100%;
                     height: 100%;

@@ -1,4 +1,4 @@
-import PerformerPage from '@/core/layouts/pages/User/Performers/Performer.component';
+import PerformerPage from '@/core/layouts/pages/Composer/Performers/Performer.component';
 
 function PerformerRouting() {
     return <PerformerPage />;

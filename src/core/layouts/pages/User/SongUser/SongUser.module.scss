@@ -8,16 +8,72 @@
     padding-top: 1.5em;
     padding-bottom: 20%;
 
+    .profile-user {
+        padding: 3%;
+        box-shadow: rgba(22, 57, 40, 0.3) 0px 19px 38px, rgba(0, 191, 99, 0.22) 0px 15px 12px;
+        background: var(--theme-mode-profile);
+        .information {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            .image-profile {
+                position: relative;
+                .image2 {
+                    width: 200px;
+                    height: 200px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    box-shadow: var(--theme-mode-shadow-profile);
+                }
+            }
+
+            .name {
+                width: 100%;
+                padding: 4%;
+                position: relative;
+
+                .name-profile {
+                    font-size: 4.5em;
+                }
+                p {
+                    position: absolute;
+                }
+            }
+        }
+    }
     .title {
         width: 90%;
         margin: auto;
+        margin-top: 5%;
 
-        h2{
+        h2 {
             font-size: 1.5em;
         }
         p {
             font-size: 1em;
             color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.6);
+        }
+    }
+    .detail {
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 100px;
+        line-height: 100px;
+        padding-left: 5%;
+
+        .detail-image {
+            width: 50px;
+            height: 50px;
+            margin-right: 0.5em;
+            border-radius: 100%;
+        }
+        .infor {
+            span {
+                font-weight: 400;
+                font-size: 14px;
+            }
         }
     }
     .album-header {
@@ -38,7 +94,6 @@
     }
 
     .album-render {
-        margin-top: 1em;
         padding: 20px;
         width: 100%;
 
@@ -125,6 +180,14 @@
                     width: 18%;
                     text-align: start;
                     color: gray;
+
+                    a {
+                        padding-right: 10px;
+                        color: gray;
+                    }
+                }
+                #album a:hover {
+                    color: var(--theme-mode-color);
                 }
                 #date {
                     padding: 10px;
@@ -156,7 +219,9 @@
                     }
                 }
                 #album {
-                    color: var(--theme-mode-color);
+                    a {
+                        color: var(--theme-mode-color);
+                    }
                 }
                 #date {
                     color: var(--theme-mode-color);
@@ -188,5 +253,4 @@
             color: #03d16d;
         }
     }
-  
 }

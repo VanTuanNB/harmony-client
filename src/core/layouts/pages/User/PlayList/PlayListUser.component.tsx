@@ -7,12 +7,12 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import UpdatePlaylist from '../../../components/PopUp/UpdatePlaylist/UpdatePlaylist.component';
-import style from './PlayList.module.scss';
+import style from './PlayListUser.module.scss';
 import HeartComponent from '@/shared/components/Heart/Heart.component';
 
 const cx = classNames.bind(style);
 
-function PlayListPage() {
+function PlayListUserPage() {
     const [popupUploadPlaylist, setPopupUploadPlaylist] = useState(false);
     const [playlist, setPlaylist] = useState('');
     const path = usePathname();
@@ -162,4 +162,4 @@ function PlayListPage() {
     );
 }
 
-export default PlayListPage;
+export default PlayListUserPage;
