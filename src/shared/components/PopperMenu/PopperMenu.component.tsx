@@ -1,12 +1,12 @@
-import { ReactElement, ReactNode, useRef, useState } from 'react';
-import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react/headless';
+import classNames from 'classnames/bind';
+import { ReactElement, ReactNode, memo, useState } from 'react';
 
-import styles from './PopperMenu.module.scss';
 import { IPopperListOptions } from '@/shared/interfaces/IPopperListOptions.interface';
-import MenuItem from './MenuItem.component';
-import Wrapper from './Wrapper.component';
 import HeaderPopper from './HeaderPopper.component';
+import MenuItem from './MenuItem.component';
+import styles from './PopperMenu.module.scss';
+import Wrapper from './Wrapper.component';
 
 const cx = classNames.bind(styles);
 
@@ -20,9 +20,16 @@ interface IPopperMenu {
         left?: number;
         bottom?: number;
     };
+    callbackFn?: (title: string) => void;
 }
 
-function PopperMenuComponent({ children, listOptions, isHideOutSide = true, position }: IPopperMenu): ReactNode {
+function PopperMenuComponent({
+    children,
+    listOptions,
+    isHideOutSide = true,
+    position,
+    callbackFn,
+}: IPopperMenu): ReactNode {
     const [history, setHistory] = useState<{ data: IPopperListOptions[]; title: string }[]>([
         { data: listOptions, title: '' },
     ]);
@@ -42,6 +49,7 @@ function PopperMenuComponent({ children, listOptions, isHideOutSide = true, posi
                             setHistory((prevState) => [...prevState, { data: item.children!.data, title: item.title }]);
                         } else {
                             setHistory((prevState) => [...prevState]);
+                            if (!!callbackFn) callbackFn(item.title);
                         }
                     }}
                 />
@@ -91,4 +99,4 @@ function PopperMenuComponent({ children, listOptions, isHideOutSide = true, posi
     );
 }
 
-export default PopperMenuComponent;
+export default memo(PopperMenuComponent);
