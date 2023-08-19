@@ -14,6 +14,7 @@ import { useGetServiceProfileQuery } from '@/core/redux/services/user.service';
 import HeartComponent from '@/shared/components/Heart/Heart.component';
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
 import { AlbumIcon, HistoryIcon, ListSongIcon, PlayListIcon } from '@/shared/components/Svg/index.component';
+import { formatDate } from '@/utils/format.util';
 import { faAdd, faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
@@ -252,9 +253,7 @@ function Profile() {
                                         </div>
                                     </div>
                                     <div className={cx('single-right')}>
-                                        <div id={cx('album')}>
-                                            {format(new Date(item.publish), 'dd-MM-yyyy HH:mm:ss')}
-                                        </div>
+                                        <div id={cx('album')}>{formatDate(item.publish)}</div>
 
                                         <HeartComponent />
                                         <div id={cx('lenght')}>
@@ -320,9 +319,7 @@ function Profile() {
                                         </div>
                                     </div>
                                     <div className={cx('single-right')}>
-                                        <div id={cx('album')}>
-                                            {format(new Date(item.publish), 'dd-MM-yyyy HH:mm:ss')}
-                                        </div>
+                                        <div id={cx('album')}>{formatDate(item.publish)}</div>
                                         <HeartComponent />
                                         <div id={cx('lenght')}>
                                             <span id={cx('lenght')}>3:40</span>
