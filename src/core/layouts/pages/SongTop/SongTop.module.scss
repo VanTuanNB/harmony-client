@@ -1,0 +1,198 @@
+.main-album {
+    width: 98%;
+    margin: 0 auto;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: var(--theme-mode-background-user);
+    transition: background-color linear 0.2s;
+    padding-top: 1.5em;
+    padding-bottom: 20%;
+
+    .title {
+        width: 90%;
+        margin: auto;
+
+        h2 {
+            font-size: 2.5em;
+            background: -webkit-linear-gradient(left, #00bf63, #f90);
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        p {
+            font-size: 1em;
+            color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.6);
+        }
+    }
+    .album-header {
+        display: inline-flex;
+    }
+    .prev-button {
+        background: none;
+        width: 100px;
+        height: 100px;
+    }
+    .next-button {
+        background: none;
+        width: 100px;
+        height: 100px;
+    }
+    table {
+        border-collapse: collapse;
+    }
+
+    .album-render {
+        margin-top: 1em;
+        padding: 20px;
+        width: 100%;
+
+        .list-songs {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            .single-song {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                height: 100px;
+                border-bottom: 1px solid rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
+                border-top: 1px solid rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
+                border-radius: 5px;
+                transition: 0.15s;
+                cursor: pointer;
+
+                .id {
+                    width: 50px;
+                    margin: auto;
+
+                    p {
+                        font-size: 2.5em;
+                        font-weight: bold;
+                        text-align: center;
+                    }
+                }
+                .top0 {
+                    color: #00bf63;
+                }
+
+                .top1 {
+                    color: brown;
+                }
+                .top2 {
+                    color: yellow;
+                }
+                #song {
+                    width: 40%;
+                    margin-left: 1em;
+                    display: flex;
+                    flex-direction: row;
+
+                    img {
+                        width: 60px;
+                        height: 60px;
+                        object-fit: cover;
+                        border-radius: 5px;
+                    }
+
+                    #song-title {
+                        height: 40px;
+                        line-height: 25px;
+                        justify-content: center;
+                        margin-left: 0.5em;
+
+                        #title {
+                            font-size: 16px;
+                            font-weight: 500;
+                            margin-top: 5px;
+                        }
+                        #author {
+                            width: 100%;
+                            display: grid;
+                            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                            column-gap: 10px;
+                            a {
+                                font-size: 14px;
+                                font-weight: 400;
+                                color: gray;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                            }
+                            a:hover {
+                                color: var(--theme-mode-color);
+                            }
+                        }
+                    }
+                }
+                #album {
+                    width: 30%;
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+
+                    a {
+                        font-size: 14px;
+                        font-weight: 400;
+                        color: gray;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+                #album a:hover {
+                    color: var(--theme-mode-color);
+                }
+                #date {
+                    padding: 10px;
+                    text-align: center;
+                    color: gray;
+                }
+                #lenght {
+                    padding: 0px 20px;
+                    text-align: center;
+                    display: flex;
+                    align-items: center;
+
+                    #lenght {
+                        padding: 0px 20px;
+                        color: gray;
+                    }
+                    #icon {
+                        opacity: 0%;
+                    }
+                }
+            }
+            .single-song:hover {
+                background-color: rgba(184, 180, 180, 0.329);
+
+                #date {
+                    color: var(--theme-mode-color);
+                }
+                #lenght {
+                    #lenght {
+                        color: var(--theme-mode-color);
+                    }
+                    #icon {
+                        opacity: 100%;
+                    }
+                }
+            }
+        }
+    }
+    .btn-icon {
+        width: 90%;
+        height: 60px;
+        margin: auto;
+        line-height: 60px;
+
+        .icon-Play {
+            color: #00bf63;
+            cursor: pointer;
+            font-size: 4em;
+            margin-top: 20px;
+        }
+        .icon-Play:hover {
+            color: #03d16d;
+        }
+    }
+}
