@@ -1,17 +1,26 @@
 'use client';
 import Link from 'next/link';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import classNames from 'classnames/bind';
-import styles from './Header.module.scss';
+import { selectUserReducer } from '@/core/redux/features/user/user.slice';
+import { useAppSelector } from '@/core/redux/hook.redux';
 import InputSearchComponent from '@/shared/components/InputSearch/InputSearch.component';
+import classNames from 'classnames/bind';
+import { useEffect, useState } from 'react';
+import styles from './Header.module.scss';
+import HeaderAuth from './HeaderAuth/HeaderAuth.component';
 import HeaderRight from './HeaderRight/HeaderRight.component';
 
 const cx = classNames.bind(styles);
 
 function HeaderComponent() {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const { profile } = useAppSelector(selectUserReducer);
+    useEffect(() => {
+        setIsLoading(true);
+    }, [profile]);
     return (
         <header className={cx('header')}>
             <div className={cx('header-left')}>
@@ -25,7 +34,7 @@ function HeaderComponent() {
                 </div>
                 <InputSearchComponent />
             </div>
-            <HeaderRight />
+            {isLoading && (!!profile ? <HeaderRight profile={profile} /> : <HeaderAuth />)}
         </header>
     );
 }

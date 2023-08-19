@@ -1,0 +1,18 @@
+.wrapper-login {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    & .link-login {
+        padding: 6px 12px;
+        background-color: #00bf63;
+        border-radius: 6px;
+        font-weight: 500;
+        color: var(--theme-mode-color);
+
+        &:hover {
+            background-color: #02a054;
+        }
+    }
+}

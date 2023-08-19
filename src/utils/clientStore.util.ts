@@ -1,3 +1,4 @@
+'use client';
 import { IClientStoreSide } from '@/core/common/interfaces/index.interface';
 
 export class LocalStorageSide implements IClientStoreSide {
@@ -22,12 +23,14 @@ export class sessionStorageSide implements IClientStoreSide {
 
 export class CookieStorageSide implements IClientStoreSide {
     getStore(key: string): { [key: string]: any } {
+        if (typeof document === 'undefined') return {};
         let keyEQ = key + '=';
         const arrSegmentCookie = document.cookie.split(';');
         for (let i = 0; i < arrSegmentCookie.length; i++) {
             let charts = arrSegmentCookie[i];
             while (charts.charAt(0) == ' ') charts = charts.substring(1, charts.length);
-            if (charts.indexOf(keyEQ) === 0) return { [key]: charts.substring(keyEQ.length, charts.length) };
+            if (charts.indexOf(keyEQ) === 0)
+                return { [key]: JSON.parse(decodeURIComponent(charts.substring(keyEQ.length, charts.length))) };
         }
         return {};
     }

@@ -1,16 +1,13 @@
-export interface IUserStore {
+import { ROLE_CUSTOMER } from '../constants/common.constant';
+export interface IProfile {
     _id: string;
     email: string;
     name: string;
-    refreshToken: string;
-    password?: string;
-    avatarUrl?: string;
+    avatarUrl: string;
     locale?: string;
-    playlistReference?: string[];
-    favoriteListReference?: string;
-    historyReference?: string;
-    isRegistrationForm: boolean;
-    composerReference?: string;
-    createdAt?: Date;
-    updatedAt?: Date;
+    role: ROLE_CUSTOMER;
+    nickname?: string;
+}
+export interface IUserStore {
+    profile: IProfile | null;
 }
