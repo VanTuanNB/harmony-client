@@ -10,7 +10,7 @@
     &:hover {
         background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
     }
-    
+
     & .media {
         display: flex;
         align-items: center;
@@ -58,8 +58,8 @@
                     color: var(--theme-mode-color);
                     margin: 0;
                     line-height: 1.6rem;
-                    display: -webkit-box;
                     max-height: 1.6rem;
+                    display: -webkit-box;
                     overflow: hidden;
                     -webkit-line-clamp: 1;
                     -webkit-box-orient: vertical;
@@ -71,11 +71,8 @@
                     font-size: 1.2rem;
                     margin-top: 4px;
                     line-height: 1.4rem;
-                    display: -webkit-box;
                     max-height: 1.6rem;
-                    overflow: hidden;
-                    -webkit-line-clamp: 1;
-                    -webkit-box-orient: vertical;
+                    display: -webkit-box;
 
                     & .link-channel {
                         color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.6);

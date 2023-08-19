@@ -1,13 +1,12 @@
-import classNames from 'classnames/bind';
-import { ReactNode, memo, useState } from 'react';
-
 import { EStateCurrentSong } from '@/core/common/constants/common.constant';
-import { ISong, IUser } from '@/core/common/interfaces/collection.interface';
+import { ISong } from '@/core/common/interfaces/collection.interface';
 import { ISongStore } from '@/core/common/interfaces/songStore.interface';
 import { selectSongReducer } from '@/core/redux/features/song/song.slice';
 import { useAppSelector } from '@/core/redux/hook.redux';
+import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ReactNode, memo, useState } from 'react';
 import LoadingSong from '../Loading/LoadingSong/LoadingSong.component';
 import styles from './MediaItem.module.scss';
 
@@ -38,11 +37,13 @@ function MediaItem({ _id, thumbnailUrl, title, performers, active = false, onCli
                     <div className={cx('info')}>
                         <h1 className={cx('title')}>{title}</h1>
                         <h3 className={cx('performers')}>
-                            {performers.map((performer: IUser, index: number) => (
-                                <Link key={index} href={'/' + performer.nickname} className={cx('link-channel')}>
-                                    {performer.name}
-                                </Link>
-                            ))}
+                            {performers.map((item, index) => {
+                                return (
+                                    <Link key={index} href={'/' + item.nickname} className={cx('link-channel')}>
+                                        {item.name}
+                                    </Link>
+                                );
+                            })}
                         </h3>
                     </div>
                 </div>

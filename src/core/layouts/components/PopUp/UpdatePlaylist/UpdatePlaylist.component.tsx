@@ -1,6 +1,7 @@
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
+import { memo } from 'react';
 import style from './UpdatePlaylist.module.scss';
 
 const cx = classNames.bind(style);
@@ -14,7 +15,7 @@ function UpdatePlaylist({ close }: IState) {
             <div className={cx('controller')}>
                 <div className={cx('form-pop-up')}>
                     <div className={cx('title')}>
-                        <h2>Cập nhập playlist</h2>
+                        <h2>Cập nhật playlist</h2>
                         <button onClick={close}>
                             <FontAwesomeIcon icon={faClose} className={cx('close')} />
                         </button>
@@ -31,4 +32,4 @@ function UpdatePlaylist({ close }: IState) {
     );
 }
 
-export default UpdatePlaylist;
+export default memo(UpdatePlaylist);
