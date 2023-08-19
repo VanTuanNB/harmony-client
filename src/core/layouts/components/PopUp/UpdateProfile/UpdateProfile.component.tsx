@@ -94,8 +94,8 @@ function UpdateProfile({ close, dataProfile }: IState) {
                                     <Image
                                         className={cx('img')}
                                         src={dataProfile.avatarUrl || '/images/fallback-thumbnail-user.jpg'}
-                                        width={100}
-                                        height={100}
+                                        width={500}
+                                        height={500}
                                         alt=""
                                     />
                                 )}
