@@ -41,7 +41,7 @@ export interface ISong {
         keyObject: string;
         contentType: EContentTypeObjectS3.AUDIO;
     };
-    publish: Date;
+    publish: string;
     albumReference?: IAlbum[];
     genresReference: IGenre[];
     performers: IUser[];

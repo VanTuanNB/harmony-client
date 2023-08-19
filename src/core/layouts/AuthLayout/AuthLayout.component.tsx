@@ -13,7 +13,6 @@ const cx = classNames.bind(styles);
 
 function AuthLayout({ children }: { children: ReactNode }) {
     const pathname = usePathname();
-    console.log('path name', pathname);
     const store = useAppSelector(selectClientStoreReducer);
     const currentTheme = store.localStoreSide[ELocalStorageKey.DATA_THEME];
 

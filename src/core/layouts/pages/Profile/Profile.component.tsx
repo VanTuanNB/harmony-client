@@ -6,10 +6,10 @@ import UpdateProfile from '@/core/layouts/components/PopUp/UpdateProfile/UpdateP
 import { useGetServiceProfileQuery } from '@/core/redux/services/user.service';
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
 import { AlbumIcon, HeartIcon1, HeartIcon2, HeartIcon3, ListSongIcon } from '@/shared/components/Svg/index.component';
+import { formatDate } from '@/utils/format.util';
 import { faAdd, faCirclePlay, faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
-import { format } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -103,7 +103,9 @@ function Profile() {
                                         <button onClick={openPopUpSong}>
                                             <FontAwesomeIcon className={cx('icon-add')} icon={faAdd} />
                                         </button>
-                                       {profile.songsReference?.length !== 0 && <Link href={`/profile/song/${profile._id}`}>Xem tất cả</Link>}
+                                        {profile.songsReference?.length !== 0 && (
+                                            <Link href={`/profile/song/${profile._id}`}>Xem tất cả</Link>
+                                        )}
                                     </div>
                                 </div>
                                 <div className={cx('list-songs')}>
@@ -127,9 +129,7 @@ function Profile() {
                                                         </div>
                                                     </div>
                                                     <div className={cx('single-right')}>
-                                                        <div id={cx('album')}>
-                                                            {format(new Date(item.publish), 'dd-MM-yyyy HH:mm:ss')}
-                                                        </div>
+                                                        <div id={cx('album')}>{formatDate(item.publish)}</div>
                                                         <div className={cx('heart-container')} title="Like">
                                                             <input
                                                                 type="checkbox"
@@ -145,7 +145,9 @@ function Profile() {
                                                         <div id={cx('lenght')}>
                                                             <span id={cx('lenght')}>3:40</span>
                                                         </div>
-                                                        <Link href={`/user/song/${item._id}`} className={cx('edit')}>Sửa</Link>
+                                                        <Link href={`/user/song/${item._id}`} className={cx('edit')}>
+                                                            Sửa
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             </>

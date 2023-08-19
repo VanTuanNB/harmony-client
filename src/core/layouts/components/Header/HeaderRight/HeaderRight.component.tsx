@@ -1,7 +1,6 @@
-import { ReactNode, memo, useEffect, useState } from 'react';
+import { ReactNode, memo } from 'react';
 
-import { selectUserReducer } from '@/core/redux/features/user/user.slice';
-import { useAppSelector } from '@/core/redux/hook.redux';
+import { IProfile } from '@/core/common/interfaces/userStore.interface';
 import ButtonSwitchTheme from '@/shared/components/ButtonSwitchTheme/ButtonSwitchTheme.component';
 import PopperMenuComponent from '@/shared/components/PopperMenu/PopperMenu.component';
 import { IPopperListOptions } from '@/shared/interfaces/IPopperListOptions.interface';
@@ -13,10 +12,11 @@ import styles from './HeaderRight.module.scss';
 
 const cx = classNames.bind(styles);
 
-function HeaderRight(): ReactNode {
-    const [avatar, setAvatar] = useState<string>('');
-    const { profile } = useAppSelector(selectUserReducer);
-    console.log(profile);
+interface IProps {
+    profile: IProfile;
+}
+
+function HeaderRight({ profile }: IProps): ReactNode {
     const MENU_SETTINGS: IPopperListOptions[] = [
         {
             icon: faHome,
@@ -55,32 +55,30 @@ function HeaderRight(): ReactNode {
         },
     ];
 
-    useEffect(() => {
-        if (profile) setAvatar(profile.avatarUrl);
-    }, [profile]);
-
     return (
-        <ul className={cx('header-right-options')}>
-            <li className={cx('item')}>
+        <div className={cx('header-right-options')}>
+            <div className={cx('item')}>
                 <ButtonSwitchTheme />
-            </li>
-            <li className={cx('item')}>
+            </div>
+            <div className={cx('item')}>
                 <PopperMenuComponent listOptions={MENU_SETTINGS} position={{ top: 46, right: 0 }}>
                     <button className={cx('btn-settings')}>
                         <FontAwesomeIcon icon={faGear} />
                     </button>
                 </PopperMenuComponent>
-            </li>
-            <li className={cx('item')}>
+            </div>
+            <div className={cx('item')}>
                 <PopperMenuComponent listOptions={USER_SETTINGS} position={{ top: 46, right: 0 }}>
-                    {!!avatar ? (
-                        <Image src={avatar} width={40} height={40} alt="image" className={cx('avatar')} />
-                    ) : (
-                        <></>
-                    )}
+                    <Image
+                        src={profile.avatarUrl || '/images/fallback-thumbnail-user.jpg'}
+                        width={40}
+                        height={40}
+                        alt="image"
+                        className={cx('avatar')}
+                    />
                 </PopperMenuComponent>
-            </li>
-        </ul>
+            </div>
+        </div>
     );
 }
 

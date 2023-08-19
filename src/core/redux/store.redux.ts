@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { batchedSubscribe } from 'redux-batched-subscribe';
 
-import logger from 'redux-logger';
 import { ESelectReducer } from '../common/constants/reduxSlice.constant';
 import clientStoreSlice from './features/client/client.slice';
 import songSlice from './features/song/song.slice';
@@ -16,7 +15,7 @@ export const store = configureStore({
         [ESelectReducer.CLIENT_STORE]: clientStoreSlice.reducer,
         [ESelectReducer.SONG]: songSlice.reducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger, rootSplitApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(rootSplitApi.middleware),
     devTools: process.env.NODE_ENV !== 'production',
     enhancers: [batchedSubscribe((notify) => notify())],
 });

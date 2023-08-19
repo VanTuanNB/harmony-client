@@ -1,3 +1,4 @@
+'use client';
 import { IClientStoreSide } from '@/core/common/interfaces/index.interface';
 
 export class LocalStorageSide implements IClientStoreSide {
