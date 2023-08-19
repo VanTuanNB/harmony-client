@@ -1,119 +1,174 @@
-.form {
-    width: 35%;
-    background: var(--theme-mode-background-user);
-    margin-top: 100px;
-    text-align: center;
-    margin: auto;
-    border-radius: 5px;
-    padding-bottom: 10px;
+.wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    hr {
-        margin-top: 40px;
-        margin-bottom: 40px;
-    }
-    .form-top {
-        display: grid;
-        grid-template-columns: 1fr;
-        justify-items: center;
-        row-gap: 20px;
+    .form {
+        width: 36%;
+        background: var(--theme-mode-background-user);
+        margin-top: 30 px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 5px;
+        padding-bottom: 10px;
+
+        hr {
+            width: 98%;
+            margin-top: 32px;
+            margin-bottom: 32px;
+        }
 
         h2 {
             font-size: 2em;
-            padding-top: 50px;
+            padding-top: 36px;
+            margin-bottom: 12px;
+        }
+        .form-top {
+            width: 60%;
+            display: grid;
+            grid-template-columns: 1fr;
+            justify-items: center;
+            row-gap: 20px;
+
+            a {
+                width: 100%;
+                height: 50px;
+                line-height: 40px;
+                display: grid;
+                grid-template-columns: 50px 200px;
+                align-items: center;
+                justify-content: center;
+                text-align: left;
+                border: 1px solid var(--theme-mode-color);
+                border-radius: 5px;
+                color: var(--theme-mode-color);
+
+                .icon-facebook {
+                    width: 20px;
+                    height: 20px;
+                    line-height: 40px;
+                    object-fit: cover;
+                    margin: auto;
+                }
+                p {
+                    text-align: left;
+                    color: var(--theme-mode-color);
+                }
+            }
+            a:hover {
+                box-shadow: 0 0 10px #cbcaca;
+            }
+        }
+
+        & .form-group {
+            width: 100%;
             margin-bottom: 20px;
         }
 
-        a {
-            width: 50%;
-            height: 50px;
-            line-height: 40px;
-            display: grid;
-            grid-template-columns: 50px 200px;
-            align-items: center;
-            justify-content: center;
-            text-align: left;
-            border: 1px solid var(--theme-mode-color);
-            border-radius: 5px;
-            color: var(--theme-mode-color);
+        .login-form {
+            margin-top: 32px;
+            width: 60%;
 
-            .icon-facebook {
-                width: 20px;
-                height: 20px;
-                line-height: 40px;
-                object-fit: cover;
-                margin: auto;
+            &.signUp {
+                margin-top: 0;
             }
-            p {
-                text-align: left;
+
+            & .wrapper-password {
+                width: 100%;
+                position: relative;
+
+                & .btn-preview {
+                    width: 30px;
+                    padding: 4px;
+                    background: transparent;
+                    position: absolute;
+                    color: var(--theme-mode-color);
+                    top: 50%;
+                    right: 0;
+                    transform: translateY(-50%);
+                    font-size: 1.4rem;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.1);
+                        border-radius: 8px;
+                    }
+                }
+            }
+
+            input {
+                width: 100%;
+                height: 40px;
+                border: 1px solid var(--theme-mode-color);
+                background: none;
+                padding-left: 10px;
+                border-radius: 5px;
+                color: var(--theme-mode-color);
+
+                &.invalid {
+                    border: 1px solid red;
+                }
+
+                &:placeholder-shown {
+                    color: #ccc;
+                    font-weight: 500;
+                }
+            }
+
+            & .messages {
+                height: 18px;
+                & .message-errors {
+                    font-size: 1.4rem;
+                    color: red;
+                    font-weight: 600;
+                }
+            }
+            & .remember {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 20px;
+                input[type='checkbox'] {
+                    width: 20px;
+                    height: 20px;
+                }
+                span {
+                    padding-left: 10px;
+                }
+            }
+            .btn-submit {
+                width: 100%;
+                height: 40px;
+                border-radius: 10px;
+                font-weight: 500;
+                transition: 0.3s;
+                cursor: pointer;
+            }
+            .btn-submit:not(:disabled):hover {
+                background-color: var(--theme-item-highlight);
+                color: white;
+            }
+        }
+        .forgot {
+            height: 50px;
+            line-height: 50px;
+            text-decoration: underline;
+            font-weight: 300;
+            font-style: oblique;
+            font-size: 15px;
+            color: var(--theme-mode-color);
+        }
+        .sub {
+            margin-top: 24px;
+            color: var(--theme-mode-color);
+            font-weight: 300;
+            a {
+                text-decoration: underline;
+                font-weight: 500;
                 color: var(--theme-mode-color);
             }
-        }
-        a:hover {
-            box-shadow: 0 0 10px #cbcaca;
-        }
-    }
-
-    .login-form {
-        width: 100%;
-        margin-top: 50px;
-
-        input {
-            width: 50%;
-            height: 40px;
-            margin-bottom: 20px;
-            border: 1px solid var(--theme-mode-color);
-            background: none;
-            padding-left: 10px;
-            border-radius: 5px;
-            color: var(--theme-mode-color);
-        }
-        .terms {
-            margin-top: 1em;
-        }
-        p {
-            font-size: 11px;
-            width: 80%;
-            margin: auto;
-
-            input[type='checkbox'] {
-                width: 20px;
-                height: 20px;
-            }
-            span {
-                padding-left: 10px;
-            }
-        }
-
-        button {
-            width: 50%;
-            height: 40px;
-            border-radius: 10px;
-            font-weight: 500;
-            margin-top: 30px;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: var(--theme-item-highlight);
-            color: white;
-        }
-    }
-    .forgot {
-        height: 50px;
-        line-height: 50px;
-        text-decoration: underline;
-        font-weight: 300;
-        font-style: oblique;
-        font-size: 15px;
-        color: var(--theme-mode-color);
-    }
-    p {
-        color: var(--theme-mode-color);
-        font-weight: 300;
-        a {
-            text-decoration: underline;
-            font-weight: 500;
-            color: var(--theme-mode-color);
         }
     }
 }

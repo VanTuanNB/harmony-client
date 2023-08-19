@@ -20,7 +20,8 @@ import { AlbumIcon } from '@/shared/components/Svg/index.component';
 import { faArrowLeft, faArrowRight, faWifi } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
-import { format } from 'date-fns';
+
+import { formatDate } from '@/utils/format.util';
 import Image from 'next/image';
 import Link from 'next/link';
 import { memo, useEffect, useState } from 'react';
@@ -222,7 +223,7 @@ function HomePage() {
                                         <span>#{index + 1}</span>
                                     </div>
                                     <div className={cx('date')}>
-                                        <span>{format(new Date(song.publish), 'dd/MM/yyyy')}</span>
+                                        <span>{formatDate(song.publish)}</span>
                                     </div>
                                 </div>
                             </div>
