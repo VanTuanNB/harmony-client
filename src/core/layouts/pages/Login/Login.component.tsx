@@ -79,12 +79,12 @@ function LoginPage() {
         <div className={cx('wrapper')}>
             {isLoading && <LoadingPage />}
             <div className={cx('form')}>
-                <h2>Login to Harmony</h2>
+                <h2>Đăng nhập Harmony</h2>
                 <form onSubmit={handleSubmit(onSubmit)} className={cx('login-form')}>
                     <div className={cx('form-group')}>
                         <input
                             type="text"
-                            placeholder="Email"
+                            placeholder="Nhập email..."
                             className={cx(errors.email && 'invalid')}
                             {...register('email', { required: true, pattern: REGEX.EMAIL })}
                         />
@@ -101,7 +101,7 @@ function LoginPage() {
                         <div className={cx('wrapper-password')}>
                             <input
                                 type={isPreviewPassword ? 'text' : 'password'}
-                                placeholder="Password"
+                                placeholder="Nhập password..."
                                 className={cx(errors.password && 'invalid')}
                                 {...register('password', { required: true })}
                             />
@@ -123,24 +123,24 @@ function LoginPage() {
                     <button className={cx('btn-submit')}>Log in</button>
                 </form>
                 <Link href="" className={cx('forgot')}>
-                    Forgot your password?
+                    Quên mật khẩu?
                 </Link>
                 <hr />
 
                 <div className={cx('form-top')}>
                     <Link href={AUTH_API_SOCIAL.URL_GOOGLE}>
                         <GoogleIcon width="30px" height="30px" className={cx('icon-facebook')} fill="none" />
-                        <p> Continue with Google</p>
+                        <p> Tiếp tục với Google</p>
                     </Link>
                     <Link href={AUTH_API_SOCIAL.URL_FACEBOOK}>
                         <FacebookIcon width="30px" height="30px" className={cx('icon-facebook')} fill="none" />
-                        <p> Continue with Facebook</p>
+                        <p> Tiếp tục với Facebook</p>
                     </Link>
                 </div>
                 <div className={cx('sub')}>
-                    Don't have an account?{' '}
+                    Bạn chưa có tài khoản?{' '}
                     <Link href="">
-                        <i>Sign up Harmony for free</i>
+                        <i>Đăng ký với chúng tôi</i>
                     </Link>
                 </div>
             </div>

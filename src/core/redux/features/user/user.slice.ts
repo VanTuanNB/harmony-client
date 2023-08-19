@@ -16,7 +16,7 @@ export const userSlice = createSlice({
     name: ESelectReducer.USER,
     initialState,
     reducers: {
-        updateProfile(state: IUserStore, action: PayloadAction<IProfile>) {
+        updateProfile(state: IUserStore, action: PayloadAction<IProfile | null>) {
             state[EScopeSongStore.PROFILE] = action.payload;
             localStoreInstance.setStore<IProfile | null>(EScopeSongStore.PROFILE, action.payload);
         },
