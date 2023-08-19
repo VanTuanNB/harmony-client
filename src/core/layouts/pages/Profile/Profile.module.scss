@@ -6,8 +6,7 @@
     background-color: var(--theme-mode-background-user);
     transition: background-color linear 0.2s;
     padding-top: 1.5em;
-    padding-bottom: 100%;
-    margin-bottom: 6.5em;
+    padding-bottom: 20%;
     a {
         color: var(--theme-mode-color);
     }
@@ -91,23 +90,6 @@
 
         .composer-song {
             margin-bottom: 5%;
-        }
-
-        .albumNot {
-            width: 100%;
-            text-align: center;
-
-            .icon-album {
-                color: var(--theme-mode-color);
-                width: 100px;
-                height: 100px;
-                background-color: #00bf63;
-                border-radius: 10px;
-            }
-            h2 {
-                color: gray;
-                font-size: 1.3em;
-            }
         }
     }
     .history {
@@ -221,6 +203,9 @@
                     flex-direction: row;
 
                     img {
+                        width: 40px;
+                        height: 40px;
+                        object-fit: cover;
                         border-radius: 5px;
                     }
 
@@ -250,6 +235,12 @@
                     text-align: center;
                     line-height: 50px;
                     color: gray;
+                    a {
+                        padding-right: 20px;color: gray;
+                    }
+                }
+                #album a:hover {
+                    color: var(--theme-mode-color);
                 }
                 #icon {
                     opacity: 0%;
@@ -269,7 +260,7 @@
                         padding: 5px;
                     }
                 }
-                .edit{
+                .edit {
                     width: 10%;
                     display: flex;
                     text-align: center;
@@ -305,10 +296,27 @@
                         color: var(--theme-mode-color);
                     }
                 }
-                .edit{
+                .edit {
                     opacity: 100%;
                 }
             }
+        }
+    }
+    .albumNot {
+        width: 100%;
+        text-align: center;
+
+        .icon-album {
+            color: var(--theme-mode-color);
+            width: 100px;
+            height: 100px;
+            background-color: #00bf63;
+            border-radius: 10px;
+        }
+        h2 {
+            color: gray;
+            font-size: 1.3em;
+            text-align: center;
         }
     }
     .list {
@@ -316,7 +324,7 @@
         flex-wrap: wrap;
         .item {
             width: 20%;
-            height: 30%;
+            padding-bottom: 10px;
             margin: 10px;
             text-align: center;
             border-radius: 5px;
@@ -337,9 +345,16 @@
             }
             img {
                 width: 100%;
-                height: 40%;
+                height: 70%;
                 object-fit: cover;
                 border-radius: 5px;
+            }
+            .icon-album {
+                width: 100%;
+                height: 70%;
+                object-fit: cover;
+                border-radius: 5px;
+                background-color: #00a153;
             }
             p {
                 font-size: 1.3rem;
@@ -347,93 +362,13 @@
         }
         .item:hover {
             box-shadow: 0 0 15px var(--theme-filter);
-            .playButton {
-                opacity: 100%;
-                top: 35%;
-            }
-        }
-    }
-    .heart-container {
-        --heart-color: #00bf63;
-        position: relative;
-        width: 50px;
-        height: 50px;
-        transition: 0.3s;
-
-        .checkbox {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            z-index: 20;
-            cursor: pointer;
-        }
-
-        .svg-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            .svg-outline,
-            .svg-filled {
-                fill: var(--heart-color);
+            transition: 0.5 ease-in-out;
+            img {
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
                 position: absolute;
-            }
-
-            .svg-filled {
-                animation: keyframes-svg-filled 1s;
-                display: none;
-            }
-
-            .svg-celebrate {
-                position: absolute;
-                animation: keyframes-svg-celebrate 0.5s;
-                animation-fill-mode: forwards;
-                display: none;
-                stroke: var(--heart-color);
-                fill: var(--heart-color);
-                stroke-width: 2px;
-            }
-        }
-        .checkbox:checked ~ .svg-container .svg-filled {
-            display: block;
-        }
-
-        .checkbox:checked ~ .svg-container .svg-celebrate {
-            display: block;
-        }
-
-        @keyframes keyframes-svg-filled {
-            0% {
-                transform: scale(0);
-            }
-
-            25% {
-                transform: scale(1.2);
-            }
-
-            50% {
-                transform: scale(1);
-                filter: brightness(1.5);
-            }
-        }
-
-        @keyframes keyframes-svg-celebrate {
-            0% {
-                transform: scale(0);
-            }
-
-            50% {
-                opacity: 1;
-                filter: brightness(1.5);
-            }
-
-            100% {
-                transform: scale(1.4);
-                opacity: 0;
-                display: none;
             }
         }
     }

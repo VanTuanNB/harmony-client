@@ -17,7 +17,7 @@
 
         .form-pop-up {
             width: 35vw;
-            height: 40%;
+            padding-bottom: 10%;
             display: grid;
             padding: 3%;
             border-radius: 10px;
@@ -47,14 +47,17 @@
                 .form {
                     width: 100%;
                     text-align: center;
+                    display: grid;
+                    justify-content: center;
                     input {
                         height: 50px;
-                        width: 95%;
+                        width: 400px;
                         border-radius: 5px;
                         border: none;
                         padding-left: 10px;
                         color: var(--theme-mode-color);
                         background: var(--theme-filter);
+                        margin-bottom: 15px;
                     }
                     button {
                         margin-top: 20px;
@@ -64,6 +67,21 @@
                         color: var(--theme-mode-background);
                         background-color: #00bf63;
                         font-weight: bold;
+                    }
+                    .err {
+                        color: brown;
+                        height: 40px;
+                        line-height: 40px;
+                    }
+
+                    .select-input {
+                        width: 400px;
+                        color: black;
+                        padding-bottom: 10px;
+                        // font-size: 15px;
+                        background: none;
+                        border-radius: 5px;
+                        margin: 0 auto;
                     }
                 }
             }

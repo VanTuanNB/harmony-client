@@ -15,12 +15,7 @@ export default function PlaylistSymlinkComponent() {
                         <a href="#" className={cx('main-header-link')}>
                             Playlists
                         </a>
-                        <a href="#" className={cx('main-header-link')}>
-                            Test1
-                        </a>
-                        <a href="#" className={cx('main-header-link')}>
-                            Test2
-                        </a>
+                       
                     </div>
                 </div>
             </div>

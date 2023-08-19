@@ -1,7 +1,7 @@
-import PlayListPage from '@/core/layouts/pages/User/PlayList/PlayList.component';
+import PlayListUserPage from '@/core/layouts/pages/User/PlayList/PlayListUser.component';
 
 function PlaylistRouting() {
-    return <PlayListPage />;
+    return <PlayListUserPage />;
 }
 
 export default PlaylistRouting;

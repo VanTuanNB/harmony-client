@@ -5,12 +5,12 @@ const MENU_SETTINGS: IPopperListOptions[] = [
     {
         icon: faHome,
         title: 'Home settings',
-        href: '/dashboard',
+        href: '/',
     },
     {
         icon: faUser,
         title: 'Profile',
-        href: '/profile',
+        href: '/profile/2cbbe26b-173f-4fee-af7c-1c8fdeedee9f',
     },
     {
         icon: faRightFromBracket,
