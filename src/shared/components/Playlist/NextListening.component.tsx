@@ -27,7 +27,7 @@ function NextListeningComponent(): ReactNode {
                                     <MediaItem
                                         _id={song._id}
                                         title={song.title}
-                                        thumbnail={song.thumbnail}
+                                        thumbnailUrl={song.thumbnailUrl}
                                         performers={song.performers}
                                         onClick={handleClickMediaItem}
                                     />

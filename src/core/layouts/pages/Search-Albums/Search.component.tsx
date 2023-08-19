@@ -5,6 +5,7 @@ import { faCirclePlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SearchFilterComponent from '@/shared/components/SearchFilter/SearchFilter.component';
 import Image from 'next/image';
+import { memo } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -83,4 +84,4 @@ function SearchPageAlbums() {
         </div>
     );
 }
-export default SearchPageAlbums;
+export default memo(SearchPageAlbums);

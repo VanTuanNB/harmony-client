@@ -1,16 +1,14 @@
-import classNames from 'classnames/bind';
-import { faHome, faStar, faMusic, faBookmark } from '@fortawesome/free-solid-svg-icons';
-import styles from './SideBarNavigation.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Link from 'next/link';
-import Image from 'next/image';
-import { MainLogo } from '@/shared/components/Svg/index.component';
-import { selectClientStoreReducer } from '@/core/redux/features/client/client.slice';
-import { useAppSelector } from '@/core/redux/hook.redux';
 import { ELocalStorageKey } from '@/core/common/constants/common.constant';
 import { EDataTheme } from '@/core/common/constants/reduxSlice.constant';
+import { selectClientStoreReducer } from '@/core/redux/features/client/client.slice';
+import { useAppSelector } from '@/core/redux/hook.redux';
+import { MainLogo } from '@/shared/components/Svg/index.component';
+import { faBookmark, faHome, faMusic, faStar } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames/bind';
+import Link from 'next/link';
 import PlaylistSymlinkComponent from './Playlist/PlaylistSymlink/PlaylistSymlink.component';
-
+import styles from './SideBarNavigation.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -21,22 +19,22 @@ function SideBarNavigation() {
         <div className={cx('sidebar-navigation')}>
             <div className={cx('left-sidebar')}>
                 <div className={cx('navigation')}>
-                    <div className={cx('icon-logo')}>
+                    <Link href={'/'} className={cx('icon-logo')}>
                         <MainLogo
                             fillIcon={currentTheme === EDataTheme.DARK ? 'white' : 'black'}
                             className={cx('Layer_1')}
                         />
-                    </div>
+                    </Link>
                     <ul>
                         <li>
-                            <Link href="">
+                            <Link href="/">
                                 <FontAwesomeIcon icon={faHome} className={cx('icon')} />
                                 <span>Trang chủ</span>
                             </Link>
                         </li>
 
                         <li>
-                            <Link href="">
+                            <Link href="/genres">
                                 <FontAwesomeIcon icon={faMusic} className={cx('icon')} />
                                 <span>Chủ đề & Thể loại</span>
                             </Link>

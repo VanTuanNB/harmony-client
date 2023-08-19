@@ -1,7 +1,7 @@
-import SongPage from '@/core/layouts/pages/Composer/Song/Song.component';
+import SongUserPage from '@/core/layouts/pages/User/SongUser/SongUser.component';
 
 function SongRouting() {
-    return <SongPage />;
+    return <SongUserPage />;
 }
 
 export default SongRouting;

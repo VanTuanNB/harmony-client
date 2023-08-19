@@ -1,19 +1,27 @@
 'use client';
-import { IUser } from '@/core/common/interfaces/collection.interface';
+import { ISong, IUser } from '@/core/common/interfaces/collection.interface';
+import { ISongStore } from '@/core/common/interfaces/songStore.interface';
 import CreateAlbum from '@/core/layouts/components/PopUp/CreateAlbum/CreateAlbum.component';
 import CreateSongComponent from '@/core/layouts/components/PopUp/CreateSong/CreateSong.component';
 import UpdateProfile from '@/core/layouts/components/PopUp/UpdateProfile/UpdateProfile.component';
+import {
+    pushSongIntoPrevPlayListAction,
+    selectSongReducer,
+    startPlayingAction,
+} from '@/core/redux/features/song/song.slice';
+import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import { useGetServiceProfileQuery } from '@/core/redux/services/user.service';
+import HeartComponent from '@/shared/components/Heart/Heart.component';
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
-import { AlbumIcon, HeartIcon1, HeartIcon2, HeartIcon3, ListSongIcon } from '@/shared/components/Svg/index.component';
-import { faAdd, faCirclePlay, faPen } from '@fortawesome/free-solid-svg-icons';
+import { AlbumIcon, HistoryIcon, ListSongIcon, PlayListIcon } from '@/shared/components/Svg/index.component';
+import { faAdd, faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import { format } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import styles from './Profile.module.scss';
 
 const cx = classNames.bind(styles);
@@ -22,35 +30,45 @@ function Profile() {
     const path = usePathname();
     const resurt = path.split('/profile/')[1];
     const [isComposer, setIsComposer] = useState('');
+    const [isUpdated, setIsUpdated] = useState(false);
     const [popupSong, setPopupSong] = useState(false);
     const [popupUploadProfile, setPopupUploadProfile] = useState(false);
     const [popupCreateAlbum, setPopupCreateAlbum] = useState(false);
     const [profile, setProfile] = useState<IUser>();
-    const apiUser = useGetServiceProfileQuery(resurt);
-    // const apiGetHistory = useGetHistoryByUserIdQuery();
-    // const apiGetFavorite = useGetFavoriteByUserIdQuery()
+    const { data, isLoading, refetch } = useGetServiceProfileQuery(resurt);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (apiUser.data) {
-            let profile = apiUser.data.data;
-            console.log(profile);
-
+        if (data) {
+            let profile = data.data;
             if (profile) {
                 setIsComposer(profile.role);
                 setProfile(profile);
             }
         }
-    }, [apiUser.data, isComposer, profile]);
-
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data]);
     const closePopupSong = useCallback(() => {
         setPopupSong(false);
     }, []);
-    const closePopupAlbum = useCallback(() => {
-        setPopupCreateAlbum(false);
+    const closePopupAlbum = useCallback((isReload: boolean) => {
+        if (isReload) {
+            refetch();
+            setPopupCreateAlbum(false);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    const closePopupProfile = useCallback(() => {
-        setPopupUploadProfile(false);
-    }, []);
+    const closePopupProfile = useCallback(
+        (isReload: boolean) => {
+            if (isReload) {
+                // refetch();
+                setPopupUploadProfile(false);
+                console.log('profile', data);
+            }
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [],
+    );
     const openPopUpSong = () => {
         if (!popupSong) {
             setPopupSong(true);
@@ -66,9 +84,16 @@ function Profile() {
             setPopupCreateAlbum(true);
         }
     };
+
+    const store: ISongStore = useAppSelector(selectSongReducer);
+    const onClick = (_id: string) => {
+        const songSelected = store.playlist.suggests.find((song) => song._id === _id);
+        dispatch(pushSongIntoPrevPlayListAction(songSelected as any));
+        dispatch(startPlayingAction(songSelected as ISong));
+    };
     return (
         <div className={cx('profile')}>
-            {apiUser.isLoading && <SkeletonLoading count={20} />}
+            {isLoading && <SkeletonLoading count={20} />}
             {profile && (
                 <>
                     <div className={cx('profile-user')}>
@@ -78,19 +103,21 @@ function Profile() {
                                     className={cx('image2')}
                                     src={profile?.avatarUrl || '/images/fallback-thumbnail-user.jpg'}
                                     alt=""
-                                    width={200}
-                                    height={200}
+                                    width={500}
+                                    height={500}
                                 />
 
                                 <button onClick={openPopUpProfile} className={cx('update-profile')}>
                                     <FontAwesomeIcon icon={faPen} className={cx('icon-edit')} />
                                 </button>
-                                {popupUploadProfile && <UpdateProfile close={closePopupProfile} data={profile} />}
+                                {popupUploadProfile && (
+                                    <UpdateProfile close={closePopupProfile} dataProfile={profile} />
+                                )}
                             </div>
                             <div className={cx('name')}>
                                 <p>Profile</p>
                                 <h2 className={cx('name-profile')}>{profile?.name}</h2>
-                                <p>{profile?.playlistReference?.length} PlayList</p>
+                                <p>{profile?.albumsReference?.length} Album</p>
                             </div>
                         </div>
                     </div>
@@ -103,7 +130,9 @@ function Profile() {
                                         <button onClick={openPopUpSong}>
                                             <FontAwesomeIcon className={cx('icon-add')} icon={faAdd} />
                                         </button>
-                                       {profile.songsReference?.length !== 0 && <Link href={`/profile/song/${profile._id}`}>Xem tất cả</Link>}
+                                        {profile.songsReference?.length !== 0 && (
+                                            <Link href={`/composer/song/${profile._id}`}>Xem tất cả</Link>
+                                        )}
                                     </div>
                                 </div>
                                 <div className={cx('list-songs')}>
@@ -111,14 +140,17 @@ function Profile() {
                                         return (
                                             <>
                                                 <div key={item._id} className={cx('single-song')}>
-                                                    <div className={cx('single-left')}>
+                                                    <div
+                                                        onClick={() => onClick(item._id)}
+                                                        className={cx('single-left')}
+                                                    >
                                                         <div id={cx('id')}>{index + 1}</div>
                                                         <div id={cx('song')}>
                                                             <Image
                                                                 src={item.thumbnailUrl}
                                                                 alt={''}
-                                                                width={40}
-                                                                height={40}
+                                                                width={100}
+                                                                height={100}
                                                             ></Image>
                                                             <div id={cx('song-title')}>
                                                                 <div id={cx('title')}>{item.title}</div>
@@ -128,24 +160,19 @@ function Profile() {
                                                     </div>
                                                     <div className={cx('single-right')}>
                                                         <div id={cx('album')}>
-                                                            {format(new Date(item.publish), 'dd-MM-yyyy HH:mm:ss')}
+                                                            {item.albumReference?.map((item, index) => (
+                                                                <Link href={'/composer/album/' + item._id} key={index}>
+                                                                    {item.title}
+                                                                </Link>
+                                                            ))}
                                                         </div>
-                                                        <div className={cx('heart-container')} title="Like">
-                                                            <input
-                                                                type="checkbox"
-                                                                className={cx('checkbox')}
-                                                                id="Give-It-An-Id"
-                                                            />
-                                                            <div className={cx('svg-container')}>
-                                                                <HeartIcon1 className={cx('svg-outline')} />
-                                                                <HeartIcon2 className={cx('svg-filled')} />
-                                                                <HeartIcon3 className={cx('svg-celebrate')} />
-                                                            </div>
-                                                        </div>
+                                                        <HeartComponent />
                                                         <div id={cx('lenght')}>
                                                             <span id={cx('lenght')}>3:40</span>
                                                         </div>
-                                                        <Link href={`/user/song/${item._id}`} className={cx('edit')}>Sửa</Link>
+                                                        <Link href={`/user/song/${item._id}`} className={cx('edit')}>
+                                                            Sửa
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             </>
@@ -158,7 +185,13 @@ function Profile() {
                                         </div>
                                     )}
                                 </div>
-                                {popupSong && <CreateSongComponent close={closePopupSong} />}
+                                {popupSong && (
+                                    <CreateSongComponent
+                                        data={profile}
+                                        setIsUpdated={setIsUpdated}
+                                        close={closePopupSong}
+                                    />
+                                )}
                             </div>
                             <div className={cx('composer-album')}>
                                 <div className={cx('control-title')}>
@@ -173,18 +206,16 @@ function Profile() {
                                 <div className={cx('list')}>
                                     {profile.albumsReference?.map((item, key) => {
                                         return (
-                                            <>
-                                                <div className={cx('item')}>
-                                                    <Image
-                                                        src={item.thumbnailUrl || '/images/fallback-thumbnail-user.jpg'}
-                                                        alt=""
-                                                        width={100}
-                                                        height={100}
-                                                    />
-                                                    <h3>{item.title}</h3>
-                                                    <p>{item.information}</p>
-                                                </div>
-                                            </>
+                                            <Link className={cx('item')} href={'/composer/album/' + item._id} key={key}>
+                                                {item.thumbnailUrl && (
+                                                    <Image src={item.thumbnailUrl} alt="" width={500} height={500} />
+                                                )}
+                                                {item.thumbnailUrl === null && (
+                                                    <AlbumIcon className={cx('icon-album')} />
+                                                )}
+                                                <h3>{item.title}</h3>
+                                                <p>{item.information}</p>
+                                            </Link>
                                         );
                                     })}
                                     {profile.albumsReference?.length === 0 && (
@@ -194,7 +225,7 @@ function Profile() {
                                         </div>
                                     )}
                                 </div>
-                                {popupCreateAlbum && <CreateAlbum close={closePopupAlbum} />}
+                                {popupCreateAlbum && <CreateAlbum close={closePopupAlbum} dataProfile={profile} />}
                             </div>
                         </div>
                     )}
@@ -209,101 +240,36 @@ function Profile() {
                             </div>
                         </div>
                         <div className={cx('list-songs')}>
-                            <div className={cx('single-song')}>
-                                <div className={cx('single-left')}>
-                                    <div id={cx('id')}>1</div>
-                                    <div id={cx('song')}>
-                                        <Image
-                                            src={'/images/fallback-thumbnail-user.jpg'}
-                                            alt={''}
-                                            width={40}
-                                            height={40}
-                                        ></Image>
-                                        <div id={cx('song-title')}>
-                                            <div id={cx('title')}>Chúng ta của hiện tại</div>
-                                            <div id={cx('author')}>Sơn Tùng MTP</div>
+                            {profile.historyReference?.listSong.map((item) => (
+                                <div onClick={() => onClick(item._id)} key={item._id} className={cx('single-song')}>
+                                    <div className={cx('single-left')}>
+                                        <div id={cx('id')}>1</div>
+                                        <div id={cx('song')}>
+                                            <Image src={item.thumbnailUrl} alt={''} width={40} height={40}></Image>
+                                            <div id={cx('song-title')}>
+                                                <div id={cx('title')}>{item.title}</div>
+                                                <div id={cx('author')}>{profile.name}</div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className={cx('single-right')}>
-                                    <div id={cx('album')}>Tìm em đến lúc nào</div>
+                                    <div className={cx('single-right')}>
+                                        <div id={cx('album')}>
+                                            {format(new Date(item.publish), 'dd-MM-yyyy HH:mm:ss')}
+                                        </div>
 
-                                    <div className={cx('heart-container')} title="Like">
-                                        <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
-                                        <div className={cx('svg-container')}>
-                                            <HeartIcon1 className={cx('svg-outline')} />
-                                            <HeartIcon2 className={cx('svg-filled')} />
-                                            <HeartIcon3 className={cx('svg-celebrate')} />
-                                        </div>
-                                    </div>
-                                    <div id={cx('lenght')}>
-                                        <span id={cx('lenght')}>3:40</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={cx('single-song')}>
-                                <div className={cx('single-left')}>
-                                    <div id={cx('id')}>2</div>
-                                    <div id={cx('song')}>
-                                        <Image
-                                            src={'/images/fallback-thumbnail-user.jpg'}
-                                            alt={''}
-                                            width={40}
-                                            height={40}
-                                        ></Image>
-                                        <div id={cx('song-title')}>
-                                            <div id={cx('title')}>Chúng ta của hiện tại</div>
-                                            <div id={cx('author')}>Sơn Tùng MTP</div>
+                                        <HeartComponent />
+                                        <div id={cx('lenght')}>
+                                            <span id={cx('lenght')}>3:40</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div className={cx('single-right')}>
-                                    <div id={cx('album')}>Tìm em đến lúc nào</div>
-
-                                    <div className={cx('heart-container')} title="Like">
-                                        <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
-                                        <div className={cx('svg-container')}>
-                                            <HeartIcon1 className={cx('svg-outline')} />
-                                            <HeartIcon2 className={cx('svg-filled')} />
-                                            <HeartIcon3 className={cx('svg-celebrate')} />
-                                        </div>
-                                    </div>
-                                    <div id={cx('lenght')}>
-                                        <span id={cx('lenght')}>3:40</span>
-                                    </div>
+                            ))}
+                            {!profile.historyReference && (
+                                <div className={cx('albumNot')}>
+                                    <HistoryIcon className={cx('icon-album')} />
+                                    <h2>Bạn chưa có bài hát đã nghe</h2>
                                 </div>
-                            </div>
-                            <div className={cx('single-song')}>
-                                <div className={cx('single-left')}>
-                                    <div id={cx('id')}>3</div>
-                                    <div id={cx('song')}>
-                                        <Image
-                                            src={'/images/fallback-thumbnail-user.jpg'}
-                                            alt={''}
-                                            width={40}
-                                            height={40}
-                                        ></Image>
-                                        <div id={cx('song-title')}>
-                                            <div id={cx('title')}>Chúng ta của hiện tại</div>
-                                            <div id={cx('author')}>Sơn Tùng MTP</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className={cx('single-right')}>
-                                    <div id={cx('album')}>Tìm em đến lúc nào</div>
-                                    <div className={cx('heart-container')} title="Like">
-                                        <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
-                                        <div className={cx('svg-container')}>
-                                            <HeartIcon1 className={cx('svg-outline')} />
-                                            <HeartIcon2 className={cx('svg-filled')} />
-                                            <HeartIcon3 className={cx('svg-celebrate')} />
-                                        </div>
-                                    </div>
-                                    <div id={cx('lenght')}>
-                                        <span id={cx('lenght')}>3:40</span>
-                                    </div>
-                                </div>
-                            </div>
+                            )}
                         </div>
                     </div>
 
@@ -315,30 +281,19 @@ function Profile() {
                             </div>
                         </div>
                         <div className={cx('list')}>
-                            <div className={cx('item')}>
-                                <Image src="/images/fallback-thumbnail-user.jpg" alt="" width={100} height={100} />
-                                <FontAwesomeIcon icon={faCirclePlay} className={cx('playButton')} />
-                                <h3>Đi để trở về</h3>
-                                <p>By JosephHuy</p>
-                            </div>
-                            <div className={cx('item')}>
-                                <Image src="/images/fallback-thumbnail-user.jpg" alt="" width={100} height={100} />
-                                <FontAwesomeIcon icon={faCirclePlay} className={cx('playButton')} />
-                                <h3>Đi để trở về</h3>
-                                <p>By JosephHuy</p>
-                            </div>
-                            <div className={cx('item')}>
-                                <Image src="/images/fallback-thumbnail-user.jpg" alt="" width={100} height={100} />
-                                <FontAwesomeIcon icon={faCirclePlay} className={cx('playButton')} />
-                                <h3>Đi để trở về</h3>
-                                <p>By JosephHuy</p>
-                            </div>
-                            <div className={cx('item')}>
-                                <Image src="/images/fallback-thumbnail-user.jpg" alt="" width={100} height={100} />
-                                <FontAwesomeIcon icon={faCirclePlay} className={cx('playButton')} />
-                                <h3>Đi để trở về</h3>
-                                <p>By JosephHuy</p>
-                            </div>
+                            {profile.playlistReference?.map((item) => (
+                                <Link href={'/user/album/' + item._id} key={item._id} className={cx('item')}>
+                                    <Image src="/images/fallback-thumbnail-user.jpg" alt="" width={100} height={100} />
+                                    <h3>{item.title}</h3>
+                                    <p>{item.userReference.name}</p>
+                                </Link>
+                            ))}
+                            {profile.playlistReference?.length === 0 && (
+                                <div className={cx('albumNot')}>
+                                    <PlayListIcon className={cx('icon-album')} />
+                                    <h2>Bạn chưa có playlist</h2>
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -353,102 +308,35 @@ function Profile() {
                             </div>
                         </div>
                         <div className={cx('list-songs')}>
-                            <div className={cx('single-song')}>
-                                <div className={cx('single-left')}>
-                                    <div id={cx('id')}>1</div>
-                                    <div id={cx('song')}>
-                                        <Image
-                                            src={'/images/fallback-thumbnail-user.jpg'}
-                                            alt={''}
-                                            width={40}
-                                            height={40}
-                                        ></Image>
-                                        <div id={cx('song-title')}>
-                                            <div id={cx('title')}>Chúng ta của hiện tại</div>
-                                            <div id={cx('author')}>Sơn Tùng MTP</div>
+                            {profile.favoriteListReference?.listSong.map((item, index) => (
+                                <div onClick={() => onClick(item._id)} key={item._id} className={cx('single-song')}>
+                                    <div className={cx('single-left')}>
+                                        <div id={cx('id')}>{index + 1}</div>
+                                        <div id={cx('song')}>
+                                            <Image src={item.thumbnailUrl} alt={''} width={40} height={40}></Image>
+                                            <div id={cx('song-title')}>
+                                                <div id={cx('title')}>{item.title}</div>
+                                                <div id={cx('author')}>{profile.name}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className={cx('single-right')}>
+                                        <div id={cx('album')}>
+                                            {format(new Date(item.publish), 'dd-MM-yyyy HH:mm:ss')}
+                                        </div>
+                                        <HeartComponent />
+                                        <div id={cx('lenght')}>
+                                            <span id={cx('lenght')}>3:40</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div className={cx('single-right')}>
-                                    <div id={cx('album')}>Tìm em đến lúc nào</div>
-
-                                    <div className={cx('heart-container')} title="Like">
-                                        <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
-                                        <div className={cx('svg-container')}>
-                                            <HeartIcon1 className={cx('svg-outline')} />
-                                            <HeartIcon2 className={cx('svg-filled')} />
-                                            <HeartIcon3 className={cx('svg-celebrate')} />
-                                        </div>
-                                    </div>
-                                    <div id={cx('lenght')}>
-                                        <span id={cx('lenght')}>3:40</span>
-                                    </div>
+                            ))}
+                            {!profile.favoriteListReference && (
+                                <div className={cx('albumNot')}>
+                                    <ListSongIcon className={cx('icon-album')} />
+                                    <h2>Bạn chưa thêm bài hát yêu thích</h2>
                                 </div>
-                            </div>
-                            <div className={cx('single-song')}>
-                                <div className={cx('single-left')}>
-                                    <div id={cx('id')}>1</div>
-                                    <div id={cx('song')}>
-                                        <Image
-                                            src={'/images/fallback-thumbnail-user.jpg'}
-                                            alt={''}
-                                            width={40}
-                                            height={40}
-                                        ></Image>
-                                        <div id={cx('song-title')}>
-                                            <div id={cx('title')}>Chúng ta của hiện tại</div>
-                                            <div id={cx('author')}>Sơn Tùng MTP</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className={cx('single-right')}>
-                                    <div id={cx('album')}>Tìm em đến lúc nào</div>
-
-                                    <div className={cx('heart-container')} title="Like">
-                                        <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
-                                        <div className={cx('svg-container')}>
-                                            <HeartIcon1 className={cx('svg-outline')} />
-                                            <HeartIcon2 className={cx('svg-filled')} />
-                                            <HeartIcon3 className={cx('svg-celebrate')} />
-                                        </div>
-                                    </div>
-                                    <div id={cx('lenght')}>
-                                        <span id={cx('lenght')}>3:40</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className={cx('single-song')}>
-                                <div className={cx('single-left')}>
-                                    <div id={cx('id')}>1</div>
-                                    <div id={cx('song')}>
-                                        <Image
-                                            src={'/images/fallback-thumbnail-user.jpg'}
-                                            alt={''}
-                                            width={40}
-                                            height={40}
-                                        ></Image>
-                                        <div id={cx('song-title')}>
-                                            <div id={cx('title')}>Chúng ta của hiện tại</div>
-                                            <div id={cx('author')}>Sơn Tùng MTP</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className={cx('single-right')}>
-                                    <div id={cx('album')}>Tìm em đến lúc nào</div>
-
-                                    <div className={cx('heart-container')} title="Like">
-                                        <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
-                                        <div className={cx('svg-container')}>
-                                            <HeartIcon1 className={cx('svg-outline')} />
-                                            <HeartIcon2 className={cx('svg-filled')} />
-                                            <HeartIcon3 className={cx('svg-celebrate')} />
-                                        </div>
-                                    </div>
-                                    <div id={cx('lenght')}>
-                                        <span id={cx('lenght')}>3:40</span>
-                                    </div>
-                                </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </>
@@ -457,4 +345,4 @@ function Profile() {
     );
 }
 
-export default Profile;
+export default memo(Profile);

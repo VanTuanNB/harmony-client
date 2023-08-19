@@ -1,10 +1,11 @@
 'use client';
-import { HeartIcon1, HeartIcon2, HeartIcon3 } from '@/shared/components/Svg/index.component';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import style from './History.module.scss';
+import HeartComponent from '@/shared/components/Heart/Heart.component';
+import { memo } from 'react';
 
 const cx = classNames.bind(style);
 
@@ -38,14 +39,7 @@ function HistoryPage() {
                         <div id={cx('album')}>Starboy</div>
                         <div id={cx('date')}>19/12/2020</div>
                         <div id={cx('lenght')}>
-                            <div className={cx('heart-container')} title="Like">
-                                <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
-                                <div className={cx('svg-container')}>
-                                    <HeartIcon1 className={cx('svg-outline')} />
-                                    <HeartIcon2 className={cx('svg-filled')} />
-                                    <HeartIcon3 className={cx('svg-celebrate')} />
-                                </div>
-                            </div>
+                            <HeartComponent />
                             <span id={cx('lenght')}>3:40</span>
                         </div>
                     </div>
@@ -61,14 +55,7 @@ function HistoryPage() {
                         <div id={cx('album')}>Starboy</div>
                         <div id={cx('date')}>19/12/2020</div>
                         <div id={cx('lenght')}>
-                            <div className={cx('heart-container')} title="Like">
-                                <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
-                                <div className={cx('svg-container')}>
-                                    <HeartIcon1 className={cx('svg-outline')} />
-                                    <HeartIcon2 className={cx('svg-filled')} />
-                                    <HeartIcon3 className={cx('svg-celebrate')} />
-                                </div>
-                            </div>
+                            <HeartComponent />
                             <span id={cx('lenght')}>3:40</span>
                         </div>
                     </div>
@@ -84,14 +71,7 @@ function HistoryPage() {
                         <div id={cx('album')}>Starboy</div>
                         <div id={cx('date')}>19/12/2020</div>
                         <div id={cx('lenght')}>
-                            <div className={cx('heart-container')} title="Like">
-                                <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
-                                <div className={cx('svg-container')}>
-                                    <HeartIcon1 className={cx('svg-outline')} />
-                                    <HeartIcon2 className={cx('svg-filled')} />
-                                    <HeartIcon3 className={cx('svg-celebrate')} />
-                                </div>
-                            </div>
+                            <HeartComponent />
                             <span id={cx('lenght')}>3:40</span>
                         </div>
                     </div>
@@ -107,14 +87,7 @@ function HistoryPage() {
                         <div id={cx('album')}>Starboy</div>
                         <div id={cx('date')}>19/12/2020</div>
                         <div id={cx('lenght')}>
-                            <div className={cx('heart-container')} title="Like">
-                                <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
-                                <div className={cx('svg-container')}>
-                                    <HeartIcon1 className={cx('svg-outline')} />
-                                    <HeartIcon2 className={cx('svg-filled')} />
-                                    <HeartIcon3 className={cx('svg-celebrate')} />
-                                </div>
-                            </div>
+                            <HeartComponent />
                             <span id={cx('lenght')}>3:40</span>
                         </div>
                     </div>
@@ -130,14 +103,7 @@ function HistoryPage() {
                         <div id={cx('album')}>Starboy</div>
                         <div id={cx('date')}>19/12/2020</div>
                         <div id={cx('lenght')}>
-                            <div className={cx('heart-container')} title="Like">
-                                <input type="checkbox" className={cx('checkbox')} id="Give-It-An-Id" />
-                                <div className={cx('svg-container')}>
-                                    <HeartIcon1 className={cx('svg-outline')} />
-                                    <HeartIcon2 className={cx('svg-filled')} />
-                                    <HeartIcon3 className={cx('svg-celebrate')} />
-                                </div>
-                            </div>
+                            <HeartComponent />
                             <span id={cx('lenght')}>3:40</span>
                         </div>
                     </div>
@@ -147,4 +113,4 @@ function HistoryPage() {
     );
 }
 
-export default HistoryPage;
+export default memo(HistoryPage);

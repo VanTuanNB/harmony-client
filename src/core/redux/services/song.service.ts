@@ -23,20 +23,30 @@ export const songApi = rootSplitApi.injectEndpoints({
                 responseHandler: async (response) => URL.createObjectURL(await response.blob()),
             }),
         }),
+        getServiceSongsJustReleased: builder.query<IResponseServer<ISong[]>, string>({
+            query: (param?: string) => ({
+                url: '/song/released',
+                params: { item: param ?? '' },
+            }),
+        }),
+        getServiceSongsViewTop: builder.query<IResponseServer<ISong[]>, string>({
+            query: (param?: string) => ({
+                url: '/song/songTop',
+                params: { item: param ?? '' },
+            }),
+        }),
         postCreateSong: builder.mutation<IResponseServer, Partial<Post>>({
             query: (body) => ({
                 url: '/song/',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization:
-                        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiIyY2JiZTI2Yi0xNzNmLTRmZWUtYWY3Yy0xYzhmZGVlZGVlOWYiLCJlbWFpbCI6Imh1eWRlcHRyYWkxOTA2MjAwMkBnbWFpbC5jb20iLCJyb2xlIjoiY29tcG9zZXIiLCJpYXQiOjE2OTE2NzEzNjEsImV4cCI6MTY5MTkzMDU2MX0.vCQk1NNP2-Wk-AeALieTX-TlHs-VuuC_UiKWVJS4tBc',
-                },
+                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmYTBmMmUzOC1jNGI2LTQ0MDUtOGY4OS0zNWIxYzUxZTg1ZDQiLCJlbWFpbCI6Imh1eW5xcHMxNjkxOEBmcHQuZWR1LnZuIiwicm9sZSI6ImNvbXBvc2VyIiwiaWF0IjoxNjkyMjU3NDYwLCJleHAiOjE2OTQ4NDk0NjB9.dhhHL8X9SykQWhGUYI6foyokVpDCUpJ4sswYCUfokQ8'},
                 body,
             }),
         }),
     }),
 });
 
-export const { useGetServiceSongsQuery, useGetSuggestSongQuery, useGetStreamSongQuery, usePostCreateSongMutation } =
-    songApi;
+export const { useGetServiceSongsQuery, useGetSuggestSongQuery, useGetStreamSongQuery, usePostCreateSongMutation, useGetServiceSongsJustReleasedQuery, useGetServiceSongsViewTopQuery } = songApi;
+

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FacebookIcon, GoogleIcon } from '@/shared/components/Svg/index.component';
+import { memo } from 'react';
 
 const cx = classNames.bind(styles);
 
@@ -52,4 +53,4 @@ function SignupPage() {
     );
 }
 
-export default SignupPage;
+export default memo(SignupPage);
