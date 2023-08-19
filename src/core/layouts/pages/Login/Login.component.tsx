@@ -1,7 +1,8 @@
-import classNames from 'classnames/bind';
-import styles from './Login.module.scss';
-import Link from 'next/link';
 import { FacebookIcon, GoogleIcon } from '@/shared/components/Svg/index.component';
+import classNames from 'classnames/bind';
+import Link from 'next/link';
+import { memo } from 'react';
+import styles from './Login.module.scss';
 
 const cx = classNames.bind(styles);
 
@@ -35,10 +36,13 @@ function LoginPage() {
             </Link>
             <hr />
             <p>
-                Don't have an account? <Link href=""><i>Sign up Harmony for free</i></Link>
+                Don't have an account?{' '}
+                <Link href="">
+                    <i>Sign up Harmony for free</i>
+                </Link>
             </p>
         </div>
     );
 }
 
-export default LoginPage;
+export default memo(LoginPage);

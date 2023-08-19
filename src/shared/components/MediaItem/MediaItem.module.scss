@@ -58,8 +58,8 @@
                     color: var(--theme-mode-color);
                     margin: 0;
                     line-height: 1.6rem;
-                    display: -webkit-box;
                     max-height: 1.6rem;
+                    display: -webkit-box;
                     overflow: hidden;
                     -webkit-line-clamp: 1;
                     -webkit-box-orient: vertical;
@@ -71,16 +71,12 @@
                     font-size: 1.2rem;
                     margin-top: 4px;
                     line-height: 1.4rem;
-                    display: -webkit-box;
                     max-height: 1.6rem;
-                    white-space: nowrap; 
-                        overflow: hidden; 
-                        text-overflow: ellipsis;
+                    display: -webkit-box;
 
                     & .link-channel {
                         color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.6);
                         margin-left: 4px;
-                       
 
                         &:first-child {
                             margin-left: 0;

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import UpdatePlaylist from '../../../components/PopUp/UpdatePlaylist/UpdatePlaylist.component';
 import style from './PlayListUser.module.scss';
 import HeartComponent from '@/shared/components/Heart/Heart.component';
@@ -162,4 +162,4 @@ function PlayListUserPage() {
     );
 }
 
-export default PlayListUserPage;
+export default memo(PlayListUserPage);

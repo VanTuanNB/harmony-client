@@ -18,7 +18,7 @@ import { format } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import styles from './Performer.module.scss';
 
 const cx = classNames.bind(styles);
@@ -138,4 +138,4 @@ function PerformerPage() {
     );
 }
 
-export default PerformerPage;
+export default memo(PerformerPage);

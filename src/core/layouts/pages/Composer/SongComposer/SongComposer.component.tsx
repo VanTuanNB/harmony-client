@@ -17,6 +17,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import style from './SongComposer.module.scss';
+import { memo } from 'react';
 
 const cx = classNames.bind(style);
 
@@ -80,4 +81,4 @@ function SongComposerPage() {
     );
 }
 
-export default SongComposerPage;
+export default memo(SongComposerPage);

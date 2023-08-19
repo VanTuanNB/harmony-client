@@ -17,18 +17,28 @@ import {
 import HeartComponent from '@/shared/components/Heart/Heart.component';
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
 import { AlbumIcon } from '@/shared/components/Svg/index.component';
-import { faWifi } from '@fortawesome/free-solid-svg-icons';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight, faWifi } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import { format } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect,useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import styles from './Home.module.scss';
 const cx = classNames.bind(styles);
 
+const images = [
+    '/images/thumnail1.jpg',
+    '/images/thumnail2.jpg',
+    '/images/thumnail3.jpg',
+    '/images/thumnail4.jpg',
+    '/images/thumnail1.jpg',
+    '/images/thumnail2.jpg',
+];
+
 function HomePage() {
+    const [startImageIndex, setStartImageIndex] = useState(0);
+    const imagesToShow = images.slice(startImageIndex, startImageIndex + 3);
     const apiJustReleased = useGetServiceSongsJustReleasedQuery('6');
     const apiAlbumNewWeek = useGetServiceAlbumNewWeekQuery('4');
     const apiSongTop = useGetServiceSongsViewTopQuery('6');
@@ -36,7 +46,13 @@ function HomePage() {
     const apiGenreTop = useGetServiceGenreTopQuery('4');
     const dispatch = useAppDispatch();
 
-    console.log(apiGenreTop.data);
+    const showNextImages = () => {
+        setStartImageIndex((prevIndex) => Math.min(prevIndex + 1, images.length - 3));
+    };
+
+    const showPreviousImages = () => {
+        setStartImageIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+    };
 
     useEffect(() => {
         if (apiJustReleased.data) {
@@ -45,33 +61,16 @@ function HomePage() {
         if (apiSongTop.data) {
             dispatch(pushListSuggestSongIntoStoreAction(apiSongTop.data.data));
         }
+        if (apiSongTopView.data) {
+            dispatch(pushListSuggestSongIntoStoreAction(apiSongTopView.data.data));
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [apiJustReleased.data, apiSongTop.data]);
+    }, [apiJustReleased.data, apiSongTop.data, apiSongTopView.data]);
     const store: ISongStore = useAppSelector(selectSongReducer);
     const onClick = (_id: string) => {
         const songSelected = store.playlist.suggests.find((song) => song._id === _id);
         dispatch(pushSongIntoPrevPlayListAction(songSelected as any));
         dispatch(startPlayingAction(songSelected as ISong));
-    };
-
-    const [startImageIndex, setStartImageIndex] = useState(0); // Vị trí của ảnh đầu tiên trong vùng
-
-    const images = [
-        '/images/thumnail1.jpg',
-        '/images/thumnail2.jpg',
-        '/images/thumnail3.jpg',
-        '/images/thumnail4.jpg',
-        '/images/thumnail1.jpg',
-        '/images/thumnail2.jpg',
-    ]; // Đường dẫn của các ảnh
-    const imagesToShow = images.slice(startImageIndex, startImageIndex + 3); // Lấy ra 3 ảnh để hiển thị
-
-    const showNextImages = () => {
-        setStartImageIndex((prevIndex) => Math.min(prevIndex + 1, images.length - 3));
-    };
-
-    const showPreviousImages = () => {
-        setStartImageIndex((prevIndex) => Math.max(prevIndex - 1, 0));
     };
 
     return (
@@ -195,7 +194,7 @@ function HomePage() {
                 {apiSongTopView.isLoading && <SkeletonLoading count={3} />}
                 <div className={cx('list-rank')}>
                     {apiSongTopView.data?.data.map((song, index) => (
-                        <div key={song._id} className={cx('ranking-image-1')}>
+                        <div onClick={() => onClick(song._id)} key={song._id} className={cx('ranking-image-1')}>
                             <div className={cx('image')}>
                                 <Image
                                     className={cx('image3')}
@@ -301,4 +300,4 @@ function HomePage() {
     );
 }
 
-export default HomePage;
+export default memo(HomePage);

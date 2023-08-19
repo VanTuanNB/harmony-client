@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 import MediaItem from '@/shared/components/MediaItem/MediaItem.component';
 import { ISongStore } from '@/core/common/interfaces/songStore.interface';
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { useGetServiceSongsQuery } from '@/core/redux/services/song.service';
 import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import { pushListSuggestSongIntoStoreAction, selectSongReducer } from '@/core/redux/features/song/song.slice';
@@ -114,4 +114,4 @@ function SearchPageSongs() {
         </div>
     );
 }
-export default SearchPageSongs;
+export default memo(SearchPageSongs);

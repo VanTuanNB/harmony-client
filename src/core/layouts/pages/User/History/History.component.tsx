@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 import style from './History.module.scss';
 import HeartComponent from '@/shared/components/Heart/Heart.component';
+import { memo } from 'react';
 
 const cx = classNames.bind(style);
 
@@ -112,4 +113,4 @@ function HistoryPage() {
     );
 }
 
-export default HistoryPage;
+export default memo(HistoryPage);

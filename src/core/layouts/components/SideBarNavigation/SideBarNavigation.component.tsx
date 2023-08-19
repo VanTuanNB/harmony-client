@@ -34,7 +34,7 @@ function SideBarNavigation() {
                         </li>
 
                         <li>
-                            <Link href="">
+                            <Link href="/genres">
                                 <FontAwesomeIcon icon={faMusic} className={cx('icon')} />
                                 <span>Chủ đề & Thể loại</span>
                             </Link>

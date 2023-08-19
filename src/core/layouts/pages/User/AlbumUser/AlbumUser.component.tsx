@@ -17,7 +17,7 @@ import classNames from 'classnames/bind';
 import { format } from 'date-fns';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import style from './AlbumUser.module.scss';
 
 const cx = classNames.bind(style);
@@ -32,9 +32,9 @@ function AlbumUserPage() {
     const dispatch = useAppDispatch();
     useEffect(() => {
         if (data) {
-            const song = data.data.listSong as ISong[]
+            const song = data.data.listSong as ISong[];
             setAlbum(data.data);
-            setListSong(song)
+            setListSong(song);
         }
     }, [data, listSong]);
 
@@ -94,7 +94,7 @@ function AlbumUserPage() {
                             </div>
                         </div>
                         <div className={cx('list-songs')}>
-                            {listSong?.map((song , index) => (
+                            {listSong?.map((song, index) => (
                                 <div onClick={() => onClick(song._id)} key={index} className={cx('single-song')}>
                                     <div id={cx('id')}>{index + 1}</div>
                                     <div id={cx('song')}>
@@ -132,4 +132,4 @@ function AlbumUserPage() {
     );
 }
 
-export default AlbumUserPage;
+export default memo(AlbumUserPage);

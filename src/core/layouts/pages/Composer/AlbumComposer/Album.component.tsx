@@ -16,7 +16,7 @@ import classNames from 'classnames/bind';
 import { format } from 'date-fns';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import UpdateAlbum from '../../../components/PopUp/UpdateAlbum/UpdateAlbum.component';
 import style from './AlbumComposer.module.scss';
 
@@ -157,4 +157,4 @@ function AlbumComposerPage() {
     );
 }
 
-export default AlbumComposerPage;
+export default memo(AlbumComposerPage);

@@ -20,7 +20,7 @@ function PlayingComponent(): ReactNode {
         <div className={cx('prev-wrapper')}>
             {checkPlaying.length > 0 && (
                 <>
-                    <h2 className={cx('title')}>Danh sách phát</h2>
+                    <h2 className={cx('title')}>Bài hát đang phát</h2>
                     <ul className={cx('list-listening')}>
                         <li key={playing._id} className={cx('item')}>
                             <MediaItem

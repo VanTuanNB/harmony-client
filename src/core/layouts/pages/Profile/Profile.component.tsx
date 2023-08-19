@@ -21,7 +21,7 @@ import { format } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import styles from './Profile.module.scss';
 
 const cx = classNames.bind(styles);
@@ -345,4 +345,4 @@ function Profile() {
     );
 }
 
-export default Profile;
+export default memo(Profile);

@@ -16,6 +16,7 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { memo } from 'react';
 import style from './SongUser.module.scss';
 
 const cx = classNames.bind(style);
@@ -97,4 +98,4 @@ function SongUserPage() {
     );
 }
 
-export default SongUserPage;
+export default memo(SongUserPage);
