@@ -222,7 +222,10 @@
                         #author {
                             font-size: 14px;
                             font-weight: 400;
-                            color: gray;
+
+                            a {
+                                color: gray;
+                            }
                         }
                     }
                 }
@@ -236,7 +239,8 @@
                     line-height: 50px;
                     color: gray;
                     a {
-                        padding-right: 20px;color: gray;
+                        padding-right: 20px;
+                        color: gray;
                     }
                 }
                 #album a:hover {

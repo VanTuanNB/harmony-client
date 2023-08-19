@@ -12,7 +12,10 @@ export const genreApi = rootSplitApi.injectEndpoints({
                 params: { item: parma ?? '' }
             }),
         }),
+        getServiceGenreById: builder.query<IResponseServer<IGenre>, string>({
+            query: (param?: string) => `/genre/${param ?? ''}`,
+        }),
     })
 })
 
-export const { useGetServiceGenreQuery, useGetServiceGenreTopQuery } = genreApi; 
+export const { useGetServiceGenreQuery, useGetServiceGenreTopQuery, useGetServiceGenreByIdQuery } = genreApi; 
