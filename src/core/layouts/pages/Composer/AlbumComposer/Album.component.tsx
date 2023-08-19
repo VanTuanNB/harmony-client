@@ -10,10 +10,10 @@ import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import { useGetServiceAlbumQuery, usePutServiceAlbumMutation } from '@/core/redux/services/album.service';
 import HeartComponent from '@/shared/components/Heart/Heart.component';
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
+import { formatDate } from '@/utils/format.util';
 import { faClock, faClose, faPen, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
-import { format } from 'date-fns';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { memo, useCallback, useEffect, useState } from 'react';
@@ -40,10 +40,10 @@ function AlbumComposerPage() {
 
     useEffect(() => {
         if (isUpdated) {
-            refetch()
+            refetch();
             setIsUpdated(false);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isUpdated]);
     const closePopupAlbum = useCallback(() => {
         setPopupUploadAlbum(false);
@@ -88,7 +88,9 @@ function AlbumComposerPage() {
                     <button onClick={openPopUpProfile} className={cx('update-profile')}>
                         <FontAwesomeIcon icon={faPen} className={cx('icon-edit')} />
                     </button>
-                    {popupUploadAlbum && album && <UpdateAlbum setIsUpdated={setIsUpdated} close={closePopupAlbum} dataAlbum={data?.data} />}
+                    {popupUploadAlbum && album && (
+                        <UpdateAlbum setIsUpdated={setIsUpdated} close={closePopupAlbum} dataAlbum={data?.data} />
+                    )}
                 </div>
                 <div className={cx('album-detail')}>
                     <div className={cx('title')}>
@@ -139,7 +141,7 @@ function AlbumComposerPage() {
                                 </div>
                             </div>
                             <div id={cx('album')}>{data?.data.title}</div>
-                            <div id={cx('date')}>{format(new Date(song.publish), 'dd-MM-yyyy HH:mm:ss')}</div>
+                            <div id={cx('date')}>{formatDate(song.publish)}</div>
                             <div id={cx('lenght')}>
                                 <HeartComponent />
                                 <span id={cx('lenght')}>3:40</span>

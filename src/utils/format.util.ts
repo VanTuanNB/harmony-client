@@ -13,6 +13,7 @@ export const formatDurationSong = (duration: number) => {
 };
 
 export const formatDate = (input: string, type?: EDateFormat): string => {
+    if (!input) return '';
     if (!type) type = EDateFormat.DD_MM_YYYY;
     const date = new Date(input);
     switch (type) {
