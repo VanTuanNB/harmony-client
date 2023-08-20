@@ -36,7 +36,7 @@ export const userApi = rootSplitApi.injectEndpoints({
         }),
         putServiceProfile: builder.mutation<IResponseServer, Partial<IUser>>({
             query: (user) => ({
-                url: `/user/profile/${user._id ?? ''}`,
+                url: `/user/profile/`,
                 method: 'PUT',
                 body: user,
                 headers: {

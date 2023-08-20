@@ -15,7 +15,7 @@ interface IState {
     dataProfile: IUser;
 }
 function UpdateProfile({ isUpdated, dataProfile }: IState) {
-    const [name, setName] = useState<string>(dataProfile?.name || '');
+    const [name, setName] = useState<string>(dataProfile.name);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const [avatar, setAvatar] = useState<File | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -32,8 +32,8 @@ function UpdateProfile({ isUpdated, dataProfile }: IState) {
     };
     const Submit = async (e: any) => {
         e.preventDefault();
+
         const file = fileInputRef.current?.files?.[0];
-        console.log(file);
         if (file) {
             const fileExtension = file.name.split('.').pop();
             const newValue = {
@@ -42,18 +42,15 @@ function UpdateProfile({ isUpdated, dataProfile }: IState) {
                 isNewUploadAvatar: true,
                 contentType: fileExtension,
             };
-            const putData =  putServiceProfile(newValue) as any
+            const putData = (await putServiceProfile(newValue)) as any;
             const uploadS3 = await uploadThumnail({ privateUrl: putData.data.data.privateUrl, file });
             isUpdated(true);
         } else {
-            console.log(true);
-            
-            const newValue = {
-                _id: dataProfile?._id,
-                isNewUploadAvatar: false,
+            const value = {
+                _id: dataProfile._id,
                 name: name,
             };
-            await putServiceProfile(newValue);
+            putServiceProfile(value);
             isUpdated(true);
         }
     };
@@ -75,17 +72,17 @@ function UpdateProfile({ isUpdated, dataProfile }: IState) {
                                     <Image className={cx('img')} src={imagePreview} width={100} height={100} alt="" />
                                 ) : (
                                     <Image
-                                    className={cx('image2')}
-                                    src={
-                                        dataProfile.avatarUrl
-                                            ? `${dataProfile.avatarUrl}?${new Date().getTime()}`
-                                            : '/images/fallback-thumbnail-user.jpg'
-                                    }
-                                    alt=""
-                                    loading="lazy"
-                                    width={500}
-                                    height={500}
-                                />
+                                        className={cx('image2')}
+                                        src={
+                                            dataProfile.avatarUrl
+                                                ? `${dataProfile.avatarUrl}?${new Date().getTime()}`
+                                                : '/images/fallback-thumbnail-user.jpg'
+                                        }
+                                        alt=""
+                                        loading="lazy"
+                                        width={500}
+                                        height={500}
+                                    />
                                 )}
                                 <label htmlFor="file" className={cx('title-upload')}>
                                     Thêm ảnh
