@@ -1,7 +1,7 @@
 import { EStateCurrentSong } from '@/core/common/constants/common.constant';
 import { ISong } from '@/core/common/interfaces/collection.interface';
-import { selectSongReducer } from '@/core/redux/features/song/song.slice';
-import { useAppSelector } from '@/core/redux/hook.redux';
+import { selectSongReducer, updateStatePlayingAction } from '@/core/redux/features/song/song.slice';
+import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
@@ -18,7 +18,11 @@ interface IProps {
 }
 
 function MediaItemInPage({ data, onClick }: IProps) {
+    const dispatch = useAppDispatch();
     const { playing } = useAppSelector(selectSongReducer);
+    const handlePlaying = () => {
+        dispatch(updateStatePlayingAction(EStateCurrentSong.PLAYING));
+    };
     return (
         <div
             onClick={() => onClick(data)}
@@ -42,7 +46,7 @@ function MediaItemInPage({ data, onClick }: IProps) {
                                     </div>
                                 )}
                                 {playing.state.includes(EStateCurrentSong.PAUSED) && (
-                                    <div className={cx('playing-icon')}>
+                                    <div className={cx('playing-icon')} onClick={handlePlaying}>
                                         <FontAwesomeIcon icon={faPlay} className={cx('icon-pause')} />
                                     </div>
                                 )}
