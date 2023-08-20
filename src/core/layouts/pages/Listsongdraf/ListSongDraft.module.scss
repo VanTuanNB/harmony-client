@@ -1,0 +1,184 @@
+.song-draf {
+    width: 98%;
+    margin: 0 auto;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: var(--theme-mode-background-user);
+    transition: background-color linear 0.2s;
+    padding-top: 1.5em;
+    padding-bottom: 20%;
+    padding-left: 30px;
+
+    .album-infor {
+        display: flex;
+        flex-direction: row;
+        height: 232px;
+        gap: 1em;
+        .image {
+            img {
+                border-radius: 50%;
+            }
+        }
+        .album-detail {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+
+            .title {
+                line-height: 3.5em;
+                margin-bottom: 2em;
+            }
+            img {
+                border-radius: 50%;
+            }
+            span {
+                font-size: 14px;
+                font-weight: 600;
+            }
+            p {
+                font-size: 14px;
+                font-weight: 600;
+            }
+            .album-name {
+                font-size: 90px;
+            }
+            .detail {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin-bottom: 0px;
+
+                .detail-image {
+                    margin-right: 0.5em;
+                }
+                .infor {
+                    span {
+                        font-weight: 400;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+    hr {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        width: 95%;
+    }
+    .listsong-edit {
+        .title-listsong {
+            width: 95.3%;
+            display: flex;
+            flex-direction: row;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #b6b6b6;
+
+            #id {
+                width: 2%;
+                text-align: end;
+            }
+            #song {
+                width: 30%;
+                margin-left: 1em;
+
+                img {
+                    width: 40px;
+                }
+            }
+            #mode {
+                width: 25%;
+                text-align: start;
+            }
+            #date {
+                width: 14%;
+                text-align: center;
+            }
+            #lenght {
+                width: 14%;
+                text-align: center;
+            }
+            #edit {
+                width: 15%;
+                text-align: center;
+            }
+        }
+    }
+    .list-songs {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .single-song {
+            width: 95.3%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 0.7em;
+            height: 56px;
+            border-radius: 5px;
+            transition: 0.15s;
+            cursor: pointer;
+
+            #id {
+                width: 2%;
+                text-align: end;
+            }
+            #song {
+                width: 30%;
+                margin-left: 0.8em;
+                display: flex;
+                flex-direction: row;
+
+                #song-title {
+                    height: 40px;
+                    line-height: 20px;
+                    justify-content: center;
+                    margin-left: 0.5em;
+
+                    #title {
+                        font-size: 16px;
+                        font-weight: 500;
+                    }
+                    #author {
+                        font-size: 14px;
+                        font-weight: 400;
+                        color: gray;
+                    }
+                }
+            }
+            #mode {
+                width: 24%;
+                text-align: start;
+            }
+            #date {
+                width: 14%;
+                text-align: center;
+            }
+
+            #lenght {
+                width: 14%;
+                text-align: center;
+
+                // #lenght {
+                //     padding: 0px 25px;
+                // }
+                #icon {
+                    opacity: 0%;
+                }
+            }
+            #edit {
+                width: 15%;
+                text-align: center;
+            }
+        }
+        .single-song:hover {
+            background-color: rgba(184, 180, 180, 0.329);
+
+            #lenght {
+                #icon {
+                    opacity: 100%;
+                }
+            }
+        }
+    }
+}

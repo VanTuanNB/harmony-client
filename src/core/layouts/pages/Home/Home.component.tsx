@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 
 import Image from 'next/image';
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import styles from './Home.module.scss';
 import AlbumHotComponent from './Hot/AlbumHot.component';
 import GenreHotComponent from './Hot/GenreHot.component';
@@ -32,6 +32,7 @@ const images = [
 
 function HomePage() {
     const [startImageIndex, setStartImageIndex] = useState(0);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const imagesToShow = images.slice(startImageIndex, startImageIndex + 3);
     const dispatch = useAppDispatch();
     const store = useAppSelector(selectSongReducer);
@@ -54,18 +55,27 @@ function HomePage() {
         },
         [dispatch, store],
     );
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const nextImageIndex = (currentImageIndex + 3) % images.length;
+            setStartImageIndex(nextImageIndex);
+            setCurrentImageIndex(nextImageIndex);
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, [currentImageIndex]);
     return (
         <div className={cx('main-home')}>
             <div className={cx('main-image')}>
                 <button className={cx('icon-slideright')} onClick={showPreviousImages}>
-                    <FontAwesomeIcon icon={faArrowRight} />
+                    <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
 
                 {imagesToShow.map((image, index) => (
                     <Image key={index} className={cx('image2')} src={image} width={1000} height={1000} alt="" />
                 ))}
                 <button className={cx('icon-slideleft')} onClick={showNextImages}>
-                    <FontAwesomeIcon icon={faArrowLeft} />
+                    <FontAwesomeIcon icon={faArrowRight} />
                 </button>
             </div>
             <ReleaseComponent onClick={onClick} />
