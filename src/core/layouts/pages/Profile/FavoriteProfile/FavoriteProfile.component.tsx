@@ -5,17 +5,16 @@ import { formatDate } from '@/utils/format.util';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
-import style from './FavoriteProfile.module.scss';
 import { memo } from 'react';
+import style from './FavoriteProfile.module.scss';
 
 const cx = classNames.bind(style);
 
 interface IProfile {
     profile: IUser;
-    playSong: any;
 }
 
-function FavoriteProfilePage({ profile, playSong }: IProfile) {
+function FavoriteProfilePage({ profile }: IProfile) {
     return (
         <div className={cx('favorite')}>
             <div className={cx('control-title')}>
@@ -29,7 +28,7 @@ function FavoriteProfilePage({ profile, playSong }: IProfile) {
             </div>
             <div className={cx('list-songs')}>
                 {profile.favoriteListReference?.listSong.map((item, index) => (
-                    <div onClick={() => playSong(item._id)} key={item._id} className={cx('single-song')}>
+                    <div key={item._id} className={cx('single-song')}>
                         <div className={cx('single-left')}>
                             <div id={cx('id')}>{index + 1}</div>
                             <div id={cx('song')}>

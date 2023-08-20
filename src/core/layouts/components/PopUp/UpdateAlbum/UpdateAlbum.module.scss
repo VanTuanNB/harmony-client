@@ -17,7 +17,7 @@
 
         .form-pop-up {
             width: 35vw;
-            padding-bottom: 10px;
+            padding-bottom: 30px;
             display: grid;
             padding: 3%;
             border-radius: 10px;
@@ -74,6 +74,7 @@
                     }
                     input[type='file'] {
                         opacity: 0%;
+                        height: 0px;
                     }
                 }
                 .img-upload:hover {
@@ -89,9 +90,6 @@
                 }
                 .form {
                     width: 100%;
-                    display: flex;
-                    flex-wrap: wrap;
-                    justify-content: center;
                     text-align: center;
                     input {
                         height: 40px;
@@ -111,7 +109,7 @@
                         border-radius: 5px;
                     }
                     button {
-                        margin-top: 50px;
+                        top: 50px;
                         padding: 10px 20px;
                         border-radius: 10px;
                         cursor: pointer;
@@ -126,7 +124,7 @@
             p {
                 width: 100%;
                 font-size: 1.2rem;
-                margin-top: 5px;
+                margin-top: 20px;
             }
         }
     }

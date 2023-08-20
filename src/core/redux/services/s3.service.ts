@@ -1,6 +1,14 @@
 import { IResponseServer } from '@/core/common/interfaces/index.interface';
 import { rootSplitApi } from './index.service';
+import { LocalStorageSide } from '@/utils/clientStore.util';
+import { ECookieStorage } from '@/core/common/constants/common.constant';
 
+interface IToken {
+    accessToken: string;
+    refreshToken: string
+}
+const localStoreInstance = new LocalStorageSide()
+const token: IToken = localStoreInstance.getStore(ECookieStorage.HARMONY_USER_TOKEN)
 
 export const s3Api = rootSplitApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -8,7 +16,9 @@ export const s3Api = rootSplitApi.injectEndpoints({
             query: () => ({
                 url: '/signedUrlS3/audio',
                 method: 'POST',
-             
+                headers: {
+                    'Authorization': `Bearer ${token.refreshToken}`
+                },
             }),
         }),
 
@@ -27,6 +37,9 @@ export const s3Api = rootSplitApi.injectEndpoints({
             query: ({ uploadId, contentType }) => ({
                 url: '/signedUrlS3/thumbnail',
                 method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token.refreshToken}`
+                },
                 body: {
                     uploadId,
                     contentType

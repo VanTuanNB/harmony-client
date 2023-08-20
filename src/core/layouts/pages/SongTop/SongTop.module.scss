@@ -14,7 +14,7 @@
 
         h2 {
             font-size: 2.5em;
-            background: -webkit-linear-gradient(left, #00bf63, #f90);
+            background: -webkit-linear-gradient(left, #00bf63, rgb(184, 249, 6), #c9ea28 );
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
@@ -66,6 +66,8 @@
                     width: 50px;
                     margin: auto;
 
+                    color: var(--theme-mode-background);
+                    -webkit-text-stroke: 1px var(--theme-mode-color);
                     p {
                         font-size: 2.5em;
                         font-weight: bold;
@@ -73,14 +75,14 @@
                     }
                 }
                 .top0 {
-                    color: #00bf63;
+                    -webkit-text-stroke: 1px #00bf63;
                 }
 
                 .top1 {
-                    color: brown;
+                    -webkit-text-stroke: 1px red;
                 }
                 .top2 {
-                    color: yellow;
+                    -webkit-text-stroke: 1px gold;
                 }
                 #song {
                     width: 40%;

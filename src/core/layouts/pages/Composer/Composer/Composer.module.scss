@@ -71,8 +71,9 @@
             .single-right {
                 width: 100%;
                 display: flex;
+                align-items: center;
                 #album {
-                    width: 50%;
+                    width: 80%;
                     text-align: center;
                     line-height: 50px;
                     color: gray;

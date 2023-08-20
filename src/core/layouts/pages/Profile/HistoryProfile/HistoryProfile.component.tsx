@@ -1,21 +1,20 @@
-import classNames from 'classnames/bind';
-import style from './HistoryProfile.module.scss';
-import Link from 'next/link';
-import Image from 'next/image';
+import { IUser } from '@/core/common/interfaces/collection.interface';
 import HeartComponent from '@/shared/components/Heart/Heart.component';
 import { HistoryIcon } from '@/shared/components/Svg/index.component';
-import { IUser } from '@/core/common/interfaces/collection.interface';
 import { formatDate } from '@/utils/format.util';
+import classNames from 'classnames/bind';
+import Image from 'next/image';
+import Link from 'next/link';
 import { memo } from 'react';
+import style from './HistoryProfile.module.scss';
 
 const cx = classNames.bind(style);
 
 interface IProfile {
     profile: IUser;
-    playSong: any;
 }
 
-function HistoryProfilePage({profile,playSong}:IProfile) {
+function HistoryProfilePage({ profile }: IProfile) {
     return (
         <div className={cx('history')}>
             <div className={cx('control-title')}>
@@ -29,11 +28,11 @@ function HistoryProfilePage({profile,playSong}:IProfile) {
             </div>
             <div className={cx('list-songs')}>
                 {profile.historyReference?.listSong.map((item) => (
-                    <div onClick={() => playSong(item._id)} key={item._id} className={cx('single-song')}>
+                    <div key={item._id} className={cx('single-song')}>
                         <div className={cx('single-left')}>
                             <div id={cx('id')}>1</div>
                             <div id={cx('song')}>
-                                <Image src={item.thumbnailUrl} alt={''} width={40} height={40}/>
+                                <Image src={item.thumbnailUrl} alt={''} width={40} height={40} />
                                 <div id={cx('song-title')}>
                                     <div id={cx('title')}>{item.title}</div>
                                     <div id={cx('author')}>{profile.name}</div>

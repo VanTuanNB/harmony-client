@@ -1,13 +1,21 @@
 import { IResponseServer, IUser } from '@/core/common/interfaces/index.interface';
 import { rootSplitApi } from './index.service';
+import { LocalStorageSide } from '@/utils/clientStore.util';
+import { ECookieStorage } from '@/core/common/constants/common.constant';
 
+interface IToken {
+    accessToken: string;
+    refreshToken: string
+}
+const localStoreInstance = new LocalStorageSide()
+const token: IToken = localStoreInstance.getStore(ECookieStorage.HARMONY_USER_TOKEN)
 export const userApi = rootSplitApi.injectEndpoints({
     endpoints: (builder) => ({
         getServiceUserRoleComposer: builder.query<IResponseServer<IUser[]>, void>({
             query: () => `/user/composer`,
         }),
         getServiceProfile: builder.query<IResponseServer<IUser>, string>({
-            query: (id: string) => `/user/${id}`,
+            query: (id?: string) => `/user/${id ?? ''}`,
         }),
         postSignUpVerify: builder.mutation<IResponseServer, { email: string; password: string; username: string }>({
             query: (body: { email: string; password: string; username: string }) => ({
@@ -31,6 +39,9 @@ export const userApi = rootSplitApi.injectEndpoints({
                 url: `/user/profile/${user._id ?? ''}`,
                 method: 'PUT',
                 body: user,
+                headers: {
+                    'Authorization': `Bearer ${token.refreshToken}`
+                },
             }),
         }),
     }),
