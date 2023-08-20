@@ -1,0 +1,56 @@
+.control-buttons {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1.4em;
+    margin-top: 0.8em;
+
+    .btn-toggle-play-paused {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #111;
+        border: 1px solid var(--theme-mode-color);
+        background-color: transparent;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+
+        & .icon-play-or-pause {
+            font-size: 18px;
+            color: var(--theme-mode-color);
+        }
+    }
+
+    & .btn-actions {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        font-size: 16px;
+        background-color: transparent;
+        text-transform: none;
+        cursor: pointer;
+        color: #fff;
+
+        &.disabled {
+            color: #ccc;
+            cursor: default;
+        }
+
+        & .icon {
+            padding: 5px;
+        }
+
+        &:hover {
+            background-color: hsla(0, 0%, 89%, 0.1);
+        }
+    }
+}

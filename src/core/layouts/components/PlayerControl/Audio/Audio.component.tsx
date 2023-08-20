@@ -1,24 +1,25 @@
 import { EStateCurrentSong } from '@/core/common/constants/common.constant';
-import { selectSongReducer, updateStatePlayingAction } from '@/core/redux/features/song/song.slice';
-import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
+import { updateStatePlayingAction } from '@/core/redux/features/song/song.slice';
+import { useAppDispatch } from '@/core/redux/hook.redux';
 import { memo, useCallback, useEffect, useRef, useState } from 'react';
 
-import styles from './Audio.module.scss';
+import { formatDurationSong } from '@/utils/format.util';
 import classNames from 'classnames/bind';
 import ProcessBar from '../ProcessBar/ProcessBar.component';
-import { formatDurationSong } from '@/utils/format.util';
+import styles from './Audio.module.scss';
 
 const cx = classNames.bind(styles);
 
 interface IAudioProps {
     data: string;
+    state: EStateCurrentSong;
+    volume: number;
 }
 
-function AudioComponent({ data }: IAudioProps) {
+function AudioComponent({ data, state, volume }: IAudioProps) {
     const [timeProcess, setTimeProcess] = useState(0);
     const [totalDuration, setTotalDuration] = useState<string>('');
     const [currentTime, setCurrentTime] = useState<string>('');
-    const store = useAppSelector(selectSongReducer);
     const audioRef = useRef<HTMLAudioElement>(null);
     const dispatch = useAppDispatch();
     const handleOnPause = () => {
@@ -66,15 +67,15 @@ function AudioComponent({ data }: IAudioProps) {
     }, [audioRef.current]);
 
     useEffect(() => {
-        if (store.playing.state === EStateCurrentSong.PLAYING) {
+        if (state === EStateCurrentSong.PLAYING) {
             audioRef.current?.play();
             return;
         }
-        if (store.playing.state === EStateCurrentSong.PAUSED) {
+        if (state === EStateCurrentSong.PAUSED) {
             audioRef.current?.pause();
             return;
         }
-    }, [store.playing.state]);
+    }, [state]);
 
     useEffect(() => {
         if (audioRef.current && !isNaN(audioRef.current.duration)) {
@@ -83,8 +84,8 @@ function AudioComponent({ data }: IAudioProps) {
     }, [audioRef.current?.duration]);
 
     useEffect(() => {
-        if (audioRef.current) audioRef.current.volume = store.playing.volume;
-    }, [store.playing.volume]);
+        if (audioRef.current) audioRef.current.volume = volume;
+    }, [volume]);
 
     return (
         <div className={cx('wrapper-media')}>

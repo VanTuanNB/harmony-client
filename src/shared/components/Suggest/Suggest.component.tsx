@@ -50,11 +50,13 @@ function SuggestComponent(): ReactNode {
     const handleClickMediaItem = useCallback(
         (_id: string) => {
             const songSelected = store.playlist.suggests.find((song) => song._id === _id);
-            dispatch(pushSongIntoPrevPlayListAction(songSelected as any));
-            dispatch(removeSongFromSuggestListAction({ _id }));
+            if (!!store.playlist.prevSongs.length && !!store.playing.currentSong) {
+                dispatch(pushSongIntoPrevPlayListAction(songSelected as any));
+            }
+            dispatch(removeSongFromSuggestListAction(_id));
             dispatch(startPlayingAction(songSelected as ISong));
         },
-        [dispatch, store.playlist.suggests],
+        [dispatch, store],
     );
     const dataSong = store.playlist.suggests;
     return (
