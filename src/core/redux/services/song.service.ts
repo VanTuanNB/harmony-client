@@ -1,5 +1,7 @@
 import { IResponseServer, ISong } from '@/core/common/interfaces/index.interface';
 import { rootSplitApi } from './index.service';
+import { LocalStorageSide } from '@/utils/clientStore.util';
+import { ECookieStorage } from '@/core/common/constants/common.constant';
 interface Post {
     albumReference: string[];
     composerReference: string;
@@ -9,6 +11,13 @@ interface Post {
     title: string;
     uploadId: string;
 }
+
+interface IToken {
+    accessToken: string;
+    refreshToken: string
+}
+const localStoreInstance = new LocalStorageSide()
+const token: IToken = localStoreInstance.getStore(ECookieStorage.HARMONY_USER_TOKEN)
 export const songApi = rootSplitApi.injectEndpoints({
     endpoints: (builder) => ({
         getServiceSongs: builder.query<IResponseServer<ISong[]>, string>({
@@ -41,7 +50,8 @@ export const songApi = rootSplitApi.injectEndpoints({
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmYTBmMmUzOC1jNGI2LTQ0MDUtOGY4OS0zNWIxYzUxZTg1ZDQiLCJlbWFpbCI6Imh1eW5xcHMxNjkxOEBmcHQuZWR1LnZuIiwicm9sZSI6ImNvbXBvc2VyIiwiaWF0IjoxNjkyMjU3NDYwLCJleHAiOjE2OTQ4NDk0NjB9.dhhHL8X9SykQWhGUYI6foyokVpDCUpJ4sswYCUfokQ8'},
+                    'Authorization': `Bearer ${token.refreshToken}`
+                },
                 body,
             }),
         }),

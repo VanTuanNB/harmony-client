@@ -66,7 +66,7 @@ export interface IAlbum {
     title: string;
     publish: Date;
     userReference: IUser;
-    listSong: ISong[] | string[];
+    listSong: ISong[];
     thumbnailUrl: string | null;
     thumbnail: {
         bucketName: string;

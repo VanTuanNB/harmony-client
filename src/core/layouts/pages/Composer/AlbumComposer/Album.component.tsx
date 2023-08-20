@@ -1,6 +1,7 @@
 'use client';
 import { ISong } from '@/core/common/interfaces/collection.interface';
 import { ISongStore } from '@/core/common/interfaces/songStore.interface';
+import UpdateSongComponent from '@/core/layouts/components/PopUp/UpdateSong/UpdateSong.component';
 import {
     pushSongIntoPrevPlayListAction,
     selectSongReducer,
@@ -11,60 +12,52 @@ import { useGetServiceAlbumQuery, usePutServiceAlbumMutation } from '@/core/redu
 import HeartComponent from '@/shared/components/Heart/Heart.component';
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
 import { formatDate } from '@/utils/format.util';
-import { faClock, faClose, faPen, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
+import { faAdd, faClock, faClose, faPen, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { memo, useCallback, useEffect, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { memo, useCallback, useState } from 'react';
 import UpdateAlbum from '../../../components/PopUp/UpdateAlbum/UpdateAlbum.component';
 import style from './AlbumComposer.module.scss';
 
 const cx = classNames.bind(style);
 
 function AlbumComposerPage() {
-    const [popupUploadAlbum, setPopupUploadAlbum] = useState(false);
-    const [isUpdated, setIsUpdated] = useState(false);
     const path = usePathname();
+    const router = useRouter();
     const resurt = path.split('/album/')[1];
+    const [popupUploadAlbum, setPopupUploadAlbum] = useState(false);
+    const [popupUploadSong, setPopupUploadSong] = useState(false);
     const { data, isLoading, refetch } = useGetServiceAlbumQuery(resurt);
-    const [album, setAlbum] = useState<ISong[]>();
     const [putAlbum] = usePutServiceAlbumMutation();
     const dispatch = useAppDispatch();
-    useEffect(() => {
-        if (data) {
-            let album = data.data.listSong as ISong[];
-            setAlbum(album);
-        }
-    }, [data, album]);
 
-    useEffect(() => {
+    const handlePopupAlbum = useCallback((isUpdated: boolean) => {
         if (isUpdated) {
             refetch();
-            setIsUpdated(false);
+            setPopupUploadAlbum(false);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isUpdated]);
-    const closePopupAlbum = useCallback(() => {
-        setPopupUploadAlbum(false);
     }, []);
-    const openPopUpProfile = () => {
-        if (!popupUploadAlbum) {
-            setPopupUploadAlbum(true);
+
+    const handlePopupUpdateSong = useCallback((isUpdated: boolean) => {
+        if (isUpdated) {
+            refetch();
+            window.location.reload();
+            setPopupUploadSong(false);
         }
-    };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleRemoveItem = async (id: string) => {
-        const newListSong = album?.filter((song) => song._id !== id);
-        setAlbum(newListSong);
-        const listSong = newListSong?.map((item) => item._id);
-        const newValue = {
-            _id: data?.data._id,
-            isNewUploadThumbnail: false,
-            userId: data?.data.userReference._id,
-            listSong: listSong,
-        };
-        putAlbum(newValue);
+        const newListSong = data?.data.listSong.reduce((acc: string[], cur: ISong, index) => {
+            if (cur._id === id) return acc;
+            acc.push(cur._id);
+            return acc;
+        }, []);
+        putAlbum({ _id: data?.data._id, listSong: newListSong as any });
+        refetch();
     };
 
     const store: ISongStore = useAppSelector(selectSongReducer);
@@ -80,16 +73,25 @@ function AlbumComposerPage() {
                 <div className={cx('image')}>
                     <Image
                         className={cx('album-img')}
-                        src={data?.data.thumbnailUrl || '/images/playlist.png'}
-                        width={232}
-                        height={232}
+                        src={
+                            data?.data && data?.data.thumbnailUrl
+                                ? `${data?.data.thumbnailUrl}?${new Date().getTime()}`
+                                : '/images/playlist.png'
+                        }
+                        width={500}
+                        height={500}
                         alt=""
                     />
-                    <button onClick={openPopUpProfile} className={cx('update-profile')}>
+                    <button onClick={() => setPopupUploadAlbum(true)} className={cx('update-profile')}>
                         <FontAwesomeIcon icon={faPen} className={cx('icon-edit')} />
                     </button>
-                    {popupUploadAlbum && album && (
-                        <UpdateAlbum setIsUpdated={setIsUpdated} close={closePopupAlbum} dataAlbum={data?.data} />
+                    {popupUploadAlbum && <UpdateAlbum isUpdated={handlePopupAlbum} dataAlbum={data?.data} />}
+                    {popupUploadSong && (
+                        <UpdateSongComponent
+                            songAlbum={data?.data.listSong}
+                            isUpdated={handlePopupUpdateSong}
+                            dataProfile={data?.data}
+                        />
                     )}
                 </div>
                 <div className={cx('album-detail')}>
@@ -98,7 +100,10 @@ function AlbumComposerPage() {
                         <span className={cx('album-name')}>{data?.data.title}</span>
                     </div>
 
-                    <p className={cx('information')}>{data?.data.information}</p>
+                    <p className={cx('information')}>
+                        {data?.data.information} {!data?.data.information && 'Chưa có mô tả'}
+                    </p>
+
                     <div className={cx('detail')}>
                         <Image
                             className={cx('detail-image')}
@@ -119,6 +124,7 @@ function AlbumComposerPage() {
             <div className={cx('btn-icon')}>
                 <FontAwesomeIcon className={cx('icon-Play')} icon={faPlayCircle} />
             </div>
+
             <div className={cx('album-render')}>
                 <div className={cx('title')}>
                     <div id={cx('id')}>#</div>
@@ -128,9 +134,12 @@ function AlbumComposerPage() {
                     <div id={cx('lenght')}>
                         <FontAwesomeIcon className={cx('icon-clock')} icon={faClock} />
                     </div>
+                    <button className={cx('uploadSong')} onClick={() => setPopupUploadSong(true)}>
+                        <FontAwesomeIcon className={cx('icon-add')} icon={faAdd} />
+                    </button>
                 </div>
                 <div className={cx('list-songs')}>
-                    {album?.map((song, index) => (
+                    {data?.data.listSong.map((song, index) => (
                         <div key={index} className={cx('single-song')}>
                             <div id={cx('id')}>{index + 1}</div>
                             <div onClick={() => onClick(song._id)} id={cx('song')}>

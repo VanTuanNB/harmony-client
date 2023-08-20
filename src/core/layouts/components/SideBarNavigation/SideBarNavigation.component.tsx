@@ -40,7 +40,7 @@ function SideBarNavigation() {
                             </Link>
                         </li>
                         <li>
-                            <Link href="">
+                            <Link href="/topSong">
                                 <FontAwesomeIcon icon={faStar} className={cx('icon')} />
                                 <span>Top 100</span>
                             </Link>

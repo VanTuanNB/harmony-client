@@ -3,7 +3,7 @@ import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import style from './Favorit.module.scss';
+import style from './Favorite.module.scss';
 import HeartComponent from '@/shared/components/Heart/Heart.component';
 import { memo } from 'react';
 

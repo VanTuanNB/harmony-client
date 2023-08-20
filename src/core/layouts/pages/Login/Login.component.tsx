@@ -139,7 +139,7 @@ function LoginPage() {
                 </div>
                 <div className={cx('sub')}>
                     Bạn chưa có tài khoản?{' '}
-                    <Link href="">
+                    <Link href="/auth/signup">
                         <i>Đăng ký với chúng tôi</i>
                     </Link>
                 </div>
