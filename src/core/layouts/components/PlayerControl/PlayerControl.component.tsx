@@ -3,21 +3,13 @@ import { selectSongReducer, updateStatePlayingAction } from '@/core/redux/featur
 import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import { useGetStreamSongQuery } from '@/core/redux/services/song.service';
 import HeartComponent from '@/shared/components/Heart/Heart.component';
-import LoadingSpinner from '@/shared/components/Loading/LoadingSpinner/LoadingSpinner.component';
-import {
-    faBackwardStep,
-    faCompress,
-    faForwardStep,
-    faPause,
-    faPlay,
-    faRetweet,
-    faShuffle,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCompress } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { memo, useCallback, useEffect } from 'react';
 import AudioComponent from './Audio/Audio.component';
+import ControlComponent from './Control/Control.component';
 import styles from './PlayerControl.module.scss';
 import VolumeComponent from './Volume/Volume.component';
 const cx = classNames.bind(styles);
@@ -25,19 +17,19 @@ const cx = classNames.bind(styles);
 function PlayerControl() {
     const store = useAppSelector(selectSongReducer);
     const dispatch = useAppDispatch();
-    const { data, error, isLoading } = useGetStreamSongQuery(store.playing.currentSong._id);
+    const { data, isLoading, isSuccess } = useGetStreamSongQuery(store.playing.currentSong._id);
 
     useEffect(() => {
-        if (data) {
+        if (isSuccess) {
             dispatch(updateStatePlayingAction(EStateCurrentSong.PLAYING));
         } else {
             dispatch(updateStatePlayingAction(EStateCurrentSong.FAILED));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [data, error]);
+    }, [data, isSuccess]);
 
-    const handleTogglePlaySong = () => {
-        if (data) {
+    const handleTogglePlaySong = useCallback(() => {
+        if (!!isSuccess) {
             switch (store.playing.state) {
                 case EStateCurrentSong.PLAYING:
                     dispatch(updateStatePlayingAction(EStateCurrentSong.PAUSED));
@@ -47,7 +39,9 @@ function PlayerControl() {
                     break;
             }
         }
-    };
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [store.playing.state]);
 
     return (
         <div hidden={store.playing.state === EStateCurrentSong.FAILED} className={cx('player-control')}>
@@ -79,27 +73,17 @@ function PlayerControl() {
                 </div>
             </div>
             <div className={cx('progress-controller')}>
-                <div className={cx('control-buttons')}>
-                    <FontAwesomeIcon icon={faShuffle} className={cx('icon')} />
-                    <FontAwesomeIcon icon={faBackwardStep} className={cx('icon')} />
-                    <button className={cx('btn-toggle-play-paused')} onClick={handleTogglePlaySong}>
-                        {isLoading || store.playing.state === EStateCurrentSong.LOADING ? (
-                            <LoadingSpinner width={20} height={20} />
-                        ) : (
-                            <>
-                                {data && store.playing.state === EStateCurrentSong.PLAYING && (
-                                    <FontAwesomeIcon icon={faPause} className={cx('icon-play-or-pause')} />
-                                )}
-                                {data && store.playing.state === EStateCurrentSong.PAUSED && (
-                                    <FontAwesomeIcon icon={faPlay} className={cx('icon-play-or-pause')} />
-                                )}
-                            </>
-                        )}
-                    </button>
-                    <FontAwesomeIcon icon={faForwardStep} className={cx('icon')} />
-                    <FontAwesomeIcon icon={faRetweet} className={cx('icon')} />
-                </div>
-                <AudioComponent data={data || ''}></AudioComponent>
+                <ControlComponent
+                    isLoading={isLoading}
+                    songId={store.playing.currentSong._id}
+                    state={store.playing.state}
+                    onTogglePlaying={handleTogglePlaySong}
+                />
+                <AudioComponent
+                    data={data || ''}
+                    state={store.playing.state}
+                    volume={store.playing.volume}
+                ></AudioComponent>
             </div>
             <div className={cx('other-features')}>
                 <VolumeComponent />
@@ -108,4 +92,4 @@ function PlayerControl() {
     );
 }
 
-export default PlayerControl;
+export default memo(PlayerControl);
