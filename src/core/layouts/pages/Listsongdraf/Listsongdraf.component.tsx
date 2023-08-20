@@ -1,5 +1,6 @@
 'use client';
-import { faClock, faEllipsis } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare } from '@fortawesome/free-regular-svg-icons';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
@@ -18,14 +19,6 @@ function ListsongdrafPage() {
                     <div className={cx('title')}>
                         <p>List song draf</p>
                         <span className={cx('album-name')}>Starboy</span>
-                    </div>
-                    <div className={cx('detail')}>
-                        <Image className={cx('detail-image')} src={''} width={24} height={24} alt="" />
-                        <div className={cx('infor')}>
-                            <span>
-                                <b>The Weeknd</b> • 2016 • 100 thích • 18 bài hát, khoảng 2 giờ
-                            </span>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -59,7 +52,7 @@ function ListsongdrafPage() {
                     </div>
                     <div id={cx('edit')}>
                         {' '}
-                        <FontAwesomeIcon id={cx('icon')} icon={faEllipsis} />
+                        <FontAwesomeIcon icon={faPenToSquare} />
                     </div>
                 </div>
             </div>

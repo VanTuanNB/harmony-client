@@ -8,12 +8,17 @@
     padding-top: 1.5em;
     padding-bottom: 20%;
     padding-left: 30px;
+
     .album-infor {
         display: flex;
         flex-direction: row;
         height: 232px;
         gap: 1em;
-
+        .image {
+            img {
+                border-radius: 50%;
+            }
+        }
         .album-detail {
             display: flex;
             flex-direction: column;
