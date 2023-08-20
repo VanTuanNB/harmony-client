@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import style from './Composer.module.scss'
-import { ISong, IUser } from "@/core/common/interfaces/collection.interface";
+import { IUser } from "@/core/common/interfaces/collection.interface";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,22 +9,20 @@ import { AlbumIcon, ListSongIcon } from "@/shared/components/Svg/index.component
 import CreateSongComponent from "@/core/layouts/components/PopUp/CreateSong/CreateSong.component";
 import CreateAlbumComponent from "@/core/layouts/components/PopUp/CreateAlbum/CreateAlbum.component";
 import { faAdd } from "@fortawesome/free-solid-svg-icons";
-import { useCallback, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/core/redux/hook.redux";
-import { ISongStore } from "@/core/common/interfaces/songStore.interface";
-import { pushSongIntoPrevPlayListAction, selectSongReducer, startPlayingAction } from "@/core/redux/features/song/song.slice";
+import { memo, useCallback, useState } from "react";
 
 const cx = classNames.bind(style)
 
 interface IComposer{
     isComposer: string;
-    dataComposer: IUser
+    profile: IUser;
+    playSong: any;
 }
-function ComposerComponent({isComposer, dataComposer}: IComposer) {
+function ComposerPage({isComposer, profile, playSong}: IComposer) {
     const [isUpdated, setIsUpdated] = useState(false);
     const [popupSong, setPopupSong] = useState(false);
     const [popupCreateAlbum, setPopupCreateAlbum] = useState(false);
-    const dispatch = useAppDispatch();
+
     
     const openPopUpAlbum = () => {
         if (!popupCreateAlbum) {
@@ -47,12 +45,7 @@ function ComposerComponent({isComposer, dataComposer}: IComposer) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const store: ISongStore = useAppSelector(selectSongReducer);
-    const onClick = (_id: string) => {
-        const songSelected = store.playlist.suggests.find((song) => song._id === _id);
-        dispatch(pushSongIntoPrevPlayListAction(songSelected as any));
-        dispatch(startPlayingAction(songSelected as ISong));
-    };
+   
     return ( 
         <>
          {isComposer === 'composer' && (
@@ -64,18 +57,18 @@ function ComposerComponent({isComposer, dataComposer}: IComposer) {
                                         <button onClick={openPopUpSong}>
                                             <FontAwesomeIcon className={cx('icon-add')} icon={faAdd} />
                                         </button>
-                                        {dataComposer.songsReference?.length !== 0 && (
-                                            <Link href={`/composer/song/${dataComposer._id}`}>Xem tất cả</Link>
+                                        {profile.songsReference?.length !== 0 && (
+                                            <Link href={`/composer/song/${profile._id}`}>Xem tất cả</Link>
                                         )}
                                     </div>
                                 </div>
                                 <div className={cx('list-songs')}>
-                                    {dataComposer.songsReference?.map((item, index) => {
+                                    {profile.songsReference?.map((item, index) => {
                                         return (
                                             <>
                                                 <div key={item._id} className={cx('single-song')}>
                                                     <div
-                                                        onClick={() => onClick(item._id)}
+                                                        onClick={() => playSong(item._id)}
                                                         className={cx('single-left')}
                                                     >
                                                         <div id={cx('id')}>{index + 1}</div>
@@ -88,7 +81,7 @@ function ComposerComponent({isComposer, dataComposer}: IComposer) {
                                                             ></Image>
                                                             <div id={cx('song-title')}>
                                                                 <div id={cx('title')}>{item.title}</div>
-                                                                <div id={cx('author')}>{dataComposer.name}</div>
+                                                                <div id={cx('author')}>{profile.name}</div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -112,7 +105,7 @@ function ComposerComponent({isComposer, dataComposer}: IComposer) {
                                             </>
                                         );
                                     })}
-                                    {dataComposer.songsReference?.length === 0 && (
+                                    {profile.songsReference?.length === 0 && (
                                         <div className={cx('albumNot')}>
                                             <ListSongIcon className={cx('icon-album')} />
                                             <h2>Bạn chưa tải bài hát lên</h2>
@@ -121,7 +114,7 @@ function ComposerComponent({isComposer, dataComposer}: IComposer) {
                                 </div>
                                 {popupSong && (
                                     <CreateSongComponent
-                                        data={dataComposer}
+                                        data={profile}
                                         setIsUpdated={setIsUpdated}
                                         close={closePopupSong}
                                     />
@@ -134,11 +127,11 @@ function ComposerComponent({isComposer, dataComposer}: IComposer) {
                                         <button onClick={openPopUpAlbum}>
                                             <FontAwesomeIcon className={cx('icon-add')} icon={faAdd} />
                                         </button>
-                                        {dataComposer.albumsReference?.length !== 0 && <Link href={''}>Xem tất cả</Link>}
+                                        {profile.albumsReference?.length !== 0 && <Link href={''}>Xem tất cả</Link>}
                                     </div>
                                 </div>
                                 <div className={cx('list')}>
-                                    {dataComposer.albumsReference?.map((item, key) => {
+                                    {profile.albumsReference?.map((item, key) => {
                                         return (
                                             <Link className={cx('item')} href={'/composer/album/' + item._id} key={key}>
                                                 {item.thumbnailUrl && (
@@ -152,14 +145,14 @@ function ComposerComponent({isComposer, dataComposer}: IComposer) {
                                             </Link>
                                         );
                                     })}
-                                    {dataComposer.albumsReference?.length === 0 && (
+                                    {profile.albumsReference?.length === 0 && (
                                         <div className={cx('albumNot')}>
                                             <AlbumIcon className={cx('icon-album')} />
                                             <h2>Bạn chưa tạo Album</h2>
                                         </div>
                                     )}
                                 </div>
-                                {popupCreateAlbum && <CreateAlbumComponent close={closePopupAlbum} dataProfile={dataComposer} />}
+                                {popupCreateAlbum && <CreateAlbumComponent close={closePopupAlbum} dataProfile={profile} />}
                             </div>
                         </div>
                     )}
@@ -167,4 +160,4 @@ function ComposerComponent({isComposer, dataComposer}: IComposer) {
      );
 }
 
-export default ComposerComponent;
+export default memo(ComposerPage);

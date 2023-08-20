@@ -38,16 +38,27 @@ function UpdateAlbum({ close, dataAlbum, setIsUpdated }: IState) {
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const [fileThumnail, setFileThumnail] = useState<File | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const [uploadThumnail] = useUploadThumnailMutation();
+    const [uploadThumnail, { isSuccess }] = useUploadThumnailMutation();
     const [putServiceAlbum, { data }] = usePutServiceAlbumMutation();
 
     useEffect(() => {
         if (data) {
             const privateUrl = data.data.privateUrl;
+            console.log(data);
+            console.log(fileThumnail);
             if (fileThumnail) uploadThumnail({ privateUrl, file: fileThumnail });
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [data, fileThumnail]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data]);
+
+    useEffect(() => {
+        if (isSuccess) {
+            console.log('thành công');
+            setSuccess(false);
+            setIsUpdated(true);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isSuccess]);
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -85,8 +96,6 @@ function UpdateAlbum({ close, dataAlbum, setIsUpdated }: IState) {
             };
             putServiceAlbum(newValue);
         }
-        setSuccess(false);
-        setIsUpdated(true);
     };
 
     return (

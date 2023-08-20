@@ -18,6 +18,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './GenreDtail.module.scss';
+import { memo } from 'react';
 const cx = classNames.bind(styles);
 
 function GenreDetailPage() {
@@ -121,4 +122,4 @@ function GenreDetailPage() {
         </>
     );
 }
-export default GenreDetailPage;
+export default memo(GenreDetailPage);

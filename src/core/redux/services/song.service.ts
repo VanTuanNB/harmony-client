@@ -41,7 +41,7 @@ export const songApi = rootSplitApi.injectEndpoints({
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJmYTBmMmUzOC1jNGI2LTQ0MDUtOGY4OS0zNWIxYzUxZTg1ZDQiLCJlbWFpbCI6Imh1eW5xcHMxNjkxOEBmcHQuZWR1LnZuIiwicm9sZSI6ImNvbXBvc2VyIiwiaWF0IjoxNjkyMjU3NDYwLCJleHAiOjE2OTQ4NDk0NjB9.dhhHL8X9SykQWhGUYI6foyokVpDCUpJ4sswYCUfokQ8'},
+                },
                 body,
             }),
         }),

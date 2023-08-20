@@ -15,6 +15,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { memo } from 'react';
 import style from './SongTop.module.scss';
+import { formatDate } from '@/utils/format.util';
 
 const cx = classNames.bind(style);
 
@@ -69,7 +70,7 @@ function SongTopPage() {
                                     </Link>
                                 ))}
                             </div>
-                            <div id={cx('date')}>19/12/2020</div>
+                            <div id={cx('date')}>{formatDate(song.publish)}</div>
                             <div id={cx('lenght')}>
                                 <HeartComponent />
                             </div>
