@@ -21,7 +21,6 @@ interface IMediaItem extends Pick<ISong, '_id' | 'thumbnailUrl' | 'title' | 'per
 function MediaItem({ _id, thumbnailUrl, title, performers, active = false, onClick }: IMediaItem): ReactNode {
     const [favorite, setFavorite] = useState<boolean>(false);
     const store: ISongStore = useAppSelector(selectSongReducer);
-
     return (
         <div className={cx('wrapper-media', active && 'active')}>
             <div className={cx('media')} onClick={() => onClick(_id)}>

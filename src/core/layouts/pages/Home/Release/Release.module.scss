@@ -1,0 +1,22 @@
+.main-just {
+    width: 94.6%;
+    // margin: 25px;
+    margin: 0 auto;
+    margin-top: 20%;
+
+    & .list-listening {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        row-gap: 10px;
+        column-gap: 10px;
+        justify-content: center;
+
+        & .item {
+            // margin: 10px;
+            padding: 8px;
+            border-radius: 6px;
+            transition: 0.5 ease-in-out;
+            cursor: pointer;
+        }
+    }
+}

@@ -37,6 +37,7 @@ export const songSlice = createSlice({
             const index = state[EScopeSongStore.PLAYLIST][EScopeSongStore.SUGGESTS].findIndex(
                 (song: ISong) => song._id === action.payload,
             );
+            if (index === -1) return;
             state[EScopeSongStore.PLAYLIST][EScopeSongStore.SUGGESTS].splice(index, 1);
         },
 
@@ -69,6 +70,7 @@ export const songSlice = createSlice({
             const index = state[EScopeSongStore.PLAYLIST][EScopeSongStore.NEXT_SONGS].findIndex(
                 (song: ISong) => song._id === action.payload,
             );
+            if (index === -1) return;
             state[EScopeSongStore.PLAYLIST][EScopeSongStore.NEXT_SONGS].splice(index, 1);
         },
     },

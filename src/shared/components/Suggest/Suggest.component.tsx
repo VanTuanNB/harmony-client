@@ -21,6 +21,7 @@ import styles from './Suggest.module.scss';
 const cx = classNames.bind(styles);
 
 function SuggestComponent(): ReactNode {
+    // const [listSong, setListSong] = useState<ISong[]>([]);
     const [pageNumber, setPageNumber] = useState<number>(1);
     const [skip, setSkip] = useState<boolean>(false);
     const { data, error, isLoading, isFetching } = useGetSuggestSongQuery(
@@ -58,16 +59,22 @@ function SuggestComponent(): ReactNode {
         },
         [dispatch, store],
     );
-    const dataSong = store.playlist.suggests;
+    // useEffect(() => {
+    //     if (data && data.success) {
+    //         setListSong((prevSong) => {
+    //             return [...prevSong, ...data.data].filter((song: ISong) => song._id !== store.playing.currentSong._id);
+    //         });
+    //     }
+    // }, [data, store.playing.currentSong]);
     return (
         <div className={cx('wrapper')}>
             <h2 className={cx('title')}>Gợi ý cho bạn</h2>
             <div className={cx('contents')}>
                 {isLoading && <SkeletonLoading count={10} />}
-                {dataSong.length > 0 && (
+                {store.playlist.suggests.length > 0 && (
                     <>
                         <LazyLoadSuggestComponent
-                            items={dataSong}
+                            items={store.playlist.suggests}
                             onClickItem={handleClickMediaItem}
                             trigger={triggerRef}
                         />
