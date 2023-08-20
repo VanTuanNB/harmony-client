@@ -73,7 +73,6 @@ $padding: 0.5em;
             display: flex;
             gap: 1em;
             align-items: center;
-            
         }
     }
     // song-bar
@@ -85,35 +84,6 @@ $padding: 0.5em;
         align-items: center;
         gap: 0.1em;
         color: $secondary-color;
-        .control-buttons {
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 2em;
-            margin-top: 0.8em;
-
-            .btn-toggle-play-paused {
-                width: 40px;
-                height: 40px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #111;
-                border: 1px solid var(--theme-mode-color);
-                background-color: transparent;
-                border-radius: 50%;
-                cursor: pointer;
-
-                &:hover {
-                    transform: scale(1.1);
-                }
-
-                & .icon-play-or-pause {
-                    font-size: 18px;
-                    color: var(--theme-mode-color);
-                }
-            }
-        }
     }
     .other-features {
         position: absolute;

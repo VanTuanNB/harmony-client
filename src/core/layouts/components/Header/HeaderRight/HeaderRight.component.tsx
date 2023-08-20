@@ -73,7 +73,7 @@ function HeaderRight({ profile }: IProps): ReactNode {
                 <PopperMenuComponent
                     listOptions={MENU_SETTINGS}
                     callbackFn={handelLogout}
-                    position={{ top: 46, right: 0 }}
+                    position={{ top: 10, right: 0 }}
                 >
                     <button className={cx('btn-settings')}>
                         <FontAwesomeIcon icon={faGear} />
@@ -81,7 +81,7 @@ function HeaderRight({ profile }: IProps): ReactNode {
                 </PopperMenuComponent>
             </div>
             <div className={cx('item')}>
-                <PopperMenuComponent listOptions={USER_SETTINGS} position={{ top: 46, right: 0 }}>
+                <PopperMenuComponent listOptions={USER_SETTINGS} position={{ top: 10, right: 0 }}>
                     <Image
                         src={profile.avatarUrl || '/images/fallback-thumbnail-user.jpg'}
                         width={40}
