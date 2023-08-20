@@ -54,6 +54,7 @@ function HomePage() {
     const showPreviousImages = () => {
         setStartImageIndex((prevIndex) => Math.max(prevIndex - 1, 0));
     };
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     useEffect(() => {
         if (apiJustReleased.data) {
@@ -74,18 +75,27 @@ function HomePage() {
         dispatch(startPlayingAction(songSelected as ISong));
     };
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const nextImageIndex = (currentImageIndex + 3) % images.length;
+            setStartImageIndex(nextImageIndex);
+            setCurrentImageIndex(nextImageIndex);
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, [currentImageIndex]);
     return (
         <div className={cx('main-home')}>
             <div className={cx('main-image')}>
                 <button className={cx('icon-slideright')} onClick={showPreviousImages}>
-                    <FontAwesomeIcon icon={faArrowRight} />
+                    <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
 
                 {imagesToShow.map((image, index) => (
                     <Image key={index} className={cx('image2')} src={image} width={1000} height={1000} alt="" />
                 ))}
                 <button className={cx('icon-slideleft')} onClick={showNextImages}>
-                    <FontAwesomeIcon icon={faArrowLeft} />
+                    <FontAwesomeIcon icon={faArrowRight} />
                 </button>
             </div>
             <div className={cx('main-just')}>
