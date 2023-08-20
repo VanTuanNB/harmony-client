@@ -54,8 +54,6 @@ function ControlComponent({ isLoading, state, onTogglePlaying, songId }: IProps)
             dispatch(startPlayingAction(playlist.suggests[0]));
         }
     };
-    console.log('playlist', playlist);
-    console.log('playing', playing);
     return (
         <div className={cx('control-buttons')}>
             <Tippy content="Phát ngẫu nhiên">
