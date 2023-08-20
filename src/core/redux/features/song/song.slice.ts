@@ -33,13 +33,17 @@ export const songSlice = createSlice({
                 EScopeSongStore.SUGGESTS
             ].concat(action.payload);
         },
-        removeSongFromSuggestListAction: (state, action: PayloadAction<{ _id: string }>) => {
-            state[EScopeSongStore.PLAYLIST][EScopeSongStore.SUGGESTS] = state[EScopeSongStore.PLAYLIST][
-                EScopeSongStore.SUGGESTS
-            ].filter((song: ISong) => song._id !== action.payload._id);
+        removeSongFromSuggestListAction: (state, action: PayloadAction<string>) => {
+            const index = state[EScopeSongStore.PLAYLIST][EScopeSongStore.SUGGESTS].findIndex(
+                (song: ISong) => song._id === action.payload,
+            );
+            state[EScopeSongStore.PLAYLIST][EScopeSongStore.SUGGESTS].splice(index, 1);
         },
 
         // prev store
+        popSongListPrevSong: (state, action: PayloadAction) => {
+            state[EScopeSongStore.PLAYLIST][EScopeSongStore.PREV_SONGS].pop();
+        },
         pushSongIntoPrevPlayListAction: (state, action: PayloadAction<ISong>) => {
             state[EScopeSongStore.PLAYLIST][EScopeSongStore.PREV_SONGS].push(action.payload);
         },
@@ -56,6 +60,17 @@ export const songSlice = createSlice({
             localStorageSide.setStore(ELocalStorageKey.VOLUME, action.payload);
             state[EScopeSongStore.PLAYING][EScopeSongStore.VOLUME] = action.payload;
         },
+
+        // nextSong
+        unShiftListNextSong: (state, action: PayloadAction<ISong>) => {
+            state[EScopeSongStore.PLAYLIST][EScopeSongStore.NEXT_SONGS].unshift(action.payload);
+        },
+        shiftListNextSong: (state, action: PayloadAction<string>) => {
+            const index = state[EScopeSongStore.PLAYLIST][EScopeSongStore.NEXT_SONGS].findIndex(
+                (song: ISong) => song._id === action.payload,
+            );
+            state[EScopeSongStore.PLAYLIST][EScopeSongStore.NEXT_SONGS].splice(index, 1);
+        },
     },
 });
 export const {
@@ -65,6 +80,9 @@ export const {
     startPlayingAction,
     updateStatePlayingAction,
     changeVolumeAction,
+    shiftListNextSong,
+    unShiftListNextSong,
+    popSongListPrevSong,
 } = songSlice.actions;
 export const selectSongReducer = (state: RootState) => state[ESelectReducer.SONG];
 export default songSlice;
