@@ -4,7 +4,7 @@ import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import styles from './Listsongdraf.module.scss';
+import styles from './ListSongDraft.module.scss';
 
 const cx = classNames.bind(styles);
 

@@ -1,4 +1,4 @@
-import ListsongdrafPage from '@/core/layouts/pages/Listsongdraf/Listsongdraf.component';
+import ListsongdrafPage from '@/core/layouts/pages/Listsongdraf/ListSongDraft.component';
 function ListsongdrafRouting() {
     return <ListsongdrafPage></ListsongdrafPage>;
 }
