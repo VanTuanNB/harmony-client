@@ -23,7 +23,7 @@ const cx = classNames.bind(style);
 
 function SongUserPage() {
     const path = usePathname();
-    const userId = path.split('/user/song/')[1];
+    const userId = path.split('/song/')[1];
     const { data, isLoading, isError } = useGetServiceProfileQuery(userId);
     const dispatch = useAppDispatch();
     const store: ISongStore = useAppSelector(selectSongReducer);
@@ -80,7 +80,7 @@ function SongUserPage() {
                             </div>
                             <div id={cx('album')}>
                                 {song.albumReference?.map((album, index) => (
-                                    <Link href={'/user/album/' + album._id} key={index}>
+                                    <Link href={'/album/' + album._id} key={index}>
                                         {album.title}
                                     </Link>
                                 ))}

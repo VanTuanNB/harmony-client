@@ -83,7 +83,7 @@ function ComposerPage({ isComposer, profile }: IComposer) {
                                                 <div id={cx('lenght')}>
                                                     <span id={cx('lenght')}>3:40</span>
                                                 </div>
-                                                <Link href={`/user/song/${item._id}`} className={cx('edit')}>
+                                                <Link href={''} className={cx('edit')}>
                                                     Sửa
                                                 </Link>
                                             </div>

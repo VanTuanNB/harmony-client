@@ -69,7 +69,7 @@ function PerformerPage() {
                                 <h2>Bài hát phổ biến</h2>
                             </div>
                             <div className={cx('btn')}>
-                                <Link href={'/user/song/' + profile._id}>Xem tất cả</Link>
+                                <Link href={'/song/' + profile._id}>Xem tất cả</Link>
                             </div>
                         </div>
                         <div className={cx('list-songs')}>
@@ -112,7 +112,7 @@ function PerformerPage() {
                         </div>
                         <div className={cx('list')}>
                             {profile.albumsReference?.map((album) => (
-                                <Link href={'/user/album/' + album._id} key={album._id} className={cx('item')}>
+                                <Link href={'/album/' + album._id} key={album._id} className={cx('item')}>
                                     {album.thumbnailUrl && (
                                         <Image src={album.thumbnailUrl} alt="" width={500} height={500} />
                                     )}

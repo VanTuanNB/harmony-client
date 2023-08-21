@@ -3,13 +3,18 @@ import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
+import useDebounce from '@/core/common/hooks/useDebounce.hook';
+import { ISearch, ISong } from '@/core/common/interfaces/collection.interface';
+import { removeSongFromSuggestListAction, startPlayingAction } from '@/core/redux/features/song/song.slice';
 import { useGetServiceSearchQuery } from '@/core/redux/services/song.service';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
 import { SearchIcon } from '../Svg/index.component';
 import styles from './InputSearch.module.scss';
+import {useRouter} from 'next/navigation';
 
 const cx = classNames.bind(styles);
 
@@ -20,10 +25,36 @@ interface ISearchResult {
 
 function InputSearchComponent(): ReactNode {
     const [keyword, setKeyword] = useState<string>('');
-    const { data } = useGetServiceSearchQuery(keyword);
-    console.log('data', data);
-
+    const debounce = useDebounce(keyword, 500);
+    const { data } = useGetServiceSearchQuery(debounce);
+    const [searchResult, setSearchResult] = useState<ISearch | null>();
     const [showHeadless, setShowHeadless] = useState<boolean>(true);
+    const dispatch = useDispatch();
+    const router = useRouter()
+
+    useEffect(() => {
+        if (!debounce.trim()) {
+            setSearchResult(null);
+            return;
+        }
+        if (data) {
+            setSearchResult(data.data);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [debounce]);
+
+    const clickSong = (data: ISong) => {
+        dispatch(removeSongFromSuggestListAction(data._id));
+        dispatch(startPlayingAction(data));
+    };
+
+    
+    const handleKeyDown = (e: any) => {
+        if (e.key === 'Enter') {
+            router.push('/search?search_query='+debounce);
+        }
+    }
+
     return (
         <>
             <div className={cx('header-search')}>
@@ -35,18 +66,18 @@ function InputSearchComponent(): ReactNode {
                         visible={showHeadless}
                         render={(attrs) => (
                             <>
-                                {data && (
+                                {searchResult && (
                                     <div className={cx('popper-search')} tabIndex={-1} {...attrs}>
                                         {
                                             <ul className={cx('popper-search-list')}>
-                                                {data && data.data.songs.length > 0 && (
+                                                {searchResult && searchResult.songs.length > 0 && (
                                                     <>
                                                         <h3 className={cx('title-search')}>Bài hát</h3>
-                                                        {data?.data?.songs?.map((result) => (
+                                                        {searchResult.songs.map((result) => (
                                                             <li key={result._id} className={cx('popper-search-item')}>
                                                                 <div className={cx('popper-search-content')}>
-                                                                    <Link
-                                                                        href={'/results?search_query=' + result._id}
+                                                                    <div
+                                                                        onClick={() => clickSong(result)}
                                                                         className={cx('popper-search-info')}
                                                                     >
                                                                         <Image
@@ -59,20 +90,20 @@ function InputSearchComponent(): ReactNode {
                                                                         <span className={cx('search-info-text')}>
                                                                             {result.title}
                                                                         </span>
-                                                                    </Link>
+                                                                    </div>
                                                                 </div>
                                                             </li>
                                                         ))}
                                                     </>
                                                 )}
-                                                {data && data.data.albums.length > 0 && (
+                                                {searchResult && searchResult.albums.length > 0 && (
                                                     <>
                                                         <h3 className={cx('title-search')}>Album</h3>
-                                                        {data.data.albums.map((result) => (
+                                                        {searchResult.albums.map((result) => (
                                                             <li key={result._id} className={cx('popper-search-item')}>
                                                                 <div className={cx('popper-search-content')}>
                                                                     <Link
-                                                                        href={'/results?search_query=' + result._id}
+                                                                        href={'/album/' + result._id}
                                                                         className={cx('popper-search-info')}
                                                                     >
                                                                         <Image
@@ -94,10 +125,10 @@ function InputSearchComponent(): ReactNode {
                                                         ))}
                                                     </>
                                                 )}
-                                                {data && data.data.performers.length > 0 && (
+                                                {searchResult && searchResult.performers.length > 0 && (
                                                     <>
                                                         <h3 className={cx('title-search')}>Ca sỹ</h3>
-                                                        {data.data.performers.map((result) => (
+                                                        {searchResult.performers.map((result) => (
                                                             <li key={result._id} className={cx('popper-search-item')}>
                                                                 <div className={cx('popper-search-content')}>
                                                                     <Link
@@ -123,9 +154,9 @@ function InputSearchComponent(): ReactNode {
                                                         ))}
                                                     </>
                                                 )}
-                                                {data?.data.albums.length === 0 &&
-                                                    data?.data.songs.length === 0 &&
-                                                    data?.data.performers.length === 0 && (
+                                                {searchResult?.albums.length === 0 &&
+                                                    searchResult?.songs.length === 0 &&
+                                                    searchResult?.performers.length === 0 && (
                                                         <div className={cx('search-not-data')}>
                                                             <SearchIcon className={cx('icon-not-search')} />
                                                             <h3>Không tìm thấy kết quả</h3>
@@ -152,7 +183,7 @@ function InputSearchComponent(): ReactNode {
                                         value={keyword}
                                         onChange={(e) => setKeyword(e.target.value)}
                                         onFocus={() => setShowHeadless(true)}
-                                        // onKeyDown={(e) => {}}
+                                        onKeyDown={handleKeyDown}
                                     />
                                 </div>
                             </div>

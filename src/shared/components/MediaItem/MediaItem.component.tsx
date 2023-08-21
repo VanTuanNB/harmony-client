@@ -38,7 +38,7 @@ function MediaItem({ _id, thumbnailUrl, title, performers, active = false, onCli
                         <h3 className={cx('performers')}>
                             {performers.map((item, index) => {
                                 return (
-                                    <Link key={index} href={'/' + item.nickname} className={cx('link-channel')}>
+                                    <Link key={index} href={'/composer/@' + item.nickname} className={cx('link-channel')}>
                                         {item.name}
                                     </Link>
                                 );
