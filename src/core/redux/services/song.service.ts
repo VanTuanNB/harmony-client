@@ -1,7 +1,8 @@
-import { IResponseServer, ISong } from '@/core/common/interfaces/index.interface';
-import { rootSplitApi } from './index.service';
-import { LocalStorageSide } from '@/utils/clientStore.util';
 import { ECookieStorage } from '@/core/common/constants/common.constant';
+import { IAlbum, IResponseServer, ISong } from '@/core/common/interfaces/index.interface';
+import { LocalStorageSide } from '@/utils/clientStore.util';
+import { rootSplitApi } from './index.service';
+import { ISearch } from '@/core/common/interfaces/collection.interface';
 interface Post {
     albumReference: string[];
     composerReference: string;
@@ -22,6 +23,12 @@ export const songApi = rootSplitApi.injectEndpoints({
     endpoints: (builder) => ({
         getServiceSongs: builder.query<IResponseServer<ISong[]>, string>({
             query: (param?: string) => `/song/${param ?? ''}`,
+        }),
+        getServiceSearch: builder.query<IResponseServer<ISearch>, string>({
+            query: (param?: string) => ({
+                url: '/song/search/',
+                params: { title: param ?? '' },
+            }),
         }),
         getSuggestSong: builder.query<IResponseServer<ISong[]>, { page: number; size: number }>({
             query: (params: { page: number; size: number }) => `/song/suggest?page=${params.page}&size=${params.size}`,
@@ -58,5 +65,5 @@ export const songApi = rootSplitApi.injectEndpoints({
     }),
 });
 
-export const { useGetServiceSongsQuery, useGetSuggestSongQuery, useGetStreamSongQuery, usePostCreateSongMutation, useGetServiceSongsJustReleasedQuery, useGetServiceSongsViewTopQuery } = songApi;
+export const { useGetServiceSongsQuery, useGetSuggestSongQuery, useGetStreamSongQuery, usePostCreateSongMutation, useGetServiceSongsJustReleasedQuery, useGetServiceSongsViewTopQuery, useGetServiceSearchQuery } = songApi;
 
