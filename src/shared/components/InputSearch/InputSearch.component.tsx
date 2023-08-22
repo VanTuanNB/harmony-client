@@ -52,6 +52,8 @@ function InputSearchComponent(): ReactNode {
     const handleKeyDown = (e: any) => {
         if (e.key === 'Enter') {
             router.push('/search?search_query='+debounce);
+            setSearchResult(null)
+            setKeyword('')
         }
     }
 

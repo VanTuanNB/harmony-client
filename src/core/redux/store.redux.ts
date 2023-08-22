@@ -7,6 +7,7 @@ import clientStoreSlice from './features/client/client.slice';
 import songSlice from './features/song/song.slice';
 import userSlice from './features/user/user.slice';
 import { rootSplitApi } from './services/index.service';
+import logger from 'redux-logger';
 
 export const store = configureStore({
     reducer: {
@@ -15,7 +16,7 @@ export const store = configureStore({
         [ESelectReducer.CLIENT_STORE]: clientStoreSlice.reducer,
         [ESelectReducer.SONG]: songSlice.reducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(rootSplitApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger,rootSplitApi.middleware),
     devTools: process.env.NODE_ENV !== 'production',
     enhancers: [batchedSubscribe((notify) => notify())],
 });

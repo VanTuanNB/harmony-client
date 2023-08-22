@@ -4,7 +4,7 @@ import { removeSongFromSuggestListAction, startPlayingAction } from '@/core/redu
 import { useAppDispatch } from '@/core/redux/hook.redux';
 import { useGetServiceSearchQuery } from '@/core/redux/services/song.service';
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
-import MediaItemComponent from '@/shared/components/MediaItem/MediaItem.component';
+import MediaItemInPage from '@/shared/components/MediaItemInPage/MediaItemInPage.component';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -40,8 +40,8 @@ function SearchPage() {
                             <Image
                                 src={data.data.songs[0].thumbnailUrl}
                                 alt=""
-                                width={100}
-                                height={100}
+                                width={500}
+                                height={500}
                                 className={cx('img')}
                             />
                             <div className={cx('top-result-infor')}>
@@ -63,12 +63,10 @@ function SearchPage() {
                                 {data.data.songs.map((song) => {
                                     return (
                                         <li key={song._id} className={cx('item')}>
-                                            <MediaItemComponent
-                                                _id={song._id}
-                                                title={song.title}
-                                                thumbnailUrl={song.thumbnailUrl}
-                                                performers={song.performers}
+                                            <MediaItemInPage
+                                                data={song}
                                                 onClick={() => clickSong(song)}
+                                                key={song._id}
                                             />
                                         </li>
                                     );
@@ -94,6 +92,26 @@ function SearchPage() {
                                 />
                                 <h3>{item.name}</h3>
                                 <p>Ca sỹ - tác giả</p>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            )}
+             {data && data.data.albums.length > 0 && (
+                <div className={cx('artist-result')}>
+                    <h2>Album liên quan</h2>
+                    <div className={cx('item-artist')}>
+                        {data.data.albums.map((item) => (
+                            <Link href={'/album/' + item._id} key={item._id} className={cx('item')}>
+                                <Image
+                                    src={item.thumbnailUrl || '/images/playlist.png'}
+                                    alt=""
+                                    width={500}
+                                    height={500}
+                                    className={cx('img')}
+                                />
+                                <h3>{item.title}</h3>
+                                <p>{item.information}</p>
                             </Link>
                         ))}
                     </div>

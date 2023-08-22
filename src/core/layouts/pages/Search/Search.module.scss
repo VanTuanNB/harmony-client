@@ -25,7 +25,7 @@
 
         .result-left {
             // width: 33%;
-            min-width: 33%;
+            width: 40%;
             height: auto;
 
             .left {
@@ -52,6 +52,9 @@
                         font-size: 32px;
                         line-height: 30px;
                         text-transform: uppercase;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
 
                     p {
@@ -71,16 +74,16 @@
         }
 
         .result-right {
-            width: 66%;
+            width: 60%;
 
             .right {
-                height: 150px;
+                height: 223px;
                 width: 100%;
                 overflow: auto;
 
-                li {
-                    padding: 15px 10px;
-                }
+                // li {
+                //     padding: 15px 10px;
+                // }
             }
         }
     }
@@ -88,12 +91,14 @@
     .artist-result {
         width: 97.5%;
         margin: 0 auto;
+        padding-top: 10px;
 
 
         .item-artist {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
+            // justify-content: center;
             gap: 20px;
 
             .item {
@@ -102,7 +107,6 @@
                 padding: 10px;
                 text-align: center;
                 border-radius: 5px;
-                padding-bottom: 10px;
                 color: var(--theme-mode-color);
 
                 h3 {
@@ -122,7 +126,12 @@
                     background: #c35151;
                 }
             }
+
+            .item:hover {
+                box-shadow: 0 0 5px var(--theme-mode-color);
+            }
         }
+
     }
 
     .filter {

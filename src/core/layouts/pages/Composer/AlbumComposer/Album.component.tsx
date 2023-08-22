@@ -14,6 +14,7 @@ import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoadin
 import { formatDate } from '@/utils/format.util';
 import { faAdd, faClock, faClose, faPen, faPlayCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
@@ -134,9 +135,11 @@ function AlbumComposerPage() {
                     <div id={cx('lenght')}>
                         <FontAwesomeIcon className={cx('icon-clock')} icon={faClock} />
                     </div>
-                    <button className={cx('uploadSong')} onClick={() => setPopupUploadSong(true)}>
-                        <FontAwesomeIcon className={cx('icon-add')} icon={faAdd} />
-                    </button>
+                    <Tippy content="thêm bài hát">
+                        <button className={cx('uploadSong')} onClick={() => setPopupUploadSong(true)}>
+                            <FontAwesomeIcon className={cx('icon-add')} icon={faAdd} />
+                        </button>
+                    </Tippy>
                 </div>
                 <div className={cx('list-songs')}>
                     {data?.data.listSong.map((song, index) => (
