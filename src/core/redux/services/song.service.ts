@@ -1,8 +1,9 @@
 import { ECookieStorage } from '@/core/common/constants/common.constant';
-import { IAlbum, IResponseServer, ISong } from '@/core/common/interfaces/index.interface';
+import { ISearch } from '@/core/common/interfaces/collection.interface';
+import { IResponseServer, ISong } from '@/core/common/interfaces/index.interface';
 import { LocalStorageSide } from '@/utils/clientStore.util';
 import { rootSplitApi } from './index.service';
-import { ISearch } from '@/core/common/interfaces/collection.interface';
+
 interface Post {
     albumReference: string[];
     composerReference: string;
@@ -15,10 +16,10 @@ interface Post {
 
 interface IToken {
     accessToken: string;
-    refreshToken: string
+    refreshToken: string;
 }
-const localStoreInstance = new LocalStorageSide()
-const token: IToken = localStoreInstance.getStore(ECookieStorage.HARMONY_USER_TOKEN)
+const localStoreInstance = new LocalStorageSide();
+const token: IToken = localStoreInstance.getStore(ECookieStorage.HARMONY_USER_TOKEN);
 export const songApi = rootSplitApi.injectEndpoints({
     endpoints: (builder) => ({
         getServiceSongs: builder.query<IResponseServer<ISong[]>, string>({
@@ -60,7 +61,7 @@ export const songApi = rootSplitApi.injectEndpoints({
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token.refreshToken}`
+                    Authorization: `Bearer ${token.refreshToken}`,
                 },
                 body,
             }),
@@ -75,8 +76,28 @@ export const songApi = rootSplitApi.injectEndpoints({
                 },
             })
         }),
-    }),
-});
+        postIncreaseConcurrencyViewSong: builder.mutation<IResponseServer<undefined>, string>({
+            query: (slug: string) => ({
+                url: `/song/increase/${slug}`,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }),
+        })
+    })
+})
 
-export const { useGetServiceSongsQuery, useGetSuggestSongQuery, useGetStreamSongQuery, usePostCreateSongMutation, useGetServiceSongsJustReleasedQuery, useGetServiceSongsViewTopQuery, useGetServiceSearchQuery, useGetServiceSongByIdQuery, usePutUpdateSongMutation } = songApi;
+export const {
+    useGetServiceSongsQuery,
+    useGetSuggestSongQuery,
+    useGetStreamSongQuery,
+    usePostCreateSongMutation,
+    useGetServiceSongsJustReleasedQuery,
+    useGetServiceSongsViewTopQuery,
+    usePostIncreaseConcurrencyViewSongMutation,
+    usePutUpdateSongMutation,
+    useGetServiceSearchQuery,
+    useGetServiceSongByIdQuery,
+} = songApi;
 

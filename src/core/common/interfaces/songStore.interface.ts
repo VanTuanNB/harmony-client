@@ -1,4 +1,4 @@
-import { EScopeSongStore, EStateCurrentSong } from '../constants/common.constant';
+import { EScopeSongStore, EStateCurrentSong, EStrategiesPlaying } from '../constants/common.constant';
 import { ISong } from './index.interface';
 
 export interface ISongStore {
@@ -6,6 +6,7 @@ export interface ISongStore {
         [EScopeSongStore.CURRENT_SONG]: ISong;
         [EScopeSongStore.STATE]: EStateCurrentSong;
         [EScopeSongStore.VOLUME]: number;
+        [EScopeSongStore.STRATEGIES]: EStrategiesPlaying;
     };
     [EScopeSongStore.PLAYLIST]: {
         [EScopeSongStore.PREV_SONGS]: ISong[];

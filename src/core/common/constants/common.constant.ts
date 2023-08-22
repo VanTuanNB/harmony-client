@@ -8,6 +8,7 @@ export enum ELocalStorageKey {
     DATA_THEME = 'data-theme',
     VOLUME = 'volume',
     HARMONY_USER_TOKEN = 'harmony_user_token',
+    STRATEGIES = 'strategies ',
 }
 
 export enum EScopeSongStore {
@@ -21,6 +22,7 @@ export enum EScopeSongStore {
     STATE = 'state',
     VOLUME = 'volume',
     PROFILE = 'profile',
+    STRATEGIES = 'strategies',
 }
 
 export enum EStateCurrentSong {
@@ -56,3 +58,9 @@ export enum EDateFormat {
 export const REGEX = {
     EMAIL: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
 };
+
+export enum EStrategiesPlaying {
+    RANDOM = 'random',
+    LOOP = 'loop',
+    SEQUENTIALLY = 'sequentially',
+}
