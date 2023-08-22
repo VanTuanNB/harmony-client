@@ -31,7 +31,7 @@ const cx = classNames.bind(style);
 function SongComposerPage() {
     const path = usePathname();
     const userId = path.split('/composer/song/')[1];
-    const { data, isLoading, isError } = useGetServiceProfileQuery(userId);
+    const { data, isLoading, refetch } = useGetServiceProfileQuery(userId);
     const [popupUploadSong, setPopupUploadSong] = useState(false);
     const [editingSongId, setEditingSongId] = useState<string | null>();
     const dispatch = useAppDispatch();
@@ -60,8 +60,10 @@ function SongComposerPage() {
 
     const handUpdateSong = useCallback((isUpdated: boolean) => {
         if (isUpdated) {
+            window.location.reload();
             setPopupUploadSong(false);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
         <div className={cx('main-album')}>
@@ -78,92 +80,97 @@ function SongComposerPage() {
                     <div className={cx('date')}>Ngày phát hành</div>
                 </div>
                 <div className={cx('list-songs')}>
-                    {data?.data.songsReference?.map((song, index) => (
-                        <div
-                            key={index}
-                            className={cx('single-song', store.playing.currentSong._id === song._id && 'active')}
-                        >
-                            <div className={cx('id')}>{index + 1}</div>
-                            <div className={cx('song')} onClick={() => onClick(song, index)}>
-                                <div className={cx('wrapper-img')}>
-                                    <Image
-                                        className={cx('img')}
-                                        src={song.thumbnailUrl}
-                                        width={40}
-                                        height={40}
-                                        alt=""
-                                    />
-                                    {store.playing.currentSong._id === song._id && (
-                                        <>
-                                            {store.playing.state.includes(EStateCurrentSong.PLAYING) && (
-                                                <div className={cx('playing-icon')}>
-                                                    <i className={cx('icon')}></i>
-                                                </div>
-                                            )}
-                                            {store.playing.state.includes(EStateCurrentSong.PAUSED) && (
-                                                <div className={cx('playing-icon')} onClick={handlePlaying}>
-                                                    <FontAwesomeIcon icon={faPlay} className={cx('icon-pause')} />
-                                                </div>
-                                            )}
-                                        </>
-                                    )}
-                                </div>
+                    {data &&
+                        data.data.songsReference?.map((song, index) => (
+                            <div
+                                key={index}
+                                className={cx('single-song', store.playing.currentSong._id === song._id && 'active')}
+                            >
+                                <div className={cx('id')}>{index + 1}</div>
+                                <div className={cx('song')} onClick={() => onClick(song, index)}>
+                                    <div className={cx('wrapper-img')}>
+                                        <Image
+                                            className={cx('img')}
+                                            src={
+                                                song && song.thumbnailUrl
+                                                    ? `${song.thumbnailUrl}?${new Date().getTime()}`
+                                                    : '/images/fallback-thumbnail-user.jpg'
+                                            }
+                                            width={500}
+                                            height={500}
+                                            alt=""
+                                        />
+                                        {store.playing.currentSong._id === song._id && (
+                                            <>
+                                                {store.playing.state.includes(EStateCurrentSong.PLAYING) && (
+                                                    <div className={cx('playing-icon')}>
+                                                        <i className={cx('icon')}></i>
+                                                    </div>
+                                                )}
+                                                {store.playing.state.includes(EStateCurrentSong.PAUSED) && (
+                                                    <div className={cx('playing-icon')} onClick={handlePlaying}>
+                                                        <FontAwesomeIcon icon={faPlay} className={cx('icon-pause')} />
+                                                    </div>
+                                                )}
+                                            </>
+                                        )}
+                                    </div>
 
-                                <div className={cx('song-title')}>
-                                    <div className={cx('song-name')}>{song.title}</div>
-                                    <div className={cx('author')}>{data?.data.name}</div>
+                                    <div className={cx('song-title')}>
+                                        <div className={cx('song-name')}>{song.title}</div>
+                                        <div className={cx('author')}>{data?.data.name}</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className={cx('album')}>
-                                <Tippy
-                                    interactive
-                                    content={
-                                        <ul className={cx('list-tooltip')}>
-                                            {song.albumReference?.map((album, index) => (
-                                                <li key={index}>
+                                <div className={cx('album')}>
+                                    <Tippy
+                                        interactive
+                                        content={
+                                            <ul className={cx('list-tooltip')}>
+                                                {song.albumReference?.map((album, index) => (
+                                                    <li key={index}>
+                                                        <Link href={'/user/album/' + album._id} key={index}>
+                                                            {album.title}
+                                                        </Link>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        }
+                                    >
+                                        <div>
+                                            {!!song.albumReference?.length ? (
+                                                song.albumReference?.map((album, index) => (
                                                     <Link href={'/user/album/' + album._id} key={index}>
                                                         {album.title}
                                                     </Link>
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    }
+                                                ))
+                                            ) : (
+                                                <span style={{ width: '164px', display: 'block', textAlign: 'center' }}>
+                                                    -
+                                                </span>
+                                            )}
+                                        </div>
+                                    </Tippy>
+                                </div>
+                                <div className={cx('date')}>{formatDate(song.publish)}</div>
+                                <div
+                                    onClick={() => {
+                                        setEditingSongId(song._id);
+                                        setPopupUploadSong(true);
+                                    }}
+                                    className={cx('lenght')}
                                 >
-                                    <div>
-                                        {!!song.albumReference?.length ? (
-                                            song.albumReference?.map((album, index) => (
-                                                <Link href={'/user/album/' + album._id} key={index}>
-                                                    {album.title}
-                                                </Link>
-                                            ))
-                                        ) : (
-                                            <span style={{ width: '164px', display: 'block', textAlign: 'center' }}>
-                                                -
-                                            </span>
-                                        )}
-                                    </div>
-                                </Tippy>
-                            </div>
-                            <div className={cx('date')}>{formatDate(song.publish)}</div>
-                            <div
-                                onClick={() => {
-                                    setEditingSongId(song._id);
-                                    setPopupUploadSong(true);
-                                }}
-                                className={cx('lenght')}
-                            >
-                                <FontAwesomeIcon className={cx('icon')} icon={faEdit} />
-                            </div>
+                                    <FontAwesomeIcon className={cx('icon')} icon={faEdit} />
+                                </div>
 
-                            {popupUploadSong && editingSongId === song._id && (
-                                <UpdateSongComponent
-                                    dataProfile={data.data}
-                                    songId={song._id}
-                                    isUpdated={handUpdateSong}
-                                />
-                            )}
-                        </div>
-                    ))}
+                                {popupUploadSong && editingSongId === song._id && (
+                                    <UpdateSongComponent
+                                        dataProfile={data.data}
+                                        songItem={song}
+                                        isUpdated={handUpdateSong}
+                                    />
+                                )}
+                            </div>
+                        ))}
                 </div>
             </div>
         </div>

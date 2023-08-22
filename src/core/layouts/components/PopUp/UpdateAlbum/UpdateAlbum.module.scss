@@ -27,6 +27,7 @@
             .title {
                 height: 50px;
             }
+
             .close {
                 width: 30px;
                 height: 30px;
@@ -49,11 +50,18 @@
                     margin: auto;
                     object-fit: cover;
                     position: relative;
+
                     img {
                         width: 200px;
                         height: 200px;
                         object-fit: cover;
                         border-radius: 10px;
+                    }
+
+                    .error-message {
+                        color: red;
+                        margin-top: 8px;
+                        font-size: 12px;
                     }
 
                     .title-upload {
@@ -72,11 +80,13 @@
                         transition: 0.3s;
                         z-index: 3;
                     }
+
                     input[type='file'] {
                         opacity: 0%;
                         height: 0px;
                     }
                 }
+
                 .img-upload:hover {
                     .title-upload {
                         opacity: 100%;
@@ -88,9 +98,11 @@
                         background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.3);
                     }
                 }
+
                 .form {
                     width: 100%;
                     text-align: center;
+
                     input {
                         height: 40px;
                         width: 100%;
@@ -101,6 +113,7 @@
                         color: var(--theme-mode-color);
                         background: var(--theme-filter);
                     }
+
                     .select-input {
                         width: 100%;
                         color: black;
@@ -108,6 +121,7 @@
                         background: none;
                         border-radius: 5px;
                     }
+
                     button {
                         top: 50px;
                         padding: 10px 20px;
@@ -121,6 +135,7 @@
                     }
                 }
             }
+
             p {
                 width: 100%;
                 font-size: 1.2rem;
