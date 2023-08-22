@@ -8,7 +8,8 @@ import {
     replaceIntoPrevPlayListAction,
     replaceNewListNextSong,
     selectSongReducer,
-    startPlayingAction
+    startPlayingAction,
+    updateStatePlayingAction,
 } from '@/core/redux/features/song/song.slice';
 import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import { useGetServiceAlbumQuery, usePutServiceAlbumMutation } from '@/core/redux/services/album.service';
@@ -71,13 +72,16 @@ function AlbumComposerPage() {
                 (data && data.data.listSong.filter((item: ISong, itemIndex: number) => itemIndex < index)) || [];
             dispatch(replaceIntoPrevPlayListAction(prevSongs));
         }
-        const nextSongs = (data && data.data.listSong.filter((item: ISong, itemIndex: number) => itemIndex > index)) || [];
+        const nextSongs =
+            (data && data.data.listSong.filter((item: ISong, itemIndex: number) => itemIndex > index)) || [];
         dispatch(replaceNewListNextSong(nextSongs));
         dispatch(removeSongFromSuggestListAction(song._id));
         dispatch(startPlayingAction(song));
     };
 
-    const handlePlaying = () => {};
+    const handlePlaying = () => {
+        dispatch(updateStatePlayingAction(EStateCurrentSong.PLAYING));
+    };
 
     return (
         <div className={cx('main-album')}>
@@ -153,10 +157,9 @@ function AlbumComposerPage() {
                         <div
                             key={index}
                             className={cx('single-song', store.playing.currentSong._id === song._id && 'active')}
-                            onClick={() => onClick(song, index)}
                         >
                             <div id={cx('id')}>{index + 1}</div>
-                            <div id={cx('song')}>
+                            <div id={cx('song')} onClick={() => onClick(song, index)}>
                                 <div className={cx('wrapper-img')}>
                                     <Image
                                         className={cx('img')}

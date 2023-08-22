@@ -4,7 +4,6 @@
 
     .composer-song {
         margin-bottom: 5%;
-       
     }
 
     .list-songs {
@@ -14,133 +13,130 @@
         flex-direction: column;
 
         .single-song {
-            width: 90%;
-            display: grid;
-            margin: auto;
-            grid-template-columns: 1fr 1fr;
-            justify-content: center;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
             align-items: center;
+            margin-top: 0.7em;
             height: 56px;
             border-radius: 5px;
             transition: 0.15s;
             cursor: pointer;
 
-            .single-left {
-                width: 100%;
-                display: flex;
-                #id {
-                    width: 2%;
-                    padding-left: 1%;
+            &:hover {
+                background-color: rgba(184, 180, 180, 0.329);
+            }
+
+            &.active {
+                background-color: rgba(var(--theme-mode-color-rgb), 0.2);
+            }
+            .wrapper-img {
+                position: relative;
+                width: 40px;
+                height: 40px;
+                border-radius: 4px;
+                .img {
+                    border-radius: 4px;
+                }
+
+                & .playing-icon {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    background-color: rgba($color: #000000, $alpha: 0.6);
                     display: flex;
                     align-items: center;
-                }
-                #song {
-                    width: 80%;
-                    margin-left: 1em;
-                    display: flex;
-                    flex-direction: row;
+                    justify-content: center;
+                    width: 100%;
+                    height: 100%;
 
-                    img {
-                        width: 40px;
-                        height: 40px;
-                        object-fit: cover;
-                        border-radius: 5px;
-                    }
-
-                    #song-title {
-                        height: 40px;
-                        line-height: 20px;
-                        justify-content: center;
-                        margin-left: 0.5em;
-
-                        #title {
-                            font-size: 16px;
-                            font-weight: 500;
-                        }
-                        #author {
-                            font-size: 14px;
-                            font-weight: 400;
-
-                            a {
-                                color: gray;
-                            }
-                        }
+                    & .icon {
+                        width: 18px;
+                        height: 18px;
+                        background-size: 18px;
+                        background-repeat: no-repeat;
+                        background-position: 50%;
+                        background-image: url(/images/icon-playing.gif);
                     }
                 }
             }
-            .single-right {
-                width: 100%;
-                display: flex;
-                align-items: center;
-                #album {
-                    width: 80%;
-                    text-align: center;
-                    line-height: 50px;
-                    color: gray;
-                    a {
-                        padding-right: 20px;
-                        color: gray;
-                    }
-                }
-                #album a:hover {
-                    color: var(--theme-mode-color);
-                }
-                #icon {
-                    opacity: 0%;
-                    padding: 0px 50px;
-                }
-                #lenght {
-                    width: 10%;
-                    display: flex;
-                    text-align: center;
-                    align-items: center;
 
-                    #lenght {
-                        padding: 0px 10px;
-                        color: gray;
-                    }
-                    #icon1 {
-                        padding: 5px;
-                    }
-                }
-                .edit {
-                    width: 10%;
-                    display: flex;
-                    text-align: center;
-                    align-items: center;
-                    margin-left: 5%;
-                    opacity: 0%;
+            & .edit {
+                font-size: 1.4rem;
+                color: var(--theme-mode-color);
+                text-transform: inherit;
+                font-style: italic;
+
+                &:hover {
                     text-decoration: underline;
                 }
             }
-        }
-        .single-song:hover {
-            background-color: rgba(184, 180, 180, 0.329);
 
-            .single-left {
-                #song {
-                    #song-title {
-                        #author {
-                            color: var(--theme-mode-color);
-                        }
+            .id {
+                width: 2%;
+                text-align: end;
+            }
+            .song {
+                width: 40%;
+                margin-left: 1em;
+                display: flex;
+                flex-direction: row;
+
+                .song-title {
+                    height: 40px;
+                    line-height: 20px;
+                    justify-content: center;
+                    margin-left: 0.5em;
+
+                    .song-name {
+                        font-size: 16px;
+                        font-weight: 500;
+                    }
+                    .author {
+                        padding-top: 3px;
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: gray;
                     }
                 }
             }
+            .album {
+                max-width: 20%;
+                height: 20px;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                text-align: start;
+                overflow: hidden;
+                color: gray;
 
-            .single-right {
-                #album {
-                    color: var(--theme-mode-color);
+                a {
+                    padding-right: 10px;
+                    color: gray;
                 }
-                #icon {
-                    opacity: 100%;
+            }
+            .album a:hover {
+                color: var(--theme-mode-color);
+            }
+            .date {
+                padding: 10px;
+                text-align: center;
+                color: gray;
+            }
+            .lenght {
+                padding: 0px 20px;
+                text-align: center;
+                display: flex;
+                align-items: center;
+
+                .lenght {
+                    padding: 0px 20px;
+                    color: gray;
                 }
-                #lenght {
-                    #lenght {
-                        color: var(--theme-mode-color);
-                    }
-                }
-                .edit {
-                    opacity: 100%;
+                .icon {
+                    opacity: 0%;
                 }
             }
         }
