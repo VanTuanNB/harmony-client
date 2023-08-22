@@ -1,8 +1,16 @@
-import { EStateCurrentSong } from '@/core/common/constants/common.constant';
-import { updateStatePlayingAction } from '@/core/redux/features/song/song.slice';
+import { EStateCurrentSong, EStrategiesPlaying } from '@/core/common/constants/common.constant';
+import {
+    pushSongIntoPrevPlayListAction,
+    removeSongFromSuggestListAction,
+    shiftListNextSong,
+    startPlayingAction,
+    updateStatePlayingAction,
+} from '@/core/redux/features/song/song.slice';
 import { useAppDispatch } from '@/core/redux/hook.redux';
 import { memo, useCallback, useEffect, useRef, useState } from 'react';
 
+import { ISongStore } from '@/core/common/interfaces/songStore.interface';
+import { usePostIncreaseConcurrencyViewSongMutation } from '@/core/redux/services/song.service';
 import { formatDurationSong } from '@/utils/format.util';
 import classNames from 'classnames/bind';
 import ProcessBar from '../ProcessBar/ProcessBar.component';
@@ -12,16 +20,17 @@ const cx = classNames.bind(styles);
 
 interface IAudioProps {
     data: string;
-    state: EStateCurrentSong;
-    volume: number;
+    store: ISongStore;
 }
 
-function AudioComponent({ data, state, volume }: IAudioProps) {
+function AudioComponent({ data, store }: IAudioProps) {
     const [timeProcess, setTimeProcess] = useState(0);
     const [totalDuration, setTotalDuration] = useState<string>('');
     const [currentTime, setCurrentTime] = useState<string>('');
+    const [isLooping, setIsLooping] = useState<boolean>(false);
     const audioRef = useRef<HTMLAudioElement>(null);
     const dispatch = useAppDispatch();
+    const [queueConcurrencyViewApi] = usePostIncreaseConcurrencyViewSongMutation();
     const handleOnPause = () => {
         dispatch(updateStatePlayingAction(EStateCurrentSong.PAUSED));
     };
@@ -67,15 +76,15 @@ function AudioComponent({ data, state, volume }: IAudioProps) {
     }, [audioRef.current]);
 
     useEffect(() => {
-        if (state === EStateCurrentSong.PLAYING) {
+        if (store.playing.state === EStateCurrentSong.PLAYING) {
             audioRef.current?.play();
             return;
         }
-        if (state === EStateCurrentSong.PAUSED) {
+        if (store.playing.state === EStateCurrentSong.PAUSED) {
             audioRef.current?.pause();
             return;
         }
-    }, [state]);
+    }, [store.playing.state]);
 
     useEffect(() => {
         if (audioRef.current && !isNaN(audioRef.current.duration)) {
@@ -84,12 +93,46 @@ function AudioComponent({ data, state, volume }: IAudioProps) {
     }, [audioRef.current?.duration]);
 
     useEffect(() => {
-        if (audioRef.current) audioRef.current.volume = volume;
-    }, [volume]);
+        if (audioRef.current) audioRef.current.volume = store.playing.volume;
+    }, [store.playing.volume]);
+
+    const handleEndedEventAudio = () => {
+        if (!store.playing.currentSong) return;
+        switch (store.playing.strategies) {
+            case EStrategiesPlaying.SEQUENTIALLY:
+                queueConcurrencyViewApi(store.playing.currentSong._id);
+                dispatch(pushSongIntoPrevPlayListAction(store.playing.currentSong));
+                if (!!store.playlist.nextSongs.length) {
+                    dispatch(removeSongFromSuggestListAction(store.playlist.nextSongs[0]._id));
+                    dispatch(shiftListNextSong(store.playlist.nextSongs[0]._id));
+                    dispatch(startPlayingAction(store.playlist.nextSongs[0]));
+                } else {
+                    dispatch(removeSongFromSuggestListAction(store.playlist.suggests[0]._id));
+                    dispatch(startPlayingAction(store.playlist.suggests[0]));
+                }
+                break;
+            case EStrategiesPlaying.RANDOM:
+                break;
+            default:
+                if (!isLooping) {
+                    queueConcurrencyViewApi(store.playing.currentSong._id);
+                    setIsLooping(true);
+                }
+                if (audioRef.current) audioRef.current.play();
+                break;
+        }
+    };
 
     return (
         <div className={cx('wrapper-media')}>
-            <audio autoPlay onPause={handleOnPause} onPlay={handleOnPlay} loop ref={audioRef} src={data || ''}></audio>
+            <audio
+                autoPlay
+                onPause={handleOnPause}
+                onPlay={handleOnPlay}
+                ref={audioRef}
+                src={data || ''}
+                onEnded={handleEndedEventAudio}
+            ></audio>
             <ProcessBar
                 timeProcess={timeProcess}
                 onDispatchSeekTime={handleTakeSeekTime}

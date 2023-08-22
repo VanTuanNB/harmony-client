@@ -1,0 +1,247 @@
+.main-album {
+    width: 98%;
+    margin: 0 auto;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: var(--theme-mode-background-user);
+    transition: background-color linear 0.2s;
+    padding-top: 1.5em;
+    padding-bottom: 20%;
+
+    .title {
+        width: 90%;
+        margin: auto;
+
+        h2 {
+            font-size: 1.5em;
+        }
+        p {
+            font-size: 1em;
+            color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.6);
+        }
+    }
+    .album-header {
+        display: inline-flex;
+    }
+    .single-song {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 0.7em;
+        height: 56px;
+        border-radius: 5px;
+        transition: 0.15s;
+        cursor: pointer;
+
+        &.active {
+            background-color: rgba(var(--theme-mode-color-rgb), 0.2);
+        }
+
+        .id {
+            width: 2%;
+            text-align: end;
+        }
+        .song {
+            width: 40%;
+            margin-left: 1em;
+            display: flex;
+            flex-direction: row;
+
+            .song-title {
+                height: 40px;
+                line-height: 20px;
+                justify-content: center;
+                margin-left: 0.5em;
+
+                .song-name {
+                    font-size: 16px;
+                    font-weight: 500;
+                }
+                .author {
+                    padding-top: 3px;
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: gray;
+                }
+            }
+        }
+        .album {
+            max-width: 20%;
+            height: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            text-align: start;
+            overflow: hidden;
+            color: gray;
+
+            a {
+                padding-right: 10px;
+                color: gray;
+            }
+        }
+        .album a:hover {
+            color: var(--theme-mode-color);
+        }
+        .date {
+            padding: 10px;
+            text-align: center;
+            color: gray;
+        }
+        .lenght {
+            padding: 0px 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+
+            .lenght {
+                padding: 0px 20px;
+                color: gray;
+            }
+            .icon {
+                opacity: 0%;
+            }
+        }
+    }
+    .single-song:hover {
+        background-color: rgba(184, 180, 180, 0.329);
+        .song {
+            .song-title {
+                .author {
+                    color: var(--theme-mode-color);
+                }
+            }
+        }
+        .album {
+            a {
+                color: var(--theme-mode-color);
+            }
+        }
+        .date {
+            color: var(--theme-mode-color);
+        }
+        .lenght {
+            .lenght {
+                color: var(--theme-mode-color);
+            }
+            .icon {
+                opacity: 100%;
+            }
+        }
+    }
+
+    .prev-button {
+        background: none;
+        width: 100px;
+        height: 100px;
+    }
+    .next-button {
+        background: none;
+        width: 100px;
+        height: 100px;
+    }
+    table {
+        border-collapse: collapse;
+    }
+
+    .album-render {
+        margin-top: 1em;
+        padding: 20px;
+        width: 100%;
+
+        .wrapper-img {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            .img {
+                border-radius: 4px;
+            }
+
+            & .playing-icon {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background-color: rgba($color: #000000, $alpha: 0.6);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+
+                & .icon {
+                    width: 18px;
+                    height: 18px;
+                    background-size: 18px;
+                    background-repeat: no-repeat;
+                    background-position: 50%;
+                    background-image: url(/images/icon-playing.gif);
+                }
+            }
+        }
+        .title {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            height: 50px;
+            line-height: 50px;
+            padding-bottom: 2px;
+            color: 0.6c6c6c;
+            border-bottom: 1px solid rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
+
+            .id {
+                width: 2%;
+                text-align: end;
+            }
+            .song {
+                width: 40%;
+                margin-left: 1em;
+            }
+            .album {
+                width: 18%;
+                text-align: start;
+            }
+            .date {
+                padding: 0px 10px;
+                text-align: center;
+                color: gray;
+            }
+            .lenght {
+                padding: 0px 8%;
+                text-align: center;
+            }
+        }
+
+        .list-songs {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    .btn-icon {
+        width: 90%;
+        height: 60px;
+        margin: auto;
+        line-height: 60px;
+
+        .icon-Play {
+            color: 0bf63;
+            cursor: pointer;
+            font-size: 4em;
+            margin-top: 20px;
+        }
+        .icon-Play:hover {
+            color: 0.03d16d;
+        }
+    }
+}
+.list-tooltip {
+    font-size: 1.6rem;
+
+    a {
+        color: #fff;
+    }
+}

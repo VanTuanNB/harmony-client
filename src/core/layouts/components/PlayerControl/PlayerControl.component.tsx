@@ -75,15 +75,11 @@ function PlayerControl() {
             <div className={cx('progress-controller')}>
                 <ControlComponent
                     isLoading={isLoading}
-                    songId={store.playing.currentSong._id}
+                    strategies={store.playing.strategies}
                     state={store.playing.state}
                     onTogglePlaying={handleTogglePlaySong}
                 />
-                <AudioComponent
-                    data={data || ''}
-                    state={store.playing.state}
-                    volume={store.playing.volume}
-                ></AudioComponent>
+                <AudioComponent data={data || ''} store={store}></AudioComponent>
             </div>
             <div className={cx('other-features')}>
                 <VolumeComponent />
