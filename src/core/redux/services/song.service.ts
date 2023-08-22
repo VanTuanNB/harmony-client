@@ -24,6 +24,9 @@ export const songApi = rootSplitApi.injectEndpoints({
         getServiceSongs: builder.query<IResponseServer<ISong[]>, string>({
             query: (param?: string) => `/song/${param ?? ''}`,
         }),
+        getServiceSongById: builder.query<IResponseServer<ISong>, string>({
+            query: (param?: string) => `/song/${param ?? ''}`,
+        }),
         getServiceSearch: builder.query<IResponseServer<ISearch>, string>({
             query: (param?: string) => ({
                 url: '/song/search/',
@@ -62,8 +65,18 @@ export const songApi = rootSplitApi.injectEndpoints({
                 body,
             }),
         }),
+        putUpdateSong: builder.mutation<IResponseServer, Partial<ISong>>({
+            query: (song) => ({
+                url: `/song/${song._id ?? ''}`,
+                method: 'PUT',
+                body: song,
+                headers: {
+                    'Authorization': `Bearer ${token.refreshToken}`
+                },
+            })
+        }),
     }),
 });
 
-export const { useGetServiceSongsQuery, useGetSuggestSongQuery, useGetStreamSongQuery, usePostCreateSongMutation, useGetServiceSongsJustReleasedQuery, useGetServiceSongsViewTopQuery, useGetServiceSearchQuery } = songApi;
+export const { useGetServiceSongsQuery, useGetSuggestSongQuery, useGetStreamSongQuery, usePostCreateSongMutation, useGetServiceSongsJustReleasedQuery, useGetServiceSongsViewTopQuery, useGetServiceSearchQuery, useGetServiceSongByIdQuery, usePutUpdateSongMutation } = songApi;
 

@@ -89,9 +89,7 @@ function AlbumUserPage() {
                             <div id={cx('song')}>Bài hát</div>
                             <div id={cx('album')}>Album</div>
                             <div id={cx('date')}>Ngày phát hành</div>
-                            <div id={cx('lenght')}>
-                                <FontAwesomeIcon className={cx('icon-clock')} icon={faClock} />
-                            </div>
+                           
                         </div>
                         <div className={cx('list-songs')}>
                             {listSong?.map((song, index) => (

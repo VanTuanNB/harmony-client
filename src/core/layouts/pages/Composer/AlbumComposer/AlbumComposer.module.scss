@@ -28,9 +28,11 @@
                 font-weight: lighter;
                 color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.6);
             }
+
             .title {
                 line-height: 3.5em;
             }
+
             img {
                 border-radius: 50%;
             }
@@ -39,13 +41,16 @@
                 font-size: 14px;
                 font-weight: 600;
             }
+
             p {
                 font-size: 14px;
                 font-weight: 600;
             }
+
             .album-name {
                 font-size: 4em;
             }
+
             .detail {
                 display: flex;
                 flex-direction: row;
@@ -55,6 +60,7 @@
                 .detail-image {
                     margin-right: 0.5em;
                 }
+
                 .infor {
                     span {
                         font-weight: 400;
@@ -63,11 +69,13 @@
                 }
             }
         }
+
         .image {
             width: 200px;
             height: 200px;
             object-fit: cover;
             position: relative;
+
             img {
                 width: 100%;
                 height: 100%;
@@ -75,19 +83,23 @@
                 border-radius: 10px;
             }
         }
+
         .image:hover {
             .album-img {
                 filter: blur(2px);
             }
+
             .update-profile {
                 opacity: 100%;
                 background-color: rgba($color: var(--theme-mode-background-album), $alpha: 0.5);
+
                 .icon-edit {
                     opacity: 100%;
                     text-align: center;
                 }
             }
         }
+
         .update-profile {
             position: absolute;
             cursor: pointer;
@@ -102,6 +114,7 @@
             justify-content: center;
             font-weight: bold;
             transition: 0.3s;
+
             .icon-edit {
                 cursor: pointer;
                 color: var(--theme-mode-color);
@@ -116,21 +129,43 @@
             }
         }
     }
+
     .album-header {
         display: inline-flex;
     }
+
     .prev-button {
         background: none;
         width: 100px;
         height: 100px;
     }
+
     .next-button {
         background: none;
         width: 100px;
         height: 100px;
     }
+
     table {
         border-collapse: collapse;
+    }
+
+    .uploadSong {
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        margin-top: 10px;
+        background: rgb(237, 93, 41);
+
+        .icon-add {
+            color: var(--theme-mode-background);
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+    }
+
+    .uploadSong:hover {
+        background: coral;
     }
 
     .album-render {
@@ -142,6 +177,7 @@
             width: 40px;
             height: 40px;
             border-radius: 4px;
+
             .img {
                 border-radius: 4px;
             }
@@ -169,6 +205,7 @@
                 }
             }
         }
+
         .title {
             width: 100%;
             display: flex;
@@ -183,39 +220,29 @@
                 width: 2%;
                 text-align: end;
             }
+
             #song {
                 width: 40%;
                 margin-left: 1em;
             }
+
             #album {
                 width: 18%;
                 text-align: start;
             }
+
             #date {
+                width: 20%;
                 padding: 0px 10px;
                 text-align: center;
                 color: gray;
             }
+
             #lenght {
                 padding: 0px 8%;
                 text-align: center;
             }
-            .uploadSong {
-                width: 30px;
-                height: 30px;
-                border-radius: 5px;
-                margin-top: 10px;
-                background: coral;
 
-                .icon-add {
-                    color: var(--theme-mode-background);
-                    cursor: pointer;
-                    font-size: 1.5em;
-                }
-            }
-            .uploadSong:hover {
-                background: rgb(237, 93, 41);
-            }
         }
 
         .list-songs {
@@ -242,6 +269,7 @@
                     width: 2%;
                     text-align: end;
                 }
+
                 #song {
                     width: 40%;
                     margin-left: 1em;
@@ -258,6 +286,7 @@
                             font-size: 16px;
                             font-weight: 500;
                         }
+
                         #author {
                             padding-top: 3px;
                             font-size: 14px;
@@ -266,33 +295,33 @@
                         }
                     }
                 }
+
                 #album {
                     width: 18%;
                     text-align: start;
                     color: gray;
                 }
+
                 #date {
+                    width: 20%;
                     padding: 10px;
                     text-align: center;
                     color: gray;
                 }
+
                 #lenght {
                     padding: 0px 20px;
                     text-align: center;
                     display: flex;
                     align-items: center;
+                    opacity: 0%;
 
-                    #lenght {
-                        padding: 0px 20px;
-                        color: gray;
-                    }
-                    #icon {
-                        opacity: 0%;
-                    }
                 }
             }
+
             .single-song:hover {
                 background-color: rgba(184, 180, 180, 0.329);
+
                 #song {
                     #song-title {
                         #author {
@@ -300,23 +329,24 @@
                         }
                     }
                 }
+
                 #album {
                     color: var(--theme-mode-color);
                 }
+
                 #date {
                     color: var(--theme-mode-color);
                 }
+
                 #lenght {
-                    #lenght {
-                        color: var(--theme-mode-color);
-                    }
-                    #icon {
-                        opacity: 100%;
-                    }
+
+                    opacity: 100%;
+
                 }
             }
         }
     }
+
     .btn-icon {
         width: 2em;
         height: 2em;

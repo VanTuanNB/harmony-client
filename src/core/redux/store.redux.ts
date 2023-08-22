@@ -16,7 +16,7 @@ export const store = configureStore({
         [ESelectReducer.CLIENT_STORE]: clientStoreSlice.reducer,
         [ESelectReducer.SONG]: songSlice.reducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger,rootSplitApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(rootSplitApi.middleware),
     devTools: process.env.NODE_ENV !== 'production',
     enhancers: [batchedSubscribe((notify) => notify())],
 });

@@ -2,6 +2,7 @@
 import { EStateCurrentSong } from '@/core/common/constants/common.constant';
 import { ISong } from '@/core/common/interfaces/collection.interface';
 import { ISongStore } from '@/core/common/interfaces/songStore.interface';
+import UpdateSongComponent from '@/core/layouts/components/PopUp/UpdateSong/UpdateSong.component';
 import {
     removeSongFromSuggestListAction,
     replaceIntoPrevPlayListAction,
@@ -12,17 +13,16 @@ import {
 } from '@/core/redux/features/song/song.slice';
 import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import { useGetServiceProfileQuery } from '@/core/redux/services/user.service';
-import HeartComponent from '@/shared/components/Heart/Heart.component';
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
 import { formatDate } from '@/utils/format.util';
-import { faClock, faEdit, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { memo } from 'react';
+import { memo, useCallback, useState } from 'react';
 import 'tippy.js/dist/tippy.css';
 import style from './SongComposer.module.scss';
 
@@ -32,6 +32,8 @@ function SongComposerPage() {
     const path = usePathname();
     const userId = path.split('/composer/song/')[1];
     const { data, isLoading, isError } = useGetServiceProfileQuery(userId);
+    const [popupUploadSong, setPopupUploadSong] = useState(false);
+    const [editingSongId, setEditingSongId] = useState<string | null>();
     const dispatch = useAppDispatch();
     const store: ISongStore = useAppSelector(selectSongReducer);
     const onClick = (song: ISong, index: number) => {
@@ -55,6 +57,12 @@ function SongComposerPage() {
     const handlePlaying = () => {
         dispatch(updateStatePlayingAction(EStateCurrentSong.PLAYING));
     };
+
+    const handUpdateSong = useCallback((isUpdated: boolean) => {
+        if (isUpdated) {
+            setPopupUploadSong(false);
+        }
+    }, []);
     return (
         <div className={cx('main-album')}>
             {isLoading && <SkeletonLoading count={20} />}
@@ -68,12 +76,9 @@ function SongComposerPage() {
                     <div className={cx('song')}>Bài hát</div>
                     <div className={cx('album')}>Album</div>
                     <div className={cx('date')}>Ngày phát hành</div>
-                    <div className={cx('lenght')}>
-                        <FontAwesomeIcon className={cx('icon-clock')} icon={faClock} />
-                    </div>
                 </div>
                 <div className={cx('list-songs')}>
-                    {data?.data.songsReference?.map((song: ISong, index: number) => (
+                    {data?.data.songsReference?.map((song, index) => (
                         <div
                             key={index}
                             className={cx('single-song', store.playing.currentSong._id === song._id && 'active')}
@@ -109,7 +114,6 @@ function SongComposerPage() {
                                     <div className={cx('author')}>{data?.data.name}</div>
                                 </div>
                             </div>
-
                             <div className={cx('album')}>
                                 <Tippy
                                     interactive
@@ -140,13 +144,24 @@ function SongComposerPage() {
                                     </div>
                                 </Tippy>
                             </div>
-
                             <div className={cx('date')}>{formatDate(song.publish)}</div>
-                            <div className={cx('lenght')}>
-                                <HeartComponent />
-                                <span className={cx('lenght')}>3:40</span>
+                            <div
+                                onClick={() => {
+                                    setEditingSongId(song._id);
+                                    setPopupUploadSong(true);
+                                }}
+                                className={cx('lenght')}
+                            >
                                 <FontAwesomeIcon className={cx('icon')} icon={faEdit} />
                             </div>
+
+                            {popupUploadSong && editingSongId === song._id && (
+                                <UpdateSongComponent
+                                    dataProfile={data.data}
+                                    songId={song._id}
+                                    isUpdated={handUpdateSong}
+                                />
+                            )}
                         </div>
                     ))}
                 </div>

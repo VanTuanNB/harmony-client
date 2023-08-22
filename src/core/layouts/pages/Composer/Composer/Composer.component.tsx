@@ -17,12 +17,12 @@ import { AlbumIcon, ListSongIcon } from '@/shared/components/Svg/index.component
 import { formatDate } from '@/utils/format.util';
 import { faAdd, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
 import { memo, useCallback, useState } from 'react';
 import style from './Composer.module.scss';
-import Tippy from '@tippyjs/react';
 
 const cx = classNames.bind(style);
 
@@ -87,7 +87,7 @@ function ComposerPage({ isComposer, profile }: IComposer) {
                             </div>
                         </div>
                         <div className={cx('list-songs')}>
-                            {profile.songsReference?.map((item: ISong, index: number) => {
+                            {profile.songsReference?.slice(0, 4)?.map((item: ISong, index: number) => {
                                 return (
                                     <div
                                         key={index}
@@ -181,10 +181,6 @@ function ComposerPage({ isComposer, profile }: IComposer) {
                                         <div className={cx('date')}>{formatDate(item.publish)}</div>
                                         <div className={cx('lenght')}>
                                             <HeartComponent />
-                                            <span className={cx('lenght')}>3:40</span>
-                                            <Link href={`/user/song/${item._id}`} className={cx('edit')}>
-                                                Sửa
-                                            </Link>
                                         </div>
                                     </div>
                                 );

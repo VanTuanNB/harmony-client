@@ -8,8 +8,8 @@ import {
 } from '@/core/redux/features/song/song.slice';
 import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import { useGetServiceProfileQuery } from '@/core/redux/services/user.service';
-import HeartComponent from '@/shared/components/Heart/Heart.component';
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
+import { formatDate } from '@/utils/format.util';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
@@ -63,9 +63,6 @@ function SongUserPage() {
                     <div id={cx('song')}>Bài hát</div>
                     <div id={cx('album')}>Album</div>
                     <div id={cx('date')}>Ngày phát hành</div>
-                    <div id={cx('lenght')}>
-                        <FontAwesomeIcon className={cx('icon-clock')} icon={faClock} />
-                    </div>
                 </div>
                 <div className={cx('list-songs')}>
                     {data?.data.songsReference?.map((song, index) => (
@@ -85,11 +82,7 @@ function SongUserPage() {
                                     </Link>
                                 ))}
                             </div>
-                            <div id={cx('date')}>19/12/2020</div>
-                            <div id={cx('lenght')}>
-                                <HeartComponent />
-                                <span id={cx('lenght')}>3:40</span>
-                            </div>
+                            <div id={cx('date')}>{formatDate(song.publish)}</div>
                         </div>
                     ))}
                 </div>

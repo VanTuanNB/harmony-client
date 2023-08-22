@@ -20,8 +20,7 @@ export default function PlaylistSymlinkComponent() {
         if (data) {
             setPlayList(data.data.playlistReference);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [data]);
     return (
         <div className={cx('right-slide')}>
             <div className={cx('main-container')}>

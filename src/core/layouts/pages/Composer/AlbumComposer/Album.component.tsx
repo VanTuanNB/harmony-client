@@ -2,7 +2,7 @@
 import { EStateCurrentSong } from '@/core/common/constants/common.constant';
 import { ISong } from '@/core/common/interfaces/collection.interface';
 import { ISongStore } from '@/core/common/interfaces/songStore.interface';
-import UpdateSongComponent from '@/core/layouts/components/PopUp/UpdateSong/UpdateSong.component';
+import UpdateSongComponent from '@/core/layouts/components/PopUp/UpdateAlbum/UpdateSong/UpdateSong.component';
 import {
     removeSongFromSuggestListAction,
     replaceIntoPrevPlayListAction,
@@ -12,31 +12,29 @@ import {
     updateStatePlayingAction,
 } from '@/core/redux/features/song/song.slice';
 import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
-import { useGetServiceAlbumQuery, usePutServiceAlbumMutation } from '@/core/redux/services/album.service';
+import { useGetServiceAlbumQuery } from '@/core/redux/services/album.service';
 import HeartComponent from '@/shared/components/Heart/Heart.component';
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
 import { formatDate } from '@/utils/format.util';
-import { faAdd, faClock, faClose, faPen, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faPen, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { memo, useCallback, useState } from 'react';
 import UpdateAlbum from '../../../components/PopUp/UpdateAlbum/UpdateAlbum.component';
 import style from './AlbumComposer.module.scss';
 import PlayingAlbumComponent from './PlayAlbum.component';
+import Tippy from '@tippyjs/react';
 
 const cx = classNames.bind(style);
 
 function AlbumComposerPage() {
     const path = usePathname();
-    const router = useRouter();
     const resurt = path.split('/album/')[1];
     const [popupUploadAlbum, setPopupUploadAlbum] = useState(false);
     const [popupUploadSong, setPopupUploadSong] = useState(false);
     const { data, isLoading, refetch } = useGetServiceAlbumQuery(resurt);
-    const [putAlbum] = usePutServiceAlbumMutation();
     const dispatch = useAppDispatch();
 
     const handlePopupAlbum = useCallback((isUpdated: boolean) => {
@@ -55,16 +53,6 @@ function AlbumComposerPage() {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    const handleRemoveItem = async (id: string) => {
-        const newListSong = data?.data.listSong.reduce((acc: string[], cur: ISong, index) => {
-            if (cur._id === id) return acc;
-            acc.push(cur._id);
-            return acc;
-        }, []);
-        putAlbum({ _id: data?.data._id, listSong: newListSong as any });
-        refetch();
-    };
 
     const store: ISongStore = useAppSelector(selectSongReducer);
     const onClick = (song: ISong, index: number) => {
@@ -140,20 +128,17 @@ function AlbumComposerPage() {
                 </div>
             </div>
             {data && data.data && !!data.data.listSong.length && <PlayingAlbumComponent data={data.data.listSong} />}
+            <Tippy content="Thêm xoá bài hát">
+                <button className={cx('uploadSong')} onClick={() => setPopupUploadSong(true)}>
+                    <FontAwesomeIcon className={cx('icon-add')} icon={faEdit} />
+                </button>
+            </Tippy>
             <div className={cx('album-render')}>
                 <div className={cx('title')}>
                     <div id={cx('id')}>#</div>
                     <div id={cx('song')}>Bài hát</div>
                     <div id={cx('album')}>Album</div>
                     <div id={cx('date')}>Ngày phát hành</div>
-                    <div id={cx('lenght')}>
-                        <FontAwesomeIcon className={cx('icon-clock')} icon={faClock} />
-                    </div>
-                    <Tippy content="thêm bài hát">
-                        <button className={cx('uploadSong')} onClick={() => setPopupUploadSong(true)}>
-                            <FontAwesomeIcon className={cx('icon-add')} icon={faAdd} />
-                        </button>
-                    </Tippy>
                 </div>
                 <div className={cx('list-songs')}>
                     {data?.data.listSong.map((song: ISong, index: number) => (
@@ -196,12 +181,6 @@ function AlbumComposerPage() {
                             <div id={cx('date')}>{formatDate(song.publish)}</div>
                             <div id={cx('lenght')}>
                                 <HeartComponent />
-                                <span id={cx('lenght')}>3:40</span>
-                                <FontAwesomeIcon
-                                    onClick={() => handleRemoveItem(song._id)}
-                                    id={cx('icon')}
-                                    icon={faClose}
-                                />
                             </div>
                         </div>
                     ))}
