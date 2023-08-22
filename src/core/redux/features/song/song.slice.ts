@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { ELocalStorageKey, EStateCurrentSong } from '@/core/common/constants/common.constant';
+import { ELocalStorageKey, EStateCurrentSong, EStrategiesPlaying } from '@/core/common/constants/common.constant';
 import { EScopeSongStore, ESelectReducer } from '@/core/common/constants/index.constant';
 import { ISong, ISongStore } from '@/core/common/interfaces/index.interface';
 import type { RootState } from '@/core/redux/store.redux';
@@ -14,6 +14,7 @@ const initialState: ISongStore = {
         [EScopeSongStore.CURRENT_SONG]: {} as ISong,
         [EScopeSongStore.STATE]: EStateCurrentSong.LOADING,
         [EScopeSongStore.VOLUME]: localStorageSide.getStore(ELocalStorageKey.VOLUME) ?? 1,
+        [EScopeSongStore.STRATEGIES]: localStorageSide.getStore(ELocalStorageKey.STRATEGIES) ?? EStrategiesPlaying.LOOP,
     },
     [EScopeSongStore.PLAYLIST]: {
         [EScopeSongStore.PREV_SONGS]: [],
@@ -79,6 +80,12 @@ export const songSlice = createSlice({
             if (index === -1) return;
             state[EScopeSongStore.PLAYLIST][EScopeSongStore.NEXT_SONGS].splice(index, 1);
         },
+
+        // Playback mode song
+        updatePlaybackMode: (state, action: PayloadAction<EStrategiesPlaying>) => {
+            localStorageSide.setStore(ELocalStorageKey.STRATEGIES, action.payload);
+            state[EScopeSongStore.PLAYING][EScopeSongStore.STRATEGIES] = action.payload;
+        },
     },
 });
 export const {
@@ -93,6 +100,7 @@ export const {
     popSongListPrevSong,
     replaceNewListNextSong,
     replaceIntoPrevPlayListAction,
+    updatePlaybackMode,
 } = songSlice.actions;
 export const selectSongReducer = (state: RootState) => state[ESelectReducer.SONG];
 export default songSlice;

@@ -39,6 +39,11 @@
         text-transform: none;
         cursor: pointer;
         color: #fff;
+        position: relative;
+
+        &.active {
+            color: var(--theme-item-highlight);
+        }
 
         &.disabled {
             color: #ccc;
@@ -47,6 +52,23 @@
 
         & .icon {
             padding: 5px;
+        }
+
+        & .mode-loop {
+            position: absolute;
+            top: 48%;
+            right: 0;
+            transform: translate(-48%, 0);
+            font-size: 0.9rem;
+            background-color: var(--theme-item-highlight);
+            color: #fff;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         &:hover {

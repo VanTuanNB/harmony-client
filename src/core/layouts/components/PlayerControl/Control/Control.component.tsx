@@ -9,7 +9,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 
-import { EStateCurrentSong } from '@/core/common/constants/common.constant';
+import { EStateCurrentSong, EStrategiesPlaying } from '@/core/common/constants/common.constant';
 import {
     popSongListPrevSong,
     pushSongIntoPrevPlayListAction,
@@ -18,6 +18,7 @@ import {
     shiftListNextSong,
     startPlayingAction,
     unShiftListNextSong,
+    updatePlaybackMode,
 } from '@/core/redux/features/song/song.slice';
 import { useAppDispatch } from '@/core/redux/hook.redux';
 import LoadingSpinner from '@/shared/components/Loading/LoadingSpinner/LoadingSpinner.component';
@@ -31,10 +32,10 @@ const cx = classNames.bind(styles);
 interface IProps {
     isLoading: boolean;
     state: EStateCurrentSong;
-    songId: string;
+    strategies: EStrategiesPlaying;
     onTogglePlaying: () => void;
 }
-function ControlComponent({ isLoading, state, onTogglePlaying, songId }: IProps) {
+function ControlComponent({ isLoading, state, strategies, onTogglePlaying }: IProps) {
     const dispatch = useAppDispatch();
     const { playlist, playing } = useSelector(selectSongReducer);
     const handlePrevSong = () => {
@@ -54,6 +55,13 @@ function ControlComponent({ isLoading, state, onTogglePlaying, songId }: IProps)
             dispatch(removeSongFromSuggestListAction(playlist.suggests[0]._id));
             dispatch(startPlayingAction(playlist.suggests[0]));
         }
+    };
+    const handleToggleStrategies = () => {
+        dispatch(
+            updatePlaybackMode(
+                strategies === EStrategiesPlaying.LOOP ? EStrategiesPlaying.SEQUENTIALLY : EStrategiesPlaying.LOOP,
+            ),
+        );
     };
     return (
         <div className={cx('control-buttons')}>
@@ -91,8 +99,16 @@ function ControlComponent({ isLoading, state, onTogglePlaying, songId }: IProps)
                 </button>
             </Tippy>
             <Tippy content="Bật phát lại một bài">
-                <div className={cx('btn-actions')}>
+                <div
+                    onClick={handleToggleStrategies}
+                    className={cx(
+                        'btn-actions',
+                        (strategies === EStrategiesPlaying.LOOP || strategies === EStrategiesPlaying.SEQUENTIALLY) &&
+                            'active',
+                    )}
+                >
                     <FontAwesomeIcon icon={faRetweet} className={cx('icon')} />
+                    {strategies === EStrategiesPlaying.LOOP && <div className={cx('mode-loop')}>1</div>}
                 </div>
             </Tippy>
         </div>
