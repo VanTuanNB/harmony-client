@@ -60,9 +60,21 @@
             margin-right: 5px;
             padding: 4px 12px;
         }
-        .icon1 {
-            padding: 4px 12px;
+
+        & .btn-add-playlist {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            background-color: transparent;
+            text-align: center;
+            color: var(--theme-mode-color);
+            font-size: 1.6rem;
+            cursor: pointer;
+            &:hover {
+                background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
+            }
         }
+
         .container .icon {
             position: absolute;
             // width: 30px;

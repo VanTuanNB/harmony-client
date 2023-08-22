@@ -4,8 +4,8 @@ import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoadin
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from './Genres.module.scss';
 import { memo } from 'react';
+import styles from './Genres.module.scss';
 const cx = classNames.bind(styles);
 
 function GenresPage() {

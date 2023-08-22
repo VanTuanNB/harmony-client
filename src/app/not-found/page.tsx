@@ -7,7 +7,7 @@ function PageNotFound() {
     return (
         <div className={cx('wrapper')}>
             <div className={cx('wrapper-img')}>
-                <Image src="/404thumbnail.png" width={100} height={100} alt="" />
+                <Image src="/images/404thumbnail.png" width={100} height={100} alt="" />
             </div>
             <div className={cx('wrapper-actions')}>
                 <Link href={'/'} className={cx('btn-link')}>

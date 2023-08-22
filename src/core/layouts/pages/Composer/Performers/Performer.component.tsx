@@ -1,5 +1,5 @@
 'use client';
-import { EStateCurrentSong } from '@/core/common/constants/common.constant';
+import { ELocalStorageKey, EStateCurrentSong, ROLE_CUSTOMER } from '@/core/common/constants/common.constant';
 import { ISong, IUser } from '@/core/common/interfaces/collection.interface';
 import { ISongStore } from '@/core/common/interfaces/songStore.interface';
 import {
@@ -13,27 +13,30 @@ import {
 import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import { useGetServicePerformerQuery } from '@/core/redux/services/user.service';
 import HeartComponent from '@/shared/components/Heart/Heart.component';
+import LoadingPage from '@/shared/components/Loading/LoadingPage/LoadingPage.component';
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
 import { AlbumIcon, ListSongIcon } from '@/shared/components/Svg/index.component';
+import { LocalStorageSide } from '@/utils/clientStore.util';
 import { formatDate } from '@/utils/format.util';
 import { faCirclePlay, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { memo, useEffect, useState } from 'react';
 import styles from './Performer.module.scss';
 
 const cx = classNames.bind(styles);
-
+const localStorageInstance = new LocalStorageSide();
 function PerformerPage() {
+    const profileStore = localStorageInstance.getStore(ELocalStorageKey.PROFILE);
     const path = usePathname();
+    const router = useRouter();
     const resurt = path.split('/composer/@')[1];
     const [profile, setProfile] = useState<IUser>();
     const apiUser = useGetServicePerformerQuery(resurt);
     const dispatch = useAppDispatch();
-
     useEffect(() => {
         if (apiUser.data) {
             setProfile(apiUser.data.data);
@@ -61,6 +64,17 @@ function PerformerPage() {
     const handlePlaying = () => {
         dispatch(updateStatePlayingAction(EStateCurrentSong.PLAYING));
     };
+
+    useEffect(() => {
+        if (!profileStore) router.replace('/auth/login');
+        if (profileStore.role !== ROLE_CUSTOMER.COMPOSER) router.replace('/not-found');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [profileStore]);
+
+    if (!profileStore || profileStore.role !== ROLE_CUSTOMER.COMPOSER) {
+        return <LoadingPage />;
+    }
+
     return (
         <div className={cx('profile')}>
             {apiUser.isLoading && <SkeletonLoading count={20} />}
@@ -141,26 +155,6 @@ function PerformerPage() {
                                         <span className={cx('lenght')}>3:40</span>
                                     </div>
                                 </div>
-                                // <div onClick={() => onClick(song._id)} key={song._id} className={cx('single-song')}>
-                                //     <div className={cx('single-left')}>
-                                //         <div id={cx('id')}>{index + 1}</div>
-                                //         <div id={cx('song')}>
-                                //             <Image src={song.thumbnailUrl} alt={''} width={40} height={40}></Image>
-                                //             <div id={cx('song-title')}>
-                                //                 <div id={cx('title')}>{song.title}</div>
-                                //                 <div id={cx('author')}>{profile.name}</div>
-                                //             </div>
-                                //         </div>
-                                //     </div>
-                                //     <div className={cx('single-right')}>
-                                //         <div id={cx('album')}>{formatDate(song.publish)}</div>
-
-                                //         <HeartComponent />
-                                //         <div id={cx('lenght')}>
-                                //             <span id={cx('lenght')}>3:40</span>
-                                //         </div>
-                                //     </div>
-                                // </div>
                             ))}
                             {profile.songsReference?.length === 0 && (
                                 <div className={cx('albumNot')}>
