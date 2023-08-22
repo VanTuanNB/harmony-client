@@ -47,6 +47,7 @@ function ControlComponent({ isLoading, state, onTogglePlaying, songId }: IProps)
     const handleNextSong = () => {
         dispatch(pushSongIntoPrevPlayListAction(playing.currentSong));
         if (!!playlist.nextSongs.length) {
+            dispatch(removeSongFromSuggestListAction(playlist.nextSongs[0]._id));
             dispatch(shiftListNextSong(playlist.nextSongs[0]._id));
             dispatch(startPlayingAction(playlist.nextSongs[0]));
         } else {

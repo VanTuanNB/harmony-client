@@ -1,15 +1,28 @@
-import { IUser } from '@/core/common/interfaces/collection.interface';
+import { EStateCurrentSong } from '@/core/common/constants/common.constant';
+import { IAlbum, ISong, IUser } from '@/core/common/interfaces/collection.interface';
+import { ISongStore } from '@/core/common/interfaces/songStore.interface';
 import CreateAlbumComponent from '@/core/layouts/components/PopUp/CreateAlbum/CreateAlbum.component';
 import CreateSongComponent from '@/core/layouts/components/PopUp/CreateSong/CreateSong.component';
+import {
+    removeSongFromSuggestListAction,
+    replaceIntoPrevPlayListAction,
+    replaceNewListNextSong,
+    selectSongReducer,
+    startPlayingAction,
+    updateStatePlayingAction,
+} from '@/core/redux/features/song/song.slice';
+import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import HeartComponent from '@/shared/components/Heart/Heart.component';
 import { AlbumIcon, ListSongIcon } from '@/shared/components/Svg/index.component';
-import { faAdd } from '@fortawesome/free-solid-svg-icons';
+import { formatDate } from '@/utils/format.util';
+import { faAdd, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
 import { memo, useCallback, useState } from 'react';
 import style from './Composer.module.scss';
+import Tippy from '@tippyjs/react';
 
 const cx = classNames.bind(style);
 
@@ -34,7 +47,29 @@ function ComposerPage({ isComposer, profile }: IComposer) {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
+    const dispatch = useAppDispatch();
+    const store: ISongStore = useAppSelector(selectSongReducer);
+    const onClick = (song: ISong, index: number) => {
+        if (index > 0) {
+            const prevSongs =
+                (profile &&
+                    profile.songsReference &&
+                    profile.songsReference.filter((item: ISong, itemIndex: number) => itemIndex < index)) ||
+                [];
+            dispatch(replaceIntoPrevPlayListAction(prevSongs));
+        }
+        const nextSongs =
+            (profile &&
+                profile.songsReference &&
+                profile.songsReference.filter((item: ISong, itemIndex: number) => itemIndex > index)) ||
+            [];
+        dispatch(replaceNewListNextSong(nextSongs));
+        dispatch(removeSongFromSuggestListAction(song._id));
+        dispatch(startPlayingAction(song));
+    };
+    const handlePlaying = () => {
+        dispatch(updateStatePlayingAction(EStateCurrentSong.PLAYING));
+    };
     return (
         <>
             {isComposer === 'composer' && (
@@ -52,45 +87,109 @@ function ComposerPage({ isComposer, profile }: IComposer) {
                             </div>
                         </div>
                         <div className={cx('list-songs')}>
-                            {profile.songsReference?.map((item, index) => {
+                            {profile.songsReference?.map((item: ISong, index: number) => {
                                 return (
-                                    <>
-                                        <div key={item._id} className={cx('single-song')}>
-                                            <div className={cx('single-left')}>
-                                                <div id={cx('id')}>{index + 1}</div>
-                                                <div id={cx('song')}>
-                                                    <Image
-                                                        src={item.thumbnailUrl}
-                                                        alt={''}
-                                                        width={100}
-                                                        height={100}
-                                                    ></Image>
-                                                    <div id={cx('song-title')}>
-                                                        <div id={cx('title')}>{item.title}</div>
-                                                        <div id={cx('author')}>{profile.name}</div>
-                                                    </div>
-                                                </div>
+                                    <div
+                                        key={index}
+                                        className={cx(
+                                            'single-song',
+                                            store.playing.currentSong._id === item._id && 'active',
+                                        )}
+                                    >
+                                        <div className={cx('id')}>{index + 1}</div>
+                                        <div className={cx('song')} onClick={() => onClick(item, index)}>
+                                            <div className={cx('wrapper-img')}>
+                                                <Image
+                                                    className={cx('img')}
+                                                    src={item.thumbnailUrl}
+                                                    width={40}
+                                                    height={40}
+                                                    alt=""
+                                                />
+                                                {store.playing.currentSong._id === item._id && (
+                                                    <>
+                                                        {store.playing.state.includes(EStateCurrentSong.PLAYING) && (
+                                                            <div className={cx('playing-icon')}>
+                                                                <i className={cx('icon')}></i>
+                                                            </div>
+                                                        )}
+                                                        {store.playing.state.includes(EStateCurrentSong.PAUSED) && (
+                                                            <div className={cx('playing-icon')} onClick={handlePlaying}>
+                                                                <FontAwesomeIcon
+                                                                    icon={faPlay}
+                                                                    className={cx('icon-pause')}
+                                                                />
+                                                            </div>
+                                                        )}
+                                                    </>
+                                                )}
                                             </div>
-                                            <div className={cx('single-right')}>
-                                                <div id={cx('album')}>
-                                                    {item.albumReference?.map((item, index) => (
-                                                        <Link href={'/composer/album/' + item._id} key={index}>
-                                                            {item.title}
-                                                        </Link>
-                                                    ))}
+
+                                            <div className={cx('song-title')}>
+                                                <div className={cx('song-name')}>{item.title}</div>
+                                                <div className={cx('author')}>
+                                                    {item.performers &&
+                                                        !!item.performers.length &&
+                                                        item.performers.map((performer) => (
+                                                            <Link
+                                                                key={performer._id}
+                                                                href={`/profile/${performer._id}`}
+                                                            >
+                                                                {performer.name}
+                                                            </Link>
+                                                        ))}
                                                 </div>
-                                                <HeartComponent />
-                                                <div id={cx('lenght')}>
-                                                    <span id={cx('lenght')}>3:40</span>
-                                                </div>
-                                                <Link href={''} className={cx('edit')}>
-                                                    Sửa
-                                                </Link>
                                             </div>
                                         </div>
-                                    </>
+                                        <div className={cx('album')}>
+                                            <Tippy
+                                                interactive
+                                                content={
+                                                    <ul className={cx('list-tooltip')}>
+                                                        {item.albumReference?.map((album: IAlbum, index: number) => (
+                                                            <li key={index}>
+                                                                <Link href={'/user/album/' + album._id} key={index}>
+                                                                    {album.title}
+                                                                </Link>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                }
+                                            >
+                                                <div>
+                                                    {!!item.albumReference?.length ? (
+                                                        item.albumReference?.map((album, index) => (
+                                                            <Link href={'/user/album/' + album._id} key={index}>
+                                                                {album.title}
+                                                            </Link>
+                                                        ))
+                                                    ) : (
+                                                        <span
+                                                            style={{
+                                                                width: '164px',
+                                                                display: 'block',
+                                                                textAlign: 'center',
+                                                            }}
+                                                        >
+                                                            -
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            </Tippy>
+                                        </div>
+
+                                        <div className={cx('date')}>{formatDate(item.publish)}</div>
+                                        <div className={cx('lenght')}>
+                                            <HeartComponent />
+                                            <span className={cx('lenght')}>3:40</span>
+                                            <Link href={`/user/song/${item._id}`} className={cx('edit')}>
+                                                Sửa
+                                            </Link>
+                                        </div>
+                                    </div>
                                 );
                             })}
+
                             {profile.songsReference?.length === 0 && (
                                 <div className={cx('albumNot')}>
                                     <ListSongIcon className={cx('icon-album')} />
