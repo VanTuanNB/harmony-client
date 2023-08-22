@@ -1,7 +1,14 @@
 'use client';
 import { ISong } from '@/core/common/interfaces/collection.interface';
-import { removeSongFromSuggestListAction, startPlayingAction } from '@/core/redux/features/song/song.slice';
-import { useAppDispatch } from '@/core/redux/hook.redux';
+import { ISongStore } from '@/core/common/interfaces/songStore.interface';
+import {
+    removeSongFromSuggestListAction,
+    replaceIntoPrevPlayListAction,
+    replaceNewListNextSong,
+    selectSongReducer,
+    startPlayingAction,
+} from '@/core/redux/features/song/song.slice';
+import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import { useGetServiceSearchQuery } from '@/core/redux/services/song.service';
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
 import MediaItemInPage from '@/shared/components/MediaItemInPage/MediaItemInPage.component';
@@ -20,9 +27,24 @@ function SearchPage() {
     const { data, error, isLoading } = useGetServiceSearchQuery(search || '');
     const dispatch = useAppDispatch();
 
-    const clickSong = (data: ISong) => {
-        dispatch(removeSongFromSuggestListAction(data._id));
-        dispatch(startPlayingAction(data));
+    const store: ISongStore = useAppSelector(selectSongReducer);
+    const onClick = (song: ISong, index: number) => {
+        if (index > 0) {
+            const prevSongs =
+                (data &&
+                    data.data.songs &&
+                    data.data.songs.filter((item: ISong, itemIndex: number) => itemIndex < index)) ||
+                [];
+            dispatch(replaceIntoPrevPlayListAction(prevSongs));
+        }
+        const nextSongs =
+            (data &&
+                data.data.songs &&
+                data.data.songs.filter((item: ISong, itemIndex: number) => itemIndex > index)) ||
+            [];
+        dispatch(replaceNewListNextSong(nextSongs));
+        dispatch(removeSongFromSuggestListAction(song._id));
+        dispatch(startPlayingAction(song));
     };
 
     return (
@@ -36,7 +58,7 @@ function SearchPage() {
                     <h2>kết quả hàng đầu</h2>
                     {isLoading && <SkeletonLoading count={3} />}
                     {data && data.data.songs.length > 0 && (
-                        <div onClick={() => clickSong(data.data.songs[0])} className={cx('left')}>
+                        <div onClick={() => onClick(data.data.songs[0], 0)} className={cx('left')}>
                             <Image
                                 src={data.data.songs[0].thumbnailUrl}
                                 alt=""
@@ -60,12 +82,12 @@ function SearchPage() {
                         {isLoading && <SkeletonLoading count={2} />}
                         {data && data.data.songs.length > 0 && (
                             <ul className={cx('list-listening')}>
-                                {data.data.songs.map((song) => {
+                                {data.data.songs.map((song, index) => {
                                     return (
                                         <li key={song._id} className={cx('item')}>
                                             <MediaItemInPage
                                                 data={song}
-                                                onClick={() => clickSong(song)}
+                                                onClick={() => onClick(song, index)}
                                                 key={song._id}
                                             />
                                         </li>
@@ -97,7 +119,7 @@ function SearchPage() {
                     </div>
                 </div>
             )}
-             {data && data.data.albums.length > 0 && (
+            {data && data.data.albums.length > 0 && (
                 <div className={cx('artist-result')}>
                     <h2>Album liên quan</h2>
                     <div className={cx('item-artist')}>

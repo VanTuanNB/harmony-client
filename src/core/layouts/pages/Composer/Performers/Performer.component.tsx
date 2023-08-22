@@ -90,7 +90,7 @@ function PerformerPage() {
                                 <h2>Bài hát phổ biến</h2>
                             </div>
                             <div className={cx('btn')}>
-                                <Link href={'/song/' + profile._id}>Xem tất cả</Link>
+                                <Link href={'/user/' + profile._id + '/song'}>Xem tất cả</Link>
                             </div>
                         </div>
                         <div className={cx('list-songs')}>
