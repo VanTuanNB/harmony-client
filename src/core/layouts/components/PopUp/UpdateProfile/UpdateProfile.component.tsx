@@ -14,9 +14,12 @@ interface IState {
     isUpdated: (isReload: boolean) => void;
     dataProfile: IUser;
 }
+const validImageExtensions = ['jpg', 'jpeg', 'png'];
 function UpdateProfile({ isUpdated, dataProfile }: IState) {
     const [name, setName] = useState<string>(dataProfile.name);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
+    
+    const [invalidImageError, setInvalidImageError] = useState<string | null>(null);
     const [avatar, setAvatar] = useState<File | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [uploadThumnail] = useUploadThumnailMutation();
@@ -24,7 +27,18 @@ function UpdateProfile({ isUpdated, dataProfile }: IState) {
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
-            setImagePreview(URL.createObjectURL(e.target.files[0]));
+            const file = e.target.files[0];
+            const fileExtension = file.name.split('.').pop()?.toLowerCase();
+    
+            if (!fileExtension || !validImageExtensions.includes(fileExtension)) {
+                setInvalidImageError('File tải lên không phải là hình ảnh');
+                setImagePreview(null); // Clear image preview
+                return;
+            }
+    
+            // Clear any previous error
+            setInvalidImageError(null);
+            setImagePreview(URL.createObjectURL(file));
         }
     };
     const handleInputName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,6 +101,7 @@ function UpdateProfile({ isUpdated, dataProfile }: IState) {
                                 <label htmlFor="file" className={cx('title-upload')}>
                                     Thêm ảnh
                                 </label>
+                                {invalidImageError && <div className={cx('error-message')}>{invalidImageError}</div>}
                                 <input
                                     type="file"
                                     name="file"

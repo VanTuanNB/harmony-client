@@ -117,3 +117,9 @@ export interface IPlaylist {
     createdAt?: Date;
     updatedAt?: Date;
 }
+
+export interface ISearch{
+    albums: IAlbum[];
+    songs: ISong[];
+    performers: IUser[]
+}

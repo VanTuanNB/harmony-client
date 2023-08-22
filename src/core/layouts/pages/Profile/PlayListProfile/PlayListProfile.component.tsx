@@ -23,7 +23,7 @@ function PlayListProfilePage({ profile }: IProfile) {
             </div>
             <div className={cx('list')}>
                 {profile.playlistReference?.map((item) => (
-                    <Link href={'/user/album/' + item._id} key={item._id} className={cx('item')}>
+                    <Link href={'/album/' + item._id} key={item._id} className={cx('item')}>
                         <Image src="/images/fallback-thumbnail-user.jpg" alt="" width={100} height={100} />
                         <h3>{item.title}</h3>
                         <p>{item.userReference.name}</p>

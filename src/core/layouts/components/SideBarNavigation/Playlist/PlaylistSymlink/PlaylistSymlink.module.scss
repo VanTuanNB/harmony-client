@@ -1,15 +1,18 @@
 .right-slide {
     width: 100%;
     overflow: auto;
+
     .main-container {
         display: flex;
         flex-direction: column;
         flex-grow: 1;
+
         .main-header {
             display: flex;
             align-items: center;
             height: 58px;
             flex-shrink: 0;
+
             .header-menu {
                 .main-header-link {
                     padding: 4px 12px;
@@ -19,18 +22,22 @@
                     margin-right: 5px;
                     transition: 0.3s;
                 }
+
                 .main-header-link:hover {
                     background-color: #4c4b4b;
                 }
             }
         }
     }
+
     .search-sidebar {
         display: flex;
         align-items: center;
         justify-content: space-between;
+
         .container {
             position: relative;
+
             .input {
                 padding-left: 30px;
                 height: 30px;
@@ -49,20 +56,23 @@
                     cursor: text;
                 }
 
-                &:focus + .icon {
+                &:focus+.icon {
                     pointer-events: all;
                     cursor: pointer;
                 }
             }
         }
+
         .icon {
             color: var(--theme-mode-color);
             margin-right: 5px;
             padding: 4px 12px;
         }
+
         .icon1 {
             padding: 4px 12px;
         }
+
         .container .icon {
             position: absolute;
             // width: 30px;
@@ -73,6 +83,7 @@
             pointer-events: none;
         }
     }
+
     .album-render {
         width: 100%;
 
@@ -87,18 +98,22 @@
                 width: 2%;
                 text-align: end;
             }
+
             #song {
                 width: 40%;
                 margin-left: 1em;
             }
+
             #album {
                 width: 18%;
                 text-align: start;
             }
+
             #date {
                 width: 20%;
                 text-align: center;
             }
+
             #lenght {
                 width: 20%;
                 text-align: center;
@@ -132,6 +147,7 @@
                         justify-content: center;
                         margin-left: 0.5em;
                     }
+
                     #author {
                         font-size: 14px;
                         font-weight: 400;
@@ -139,6 +155,7 @@
                     }
                 }
             }
+
             .single-song:hover {
                 background-color: rgba(184, 180, 180, 0.329);
 
@@ -146,6 +163,26 @@
                     #icon {
                         opacity: 100%;
                     }
+                }
+            }
+
+            .albumNot {
+                width: 100%;
+                margin-top: 50px;
+                text-align: center;
+
+                .icon-album {
+                    color: var(--theme-mode-color);
+                    width: 50px;
+                    height: 50px;
+                    background-color: #00bf63;
+                    border-radius: 10px;
+                }
+
+                h2 {
+                    color: gray;
+                    font-size: 1em;
+                    text-align: center;
                 }
             }
         }

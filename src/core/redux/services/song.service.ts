@@ -1,7 +1,9 @@
 import { ECookieStorage } from '@/core/common/constants/common.constant';
+import { ISearch } from '@/core/common/interfaces/collection.interface';
 import { IResponseServer, ISong } from '@/core/common/interfaces/index.interface';
 import { LocalStorageSide } from '@/utils/clientStore.util';
 import { rootSplitApi } from './index.service';
+
 interface Post {
     albumReference: string[];
     composerReference: string;
@@ -22,6 +24,15 @@ export const songApi = rootSplitApi.injectEndpoints({
     endpoints: (builder) => ({
         getServiceSongs: builder.query<IResponseServer<ISong[]>, string>({
             query: (param?: string) => `/song/${param ?? ''}`,
+        }),
+        getServiceSongById: builder.query<IResponseServer<ISong>, string>({
+            query: (param?: string) => `/song/${param ?? ''}`,
+        }),
+        getServiceSearch: builder.query<IResponseServer<ISearch>, string>({
+            query: (param?: string) => ({
+                url: '/song/search/',
+                params: { title: param ?? '' },
+            }),
         }),
         getSuggestSong: builder.query<IResponseServer<ISong[]>, { page: number; size: number }>({
             query: (params: { page: number; size: number }) => `/song/suggest?page=${params.page}&size=${params.size}`,
@@ -55,6 +66,16 @@ export const songApi = rootSplitApi.injectEndpoints({
                 body,
             }),
         }),
+        putUpdateSong: builder.mutation<IResponseServer, Partial<ISong>>({
+            query: (song) => ({
+                url: `/song/${song._id ?? ''}`,
+                method: 'PUT',
+                body: song,
+                headers: {
+                    'Authorization': `Bearer ${token.refreshToken}`
+                },
+            })
+        }),
         postIncreaseConcurrencyViewSong: builder.mutation<IResponseServer<undefined>, string>({
             query: (slug: string) => ({
                 url: `/song/increase/${slug}`,
@@ -63,9 +84,9 @@ export const songApi = rootSplitApi.injectEndpoints({
                     'Content-Type': 'application/json',
                 },
             }),
-        }),
-    }),
-});
+        })
+    })
+})
 
 export const {
     useGetServiceSongsQuery,
@@ -75,4 +96,8 @@ export const {
     useGetServiceSongsJustReleasedQuery,
     useGetServiceSongsViewTopQuery,
     usePostIncreaseConcurrencyViewSongMutation,
+    usePutUpdateSongMutation,
+    useGetServiceSearchQuery,
+    useGetServiceSongByIdQuery,
 } = songApi;
+

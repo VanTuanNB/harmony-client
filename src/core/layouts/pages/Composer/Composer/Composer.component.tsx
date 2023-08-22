@@ -1,5 +1,5 @@
 import { EStateCurrentSong } from '@/core/common/constants/common.constant';
-import { ISong, IUser } from '@/core/common/interfaces/collection.interface';
+import { IAlbum, ISong, IUser } from '@/core/common/interfaces/collection.interface';
 import { ISongStore } from '@/core/common/interfaces/songStore.interface';
 import CreateAlbumComponent from '@/core/layouts/components/PopUp/CreateAlbum/CreateAlbum.component';
 import CreateSongComponent from '@/core/layouts/components/PopUp/CreateSong/CreateSong.component';
@@ -17,6 +17,7 @@ import { AlbumIcon, ListSongIcon } from '@/shared/components/Svg/index.component
 import { formatDate } from '@/utils/format.util';
 import { faAdd, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -86,7 +87,7 @@ function ComposerPage({ isComposer, profile }: IComposer) {
                             </div>
                         </div>
                         <div className={cx('list-songs')}>
-                            {profile.songsReference?.map((item: ISong, index: number) => {
+                            {profile.songsReference?.slice(0, 4)?.map((item: ISong, index: number) => {
                                 return (
                                     <div
                                         key={index}
@@ -140,7 +141,7 @@ function ComposerPage({ isComposer, profile }: IComposer) {
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* <div className={cx('album')}>
+                                        <div className={cx('album')}>
                                             <Tippy
                                                 interactive
                                                 content={
@@ -175,15 +176,11 @@ function ComposerPage({ isComposer, profile }: IComposer) {
                                                     )}
                                                 </div>
                                             </Tippy>
-                                        </div> */}
+                                        </div>
 
                                         <div className={cx('date')}>{formatDate(item.publish)}</div>
                                         <div className={cx('lenght')}>
                                             <HeartComponent />
-                                            <span className={cx('lenght')}>3:40</span>
-                                            <Link href={`/user/song/${item._id}`} className={cx('edit')}>
-                                                Sửa
-                                            </Link>
                                         </div>
                                     </div>
                                 );

@@ -65,7 +65,7 @@ function SongTopPage() {
                             </div>
                             <div id={cx('album')}>
                                 {song.albumReference?.map((album, index) => (
-                                    <Link href={'/user/album/' + album._id} key={index}>
+                                    <Link href={'/album/' + album._id} key={index}>
                                         {album.title}
                                     </Link>
                                 ))}

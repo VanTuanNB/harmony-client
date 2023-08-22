@@ -57,15 +57,21 @@
                     position: relative;
                     width: 100%;
                     .ranking {
-                        color: #00a153;
                         font-size: 3.5rem;
                         font-weight: 900;
                         line-height: 40px;
+                        color: var(--theme-mode-background);
                         padding-bottom: 10px;
-                        span {
-                            color: none;
-                            text-shadow: 2px 0 2px #b9b7b7;
-                        }
+                       
+                    }
+                    .rank0{
+                        -webkit-text-stroke: 1px #00bf63;
+                    }
+                    .rank1{
+                        -webkit-text-stroke: 1px red;
+                    }
+                    .rank2{
+                        -webkit-text-stroke: 1px gold;
                     }
                     .date {
                         position: absolute;
@@ -73,7 +79,6 @@
                         color: var(--theme-mode-color);
                         font-size: 14px;
                         text-align: right;
-
                         padding-right: 1rem;
                         bottom: 5px;
                     }

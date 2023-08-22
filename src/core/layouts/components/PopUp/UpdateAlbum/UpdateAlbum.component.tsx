@@ -30,9 +30,11 @@ interface IState {
     dataAlbum: IAlbum | undefined;
     isUpdated: (value: boolean) => void;
 }
+const validImageExtensions = ['jpg', 'jpeg', 'png'];
 function UpdateAlbum({ dataAlbum, isUpdated }: IState) {
     const [title, setTitle] = useState<string>(dataAlbum?.title || '');
     const [information, setInformation] = useState<string>(dataAlbum?.information || '');
+    const [invalidImageError, setInvalidImageError] = useState<string | null>(null);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [uploadThumnail] = useUploadThumnailMutation();
@@ -41,7 +43,15 @@ function UpdateAlbum({ dataAlbum, isUpdated }: IState) {
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
-            setImagePreview(URL.createObjectURL(e.target.files[0]));
+            const file = e.target.files[0];
+            const fileExtension = file.name.split('.').pop()?.toLowerCase();
+            if (!fileExtension || !validImageExtensions.includes(fileExtension)) {
+                setInvalidImageError('File tải lên không phải là hình ảnh');
+                setImagePreview(null);
+                return;
+            }
+            setInvalidImageError(null);
+            setImagePreview(URL.createObjectURL(file));
         }
     };
     const handleInputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -117,6 +127,8 @@ function UpdateAlbum({ dataAlbum, isUpdated }: IState) {
                                     <label htmlFor="file" className={cx('title-upload')}>
                                         Thêm ảnh
                                     </label>
+                                    {invalidImageError && <div className={cx('error-message')}>{invalidImageError}</div>}
+
                                     <input
                                         type="file"
                                         name="file"

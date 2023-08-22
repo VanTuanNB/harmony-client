@@ -18,7 +18,7 @@ function AlbumHotComponent() {
             {apiAlbumNewWeek.isLoading && <SkeletonLoading count={3} />}
             <div className={cx('hot-image')}>
                 {apiAlbumNewWeek.data?.data.map((item) => (
-                    <Link href={'/user/album/' + item._id} key={item._id} className={cx('hot-image-1')}>
+                    <Link href={'/album/' + item._id} key={item._id} className={cx('hot-image-1')}>
                         <div className={cx('image-album')}>
                             {item.thumbnailUrl && (
                                 <Image

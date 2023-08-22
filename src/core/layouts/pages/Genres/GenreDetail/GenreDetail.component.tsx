@@ -90,7 +90,7 @@ function GenreDetailPage() {
                                             </div>
                                             <div id={cx('album')}>
                                                 {song.albumReference?.map((item, index) => (
-                                                    <Link href={'/user/album/' + item._id} key={index}>
+                                                    <Link href={'/album/' + item._id} key={index}>
                                                         {item.title}
                                                     </Link>
                                                 ))}

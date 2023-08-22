@@ -1,118 +1,122 @@
 'use client';
-import classNames from 'classnames/bind';
-import styles from './Search.module.scss';
-import MediaItem from '@/shared/components/MediaItem/MediaItem.component';
-import { ISongStore } from '@/core/common/interfaces/songStore.interface';
-import { memo, useEffect } from 'react';
-import { useGetServiceSongsQuery } from '@/core/redux/services/song.service';
-import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
-import { pushListSuggestSongIntoStoreAction, selectSongReducer } from '@/core/redux/features/song/song.slice';
+import { ISong } from '@/core/common/interfaces/collection.interface';
+import { removeSongFromSuggestListAction, startPlayingAction } from '@/core/redux/features/song/song.slice';
+import { useAppDispatch } from '@/core/redux/hook.redux';
+import { useGetServiceSearchQuery } from '@/core/redux/services/song.service';
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
-import { faWifi } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import MediaItemInPage from '@/shared/components/MediaItemInPage/MediaItemInPage.component';
+import classNames from 'classnames/bind';
 import Image from 'next/image';
-import SearchFilterComponent from '@/shared/components/SearchFilter/SearchFilter.component';
-
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { memo } from 'react';
+import styles from './Search.module.scss';
 
 const cx = classNames.bind(styles);
 
 function SearchPage() {
-    const { data, error, isLoading } = useGetServiceSongsQuery('');
+    const searchParams = useSearchParams();
+    const search = searchParams.get('search_query');
+    const { data, error, isLoading } = useGetServiceSearchQuery(search || '');
     const dispatch = useAppDispatch();
-    useEffect(() => {
-        if (data) {
-            dispatch(pushListSuggestSongIntoStoreAction(data.data));
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [data]);
-    const store: ISongStore = useAppSelector(selectSongReducer);
-    const dataSong = store.playlist.suggests;
+
+    const clickSong = (data: ISong) => {
+        dispatch(removeSongFromSuggestListAction(data._id));
+        dispatch(startPlayingAction(data));
+    };
+
     return (
         <div className={cx('search')}>
-            <SearchFilterComponent />
+            <div className={cx('filter')}>
+                <button>Tất cả</button>
+            </div>
+
             <div className={cx('top-result')}>
                 <div className={cx('result-left')}>
-                    <h2>Top result</h2>
-                    <div className={cx('left')}>
-                        <Image
-                            src=""
-                            alt=""
-                            width={100}
-                            height={100}
-                            className={cx('img')}
-                        />
-                        <div className={cx('top-result-infor')}>
-                            <h3>Phiêu bồng</h3>
-                            <p>Composer</p>
+                    <h2>kết quả hàng đầu</h2>
+                    {isLoading && <SkeletonLoading count={3} />}
+                    {data && data.data.songs.length > 0 && (
+                        <div onClick={() => clickSong(data.data.songs[0])} className={cx('left')}>
+                            <Image
+                                src={data.data.songs[0].thumbnailUrl}
+                                alt=""
+                                width={500}
+                                height={500}
+                                className={cx('img')}
+                            />
+                            <div className={cx('top-result-infor')}>
+                                <h3>{data.data.songs[0].title}</h3>
+                                {data.data.songs[0].performers.map((item) => (
+                                    <p key={item._id}>{item.name}</p>
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    )}
+                    {error && <SkeletonLoading count={3} />}
                 </div>
                 <div className={cx('result-right')}>
-                    <h2>Related songs</h2>
+                    <h2>Bài hát liên quan</h2>
                     <div className={cx('right')}>
                         {isLoading && <SkeletonLoading count={2} />}
-                        {dataSong.length > 0 && (
+                        {data && data.data.songs.length > 0 && (
                             <ul className={cx('list-listening')}>
-                                {dataSong.map((song) => {
+                                {data.data.songs.map((song) => {
                                     return (
                                         <li key={song._id} className={cx('item')}>
-                                            <MediaItem
-                                                _id={song._id}
-                                                title={song.title}
-                                                thumbnailUrl={song.thumbnailUrl}
-                                                performers={song.performers}
-                                                onClick={() => {}}
+                                            <MediaItemInPage
+                                                data={song}
+                                                onClick={() => clickSong(song)}
+                                                key={song._id}
                                             />
                                         </li>
                                     );
                                 })}
                             </ul>
                         )}
-                        {error && (
-                            <div className={cx('wrapper-disconnect-network')}>
-                                <FontAwesomeIcon className={cx('icon-wifi')} icon={faWifi} />
-                                <span className={cx('disconnect-network-title')}>Bạn đã mất kết nối internet...</span>
-                            </div>
-                        )}
+                        {error && <SkeletonLoading count={3} />}
                     </div>
                 </div>
             </div>
-
-            <div className={cx('artist-result')}>
-                <h2>Related Artist</h2>
-                <div className={cx('item-artist')}>
-                    <div className={cx('item')}>
-                        <Image src="" alt="" width={100} height={100} className={cx('img')} />
-                        <h3>Tuan Cao</h3>
-                        <p>Artist</p>
-                    </div>
-                    <div className={cx('item')}>
-                        <Image
-                            src=""
-                            alt=""
-                            width={100} height={100}
-                            className={cx('img')}
-                        />
-                        <h3>Huy Nguyen</h3>
-                        <p>Artist</p>
-                    </div>
-                    <div className={cx('item')}>
-                        <Image src="" alt="" width={100} height={100} className={cx('img')} />
-                        <h3>Tuan Cao</h3>
-                        <p>Artist</p>
-                    </div>
-                    <div className={cx('item')}>
-                        <Image
-                            src=""
-                            alt=""
-                            width={100} height={100}
-                            className={cx('img')}
-                        />
-                        <h3>Huy Nguyen</h3>
-                        <p>Artist</p>
+            {data && data.data.performers.length > 0 && (
+                <div className={cx('artist-result')}>
+                    <h2>Ca sĩ liên quan</h2>
+                    <div className={cx('item-artist')}>
+                        {data.data.performers.map((item) => (
+                            <Link href={'/composer/@' + item.nickname} key={item._id} className={cx('item')}>
+                                <Image
+                                    src={item.avatarUrl || '/images/fallback-thumbnail-user.jpg'}
+                                    alt=""
+                                    width={500}
+                                    height={500}
+                                    className={cx('img')}
+                                />
+                                <h3>{item.name}</h3>
+                                <p>Ca sỹ - tác giả</p>
+                            </Link>
+                        ))}
                     </div>
                 </div>
-            </div>
+            )}
+             {data && data.data.albums.length > 0 && (
+                <div className={cx('artist-result')}>
+                    <h2>Album liên quan</h2>
+                    <div className={cx('item-artist')}>
+                        {data.data.albums.map((item) => (
+                            <Link href={'/album/' + item._id} key={item._id} className={cx('item')}>
+                                <Image
+                                    src={item.thumbnailUrl || '/images/playlist.png'}
+                                    alt=""
+                                    width={500}
+                                    height={500}
+                                    className={cx('img')}
+                                />
+                                <h3>{item.title}</h3>
+                                <p>{item.information}</p>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

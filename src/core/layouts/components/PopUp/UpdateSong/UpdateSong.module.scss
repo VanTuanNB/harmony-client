@@ -17,7 +17,7 @@
 
         .form-pop-up {
             width: 35vw;
-            padding-bottom: 10%;
+            padding-bottom: 30px;
             display: grid;
             padding: 3%;
             border-radius: 10px;
@@ -27,6 +27,7 @@
             .title {
                 height: 50px;
             }
+
             .close {
                 width: 30px;
                 height: 30px;
@@ -41,54 +42,105 @@
             }
 
             .profile {
-                display: grid;
-                justify-items: center;
+                .img-upload {
+                    width: 100%;
+                    display: grid;
+                    justify-content: center;
+                    justify-items: center;
+                    margin: auto;
+                    object-fit: cover;
+                    position: relative;
+
+                    img {
+                        width: 200px;
+                        height: 200px;
+                        object-fit: cover;
+                        border-radius: 10px;
+                    }
+
+                    .title-upload {
+                        position: absolute;
+                        cursor: pointer;
+                        opacity: 0%;
+                        color: white;
+                        text-decoration: underline;
+                        width: 200px;
+                        height: 200px;
+                        border-radius: 10px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-weight: bold;
+                        transition: 0.3s;
+                        z-index: 3;
+                    }
+
+                    input[type='file'] {
+                        opacity: 0%;
+                        height: 0px;
+                    }
+
+                    .error-message {
+                        color: red;
+                        margin-top: 8px;
+                        font-size: 12px;
+                    }
+
+                }
+
+                .img-upload:hover {
+                    .title-upload {
+                        opacity: 100%;
+                        text-align: center;
+                        background-color: rgba($color: black, $alpha: 0.3);
+                    }
+
+                    img {
+                        background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.3);
+                    }
+                }
 
                 .form {
                     width: 100%;
                     text-align: center;
-                    display: grid;
-                    justify-content: center;
+
                     input {
-                        height: 50px;
-                        width: 400px;
+                        height: 40px;
+                        width: 100%;
+                        margin-bottom: 10px;
                         border-radius: 5px;
                         border: none;
                         padding-left: 10px;
                         color: var(--theme-mode-color);
                         background: var(--theme-filter);
-                        margin-bottom: 15px;
                     }
+
+                    .select-input {
+                        width: 100%;
+                        color: black;
+                        padding-bottom: 10px;
+                        background: none;
+                        border-radius: 5px;
+                    }
+
                     button {
-                        margin-top: 20px;
-                        padding: 15px 20px;
+                        top: 50px;
+                        padding: 10px 20px;
                         border-radius: 10px;
                         cursor: pointer;
                         color: var(--theme-mode-background);
                         background-color: #00bf63;
+                        margin: auto;
+                        text-align: center;
                         font-weight: bold;
-                    }
-                    .err {
-                        color: brown;
-                        height: 40px;
-                        line-height: 40px;
-                    }
-
-                    .select-input {
-                        width: 400px;
-                        color: black;
-                        padding-bottom: 10px;
-                        // font-size: 15px;
-                        background: none;
-                        border-radius: 5px;
-                        margin: 0 auto;
                     }
                 }
             }
+
             p {
                 width: 100%;
                 font-size: 1.2rem;
-                margin-top: 5px;
+                margin-top: 20px;
             }
         }
     }

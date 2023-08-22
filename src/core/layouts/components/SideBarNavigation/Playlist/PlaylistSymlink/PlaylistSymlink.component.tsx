@@ -1,12 +1,26 @@
+import { IPlaylist } from '@/core/common/interfaces/collection.interface';
+import { selectUserReducer } from '@/core/redux/features/user/user.slice';
+import { useAppSelector } from '@/core/redux/hook.redux';
+import { useGetServiceProfileQuery } from '@/core/redux/services/user.service';
 import { faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import styles from './PlaylistSymlink.module.scss';
+import { PlayListIcon } from '@/shared/components/Svg/index.component';
 
 const cx = classNames.bind(styles);
 
 export default function PlaylistSymlinkComponent() {
+    const store = useAppSelector(selectUserReducer);
+    const [playlist, setPlayList] = useState<IPlaylist[]>();
+    const { data } = useGetServiceProfileQuery(store.profile?._id || '');
+    useEffect(() => {
+        if (data) {
+            setPlayList(data.data.playlistReference);
+        }
+    }, [data]);
     return (
         <div className={cx('right-slide')}>
             <div className={cx('main-container')}>
@@ -15,7 +29,6 @@ export default function PlaylistSymlinkComponent() {
                         <a href="#" className={cx('main-header-link')}>
                             Playlists
                         </a>
-                       
                     </div>
                 </div>
             </div>
@@ -30,15 +43,24 @@ export default function PlaylistSymlinkComponent() {
             </div>
             <div className={cx('album-render')}>
                 <div className={cx('list-songs')}>
-                    <div className={cx('single-song')}>
-                        <div id={cx('song')}>
-                            <Image src={'/'} alt={''} width={40} height={40}></Image>
-                            <div id={cx('song-title')}>
-                                <div id={cx('title')}>Chúng ta của hiện tại</div>
-                                <div id={cx('author')}>Sơn Tùng MTP</div>
+                    {data &&
+                        playlist?.map((item) => (
+                            <div key={item._id} className={cx('single-song')}>
+                                <div id={cx('song')}>
+                                    <Image src={'/images/playlist.png'} alt={''} width={40} height={40} />
+                                    <div id={cx('song-title')}>
+                                        <div id={cx('title')}>{item.title}</div>
+                                        <div id={cx('author')}>{data.data.name}</div>
+                                    </div>
+                                </div>
                             </div>
+                        ))}
+                    {playlist?.length === 0 && (
+                        <div className={cx('albumNot')}>
+                            <PlayListIcon className={cx('icon-album')} />
+                            <h2>Bạn chưa có playlist</h2>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
         </div>
