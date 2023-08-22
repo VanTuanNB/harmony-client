@@ -82,7 +82,7 @@ function ComposerPage({ isComposer, profile }: IComposer) {
                                     <FontAwesomeIcon className={cx('icon-add')} icon={faAdd} />
                                 </button>
                                 {profile.songsReference?.length !== 0 && (
-                                    <Link href={`/composer/song/${profile._id}`}>Xem tất cả</Link>
+                                    <Link href={`/composer/${profile._id + '/song'}`}>Xem tất cả</Link>
                                 )}
                             </div>
                         </div>
@@ -210,7 +210,7 @@ function ComposerPage({ isComposer, profile }: IComposer) {
                         <div className={cx('list')}>
                             {profile.albumsReference?.map((item, key) => {
                                 return (
-                                    <Link className={cx('item')} href={'/composer/album/' + item._id} key={key}>
+                                    <Link className={cx('item')} href={'/composer/' + item._id + '/album'} key={key}>
                                         {item.thumbnailUrl && (
                                             <Image src={item.thumbnailUrl} alt="" width={500} height={500} />
                                         )}

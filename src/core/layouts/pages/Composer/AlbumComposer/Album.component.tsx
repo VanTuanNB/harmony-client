@@ -18,23 +18,22 @@ import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoadin
 import { formatDate } from '@/utils/format.util';
 import { faEdit, faPen, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { memo, useCallback, useState } from 'react';
 import UpdateAlbum from '../../../components/PopUp/UpdateAlbum/UpdateAlbum.component';
 import style from './AlbumComposer.module.scss';
 import PlayingAlbumComponent from './PlayAlbum.component';
-import Tippy from '@tippyjs/react';
 
 const cx = classNames.bind(style);
 
 function AlbumComposerPage() {
-    const path = usePathname();
-    const resurt = path.split('/album/')[1];
+    const { slug } = useParams();
     const [popupUploadAlbum, setPopupUploadAlbum] = useState(false);
     const [popupUploadSong, setPopupUploadSong] = useState(false);
-    const { data, isLoading, refetch } = useGetServiceAlbumQuery(resurt);
+    const { data, isLoading, refetch } = useGetServiceAlbumQuery(slug);
     const dispatch = useAppDispatch();
 
     const handlePopupAlbum = useCallback((isUpdated: boolean) => {

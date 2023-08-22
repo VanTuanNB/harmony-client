@@ -21,7 +21,7 @@ import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { memo, useCallback, useState } from 'react';
 import 'tippy.js/dist/tippy.css';
 import style from './SongComposer.module.scss';
@@ -29,9 +29,8 @@ import style from './SongComposer.module.scss';
 const cx = classNames.bind(style);
 
 function SongComposerPage() {
-    const path = usePathname();
-    const userId = path.split('/composer/song/')[1];
-    const { data, isLoading, refetch } = useGetServiceProfileQuery(userId);
+    const { slug } = useParams();
+    const { data, isLoading, refetch } = useGetServiceProfileQuery(slug);
     const [popupUploadSong, setPopupUploadSong] = useState(false);
     const [editingSongId, setEditingSongId] = useState<string | null>();
     const dispatch = useAppDispatch();
