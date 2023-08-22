@@ -3,6 +3,8 @@ import { ISong } from '@/core/common/interfaces/collection.interface';
 import { ISongStore } from '@/core/common/interfaces/songStore.interface';
 import { selectSongReducer } from '@/core/redux/features/song/song.slice';
 import { useAppSelector } from '@/core/redux/hook.redux';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -32,17 +34,28 @@ function MediaItem({ _id, thumbnailUrl, title, performers, active = false, onCli
                                 <LoadingSong width={4} subHeight={8} primaryHeight={14} />
                             </div>
                         )}
+                        {store.playing.state === EStateCurrentSong.PLAYING && store.playing.currentSong._id === _id && (
+                            <div className={cx('loading-spinner')}>
+                                <i className={cx('icon-playing')}></i>
+                            </div>
+                        )}
+                        {store.playing.state === EStateCurrentSong.PAUSED && store.playing.currentSong._id === _id && (
+                            <div className={cx('loading-spinner')}>
+                                <FontAwesomeIcon icon={faPlay} className={cx('icon-pause')} />
+                            </div>
+                        )}
                     </div>
                     <div className={cx('info')}>
                         <h1 className={cx('title')}>{title}</h1>
                         <h3 className={cx('performers')}>
-                            {performers.map((item, index) => {
-                                return (
-                                    <Link key={index} href={'/' + item.nickname} className={cx('link-channel')}>
-                                        {item.name}
-                                    </Link>
-                                );
-                            })}
+                            {performers &&
+                                performers.map((item, index) => {
+                                    return (
+                                        <Link key={index} href={'/' + item.nickname} className={cx('link-channel')}>
+                                            {item.name}
+                                        </Link>
+                                    );
+                                })}
                         </h3>
                     </div>
                 </div>

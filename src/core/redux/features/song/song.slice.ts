@@ -48,6 +48,9 @@ export const songSlice = createSlice({
         pushSongIntoPrevPlayListAction: (state, action: PayloadAction<ISong>) => {
             state[EScopeSongStore.PLAYLIST][EScopeSongStore.PREV_SONGS].push(action.payload);
         },
+        replaceIntoPrevPlayListAction: (state, action: PayloadAction<ISong[]>) => {
+            state[EScopeSongStore.PLAYLIST][EScopeSongStore.PREV_SONGS] = action.payload;
+        },
 
         // playing store
         startPlayingAction: (state, action: PayloadAction<ISong>) => {
@@ -63,6 +66,9 @@ export const songSlice = createSlice({
         },
 
         // nextSong
+        replaceNewListNextSong: (state, action: PayloadAction<ISong[]>) => {
+            state[EScopeSongStore.PLAYLIST][EScopeSongStore.NEXT_SONGS] = action.payload;
+        },
         unShiftListNextSong: (state, action: PayloadAction<ISong>) => {
             state[EScopeSongStore.PLAYLIST][EScopeSongStore.NEXT_SONGS].unshift(action.payload);
         },
@@ -85,6 +91,8 @@ export const {
     shiftListNextSong,
     unShiftListNextSong,
     popSongListPrevSong,
+    replaceNewListNextSong,
+    replaceIntoPrevPlayListAction,
 } = songSlice.actions;
 export const selectSongReducer = (state: RootState) => state[ESelectReducer.SONG];
 export default songSlice;

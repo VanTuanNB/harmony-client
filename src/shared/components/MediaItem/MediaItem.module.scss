@@ -44,6 +44,15 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
+
+                    & .icon-playing {
+                        width: 18px;
+                        height: 18px;
+                        background-size: 18px;
+                        background-repeat: no-repeat;
+                        background-position: 50%;
+                        background-image: url(/images/icon-playing.gif);
+                    }
                 }
             }
 
