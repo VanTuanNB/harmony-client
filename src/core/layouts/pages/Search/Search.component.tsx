@@ -1,4 +1,5 @@
 'use client';
+import { ELocalStorageKey } from '@/core/common/constants/common.constant';
 import { ISong } from '@/core/common/interfaces/collection.interface';
 import { ISongStore } from '@/core/common/interfaces/songStore.interface';
 import {
@@ -12,16 +13,19 @@ import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import { useGetServiceSearchQuery } from '@/core/redux/services/song.service';
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
 import MediaItemInPage from '@/shared/components/MediaItemInPage/MediaItemInPage.component';
+import { LocalStorageSide } from '@/utils/clientStore.util';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { memo } from 'react';
 import styles from './Search.module.scss';
 
 const cx = classNames.bind(styles);
-
+const LocalStorageInstance = new LocalStorageSide();
 function SearchPage() {
+    const loginInfo = LocalStorageInstance.getStore(ELocalStorageKey.PROFILE);
+    const router = useRouter();
     const searchParams = useSearchParams();
     const search = searchParams.get('search_query');
     const { data, error, isLoading } = useGetServiceSearchQuery(search || '');
@@ -29,6 +33,10 @@ function SearchPage() {
 
     const store: ISongStore = useAppSelector(selectSongReducer);
     const onClick = (song: ISong, index: number) => {
+        if (!loginInfo) {
+            router.replace('/auth/login');
+            return;
+        }
         if (index > 0) {
             const prevSongs =
                 (data &&

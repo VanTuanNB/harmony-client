@@ -14,15 +14,15 @@ const cx = classNames.bind(styles);
 
 export default function PlaylistSymlinkComponent() {
     const store = useAppSelector(selectUserReducer);
-    const [playlist, setPlayList] = useState<IPlaylist[]>();
+    const [playlist, setPlayList] = useState<IPlaylist[]>([]);
     const { data } = useGetServiceProfileQuery(store.profile?._id || '');
     useEffect(() => {
         if (data) {
-            setPlayList(data.data.playlistReference);
+            setPlayList(data.data.playlistReference ?? []);
         }
     }, [data]);
     return (
-        <>
+        <div className={cx('right-slide')}>
             <div className={cx('main-container')}>
                 <div className={cx('main-header')}>
                     <div className={cx('header-menu')}>
@@ -31,16 +31,13 @@ export default function PlaylistSymlinkComponent() {
                         </a>
                     </div>
                 </div>
-                <div className={cx('search-sidebar')}>
-                    <div className={cx('container')}>
-                        <input placeholder="Type to search..." className={cx('input')} name="text" type="text" />
-                        <div>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} className={cx('icon')} />
-                        </div>
+            </div>
+            <div className={cx('search-sidebar')}>
+                <div className={cx('container')}>
+                    <input placeholder="Type to search..." className={cx('input')} name="text" type="text" />
+                    <div>
+                        <FontAwesomeIcon icon={faMagnifyingGlass} className={cx('icon')} />
                     </div>
-                    <button className={cx('btn-add-playlist')}>
-                        <FontAwesomeIcon icon={faPlus} className={cx('icon1')} />
-                    </button>
                 </div>
                 <FontAwesomeIcon icon={faPlus} className={cx('icon1')} />
             </div>
@@ -66,6 +63,6 @@ export default function PlaylistSymlinkComponent() {
                     )}
                 </div>
             </div>
-        </>
+        </div>
     );
 }
