@@ -27,6 +27,7 @@
             .title {
                 height: 50px;
             }
+
             .close {
                 width: 30px;
                 height: 30px;
@@ -49,11 +50,18 @@
                     width: 150px;
                     text-align: center;
                     position: relative;
+
                     img {
                         width: 150px;
                         height: 150px;
                         border-radius: 100%;
                         object-fit: cover;
+                    }
+
+                    .error-message {
+                        color: red;
+                        margin-top: 8px;
+                        font-size: 12px;
                     }
 
                     .title-upload {
@@ -74,10 +82,12 @@
                         transition: 0.3s;
                         z-index: 3;
                     }
+
                     input[type='file'] {
                         opacity: 0%;
                     }
                 }
+
                 .img-upload:hover {
                     .title-upload {
                         opacity: 100%;
@@ -90,9 +100,11 @@
                         background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.3);
                     }
                 }
+
                 .form {
                     width: 100%;
                     margin-top: 40px;
+
                     input {
                         height: 40px;
                         width: 95%;
@@ -102,6 +114,7 @@
                         color: var(--theme-mode-color);
                         background: var(--theme-filter);
                     }
+
                     button {
                         position: absolute;
                         margin-top: 50px;
@@ -115,6 +128,7 @@
                     }
                 }
             }
+
             p {
                 width: 100%;
                 font-size: 1.2rem;

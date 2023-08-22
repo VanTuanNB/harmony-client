@@ -28,7 +28,7 @@ function MediaItem({ _id, thumbnailUrl, title, performers, active = false, onCli
             <div className={cx('media')} onClick={() => onClick(_id)}>
                 <div className={cx('box-left')}>
                     <div className={cx('thumbnail')}>
-                        <Image src={thumbnailUrl} alt="fallback img" height={40} width={40} className={cx('img')} />
+                        <Image src={thumbnailUrl} alt="fallback img" height={500} width={500} className={cx('img')} />
                         {store.playing.state === EStateCurrentSong.LOADING && store.playing.currentSong._id === _id && (
                             <div className={cx('loading-spinner')}>
                                 <LoadingSong width={4} subHeight={8} primaryHeight={14} />
@@ -48,14 +48,14 @@ function MediaItem({ _id, thumbnailUrl, title, performers, active = false, onCli
                     <div className={cx('info')}>
                         <h1 className={cx('title')}>{title}</h1>
                         <h3 className={cx('performers')}>
-                            {performers &&
-                                performers.map((item, index) => {
-                                    return (
-                                        <Link key={index} href={'/' + item.nickname} className={cx('link-channel')}>
-                                            {item.name}
-                                        </Link>
-                                    );
-                                })}
+                            {performers.map((item, index) => {
+                                return (
+                                    <Link key={index} href={'/composer/@' + item.nickname} className={cx('link-channel')}>
+                                        {item.name}
+                                    </Link>
+                                );
+                            })}
+
                         </h3>
                     </div>
                 </div>

@@ -1,24 +1,17 @@
-import { IAlbum, ISong } from '@/core/common/interfaces/collection.interface';
-import { usePutServiceAlbumMutation } from '@/core/redux/services/album.service';
-import { useGetServiceProfileQuery } from '@/core/redux/services/user.service';
+import { ISong, IUser } from '@/core/common/interfaces/collection.interface';
+import { useGetServiceGenreQuery } from '@/core/redux/services/genre.service';
+import { useUploadThumnailMutation } from '@/core/redux/services/s3.service';
+import { usePutUpdateSongMutation } from '@/core/redux/services/song.service';
+import { useGetServiceUserRoleComposerQuery } from '@/core/redux/services/user.service';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
-import { memo, useState } from 'react';
+import Image from 'next/image';
+import { memo, useRef, useState } from 'react';
 import Select, { StylesConfig } from 'react-select';
 import style from './UpdateSong.module.scss';
-
 const cx = classNames.bind(style);
 
-interface IState {
-    dataProfile: IAlbum | undefined;
-    songAlbum: ISong[] | undefined;
-    isUpdated: (isReload: boolean) => void;
-}
-type Song = {
-    label: string;
-    value: string;
-};
 const customStyles: StylesConfig = {
     control: (provided) => ({
         ...provided,
@@ -29,73 +22,247 @@ const customStyles: StylesConfig = {
         paddingLeft: '10px',
         color: 'var(--theme-mode-color)',
         background: 'var(--theme-filter)',
-        marginBottom: '15px',
+        marginBottom: '1px',
     }),
 };
-function UpdateSongComponent({ isUpdated, dataProfile, songAlbum }: IState) {
-    const [listSong, setListSong] = useState<string[]>([]);
-    const { data } = useGetServiceProfileQuery(dataProfile?.userReference._id || '');
-    const [putServiceAlbum] = usePutServiceAlbumMutation();
 
-    const handleChangeSong = (ars: any) => {
-        setListSong(() => {
-            return ars.map((option: any) => option.value);
+interface IState {
+    dataProfile: IUser;
+    songItem: ISong;
+    isUpdated: (value: boolean) => void;
+}
+const validImageExtensions = ['jpg', 'jpeg', 'png'];
+function UpdateSong({ dataProfile, isUpdated, songItem }: IState) {
+    const [genresReference, setListGenreId] = useState<string[]>([]);
+    const [performers, setListPerformers] = useState<string[]>([]);
+    const [albumReference, setListAlbumReference] = useState<string[]>([]);
+    const [title, setTitle] = useState<string>(songItem.title);
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
+    const [invalidImageError, setInvalidImageError] = useState<string | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [uploadThumnail] = useUploadThumnailMutation();
+    const [putServiceSong] = usePutUpdateSongMutation();
+    const aipGetGenre = useGetServiceGenreQuery();
+    const aipGetUserComposer = useGetServiceUserRoleComposerQuery();
+
+    const handleChangePerformers = (selectedOptions: any) => {
+        const newInputPerformers = [...performers];
+
+        selectedOptions.forEach((item: any) => {
+            if (!newInputPerformers.includes(item.value)) {
+                newInputPerformers.push(item.value);
+            }
         });
+        setListPerformers(newInputPerformers);
     };
 
-    const inputSongUpdate = data?.data.songsReference?.map((song) => ({
-        label: song.title,
-        value: song._id,
-    }));
-    const inputSongAlbum = songAlbum?.map((song) => ({
-        label: song.title,
-        value: song._id,
-    }));
-    const inputSong = (inputSongUpdate: Song[], inputSongAlbum: Song[]): Song[] => {
-        if (inputSongAlbum.length === 0) {
-            return inputSongUpdate;
+    const handleChangeGenre = (selectedOptions: any) => {
+        const newInputGenre = [...genresReference];
+
+        selectedOptions.forEach((item: any) => {
+            if (!newInputGenre.includes(item.value)) {
+                newInputGenre.push(item.value);
+            }
+        });
+        setListGenreId(newInputGenre);
+    };
+
+    const handleChangeAlbums = (selectedOptions: any) => {
+        const newInputAlbum = [...albumReference];
+
+        selectedOptions.forEach((item: any) => {
+            if (!newInputAlbum.includes(item.value)) {
+                newInputAlbum.push(item.value);
+            }
+        });
+        setListAlbumReference(newInputAlbum);
+    };
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+            const fileExtension = file.name.split('.').pop()?.toLowerCase();
+    
+            if (!fileExtension || !validImageExtensions.includes(fileExtension)) {
+                setInvalidImageError('File tải lên không phải là hình ảnh');
+                setImagePreview(null); 
+                return;
+            }
+            setInvalidImageError(null);
+            setImagePreview(URL.createObjectURL(file));
         }
-        const albumValues = new Set(inputSongAlbum.map((song) => song.value));
-        return inputSongUpdate.filter((song) => !albumValues.has(song.value));
     };
-    const result = inputSong(inputSongUpdate ?? [], inputSongAlbum ?? []);
-    const submit = (e: any) => {
+    
+    const handleInputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.target.value);
+    };
+
+    const inputPerformers =
+        aipGetUserComposer.data?.data?.map((user) => ({
+            label: user.name,
+            value: user._id,
+        })) ?? [];
+    const inputGenre =
+        aipGetGenre.data?.data?.map((item) => ({
+            label: item.title,
+            value: item._id,
+        })) ?? [];
+    const inputAlbum =
+        dataProfile.albumsReference?.map((user) => ({
+            label: user.title,
+            value: user._id,
+        })) ?? [];
+    const inputGenreSong = songItem.genresReference.map((item) => ({
+        label: item.title,
+        value: item._id,
+    }));
+    const inputPerformerSong = songItem.performers.map((user) => ({
+        label: user.name,
+        value: user._id,
+    }));
+    const inputAlbumSong = songItem.albumReference?.map((item) => ({
+        label: item.title,
+        value: item._id,
+    }));
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const newSong = [...listSong, ...(inputSongAlbum ?? []).map((song) => song.value)];
-        putServiceAlbum({
-            _id: dataProfile?._id,
-            listSong: newSong as any,
-        });
-        isUpdated(true);
+        const file = fileInputRef.current?.files?.[0];
+        const newPerformers = performers.length > 0 ? performers : inputPerformerSong?.map((item) => item.value);
+        const newGenres = genresReference.length > 0 ? genresReference : inputGenreSong?.map((item) => item.value);
+        const newAlbum = albumReference.length > 0 ? albumReference : inputAlbumSong?.map((item) => item.value);
+        if (file ) {
+            const fileExtension = file.name.split('.').pop();
+            const newValue = {
+                _id: songItem._id,
+                title: title,
+                genresReference: newGenres,
+                albumReference: newAlbum,
+                performers: newPerformers,
+                contentType: fileExtension,
+                isNewUploadAvatar: true,
+            };
+            putServiceSong(newValue as any).then((data: any) => {
+                uploadThumnail({ privateUrl: data.data.data.data.privateUrl, file });
+            });
+            isUpdated(true);
+        } else {
+            const newValue = {
+                _id: songItem._id,
+                title: title,
+                file: file,
+                genresReference: newGenres,
+                albumReference: newAlbum,
+                performers: newPerformers,
+                isNewUploadAvatar: false,
+            };
+            putServiceSong(newValue as any);
+            isUpdated(true);
+        }
     };
+
     return (
         <>
             <div className={cx('pop-up')}>
                 <div className={cx('controller')}>
                     <div className={cx('form-pop-up')}>
                         <div className={cx('title')}>
-                            <h2>Thêm bài hát của bạn vào Album</h2>
+                            <h2>Cập nhật bài hát</h2>
                             <button onClick={() => isUpdated(true)}>
                                 <FontAwesomeIcon icon={faClose} className={cx('close')} />
                             </button>
                         </div>
                         <div className={cx('profile')}>
-                            <form onSubmit={submit} className={cx('form')}>
+                            <form className={cx('form')} onSubmit={handleSubmit}>
+                                <div className={cx('img-upload')}>
+                                    {imagePreview ? (
+                                        <Image
+                                            className={cx('img')}
+                                            src={imagePreview}
+                                            width={100}
+                                            height={100}
+                                            alt=""
+                                        />
+                                    ) : (
+                                        <Image
+                                            className={cx('img')}
+                                            src={
+                                                songItem && songItem.thumbnailUrl
+                                                    ? `${songItem.thumbnailUrl}?${new Date().getTime()}`
+                                                    : '/images/fallback-thumbnail-user.jpg'
+                                            }
+                                            width={500}
+                                            height={500}
+                                            alt=""
+                                            loading="lazy"
+                                        />
+                                    )}
+
+                                    <label htmlFor="file" className={cx('title-upload')}>
+                                        Thêm ảnh
+                                    </label>
+                                    {invalidImageError && <div className={cx('error-message')}>{invalidImageError}</div>}
+
+                                    <input
+                                        type="file"
+                                        name="file"
+                                        id="file"
+                                        onChange={handleImageChange}
+                                        ref={fileInputRef}
+                                    />
+                                </div>
+                                <input
+                                    type="text"
+                                    placeholder="Nhập tên bài hát mới"
+                                    value={songItem.title}
+                                    onChange={handleInputTitle}
+                                />
+
                                 <Select
                                     isMulti
+                                    placeholder="Chọn ca sỹ"
                                     required
-                                    onChange={handleChangeSong}
-                                    options={result}
+                                    onChange={handleChangePerformers}
+                                    options={inputPerformers}
+                                    defaultValue={inputPerformerSong}
                                     styles={customStyles}
                                     className={cx('select-input')}
                                 />
-                                <button type="submit">Thêm bài hát vào album</button>
+
+                                <Select
+                                    isMulti
+                                    required
+                                    placeholder="Chọn thể loại cho bài hát"
+                                    onChange={handleChangeGenre}
+                                    options={inputGenre}
+                                    defaultValue={inputGenreSong}
+                                    styles={customStyles}
+                                    className={cx('select-input')}
+                                />
+
+                                <Select
+                                    isMulti
+                                    required
+                                    placeholder="Chọn Album cho bài hát"
+                                    onChange={handleChangeAlbums}
+                                    options={inputAlbum}
+                                    defaultValue={inputAlbumSong}
+                                    styles={customStyles}
+                                    className={cx('select-input')}
+                                />
+
+                                <button type="submit">Cập nhập</button>
                             </form>
                         </div>
+                        <p>
+                            Bằng cách tiếp tục, bạn đồng ý cấp cho Harmony quyền truy cập vào hình ảnh bạn chọn tải lên.
+                            Hãy chắc chắn rằng bạn có quyền tải lên hình ảnh.
+                        </p>
                     </div>
                 </div>
             </div>
         </>
     );
 }
-export default memo(UpdateSongComponent);
+
+export default memo(UpdateSong);

@@ -47,7 +47,14 @@ export const GoogleIcon = ({ width = '100%', height = '100%', className, fill = 
 );
 
 export const UploadIcon = ({ width = '100%', height = '100%', className }: IIconPropsComponent) => (
-    <svg width={width} height={height} className={className} fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        width={width}
+        height={height}
+        className={className}
+        fill="none"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+    >
         <path
             d="M12.5 17L12.5 4M12.5 4L18 8.78947M12.5 4L7 8.78947"
             stroke="#909090"
@@ -318,7 +325,14 @@ export const MainLogo = ({
 );
 
 export const AlbumIcon = ({ width = '100', height = '100', className }: IIconPropsComponent) => (
-    <svg width={width} height={height} viewBox="0 0 24 24" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        width={width}
+        height={height}
+        viewBox="0 0 24 24"
+        className={className}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
         <path
             d="M4.00033 7H20.0003M5.00033 4H19.0003M6.89629 20H17.1044C18.1275 20 18.639 20 19.0447 19.8084C19.402 19.6396 19.7012 19.3687 19.9047 19.03C20.1358 18.6454 20.1867 18.1364 20.2885 17.1184L20.7365 12.6388C20.8279 11.7244 20.8736 11.2672 20.7236 10.9138C20.5918 10.6034 20.3593 10.3465 20.0635 10.1844C19.7268 10 19.2673 10 18.3484 10H5.6523C4.73336 10 4.27389 10 3.93718 10.1844C3.64141 10.3465 3.40887 10.6034 3.27708 10.9138C3.12706 11.2672 3.17278 11.7244 3.26422 12.6388L3.71218 17.1184C3.81398 18.1364 3.86488 18.6454 4.09593 19.03C4.29943 19.3687 4.59872 19.6396 4.95601 19.8084C5.36167 20 5.87321 20 6.89629 20ZM15.0003 15C15.0003 16.1046 13.6572 17 12.0003 17C10.3435 17 9.00033 16.1046 9.00033 15C9.00033 13.8954 10.3435 13 12.0003 13C13.6572 13 15.0003 13.8954 15.0003 15Z"
             stroke="#000000"
@@ -330,7 +344,14 @@ export const AlbumIcon = ({ width = '100', height = '100', className }: IIconPro
 );
 
 export const PlayListIcon = ({ width = '100', height = '100', className }: IIconPropsComponent) => (
-    <svg width={width} height={height} viewBox="0 0 24 24" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        width={width}
+        height={height}
+        viewBox="0 0 24 24"
+        className={className}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
         <path d="M11 14L3 14" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" />
         <path d="M11 18H3" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" />
         <path
@@ -344,7 +365,14 @@ export const PlayListIcon = ({ width = '100', height = '100', className }: IIcon
 );
 
 export const HistoryIcon = ({ width = '100', height = '100', className }: IIconPropsComponent) => (
-    <svg width={width} height={height} fill="none" viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
+    <svg
+        width={width}
+        height={height}
+        fill="none"
+        viewBox="0 0 24 24"
+        className={className}
+        xmlns="http://www.w3.org/2000/svg"
+    >
         <path
             d="M2 12C2 17.5228 6.47715 22 12 22C13.8214 22 15.5291 21.513 17 20.6622M12 2C17.5228 2 22 6.47715 22 12C22 13.8214 21.513 15.5291 20.6622 17"
             stroke="#1C274C"
@@ -362,7 +390,14 @@ export const HistoryIcon = ({ width = '100', height = '100', className }: IIconP
     </svg>
 );
 export const ListSongIcon = ({ width = '100', height = '100', className }: IIconPropsComponent) => (
-    <svg width={width} height={height} viewBox="0 0 24 24" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        width={width}
+        height={height}
+        viewBox="0 0 24 24"
+        className={className}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+    >
         <path d="M8 14H3" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" />
         <path d="M12 9L3 9" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round" />
         <path
@@ -386,7 +421,7 @@ export const HeartIcon1 = ({ width = '100', height = '100', className }: IIconPr
     </svg>
 );
 
-export const HeartIcon3 = ({  className }: IIconPropsComponent) => (
+export const HeartIcon3 = ({ className }: IIconPropsComponent) => (
     <svg className={className} width="100" height="100" xmlns="http://www.w3.org/2000/svg">
         <polygon points="10,10 20,20"></polygon>
         <polygon points="10,50 20,50"></polygon>
@@ -399,5 +434,83 @@ export const HeartIcon3 = ({  className }: IIconPropsComponent) => (
 export const HeartIcon2 = ({ className }: IIconPropsComponent) => (
     <svg viewBox="0 0 24 24" className={className} xmlns="http://www.w3.org/2000/svg">
         <path d="M17.5,1.917a6.4,6.4,0,0,0-5.5,3.3,6.4,6.4,0,0,0-5.5-3.3A6.8,6.8,0,0,0,0,8.967c0,4.547,4.786,9.513,8.8,12.88a4.974,4.974,0,0,0,6.4,0C19.214,18.48,24,13.514,24,8.967A6.8,6.8,0,0,0,17.5,1.917Z"></path>
+    </svg>
+);
+
+export const SearchIcon = ({className}: IIconPropsComponent) => (
+    <svg
+        width="800px"
+        height="800px"
+        viewBox="0 0 48 48"
+        enable-background="new 0 0 48 48"
+        id="_x3C_Layer_x3E_"
+        version="1.1"
+        xmlSpace="preserve"
+        className={className}
+        xmlns="http://www.w3.org/2000/svg"
+        xmlnsXlink="http://www.w3.org/1999/xlink"
+    >
+        <g id="analysis_x2C__analytics_x2C__magnifier">
+            <g>
+                <g>
+                    <rect
+                        fill="#B3E5FC"
+                        height="6"
+                        id="XMLID_7_"
+                        transform="matrix(0.707 -0.7072 0.7072 0.707 -13.014 31.4223)"
+                        width="4"
+                        x="29.418"
+                        y="28.418"
+                    />
+                    <path
+                        d="M32.126,35.661l-4.95-4.95l3.535-3.536l4.95,4.95L32.126,35.661z M28.59,30.711l3.536,3.536l2.121-2.122     l-3.536-3.536L28.59,30.711z"
+                        fill="#0277BD"
+                    />
+                </g>
+                <g>
+                    <path
+                        d="M45.207,42.379l-2.828,2.828c-0.391,0.391-1.023,0.391-1.414,0l-9.899-9.899     c-0.391-0.391-0.391-1.023,0-1.414l2.828-2.829c0.391-0.39,1.023-0.39,1.414,0l9.899,9.9     C45.598,41.355,45.598,41.988,45.207,42.379z"
+                        fill="#8C9EFF"
+                        id="XMLID_6_"
+                    />
+                    <path
+                        d="M41.672,45.999c-0.384,0-0.769-0.146-1.061-0.438l-9.899-9.899c-0.585-0.585-0.585-1.536,0-2.121     l2.828-2.829c0.584-0.584,1.535-0.583,2.121,0l9.899,9.9c0.585,0.585,0.585,1.537,0,2.122l-2.828,2.828     C42.44,45.853,42.056,45.999,41.672,45.999z M34.601,31.272c-0.128,0-0.256,0.049-0.354,0.146l-2.828,2.829     c-0.195,0.195-0.195,0.512,0,0.707l9.899,9.899c0.195,0.195,0.512,0.195,0.707,0l2.828-2.828c0.195-0.195,0.195-0.512,0-0.708     l-9.899-9.9C34.856,31.321,34.729,31.272,34.601,31.272z"
+                        fill="#0277BD"
+                    />
+                </g>
+                <path
+                    d="M43.602,41.273c-0.128,0-0.256-0.049-0.354-0.146l-7.778-7.778c-0.195-0.195-0.195-0.512,0-0.707    s0.512-0.195,0.707,0l7.778,7.778c0.195,0.195,0.195,0.512,0,0.707C43.857,41.224,43.729,41.273,43.602,41.273z"
+                    fill="#E8EAF6"
+                />
+            </g>
+
+            <g>
+                <circle cx="18.5" cy="18.5" fill="#E1F5FE" id="XMLID_1_" r="16" />
+
+                <path
+                    d="M18.5,35C9.402,35,2,27.598,2,18.5S9.402,2,18.5,2S35,9.402,35,18.5c0,3.703-1.198,7.202-3.466,10.119    c-0.171,0.218-0.485,0.256-0.701,0.087c-0.218-0.169-0.258-0.483-0.088-0.701C32.874,25.266,34,21.979,34,18.5    C34,9.953,27.047,3,18.5,3S3,9.953,3,18.5S9.953,34,18.5,34c4.027,0,7.844-1.538,10.745-4.33c0.198-0.19,0.515-0.186,0.707,0.014    c0.191,0.199,0.186,0.516-0.014,0.707C26.85,33.363,22.788,35,18.5,35z"
+                    fill="#0277BD"
+                />
+
+                <g>
+                    <circle cx="18.5" cy="18.5" fill="#B3E5FC" id="XMLID_9_" r="13.5" />
+
+                    <path
+                        d="M18.5,32.5c-7.72,0-14-6.28-14-14s6.28-14,14-14s14,6.28,14,14S26.22,32.5,18.5,32.5z M18.5,5.5     c-7.168,0-13,5.832-13,13s5.832,13,13,13s13-5.832,13-13S25.668,5.5,18.5,5.5z"
+                        fill="#FFFFFF"
+                    />
+                </g>
+
+                <path
+                    d="M17.627,8.536c-0.258,0-0.477-0.198-0.497-0.459c-0.022-0.275,0.183-0.517,0.457-0.539    C17.889,7.513,18.192,7.5,18.5,7.5C18.776,7.5,19,7.724,19,8s-0.224,0.5-0.5,0.5c-0.28,0-0.557,0.012-0.831,0.034    C17.654,8.535,17.641,8.536,17.627,8.536z"
+                    fill="#FFFFFF"
+                />
+
+                <path
+                    d="M8,19c-0.276,0-0.5-0.224-0.5-0.5c0-4.645,2.938-8.811,7.313-10.367c0.261-0.094,0.547,0.043,0.639,0.304    c0.093,0.26-0.043,0.546-0.303,0.639C11.172,10.49,8.5,14.277,8.5,18.5C8.5,18.776,8.276,19,8,19z"
+                    fill="#FFFFFF"
+                />
+            </g>
+        </g>
     </svg>
 );

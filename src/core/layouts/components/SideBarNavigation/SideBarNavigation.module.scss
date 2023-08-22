@@ -27,11 +27,13 @@
                 position: absolute;
             }
         }
+
         hr {
             width: 90%;
             margin: auto;
             border-bottom: 1px solid rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
         }
+
         .navigation {
             width: 100%;
             margin: auto;
@@ -46,20 +48,24 @@
                 padding: 10px;
                 border-radius: 10px;
             }
+
             li:hover {
                 cursor: pointer;
                 background-color: rgba($color: var(--theme-mode-color-rgb), $alpha: 0.2);
             }
+
             .icon {
                 padding-right: 10px;
                 color: var(--theme-mode-color);
             }
+
             span {
                 color: var(--theme-mode-color);
             }
         }
+
         #navigation-end {
-            height: 59.3%;
+            height: 100%;
         }
     }
 }

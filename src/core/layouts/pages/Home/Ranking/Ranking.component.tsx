@@ -36,7 +36,7 @@ function RankingComponent({ onClick }: IProps) {
                                 ))}
                             </div>
                             <div className={cx('rankingdate-main')}>
-                                <div className={cx('ranking')}>
+                                <div className={cx('ranking', 'rank'+index)}>
                                     <span>#{index + 1}</span>
                                 </div>
                                 <div className={cx('date')}>

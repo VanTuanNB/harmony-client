@@ -1,36 +1,56 @@
 'use client';
-import { ISong } from '@/core/common/interfaces/collection.interface';
+import { ISong, IUser } from '@/core/common/interfaces/collection.interface';
 import { ISongStore } from '@/core/common/interfaces/songStore.interface';
 import {
-    pushSongIntoPrevPlayListAction,
+    removeSongFromSuggestListAction,
+    replaceIntoPrevPlayListAction,
+    replaceNewListNextSong,
     selectSongReducer,
     startPlayingAction,
 } from '@/core/redux/features/song/song.slice';
 import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import { useGetServiceProfileQuery } from '@/core/redux/services/user.service';
-import HeartComponent from '@/shared/components/Heart/Heart.component';
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
-import { faClock } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { formatDate } from '@/utils/format.util';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { memo } from 'react';
+import { useParams } from 'next/navigation';
+import { memo, useEffect, useState } from 'react';
 import style from './SongUser.module.scss';
 
 const cx = classNames.bind(style);
 
 function SongUserPage() {
-    const path = usePathname();
-    const userId = path.split('/user/song/')[1];
-    const { data, isLoading, isError } = useGetServiceProfileQuery(userId);
+    const { slug } = useParams();
+    const [profile, setProfile] = useState<IUser>();
+    const { data, isLoading, isError } = useGetServiceProfileQuery(slug);
     const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        if (data) {
+            setProfile(data.data);
+        }
+    }, [data]);
+
     const store: ISongStore = useAppSelector(selectSongReducer);
-    const onClick = (_id: string) => {
-        const songSelected = store.playlist.suggests.find((song) => song._id === _id);
-        dispatch(pushSongIntoPrevPlayListAction(songSelected as any));
-        dispatch(startPlayingAction(songSelected as ISong));
+    const onClick = (song: ISong, index: number) => {
+        if (index > 0) {
+            const prevSongs =
+                (profile &&
+                    profile.songsReference &&
+                    profile.songsReference.filter((item: ISong, itemIndex: number) => itemIndex < index)) ||
+                [];
+            dispatch(replaceIntoPrevPlayListAction(prevSongs));
+        }
+        const nextSongs =
+            (profile &&
+                profile.songsReference &&
+                profile.songsReference.filter((item: ISong, itemIndex: number) => itemIndex > index)) ||
+            [];
+        dispatch(replaceNewListNextSong(nextSongs));
+        dispatch(removeSongFromSuggestListAction(song._id));
+        dispatch(startPlayingAction(song));
     };
     return (
         <div className={cx('main-album')}>
@@ -63,15 +83,15 @@ function SongUserPage() {
                     <div id={cx('song')}>Bài hát</div>
                     <div id={cx('album')}>Album</div>
                     <div id={cx('date')}>Ngày phát hành</div>
-                    <div id={cx('lenght')}>
-                        <FontAwesomeIcon className={cx('icon-clock')} icon={faClock} />
-                    </div>
                 </div>
                 <div className={cx('list-songs')}>
                     {data?.data.songsReference?.map((song, index) => (
-                        <div key={song._id} className={cx('single-song')}>
+                        <div
+                            key={song._id}
+                            className={cx('single-song', store.playing.currentSong._id === song._id && 'active')}
+                        >
                             <div id={cx('id')}>{index + 1}</div>
-                            <div onClick={() => onClick(song._id)} id={cx('song')}>
+                            <div id={cx('song')} onClick={() => onClick(song, index)}>
                                 <Image className={cx('img')} src={song.thumbnailUrl} width={40} height={40} alt="" />
                                 <div id={cx('song-title')}>
                                     <div id={cx('title')}>{song.title}</div>
@@ -80,16 +100,12 @@ function SongUserPage() {
                             </div>
                             <div id={cx('album')}>
                                 {song.albumReference?.map((album, index) => (
-                                    <Link href={'/user/album/' + album._id} key={index}>
+                                    <Link href={'/album/' + album._id} key={index}>
                                         {album.title}
                                     </Link>
                                 ))}
                             </div>
-                            <div id={cx('date')}>19/12/2020</div>
-                            <div id={cx('lenght')}>
-                                <HeartComponent />
-                                <span id={cx('lenght')}>3:40</span>
-                            </div>
+                            <div id={cx('date')}>{formatDate(song.publish)}</div>
                         </div>
                     ))}
                 </div>

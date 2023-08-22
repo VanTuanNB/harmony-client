@@ -1,6 +1,6 @@
 'use client';
 import { ELocalStorageKey, EStateCurrentSong, ROLE_CUSTOMER } from '@/core/common/constants/common.constant';
-import { ISong, IUser } from '@/core/common/interfaces/collection.interface';
+import { IAlbum, ISong, IUser } from '@/core/common/interfaces/collection.interface';
 import { ISongStore } from '@/core/common/interfaces/songStore.interface';
 import {
     removeSongFromSuggestListAction,
@@ -20,6 +20,7 @@ import { LocalStorageSide } from '@/utils/clientStore.util';
 import { formatDate } from '@/utils/format.util';
 import { faCirclePlay, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -103,29 +104,29 @@ function PerformerPage() {
                                 <h2>Bài hát phổ biến</h2>
                             </div>
                             <div className={cx('btn')}>
-                                <Link href={'/user/song/' + profile._id}>Xem tất cả</Link>
+                                <Link href={'/user/' + profile._id + '/song'}>Xem tất cả</Link>
                             </div>
                         </div>
                         <div className={cx('list-songs')}>
-                            {profile.songsReference?.map((song, index) => (
+                            {profile.songsReference?.slice(0, 4)?.map((item, index) => (
                                 <div
                                     key={index}
                                     className={cx(
                                         'single-song',
-                                        store.playing.currentSong._id === song._id && 'active',
+                                        store.playing.currentSong._id === item._id && 'active',
                                     )}
                                 >
                                     <div className={cx('id')}>{index + 1}</div>
-                                    <div className={cx('song')} onClick={() => onClick(song, index)}>
+                                    <div className={cx('song')} onClick={() => onClick(item, index)}>
                                         <div className={cx('wrapper-img')}>
                                             <Image
                                                 className={cx('img')}
-                                                src={song.thumbnailUrl}
+                                                src={item.thumbnailUrl}
                                                 width={40}
                                                 height={40}
                                                 alt=""
                                             />
-                                            {store.playing.currentSong._id === song._id && (
+                                            {store.playing.currentSong._id === item._id && (
                                                 <>
                                                     {store.playing.state.includes(EStateCurrentSong.PLAYING) && (
                                                         <div className={cx('playing-icon')}>
@@ -145,14 +146,58 @@ function PerformerPage() {
                                         </div>
 
                                         <div className={cx('song-title')}>
-                                            <div className={cx('song-name')}>{song.title}</div>
-                                            <div className={cx('author')}>{profile.name}</div>
+                                            <div className={cx('song-name')}>{item.title}</div>
+                                            <div className={cx('author')}>
+                                                {item.performers &&
+                                                    !!item.performers.length &&
+                                                    item.performers.map((performer) => (
+                                                        <Link key={performer._id} href={`/profile/${performer._id}`}>
+                                                            {performer.name}
+                                                        </Link>
+                                                    ))}
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className={cx('date')}>{formatDate(song.publish)}</div>
+                                    <div className={cx('album')}>
+                                        <Tippy
+                                            interactive
+                                            content={
+                                                <ul className={cx('list-tooltip')}>
+                                                    {item.albumReference?.map((album: IAlbum, index: number) => (
+                                                        <li key={index}>
+                                                            <Link href={'/user/album/' + album._id} key={index}>
+                                                                {album.title}
+                                                            </Link>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            }
+                                        >
+                                            <div>
+                                                {!!item.albumReference?.length ? (
+                                                    item.albumReference?.map((album, index) => (
+                                                        <Link href={'/user/album/' + album._id} key={index}>
+                                                            {album.title}
+                                                        </Link>
+                                                    ))
+                                                ) : (
+                                                    <span
+                                                        style={{
+                                                            width: '164px',
+                                                            display: 'block',
+                                                            textAlign: 'center',
+                                                        }}
+                                                    >
+                                                        -
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </Tippy>
+                                    </div>
+
+                                    <div className={cx('date')}>{formatDate(item.publish)}</div>
                                     <div className={cx('lenght')}>
                                         <HeartComponent />
-                                        <span className={cx('lenght')}>3:40</span>
                                     </div>
                                 </div>
                             ))}
@@ -173,7 +218,7 @@ function PerformerPage() {
                         </div>
                         <div className={cx('list')}>
                             {profile.albumsReference?.map((album) => (
-                                <Link href={'/user/album/' + album._id} key={album._id} className={cx('item')}>
+                                <Link href={'/album/' + album._id} key={album._id} className={cx('item')}>
                                     {album.thumbnailUrl && (
                                         <Image src={album.thumbnailUrl} alt="" width={500} height={500} />
                                     )}
