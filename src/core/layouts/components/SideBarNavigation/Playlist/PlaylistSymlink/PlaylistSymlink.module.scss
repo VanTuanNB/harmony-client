@@ -56,7 +56,7 @@
                     cursor: text;
                 }
 
-                &:focus+.icon {
+                &:focus + .icon {
                     pointer-events: all;
                     cursor: pointer;
                 }

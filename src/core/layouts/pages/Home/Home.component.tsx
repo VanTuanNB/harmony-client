@@ -12,7 +12,10 @@ import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 
+import { ELocalStorageKey } from '@/core/common/constants/common.constant';
+import { LocalStorageSide } from '@/utils/clientStore.util';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { memo, useCallback, useEffect, useState } from 'react';
 import styles from './Home.module.scss';
 import AlbumHotComponent from './Hot/AlbumHot.component';
@@ -29,8 +32,10 @@ const images = [
     '/images/thumnail1.jpg',
     '/images/thumnail2.jpg',
 ];
-
+const localStorageInstance = new LocalStorageSide();
 function HomePage() {
+    const loginInfo = localStorageInstance.getStore(ELocalStorageKey.PROFILE);
+    const router = useRouter();
     const [startImageIndex, setStartImageIndex] = useState(0);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const imagesToShow = images.slice(startImageIndex, startImageIndex + 3);
@@ -44,6 +49,10 @@ function HomePage() {
     };
     const onClick = useCallback(
         (data: ISong) => {
+            if (!loginInfo) {
+                router.replace('/auth/login');
+                return;
+            }
             if (!!store.playing.currentSong && store.playing.currentSong._id !== data._id) {
                 if (!!store.playlist.prevSongs.length) {
                     dispatch(pushSongIntoPrevPlayListAction(data));
@@ -53,7 +62,8 @@ function HomePage() {
                 dispatch(startPlayingAction(data));
             }
         },
-        [dispatch, store],
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [dispatch, store, loginInfo],
     );
     useEffect(() => {
         const interval = setInterval(() => {

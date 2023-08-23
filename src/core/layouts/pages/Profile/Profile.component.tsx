@@ -1,13 +1,15 @@
 'use client';
+import { ELocalStorageKey } from '@/core/common/constants/common.constant';
 import UpdateProfile from '@/core/layouts/components/PopUp/UpdateProfile/UpdateProfile.component';
 import { useGetServiceProfileQuery } from '@/core/redux/services/user.service';
 import SkeletonLoading from '@/shared/components/Loading/Skeleton/SkeletonLoading.component';
+import { LocalStorageSide } from '@/utils/clientStore.util';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { lazy, memo, useCallback, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { memo, useCallback, useEffect, useState } from 'react';
 import ComposerPage from '../Composer/Composer/Composer.component';
 import FavoriteProfilePage from './FavoriteProfile/FavoriteProfile.component';
 import HistoryProfilePage from './HistoryProfile/HistoryProfile.component';
@@ -15,8 +17,10 @@ import PlayListProfilePage from './PlayListProfile/PlayListProfile.component';
 import styles from './Profile.module.scss';
 
 const cx = classNames.bind(styles);
-
+const localStorageInstance = new LocalStorageSide();
 function ProfilePage() {
+    const loginInfo = localStorageInstance.getStore(ELocalStorageKey.PROFILE);
+    const router = useRouter();
     const path = usePathname();
     const resurt = path.split('/profile/')[1];
     const [popupUploadProfile, setPopupUploadProfile] = useState(false);
@@ -32,6 +36,11 @@ function ProfilePage() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [],
     );
+
+    useEffect(() => {
+        if (!loginInfo) router.replace('/auth/login');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [loginInfo]);
 
     return (
         <div className={cx('profile')}>

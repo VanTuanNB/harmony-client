@@ -5,16 +5,18 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 import { ReactNode, useEffect, useState } from 'react';
 
+import { ELocalStorageKey } from '@/core/common/constants/common.constant';
 import useDebounce from '@/core/common/hooks/useDebounce.hook';
 import { ISearch, ISong } from '@/core/common/interfaces/collection.interface';
 import { removeSongFromSuggestListAction, startPlayingAction } from '@/core/redux/features/song/song.slice';
 import { useGetServiceSearchQuery } from '@/core/redux/services/song.service';
+import { LocalStorageSide } from '@/utils/clientStore.util';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { SearchIcon } from '../Svg/index.component';
 import styles from './InputSearch.module.scss';
-import {useRouter} from 'next/navigation';
 
 const cx = classNames.bind(styles);
 
@@ -22,15 +24,16 @@ interface ISearchResult {
     _id: string;
     keywordSuggest: string;
 }
-
+const localStorageInstance = new LocalStorageSide();
 function InputSearchComponent(): ReactNode {
+    const loginInfo = localStorageInstance.getStore(ELocalStorageKey.PROFILE);
     const [keyword, setKeyword] = useState<string>('');
     const debounce = useDebounce(keyword, 500);
     const { data } = useGetServiceSearchQuery(debounce);
     const [searchResult, setSearchResult] = useState<ISearch | null>();
     const [showHeadless, setShowHeadless] = useState<boolean>(true);
     const dispatch = useDispatch();
-    const router = useRouter()
+    const router = useRouter();
 
     useEffect(() => {
         if (!debounce.trim()) {
@@ -44,18 +47,21 @@ function InputSearchComponent(): ReactNode {
     }, [debounce]);
 
     const clickSong = (data: ISong) => {
+        if (!loginInfo) {
+            router.replace('/auth/login');
+            return;
+        }
         dispatch(removeSongFromSuggestListAction(data._id));
         dispatch(startPlayingAction(data));
     };
 
-    
     const handleKeyDown = (e: any) => {
         if (e.key === 'Enter') {
-            router.push('/search?search_query='+debounce);
-            setSearchResult(null)
-            setKeyword('')
+            router.push('/search?search_query=' + debounce);
+            setSearchResult(null);
+            setKeyword('');
         }
-    }
+    };
 
     return (
         <>

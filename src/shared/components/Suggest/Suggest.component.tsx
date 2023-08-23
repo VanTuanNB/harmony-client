@@ -1,4 +1,5 @@
 'use client';
+import { ELocalStorageKey } from '@/core/common/constants/common.constant';
 import { ISong } from '@/core/common/interfaces/collection.interface';
 import { ISongStore } from '@/core/common/interfaces/songStore.interface';
 import {
@@ -10,18 +11,21 @@ import {
 } from '@/core/redux/features/song/song.slice';
 import { useAppDispatch, useAppSelector } from '@/core/redux/hook.redux';
 import { useGetSuggestSongQuery } from '@/core/redux/services/song.service';
+import { LocalStorageSide } from '@/utils/clientStore.util';
 import { faWifi } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
+import { useRouter } from 'next/navigation';
 import { ReactNode, memo, useCallback, useEffect, useRef, useState } from 'react';
 import SkeletonLoading from '../Loading/Skeleton/SkeletonLoading.component';
 import LazyLoadSuggestComponent from './LazyLoadSuggest/LazyLoad.component';
 import styles from './Suggest.module.scss';
 
 const cx = classNames.bind(styles);
-
+const localStorageInstance = new LocalStorageSide();
 function SuggestComponent(): ReactNode {
-    // const [listSong, setListSong] = useState<ISong[]>([]);
+    const loginInfo = localStorageInstance.getStore(ELocalStorageKey.PROFILE);
+    const router = useRouter();
     const [pageNumber, setPageNumber] = useState<number>(1);
     const [skip, setSkip] = useState<boolean>(false);
     const { data, error, isLoading, isFetching } = useGetSuggestSongQuery(
@@ -50,6 +54,10 @@ function SuggestComponent(): ReactNode {
     }, [data]);
     const handleClickMediaItem = useCallback(
         (_id: string) => {
+            if (!loginInfo) {
+                router.replace('/auth/login');
+                return;
+            }
             const songSelected = store.playlist.suggests.find((song) => song._id === _id);
             if (!!store.playlist.prevSongs.length && !!store.playing.currentSong) {
                 dispatch(pushSongIntoPrevPlayListAction(songSelected as any));
@@ -57,15 +65,9 @@ function SuggestComponent(): ReactNode {
             dispatch(removeSongFromSuggestListAction(_id));
             dispatch(startPlayingAction(songSelected as ISong));
         },
-        [dispatch, store],
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [dispatch, store, loginInfo],
     );
-    // useEffect(() => {
-    //     if (data && data.success) {
-    //         setListSong((prevSong) => {
-    //             return [...prevSong, ...data.data].filter((song: ISong) => song._id !== store.playing.currentSong._id);
-    //         });
-    //     }
-    // }, [data, store.playing.currentSong]);
     return (
         <div className={cx('wrapper')}>
             <h2 className={cx('title')}>Gợi ý cho bạn</h2>

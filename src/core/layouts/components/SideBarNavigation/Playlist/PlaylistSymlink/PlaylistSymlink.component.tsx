@@ -2,23 +2,23 @@ import { IPlaylist } from '@/core/common/interfaces/collection.interface';
 import { selectUserReducer } from '@/core/redux/features/user/user.slice';
 import { useAppSelector } from '@/core/redux/hook.redux';
 import { useGetServiceProfileQuery } from '@/core/redux/services/user.service';
+import { PlayListIcon } from '@/shared/components/Svg/index.component';
 import { faMagnifyingGlass, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import styles from './PlaylistSymlink.module.scss';
-import { PlayListIcon } from '@/shared/components/Svg/index.component';
 
 const cx = classNames.bind(styles);
 
 export default function PlaylistSymlinkComponent() {
     const store = useAppSelector(selectUserReducer);
-    const [playlist, setPlayList] = useState<IPlaylist[]>();
+    const [playlist, setPlayList] = useState<IPlaylist[]>([]);
     const { data } = useGetServiceProfileQuery(store.profile?._id || '');
     useEffect(() => {
         if (data) {
-            setPlayList(data.data.playlistReference);
+            setPlayList(data.data.playlistReference ?? []);
         }
     }, [data]);
     return (

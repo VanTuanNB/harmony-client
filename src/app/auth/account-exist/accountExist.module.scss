@@ -1,0 +1,37 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    & .wrapper-img {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    & .hint {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    & .wrapper-actions {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & .btn-link {
+            padding: 10px 16px;
+            background-color: #00bf63;
+            border-radius: 6px;
+            font-weight: 500;
+            color: var(--theme-mode-color);
+
+            &:hover {
+                background-color: #02a054;
+            }
+        }
+    }
+}
