@@ -23,7 +23,7 @@ import {
 import { useAppDispatch } from '@/core/redux/hook.redux';
 import LoadingSpinner from '@/shared/components/Loading/LoadingSpinner/LoadingSpinner.component';
 import Tippy from '@tippyjs/react';
-import { memo } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import 'tippy.js/dist/tippy.css';
 import styles from './Control.module.scss';
@@ -36,6 +36,8 @@ interface IProps {
     onTogglePlaying: () => void;
 }
 function ControlComponent({ isLoading, state, strategies, onTogglePlaying }: IProps) {
+    const [mounted, setMounted] = useState<boolean>(false);
+
     const dispatch = useAppDispatch();
     const { playlist, playing } = useSelector(selectSongReducer);
     const handlePrevSong = () => {
@@ -63,55 +65,63 @@ function ControlComponent({ isLoading, state, strategies, onTogglePlaying }: IPr
             ),
         );
     };
+    useEffect(() => {
+        setMounted(true);
+    }, []);
     return (
-        <div className={cx('control-buttons')}>
-            <Tippy content="Phát ngẫu nhiên">
-                <button className={cx('btn-actions')}>
-                    <FontAwesomeIcon icon={faShuffle} className={cx('icon')} />
-                </button>
-            </Tippy>
-            <Tippy content="Bài trước đó" disabled={playlist.prevSongs.length === 0}>
-                <button
-                    disabled={playlist.prevSongs.length === 0}
-                    className={cx('btn-actions', playlist.prevSongs.length === 0 && 'disabled')}
-                    onClick={handlePrevSong}
-                >
-                    <FontAwesomeIcon icon={faBackwardStep} className={cx('icon')} />
-                </button>
-            </Tippy>
-            <button className={cx('btn-toggle-play-paused')} onClick={onTogglePlaying}>
-                {isLoading || state === EStateCurrentSong.LOADING ? (
-                    <LoadingSpinner width={20} height={20} />
-                ) : (
-                    <>
-                        {state === EStateCurrentSong.PLAYING && (
-                            <FontAwesomeIcon icon={faPause} className={cx('icon-play-or-pause')} />
+        <>
+            {mounted && (
+                <div className={cx('control-buttons')}>
+                    <Tippy content="Phát ngẫu nhiên">
+                        <button className={cx('btn-actions')}>
+                            <FontAwesomeIcon icon={faShuffle} className={cx('icon')} />
+                        </button>
+                    </Tippy>
+                    <Tippy content="Bài trước đó" disabled={playlist.prevSongs.length === 0}>
+                        <button
+                            disabled={playlist.prevSongs.length === 0}
+                            className={cx('btn-actions', playlist.prevSongs.length === 0 && 'disabled')}
+                            onClick={handlePrevSong}
+                        >
+                            <FontAwesomeIcon icon={faBackwardStep} className={cx('icon')} />
+                        </button>
+                    </Tippy>
+                    <button className={cx('btn-toggle-play-paused')} onClick={onTogglePlaying}>
+                        {isLoading || state === EStateCurrentSong.LOADING ? (
+                            <LoadingSpinner width={20} height={20} />
+                        ) : (
+                            <>
+                                {state === EStateCurrentSong.PLAYING && (
+                                    <FontAwesomeIcon icon={faPause} className={cx('icon-play-or-pause')} />
+                                )}
+                                {state === EStateCurrentSong.PAUSED && (
+                                    <FontAwesomeIcon icon={faPlay} className={cx('icon-play-or-pause')} />
+                                )}
+                            </>
                         )}
-                        {state === EStateCurrentSong.PAUSED && (
-                            <FontAwesomeIcon icon={faPlay} className={cx('icon-play-or-pause')} />
-                        )}
-                    </>
-                )}
-            </button>
-            <Tippy content="Bài tiếp theo">
-                <button className={cx('btn-actions')}>
-                    <FontAwesomeIcon icon={faForwardStep} className={cx('icon')} onClick={handleNextSong} />
-                </button>
-            </Tippy>
-            <Tippy content="Bật phát lại một bài">
-                <div
-                    onClick={handleToggleStrategies}
-                    className={cx(
-                        'btn-actions',
-                        (strategies === EStrategiesPlaying.LOOP || strategies === EStrategiesPlaying.SEQUENTIALLY) &&
-                            'active',
-                    )}
-                >
-                    <FontAwesomeIcon icon={faRetweet} className={cx('icon')} />
-                    {strategies === EStrategiesPlaying.LOOP && <div className={cx('mode-loop')}>1</div>}
+                    </button>
+                    <Tippy content="Bài tiếp theo">
+                        <button className={cx('btn-actions')}>
+                            <FontAwesomeIcon icon={faForwardStep} className={cx('icon')} onClick={handleNextSong} />
+                        </button>
+                    </Tippy>
+                    <Tippy content="Bật phát lại một bài">
+                        <div
+                            onClick={handleToggleStrategies}
+                            className={cx(
+                                'btn-actions',
+                                (strategies === EStrategiesPlaying.LOOP ||
+                                    strategies === EStrategiesPlaying.SEQUENTIALLY) &&
+                                    'active',
+                            )}
+                        >
+                            <FontAwesomeIcon icon={faRetweet} className={cx('icon')} />
+                            {strategies === EStrategiesPlaying.LOOP && <div className={cx('mode-loop')}>1</div>}
+                        </div>
+                    </Tippy>
                 </div>
-            </Tippy>
-        </div>
+            )}
+        </>
     );
 }
 
