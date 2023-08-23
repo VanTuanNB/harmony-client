@@ -7,8 +7,7 @@ import { useAppDispatch } from '@/core/redux/hook.redux';
 import ButtonSwitchTheme from '@/shared/components/ButtonSwitchTheme/ButtonSwitchTheme.component';
 import PopperMenuComponent from '@/shared/components/PopperMenu/PopperMenu.component';
 import { IPopperListOptions } from '@/shared/interfaces/IPopperListOptions.interface';
-import { faBan, faGear, faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRightFromBracket, faUser } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -23,7 +22,8 @@ interface IProps {
 function HeaderRight({ profile }: IProps): ReactNode {
     const dispatch = useAppDispatch();
     const router = useRouter();
-    const MENU_SETTINGS: IPopperListOptions[] = [
+
+    const USER_SETTINGS: IPopperListOptions[] = [
         {
             icon: faUser,
             title: 'Thư viện',
@@ -36,31 +36,11 @@ function HeaderRight({ profile }: IProps): ReactNode {
         },
     ];
 
-    const USER_SETTINGS: IPopperListOptions[] = [
-        {
-            icon: faBan,
-            title: 'Danh sách chặn',
-            children: {
-                title: 'Nested Setting',
-                data: [
-                    {
-                        icon: faBan,
-                        title: 'Nested Setting',
-                    },
-                    {
-                        icon: faBan,
-                        title: 'Nested Setting2',
-                    },
-                ],
-            },
-        },
-    ];
-
     const handelLogout = useCallback((title: string) => {
         if (title === 'Đăng xuất') {
             dispatch(setUserToken(null));
             dispatch(updateProfile(null));
-            router.replace('/auth/login');
+            router.replace('/');
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -69,19 +49,13 @@ function HeaderRight({ profile }: IProps): ReactNode {
             <div className={cx('item')}>
                 <ButtonSwitchTheme />
             </div>
+
             <div className={cx('item')}>
                 <PopperMenuComponent
-                    listOptions={MENU_SETTINGS}
                     callbackFn={handelLogout}
+                    listOptions={USER_SETTINGS}
                     position={{ top: 10, right: 0 }}
                 >
-                    <button className={cx('btn-settings')}>
-                        <FontAwesomeIcon icon={faGear} />
-                    </button>
-                </PopperMenuComponent>
-            </div>
-            <div className={cx('item')}>
-                <PopperMenuComponent listOptions={USER_SETTINGS} position={{ top: 10, right: 0 }}>
                     <Image
                         src={profile.avatarUrl || '/images/fallback-thumbnail-user.jpg'}
                         width={40}
